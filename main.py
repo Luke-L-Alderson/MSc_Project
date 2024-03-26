@@ -107,6 +107,57 @@ convolution_params["filter_2"] = 3
 network = Net(time_params, network_params, oscillation_params, frame_params, convolution_params, device).to(device)
 #print_network_architecure(network)
 
+def print_network_architecure(network):
+    netp, op, fp, cp = network.network_params, network.oscillation_params, network.frame_params, network.convolution_params
+    input_layer_text = """
+    Input layer: {} channels
+                {}x{} neurons/channel
+                {} total neurons
+    """.format(fp["depth"], fp["size"], fp["size"],fp["depth"]*fp["size"]*fp["size"] )
+
+    conv1_text = """
+    Conv1 layer: {} channels
+                {}x{} neurons/channel
+                {} total neurons
+                {} synapses/neuron (ff)
+                {} total_synapses
+    """.format(cp["channels_1"], cp["conv1_size"], cp["conv1_size"], netp["num_conv1"], cp["filter_1"]*cp["filter_1"], netp["num_conv1"]*cp["filter_1"]*cp["filter_1"])
+
+    conv2_text = """
+    Conv2 layer: {} channels
+                {}x{} neurons/channel
+                {} total neurons
+                {} synapses/neuron (ff)
+                {} total_synapses
+    """.format(cp["channels_2"], cp["conv2_size"], cp["conv2_size"], netp["num_conv2"], cp["filter_2"]*cp["filter_2"], netp["num_conv2"]*cp["filter_2"]*cp["filter_2"])
+
+    rec_text = """
+    Rec layer:   {} total neurons
+                {} synapses/neuron (ff) and {} synapses/neuron (rec)
+                {} total_synapses
+    """.format(netp["num_rec"], netp["num_conv2"], netp["num_rec"], netp["num_conv2"]*netp["num_rec"] + netp["num_rec"]**2)
+
+    latent_text = """
+    Lat layer:   {} total neurons
+                {} synapses/neuron (ff)
+                {} total_synapses
+    """.format(netp["num_latent"], netp["num_rec"], netp["num_rec"], netp["num_rec"]*netp["num_latent"])
+
+    Trec_text = ""
+    Tconv2_text = ""
+    Tconv1_text = ""
+    output_layer_text = ""
+
+    print(input_layer_text)
+    print(conv1_text)
+    print(conv2_text)
+    print(rec_text)
+    print(latent_text)
+    print(Trec_text)
+    print(Tconv2_text)
+    print(Tconv1_text)
+    print(output_layer_text)
+
 #%%
 """## Training the network"""
 
@@ -145,6 +196,10 @@ for epoch in range(num_epochs):
   exams_dict, av_recorded_dict = get_exam_per_constant(network, input_specs, label_specs, exam_specs, device)
   print(f'Epoch: {epoch} - {exams_dict["none"]}')
 
+
+# what are these lines? - I think the first line saves a network, the second
+# loads the settings so you dont have to keep training
+
 #torch.save(network.state_dict(), 'data/content/pt_model_10_500.pth')
 #network.load_state_dict(torch.load('pt_model_10_500.pth'), strict=False)
 
@@ -174,13 +229,8 @@ traj_inputs = get_poisson_inputs(inputs, **input_specs).to(device)
 
 num_trials = 100
 trajectories = {var : [] for var in recorded_vars}
-
-for trial in range(num_trials):
-  recordings = network(traj_inputs, recorded_vars=recorded_vars)
-  for var in recorded_vars:
-    trajectories[var].append(to_np(recordings[var].view(int(network.time_params["total_time"]/ms), -1)[:, index[var]])*15)
-
 index = {}
+
 index["mem_conv1"] = 26*26*2 + 1
 plt.plot(to_np(recordings["mem_conv1"].view(int(network.time_params["total_time"]/ms), -1)[:, index["mem_conv1"]]))
 
@@ -193,11 +243,19 @@ plt.plot(to_np(recordings["mem_rec"].view(int(network.time_params["total_time"]/
 index["mem_latent"] = 5
 plt.plot(to_np(recordings["mem_latent"].view(int(network.time_params["total_time"]/ms), -1)[:, index["mem_latent"]]))
 
+for trial in range(num_trials):
+  print(f'Getting Recordings: {trial+1} / {num_trials}')
+  recordings = network(traj_inputs, recorded_vars=recorded_vars)
+  for var in recorded_vars:
+    trajectories[var].append(to_np(recordings[var].view(int(network.time_params["total_time"]/ms), -1)[:, index[var]])*15)
+
 t_values = np.arange(0, network.time_params["total_time"], step=network.time_params["dt"])
 var_th = (1 - np.exp(-t_values/network.network_params["tau_m"]))*network.network_params["eta"]*network_params["v_th"]/mV
 fig, axs = plt.subplots(1, len(recorded_vars), sharey=True)
 fig.suptitle(r"$u$ trajectories (addition of noise)", y= 1.05, fontsize=20)
 fig.set_size_inches(16, 5)
+
+print('Plotting Potentials...')
 
 for ax_index, (var, ax) in enumerate(zip(recorded_vars, axs)):
   mean_exp = np.mean(np.array(trajectories[var]), axis=0)
@@ -213,6 +271,8 @@ for ax_index, (var, ax) in enumerate(zip(recorded_vars, axs)):
     ax.set_ylabel(r"$u$ (mV)", fontsize=20)
     ax.legend(frameon=False, fontsize=18)
 
+print('Setting Input Specs')
+
 sns.despine()
 
 input_specs["rate_on"] = 10*Hz
@@ -222,7 +282,7 @@ exam_specs = {}
 exam_specs["constant_list"] = ["none"]
 exam_specs["batch_size"] = 16
 exam_specs["recorded_vars"] = ["curr_conv1", "spk_conv1", "curr_conv2", "spk_conv2", "curr_total", "spk_rec", "curr_latent", "spk_latent"]
-exam_specs["path"] = '/content/exam_world_data_1_1'
+exam_specs["path"] = 'data/content/exam_world_data_1_1'
 exams_dict, av_recorded_dict = get_exam_per_constant(network, input_specs, label_specs, exam_specs, device)
 recordings = av_recorded_dict["none"]
 
@@ -245,8 +305,11 @@ frac_denom = (1 - expon)*netp["R_m"]*op["I_osc"]*A
 I_min = (frac_num/frac_denom - 1)*op["I_osc"]*A
 I_max = (frac_num/frac_denom + 1)*op["I_osc"]*A
 
+print('Plotting Biophys. Stats...')
+
 fig, (ax1, ax2, ax3) = plt.subplots(1, 3)
-ax3.get_shared_y_axes().join(ax2, ax3)
+ax2.sharey(ax3)
+
 fig.suptitle('Biophys. Statistics', fontsize=20)
 
 ax1.set_ylabel("Parameters", fontsize=20)
@@ -260,7 +323,7 @@ ax1.set_xlabel("Efficacy (a.u.)", fontsize=20)
 ax2.violinplot(layers_pA, vert=False)
 ax2.tick_params(axis='both', labelsize=16)
 ax2.set_yticks([1, 2, 3, 4, 5])
-ax2.set_yticklabels( ["conv1", "conv2", "rec", "latent"])
+ax2.set_yticklabels( ["conv1", "conv2", "rec", "latent", "test"])
 ax2.set_ylabel("Layer", fontsize=20)
 ax2.set_xlabel("Input (pA)", fontsize=20)
 ax2.axvline(x=I_min/pA, color='red', linestyle='dashed')
@@ -268,19 +331,19 @@ ax2.axvline(x=I_max/pA, color='red', linestyle='dashed')
 ax2.text(I_min/pA-450, 0.65, "sub-threshold", fontsize=16, color='red')
 ax2.text(1.1*I_max/pA, 0.65, "supra-locking", fontsize=16, color='red')
 
-
 ax3.violinplot(layers_fr, vert=False)
 ax3.set_xticks([0, 50, 100, 150, 200])
 ax3.set_xticklabels([0, 50, 100, 150, 200], fontsize=20)
 ax3.tick_params(left = False, labelleft=False, labelsize=16)
 ax3.set_xlabel("FR (Hz)", fontsize=20)
 
-fig.set_size_inches(16, 5)
 
+fig.set_size_inches(16, 5)
 
 sns.despine()
 
-plt.imshow(torch.mean(recorded["curr_conv1"], 0)[2, 11].detach().cpu().numpy())
+# what is this recorded dict?
+#plt.imshow(torch.mean(recorded["curr_conv1"], 0)[2, 11].detach().cpu().numpy())
 
 plt.imshow(torch.mean(network.conv1.weight[11], 1).detach().cpu().numpy())
 plt.set_cmap('gray_r')
@@ -292,54 +355,13 @@ plt.plot(np.transpose(torch.mean(network.conv1.weight, (2, 3)).detach().cpu().nu
 
 network = Net(time_params, network_params, oscillation_params, frame_params, convolution_params, device).to(device)
 
-def print_network_architecure(network):
-    netp, op, fp, cp = network.network_params, network.oscillation_params, network.frame_params, network.convolution_params
-    input_layer_text = """
-    Input layer: {} channels
-                {}x{} neurons/channel
-                {} total neurons
-    """.format(fp["depth"], fp["size"], fp["size"],fp["depth"]*fp["size"]*fp["size"] )
-
-    conv1_text = """
-    Conv1 layer: {} channels
-                {}x{} neurons/channel
-                {} total neurons
-                {} synapses/neuron (ff)
-                {} total_synapses
-    """.format(cp["channels_1"], cp["conv1_size"], cp["conv1_size"], netp["num_conv1"], cp["filter_1"]*cp["filter_1"], netp["num_conv1"]*cp["filter_1"]*cp["filter_1"])
-
-    conv2_text = """
-    Conv2 layer: {} channels
-                {}x{} neurons/channel
-                {} total neurons
-                {} synapses/neuron (ff)
-                {} total_synapses
-    """.format(cp["channels_2"], cp["conv2_size"], cp["conv2_size"], netp["num_conv2"], cp["filter_2"]*cp["filter_2"], netp["num_conv2"]*cp["filter_2"]*cp["filter_2"])
-
-    rec_text = """
-    Rec layer:   {} total neurons
-                {} synapses/neuron (ff) and {} synapses/neuron (rec)
-                {} total_synapses
-    """.format(netp["num_rec"], netp["num_conv2"], netp["num_rec"], netp["num_conv2"]*netp["num_rec"] + netp["num_rec"]**2)
-
-    latent_text = """
-    Lat layer:   {} total neurons
-                {} synapses/neuron (ff)
-                {} total_synapses
-    """.format(netp["num_latent"], netp["num_rec"], netp["num_rec"], netp["num_rec"]*netp["num_latent"])
-
-    print(input_layer_text)
-    print(conv1_text)
-    print(conv2_text)
-    print(rec_text)
-    print(latent_text)
-
+print('Testing Cogntiive Performance...')
 """## Test network cognitive performance"""
 exam_specs = {}
 exam_specs["constant_list"] = ["none", "triangle", "square", "circle"]
 exam_specs["batch_size"] = 64
 exam_specs["recorded_vars"] = ["curr_rec"]
-exam_specs["path"] = '/content/exam_world_data_1_1'
+exam_specs["path"] = 'data/content/exam_world_data_1_1'
 
 exams_dict, av_recorded_dict = get_exam_per_constant(network, input_specs, label_specs, exam_specs, device)
 

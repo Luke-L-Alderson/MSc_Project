@@ -23,7 +23,7 @@ class autoNet(nn.Module):
         self.conv1 = nn.Conv2d(depth, cp["channels_1"], (cp["filter_1"], cp["filter_1"]))
         #self.ff_rec_conv1 = nn.Linear(num_conv1, num_conv1)
         self.lif_conv1 = snn.Leaky(beta=beta, spike_grad=spike_grad)
-        self.conv2 = nn.Conv2d(cp["channels_1"], cp["channels_2"], (cp["filter_2"],cp["filter_2"]))
+        self.conv2 = nn.Conv2d(cp["channels_1"], cp["channels_2"], (cp["filter_2"], cp["filter_2"]))
         #self.ff_rec_conv2 = nn.Linear(num_conv2, num_conv2)
         self.lif_conv2 = snn.Leaky(beta=beta, spike_grad=spike_grad)
 
@@ -32,9 +32,17 @@ class autoNet(nn.Module):
         self.ff_rec = nn.Linear(num_rec, num_rec)
         self.net_rec = snn.Leaky(beta=beta, spike_grad=spike_grad, reset_mechanism="zero")
 
-        #convolution (decoder)
+        # latent
         self.ff_latent = nn.Linear(num_rec, num_latent)
         self.lif_latent = snn.Leaky(beta=beta, spike_grad=spike_grad)
+        
+        # convolution (decoder)
+        self.deconv1 = nn.ConvTranspose2d(cp["channels_1"], depth, (cp["filter_1"], cp["filter_1"]))
+        #self.ff_rec_deconv1 = nn.Linear(num_conv1, num_conv1)
+        self.lif_deconv1 = snn.Leaky(beta=beta, spike_grad=spike_grad)
+        self.deconv2 = nn.ConvTranspose2d(cp["channels_2"], cp["channels_1"], (cp["filter_2"], cp["filter_2"]))
+        #self.ff_rec_deconv2 = nn.Linear(num_conv2, num_conv2)
+        self.lif_deconv2 = snn.Leaky(beta=beta, spike_grad=spike_grad)
 
     def forward(self, x, recorded_vars=None):
         
@@ -70,32 +78,58 @@ class autoNet(nn.Module):
             
             curr_osc = osc_of_t[timestep]
             
-            #convolution
+            # ENCODER
+            #convolution 1
             #curr_conv1 = self.conv1(x) + self.ff_rec_conv1(spk_conv1.view(batch_size, -1)).view(batch_size, channels_1, conv1_size, conv1_size)
             curr_conv1 = self.conv1(x[timestep])
             spk_conv1, mem_conv1 = self.lif_conv1(curr_conv1 + curr_osc, mem_conv1)
-            mem_conv1 += noise_amp*torch.randn(mem_conv1.shape).to(self.device)
+            #mem_conv1 += noise_amp*torch.randn(mem_conv1.shape).to(self.device)
             
+            #convolution 2
             #curr_conv2 = self.conv2(spk_conv1) + self.ff_rec_conv2(spk_conv2.view(batch_size, -1)).view(batch_size, channels_2, conv2_size, conv2_size)
             curr_conv2 = self.conv2(spk_conv1)
             spk_conv2, mem_conv2 = self.lif_conv2(curr_conv2 + curr_osc, mem_conv2)
-            mem_conv2 += noise_amp*torch.randn(mem_conv2.shape).to(self.device)
+            #mem_conv2 += noise_amp*torch.randn(mem_conv2.shape).to(self.device)
 
-            #recurrent
+            #recurrent layer
             curr_in = self.ff_in(spk_conv2.view(batch_size, -1))
             curr_rec = self.ff_rec(spk_rec)
             #print(torch.mean(torch.abs(curr_in)),torch.mean(torch.abs(noise_amp*torch.randn(curr_in.shape).to(device))))
             curr_total = curr_in + curr_rec
             spk_rec, mem_rec = self.net_rec(curr_total + curr_osc, mem_rec)
-            mem_rec += noise_amp*torch.randn(mem_rec.shape).to(self.device)
+            #mem_rec += noise_amp*torch.randn(mem_rec.shape).to(self.device)
 
-            #convolution (decoder)
+            # LATENT
             curr_latent = self.ff_latent(spk_rec)
             spk_latent, mem_latent = self.lif_latent(curr_latent + curr_osc, mem_latent)
-            mem_latent += noise_amp*torch.randn(mem_latent.shape).to(self.device)
+            #mem_latent += noise_amp*torch.randn(mem_latent.shape).to(self.device)
+
+            # DECODER
+            #undo the recurrent layer?
+            #curr_in = self.ff_in(spk_conv2.view(batch_size, -1))
+            #curr_rec = self.ff_rec(spk_rec)
+            #print(torch.mean(torch.abs(curr_in)),torch.mean(torch.abs(noise_amp*torch.randn(curr_in.shape).to(device))))
+            #curr_total = curr_in + curr_rec
+            #spk_rec, mem_rec = self.net_rec(curr_total + curr_osc, mem_rec)
+            #mem_rec += noise_amp*torch.randn(mem_rec.shape).to(self.device)
+            
+            # undo the convolution 2
+            #curr_conv2 = self.conv2(spk_conv1) + self.ff_rec_conv2(spk_conv2.view(batch_size, -1)).view(batch_size, channels_2, conv2_size, conv2_size)
+            curr_deconv2 = self.deconv2(spk_latent)
+            spk_deconv2, mem_deconv2 = self.lif_deconv2(curr_deconv2 + curr_osc, mem_deconv2)
+            #mem_deconv2 += noise_amp*torch.randn(mem_deconv2.shape).to(self.device)
+
+            # undo the convolution 1
+            #curr_conv1 = self.conv1(x) + self.ff_rec_conv1(spk_conv1.view(batch_size, -1)).view(batch_size, channels_1, conv1_size, conv1_size)
+            curr_deconv1 = self.deconv1(spk_deconv2)
+            spk_deconv1, mem_deconv1 = self.lif_deconv1(curr_deconv1 + curr_osc, mem_deconv1)
+            #mem_deconv1 += noise_amp*torch.randn(mem_deconv1.shape).to(self.device)
 
 
             #append recordings in time axis
+            #spk_recs.append(spk_rec)
+            #spk_outs.append(spk_latent)
+            
             spk_recs.append(spk_rec)
             spk_outs.append(spk_latent)
 
