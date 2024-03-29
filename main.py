@@ -23,8 +23,6 @@ from IPython.display import HTML
 from brian2 import *
 import seaborn as sns
 
-print(torch.cuda.is_available())
-
 from model.train.train_network import train_network
 from model.image_to_latent import Net
 from model.aux.functions import get_poisson_inputs, process_labels, mse_count_loss
@@ -55,6 +53,57 @@ def transfer(curr, network):
 
 def get_fr(raster, network):
   return to_np(torch.sum(raster, 0))/network.time_params["total_time"]
+
+def print_network_architecure(network):
+    netp, op, fp, cp = network.network_params, network.oscillation_params, network.frame_params, network.convolution_params
+    input_layer_text = """
+    Input layer: {} channels
+                {}x{} neurons/channel
+                {} total neurons
+    """.format(fp["depth"], fp["size"], fp["size"],fp["depth"]*fp["size"]*fp["size"] )
+
+    conv1_text = """
+    Conv1 layer: {} channels
+                {}x{} neurons/channel
+                {} total neurons
+                {} synapses/neuron (ff)
+                {} total_synapses
+    """.format(cp["channels_1"], cp["conv1_size"], cp["conv1_size"], netp["num_conv1"], cp["filter_1"]*cp["filter_1"], netp["num_conv1"]*cp["filter_1"]*cp["filter_1"])
+
+    conv2_text = """
+    Conv2 layer: {} channels
+                {}x{} neurons/channel
+                {} total neurons
+                {} synapses/neuron (ff)
+                {} total_synapses
+    """.format(cp["channels_2"], cp["conv2_size"], cp["conv2_size"], netp["num_conv2"], cp["filter_2"]*cp["filter_2"], netp["num_conv2"]*cp["filter_2"]*cp["filter_2"])
+
+    rec_text = """
+    Rec layer:   {} total neurons
+                {} synapses/neuron (ff) and {} synapses/neuron (rec)
+                {} total_synapses
+    """.format(netp["num_rec"], netp["num_conv2"], netp["num_rec"], netp["num_conv2"]*netp["num_rec"] + netp["num_rec"]**2)
+
+    latent_text = """
+    Lat layer:   {} total neurons
+                {} synapses/neuron (ff)
+                {} total_synapses
+    """.format(netp["num_latent"], netp["num_rec"], netp["num_rec"], netp["num_rec"]*netp["num_latent"])
+
+    Trec_text = ""
+    Tconv2_text = ""
+    Tconv1_text = ""
+    output_layer_text = ""
+
+    print(input_layer_text)
+    print(conv1_text)
+    print(conv2_text)
+    print(rec_text)
+    print(latent_text)
+    print(Trec_text)
+    print(Tconv2_text)
+    print(Tconv1_text)
+    print(output_layer_text)
 
 #%%
 """## Make or access existing datasets"""
@@ -115,56 +164,6 @@ convolution_params["filter_2"] = 3
 network = Net(time_params, network_params, oscillation_params, frame_params, convolution_params, device).to(device)
 print_network_architecure(network)
 
-def print_network_architecure(network):
-    netp, op, fp, cp = network.network_params, network.oscillation_params, network.frame_params, network.convolution_params
-    input_layer_text = """
-    Input layer: {} channels
-                {}x{} neurons/channel
-                {} total neurons
-    """.format(fp["depth"], fp["size"], fp["size"],fp["depth"]*fp["size"]*fp["size"] )
-
-    conv1_text = """
-    Conv1 layer: {} channels
-                {}x{} neurons/channel
-                {} total neurons
-                {} synapses/neuron (ff)
-                {} total_synapses
-    """.format(cp["channels_1"], cp["conv1_size"], cp["conv1_size"], netp["num_conv1"], cp["filter_1"]*cp["filter_1"], netp["num_conv1"]*cp["filter_1"]*cp["filter_1"])
-
-    conv2_text = """
-    Conv2 layer: {} channels
-                {}x{} neurons/channel
-                {} total neurons
-                {} synapses/neuron (ff)
-                {} total_synapses
-    """.format(cp["channels_2"], cp["conv2_size"], cp["conv2_size"], netp["num_conv2"], cp["filter_2"]*cp["filter_2"], netp["num_conv2"]*cp["filter_2"]*cp["filter_2"])
-
-    rec_text = """
-    Rec layer:   {} total neurons
-                {} synapses/neuron (ff) and {} synapses/neuron (rec)
-                {} total_synapses
-    """.format(netp["num_rec"], netp["num_conv2"], netp["num_rec"], netp["num_conv2"]*netp["num_rec"] + netp["num_rec"]**2)
-
-    latent_text = """
-    Lat layer:   {} total neurons
-                {} synapses/neuron (ff)
-                {} total_synapses
-    """.format(netp["num_latent"], netp["num_rec"], netp["num_rec"], netp["num_rec"]*netp["num_latent"])
-
-    Trec_text = ""
-    Tconv2_text = ""
-    Tconv1_text = ""
-    output_layer_text = ""
-
-    print(input_layer_text)
-    print(conv1_text)
-    print(conv2_text)
-    print(rec_text)
-    print(latent_text)
-    print(Trec_text)
-    print(Tconv2_text)
-    print(Tconv1_text)
-    print(output_layer_text)
 
 #%%
 """## Training the network"""
@@ -229,7 +228,7 @@ HTML(anim.to_html5_video())
 
 input_specs["rate_on"] = 0*Hz
 input_specs["rate_off"] = 0*Hz
-recorded_vars=["mem_conv1", "mem_conv2", "mem_rec", "mem_latent"]
+recorded_vars = ["mem_conv1", "mem_conv2", "mem_rec", "mem_latent"]
 
 traj_loader = DataLoader(train_dataset, batch_size=1, shuffle=True, drop_last=True)
 inputs, labels = next(iter(traj_loader))
@@ -237,7 +236,13 @@ traj_inputs = get_poisson_inputs(inputs, **input_specs).to(device)
 
 num_trials = 100
 trajectories = {var : [] for var in recorded_vars}
-index = {}
+index = {var : [] for var in recorded_vars}
+
+for trial in range(num_trials):
+  print(f'Getting Recordings: {trial+1} / {num_trials}')
+  recordings = network(traj_inputs, recorded_vars=recorded_vars)
+  for var in recorded_vars:
+    trajectories[var].append(to_np(recordings[var].view(int(network.time_params["total_time"]/ms), -1)[:, index[var]])*15)
 
 index["mem_conv1"] = 26*26*2 + 1
 plt.plot(to_np(recordings["mem_conv1"].view(int(network.time_params["total_time"]/ms), -1)[:, index["mem_conv1"]]))
@@ -250,12 +255,6 @@ plt.plot(to_np(recordings["mem_rec"].view(int(network.time_params["total_time"]/
 
 index["mem_latent"] = 5
 plt.plot(to_np(recordings["mem_latent"].view(int(network.time_params["total_time"]/ms), -1)[:, index["mem_latent"]]))
-
-for trial in range(num_trials):
-  print(f'Getting Recordings: {trial+1} / {num_trials}')
-  recordings = network(traj_inputs, recorded_vars=recorded_vars)
-  for var in recorded_vars:
-    trajectories[var].append(to_np(recordings[var].view(int(network.time_params["total_time"]/ms), -1)[:, index[var]])*15)
 
 t_values = np.arange(0, network.time_params["total_time"], step=network.time_params["dt"])
 var_th = (1 - np.exp(-t_values/network.network_params["tau_m"]))*network.network_params["eta"]*network_params["v_th"]/mV
