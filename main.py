@@ -13,7 +13,7 @@ Original file is located at
 #importing module
 import sys
 sys.path.append('snn-project')
-
+import os, shutil
 import torch
 
 from torch.utils.data import DataLoader
@@ -58,12 +58,20 @@ def get_fr(raster, network):
 
 #%%
 """## Make or access existing datasets"""
-
-path = 'data/content'
-
+folder = 'data/content'
+for filename in os.listdir(folder):
+    file_path = os.path.join(folder, filename)
+    try:
+        if os.path.isfile(file_path) or os.path.islink(file_path):
+            os.unlink(file_path)
+        elif os.path.isdir(file_path):
+            shutil.rmtree(file_path)
+    except Exception as e:
+        print('Failed to delete %s. Reason: %s' % (file_path, e))
+        
 # create dataset in /content
-make_dataset(train_samples=3000, test_samples=300,  width=28, M_min=1, M_max=1, restrictions={}, path=path)
-make_exam_tests(test_samples=1000, width=28, M_min=1, M_max=1, path=path)
+make_dataset(train_samples=3000, test_samples=300,  width=28, M_min=1, M_max=1, restrictions={}, path=folder)
+make_exam_tests(test_samples=1000, width=28, M_min=1, M_max=1, path=folder)
 
 #load dataset
 train_dataset = H5Dataset('data/world_data_1_1/train.hdf5')
@@ -105,7 +113,7 @@ convolution_params["channels_2"] = 64
 convolution_params["filter_2"] = 3
 
 network = Net(time_params, network_params, oscillation_params, frame_params, convolution_params, device).to(device)
-#print_network_architecure(network)
+print_network_architecure(network)
 
 def print_network_architecure(network):
     netp, op, fp, cp = network.network_params, network.oscillation_params, network.frame_params, network.convolution_params

@@ -56,19 +56,26 @@ class autoNet(nn.Module):
           x = x.type(torch.cuda.FloatTensor)
         except:
           x = x.type(torch.FloatTensor)
+        
         # Initialize hidden states and outputs at t=0
         mem_conv1 = self.lif_conv1.init_leaky()
         mem_conv2 = self.lif_conv2.init_leaky()
         mem_rec = self.net_rec.init_leaky()
         mem_latent = self.lif_latent.init_leaky()
+        mem_deconv2 = self.lif_conv1.init_leaky()
+        mem_deconv1 = self.lif_conv2.init_leaky()
         batch_size = len(x[0])
+        
         spk_conv1 = torch.zeros(batch_size, channels_1, conv1_size, conv1_size).to(self.device)
         spk_conv2 = torch.zeros(batch_size, channels_2, conv2_size, conv2_size).to(self.device)
+        spk_deconv2 = torch.zeros(batch_size, channels_1, conv1_size, conv1_size).to(self.device)
+        spk_deconv1 = torch.zeros(batch_size, channels_2, conv2_size, conv2_size).to(self.device)
+        
         spk_rec = torch.zeros(batch_size, num_rec).to(self.device)
         
         batch_size = len(x[0])
         
-        spk_recs, spk_outs = [], []
+        spk_recs, spk_outs, spk_latents = [], [], []
         
         # Record recurrent and output layer
         if recorded_vars:
@@ -78,48 +85,59 @@ class autoNet(nn.Module):
             
             curr_osc = osc_of_t[timestep]
             
+            '''
+            Questions for discussion:
+                
+                1. Are we interested in noise?
+                2. Do we still need the recurrent layer?
+                3. Should I remove oscillations?
+            
+            The below code passes the signal x[timestep] through a number of neuron layers, as follows:
+                
+                1. Convolution + LIF
+                2. Convolution + LIF
+                3. Reccurrent LIF (i.e. input + recurrent)
+                4. Latent LIF
+                5. Deonvolution + LIF
+                6. Deonvolution + LIF
+    
+            '''
+            
             # ENCODER
-            #convolution 1
+            # 1
             #curr_conv1 = self.conv1(x) + self.ff_rec_conv1(spk_conv1.view(batch_size, -1)).view(batch_size, channels_1, conv1_size, conv1_size)
             curr_conv1 = self.conv1(x[timestep])
             spk_conv1, mem_conv1 = self.lif_conv1(curr_conv1 + curr_osc, mem_conv1)
             #mem_conv1 += noise_amp*torch.randn(mem_conv1.shape).to(self.device)
             
-            #convolution 2
+            # 2
             #curr_conv2 = self.conv2(spk_conv1) + self.ff_rec_conv2(spk_conv2.view(batch_size, -1)).view(batch_size, channels_2, conv2_size, conv2_size)
             curr_conv2 = self.conv2(spk_conv1)
             spk_conv2, mem_conv2 = self.lif_conv2(curr_conv2 + curr_osc, mem_conv2)
             #mem_conv2 += noise_amp*torch.randn(mem_conv2.shape).to(self.device)
 
-            #recurrent layer
+            # 3
             curr_in = self.ff_in(spk_conv2.view(batch_size, -1))
             curr_rec = self.ff_rec(spk_rec)
             #print(torch.mean(torch.abs(curr_in)),torch.mean(torch.abs(noise_amp*torch.randn(curr_in.shape).to(device))))
             curr_total = curr_in + curr_rec
             spk_rec, mem_rec = self.net_rec(curr_total + curr_osc, mem_rec)
             #mem_rec += noise_amp*torch.randn(mem_rec.shape).to(self.device)
-
+            
             # LATENT
+            # 4
             curr_latent = self.ff_latent(spk_rec)
             spk_latent, mem_latent = self.lif_latent(curr_latent + curr_osc, mem_latent)
             #mem_latent += noise_amp*torch.randn(mem_latent.shape).to(self.device)
 
             # DECODER
-            #undo the recurrent layer?
-            #curr_in = self.ff_in(spk_conv2.view(batch_size, -1))
-            #curr_rec = self.ff_rec(spk_rec)
-            #print(torch.mean(torch.abs(curr_in)),torch.mean(torch.abs(noise_amp*torch.randn(curr_in.shape).to(device))))
-            #curr_total = curr_in + curr_rec
-            #spk_rec, mem_rec = self.net_rec(curr_total + curr_osc, mem_rec)
-            #mem_rec += noise_amp*torch.randn(mem_rec.shape).to(self.device)
-            
-            # undo the convolution 2
+            # 5
             #curr_conv2 = self.conv2(spk_conv1) + self.ff_rec_conv2(spk_conv2.view(batch_size, -1)).view(batch_size, channels_2, conv2_size, conv2_size)
             curr_deconv2 = self.deconv2(spk_latent)
             spk_deconv2, mem_deconv2 = self.lif_deconv2(curr_deconv2 + curr_osc, mem_deconv2)
             #mem_deconv2 += noise_amp*torch.randn(mem_deconv2.shape).to(self.device)
 
-            # undo the convolution 1
+            # 6
             #curr_conv1 = self.conv1(x) + self.ff_rec_conv1(spk_conv1.view(batch_size, -1)).view(batch_size, channels_1, conv1_size, conv1_size)
             curr_deconv1 = self.deconv1(spk_deconv2)
             spk_deconv1, mem_deconv1 = self.lif_deconv1(curr_deconv1 + curr_osc, mem_deconv1)
@@ -131,7 +149,8 @@ class autoNet(nn.Module):
             #spk_outs.append(spk_latent)
             
             spk_recs.append(spk_rec)
-            spk_outs.append(spk_latent)
+            spk_latents.append(spk_latent)
+            spk_outs.append(spk_deconv1)
 
             if recorded_vars:
                 for key in recorded:
