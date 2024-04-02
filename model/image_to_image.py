@@ -48,18 +48,18 @@ class SAE(nn.Module):
         
         #convolution (encoder)
         self.conv1 = nn.Conv2d(depth, cp["channels_1"], (cp["filter_1"], cp["filter_1"]))
-        self.lif_conv1 = snn.Leaky(beta=beta, spike_grad=spike_grad, init_hidden=True, output=True)
+        self.lif_conv1 = snn.Leaky(beta=beta, spike_grad=spike_grad)
         self.conv2 = nn.Conv2d(cp["channels_1"], cp["channels_2"], (cp["filter_2"], cp["filter_2"]))
-        self.lif_conv2 = snn.Leaky(beta=beta, spike_grad=spike_grad, init_hidden=True, output=True)
+        self.lif_conv2 = snn.Leaky(beta=beta, spike_grad=spike_grad)
 
         #recurrent pool
         self.ff_in = nn.Linear(num_conv2, num_rec)
         self.ff_rec = nn.Linear(num_rec, num_rec)
-        self.net_rec = snn.Leaky(beta=beta, spike_grad=spike_grad, reset_mechanism="zero", init_hidden=True, output=True)
+        self.net_rec = snn.Leaky(beta=beta, spike_grad=spike_grad, reset_mechanism="zero")
 
         # latent
         self.ff_latent = nn.Linear(num_rec, num_latent)
-        self.lif_latent = snn.Leaky(beta=beta, spike_grad=spike_grad, init_hidden=True, output=True)
+        self.lif_latent = snn.Leaky(beta=beta, spike_grad=spike_grad)
         
         self.linearNet = nn.Sequential(
             nn.Linear(num_latent, 128*4*4),
@@ -70,9 +70,9 @@ class SAE(nn.Module):
         
         # convolution (decoder)
         self.reconstruction = nn.ConvTranspose2d(cp["channels_1"], depth, (cp["filter_1"], cp["filter_1"]))
-        self.lif_reconstruction = snn.Leaky(beta=beta, spike_grad=spike_grad, init_hidden=True, output=True)
+        self.lif_reconstruction = snn.Leaky(beta=beta, spike_grad=spike_grad)
         self.deconv2 = nn.ConvTranspose2d(cp["channels_2"], cp["channels_1"], (cp["filter_2"], cp["filter_2"]))
-        self.lif_deconv2 = snn.Leaky(beta=beta, spike_grad=spike_grad, init_hidden=True, output=True)
+        self.lif_deconv2 = snn.Leaky(beta=beta, spike_grad=spike_grad)
         
         
     def forward(self, x, recorded_vars=None):
@@ -91,12 +91,16 @@ class SAE(nn.Module):
         # Initialize hidden states and outputs at t=0
         
         batch_size = len(x[0])       
-        
+        mem_conv1 = self.lif_conv1.init_leaky()
+        mem_conv2 = self.lif_conv2.init_leaky()
+        mem_rec = self.net_rec.init_leaky()
+        mem_latent = self.lif_latent.init_leaky()
+        mem_deconv2 = self.lif_conv1.init_leaky()
+        mem_deconv1 = self.lif_conv2.init_leaky()
         spk_conv1 = torch.zeros(batch_size, channels_1, conv1_size, conv1_size).to(self.device)
         spk_conv2 = torch.zeros(batch_size, channels_2, conv2_size, conv2_size).to(self.device)
-        spk_deconv2 = torch.zeros(batch_size, channels_1, conv1_size, conv1_size).to(self.device)
         spk_deconv1 = torch.zeros(batch_size, channels_2, conv2_size, conv2_size).to(self.device)
-        
+        spk_deconv2 = torch.zeros(batch_size, channels_1, conv1_size, conv1_size).to(self.device)
         spk_rec = torch.zeros(batch_size, num_rec).to(self.device)
         
         spk_outs = torch.zeros(batch_size, channels_2, conv2_size, conv2_size).to(self.device)
@@ -104,7 +108,7 @@ class SAE(nn.Module):
         
         spk_outs, spk_latents = [], []
         
-        # Record recurrent and output layer
+        # Record latent and output layer
         if recorded_vars:
             recorded = {key: [] for key in recorded_vars}
 
@@ -143,7 +147,6 @@ class SAE(nn.Module):
             curr_rec = self.ff_rec(spk_rec)
             curr_total = curr_in + curr_rec
             spk_rec, mem_rec = self.net_rec(curr_total + curr_osc, mem_rec)
-            
 
             #latent layer (code)
             curr_latent = self.ff_latent(spk_rec)
