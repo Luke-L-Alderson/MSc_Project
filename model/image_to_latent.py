@@ -19,22 +19,6 @@ class Net(nn.Module):
         #define gradient
         spike_grad = surrogate.fast_sigmoid(slope=25)
         
-        self.encoder = nn.Sequential(
-            nn.Conv2d(depth, cp["channels_1"], (cp["filter_1"], cp["filter_1"])),
-            snn.Leaky(beta=beta, spike_grad=spike_grad),
-            nn.Conv2d(cp["channels_1"], cp["channels_2"], (cp["filter_2"], cp["filter_2"])),
-            snn.Leaky(beta=beta, spike_grad=spike_grad),
-
-            #recurrent pool
-            nn.Linear(num_conv2, num_rec),
-            nn.Linear(num_rec, num_rec),
-            snn.Leaky(beta=beta, spike_grad=spike_grad, reset_mechanism="zero"),
-
-            # latent
-            nn.Linear(num_rec, num_latent),
-            snn.Leaky(beta=beta, spike_grad=spike_grad)
-            )
-        
         #convolution (encoder)
         self.conv1 = nn.Conv2d(depth, cp["channels_1"], (cp["filter_1"], cp["filter_1"]))
         #self.ff_rec_conv1 = nn.Linear(num_conv1, num_conv1)
@@ -80,9 +64,7 @@ class Net(nn.Module):
         spk_deconv1 = torch.zeros(batch_size, channels_2, conv2_size, conv2_size).to(self.device)
         
         spk_rec = torch.zeros(batch_size, num_rec).to(self.device)
-        
-        batch_size = len(x[0])
-        
+             
         spk_recs, spk_outs = [], []
         
         # Record recurrent and output layer
@@ -93,9 +75,9 @@ class Net(nn.Module):
             
             curr_osc = osc_of_t[timestep]
             
-            spk_latent, mem_latent = self.encoder(x[timestep])
+            #spk_latent, mem_latent = self.encoder(x[timestep])
             
-            '''
+            
             #convolution
             #curr_conv1 = self.conv1(x) + self.ff_rec_conv1(spk_conv1.view(batch_size, -1)).view(batch_size, channels_1, conv1_size, conv1_size)
             curr_conv1 = self.conv1(x[timestep])
@@ -119,7 +101,7 @@ class Net(nn.Module):
             curr_latent = self.ff_latent(spk_rec)
             spk_latent, mem_latent = self.lif_latent(curr_latent + curr_osc, mem_latent)
             #mem_latent += noise_amp*torch.randn(mem_latent.shape).to(self.device)
-            '''
+            
 
             #append recordings in time axis
             spk_recs.append(spk_rec)

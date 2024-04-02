@@ -25,6 +25,7 @@ import seaborn as sns
 
 from model.train.train_network import train_network
 from model.image_to_latent import Net
+from model.image_to_image import SAE
 from model.aux.functions import get_poisson_inputs, process_labels, mse_count_loss
 from data.aux.dataset import H5Dataset
 from data_generator.ds_generator import make_dataset, make_exam_tests
@@ -104,6 +105,16 @@ def print_network_architecure(network):
     print(Tconv2_text)
     print(Tconv1_text)
     print(output_layer_text)
+    
+def clear_all():
+    """Clears all the variables from the workspace of the spyder application."""
+    gl = globals().copy()
+    for var in gl:
+        if var[0] == '_': continue
+        if 'func' in str(globals()[var]): continue
+        if 'module' in str(globals()[var]): continue
+
+        del globals()[var]
 
 #%%
 """## Make or access existing datasets"""
@@ -119,14 +130,17 @@ for filename in os.listdir(folder):
         print('Failed to delete %s. Reason: %s' % (file_path, e))
         
 # create dataset in /content
+print("Making Datasets...")
 make_dataset(train_samples=3000, test_samples=300,  width=28, M_min=1, M_max=1, restrictions={}, path=folder)
 make_exam_tests(test_samples=1000, width=28, M_min=1, M_max=1, path=folder)
 
 #load dataset
+print("Dividing train/test...")
 train_dataset = H5Dataset('data/world_data_1_1/train.hdf5')
 test_dataset = H5Dataset('data/world_data_1_1/test.hdf5')
 
 # Create DataLoader
+print("Creating Loaders...")
 batch_size = 8
 train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True, drop_last=True)
 test_loader = DataLoader(test_dataset, batch_size=batch_size, shuffle=True, drop_last=True)
@@ -161,8 +175,9 @@ convolution_params["filter_1"] = 3
 convolution_params["channels_2"] = 64
 convolution_params["filter_2"] = 3
 
-network = Net(time_params, network_params, oscillation_params, frame_params, convolution_params, device).to(device)
-print_network_architecure(network)
+print("Defining network...")
+network = SAE(time_params, network_params, oscillation_params, frame_params, convolution_params, device).to(device)
+#print_network_architecure(network)
 
 
 #%%
@@ -200,9 +215,10 @@ exam_specs["path"] = 'data/content/exam_world_data_1_1'
 num_epochs = 1
 
 # set retrieval to load pre-trained network
-retrieval = 0;
+retrieval = 1;
 
-if retrieval is False:
+print("Training network...")
+if retrieval:
     for epoch in range(num_epochs):
       network = train_network(network, train_loader, test_loader, input_specs, label_specs, train_specs)
       exams_dict, av_recorded_dict = get_exam_per_constant(network, input_specs, label_specs, exam_specs, device)
@@ -269,6 +285,7 @@ fig.set_size_inches(16, 5)
 
 print('Plotting Potentials...')
 
+'''
 for ax_index, (var, ax) in enumerate(zip(recorded_vars, axs)):
   mean_exp = np.mean(np.array(trajectories[var]), axis=0)
   var_exp = np.var(np.array(trajectories[var]), axis=0)
@@ -282,6 +299,7 @@ for ax_index, (var, ax) in enumerate(zip(recorded_vars, axs)):
   if ax_index == 0:
     ax.set_ylabel(r"$u$ (mV)", fontsize=20)
     ax.legend(frameon=False, fontsize=18)
+'''
 
 print('Setting Input Specs')
 
