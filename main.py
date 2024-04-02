@@ -198,19 +198,21 @@ exam_specs["recorded_vars"] = ["curr_conv1", "spk_conv1", "curr_conv2", "spk_con
 exam_specs["path"] = 'data/content/exam_world_data_1_1'
 
 num_epochs = 1
-for epoch in range(num_epochs):
-  network = train_network(network, train_loader, test_loader, input_specs, label_specs, train_specs)
-  exams_dict, av_recorded_dict = get_exam_per_constant(network, input_specs, label_specs, exam_specs, device)
-  print(f'Epoch: {epoch} - {exams_dict["none"]}')
 
+# set retrieval to load pre-trained network
+retrieval = 0;
 
-# what are these lines? - I think the first line saves a network, the second
-# loads the settings so you dont have to keep training
-
-#torch.save(network.state_dict(), 'data/content/pt_model_10_500.pth')
-#network.load_state_dict(torch.load('pt_model_10_500.pth'), strict=False)
+if retrieval is False:
+    for epoch in range(num_epochs):
+      network = train_network(network, train_loader, test_loader, input_specs, label_specs, train_specs)
+      exams_dict, av_recorded_dict = get_exam_per_constant(network, input_specs, label_specs, exam_specs, device)
+      print(f'Epoch: {epoch} - {exams_dict["none"]}')
+    torch.save(network.state_dict(), 'data/content/pt_model_10_500.pth')
+else:
+    network.load_state_dict(torch.load('pt_model_10_500.pth'), strict=False)
 
 #%%
+
 """## Explore physiological statistics"""
 
 input_specs["rate_on"] = 500*Hz
@@ -221,10 +223,12 @@ poisson_inputs = get_poisson_inputs(inputs, **input_specs).to(device)
 
 input_index = 0
 plt.imshow(to_np(torch.transpose(inputs[input_index], 0 ,2)))
+plt.show()
 
 fig, ax = plt.subplots()
 anim = splt.animator(torch.transpose(torch.sum(poisson_inputs[:, input_index], 1), 1, 2), fig, ax)
 HTML(anim.to_html5_video())
+anim.save("spike_mnist.gif")
 
 input_specs["rate_on"] = 0*Hz
 input_specs["rate_off"] = 0*Hz
@@ -261,6 +265,7 @@ var_th = (1 - np.exp(-t_values/network.network_params["tau_m"]))*network.network
 fig, axs = plt.subplots(1, len(recorded_vars), sharey=True)
 fig.suptitle(r"$u$ trajectories (addition of noise)", y= 1.05, fontsize=20)
 fig.set_size_inches(16, 5)
+
 
 print('Plotting Potentials...')
 

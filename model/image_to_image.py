@@ -8,7 +8,7 @@ from snntorch import backprop
 from brian2 import *
 
 
-class autoNet(nn.Module):
+class SAE(nn.Module):
     def __init__(self, tp, netp, op, fp, cp, device):
         super().__init__()
         self.device = device
@@ -30,16 +30,16 @@ class autoNet(nn.Module):
             nn.Linear(num_rec, num_rec),
             snn.Leaky(beta=beta, spike_grad=spike_grad, reset_mechanism="zero"),
 
-            # latent
+            # latent - do we want a spiking latent layer?
             nn.Linear(num_rec, num_latent),
             snn.Leaky(beta=beta, spike_grad=spike_grad)
             )
         
         self.decoder = nn.Sequential(
             # convolution (decoder)
-            nn.ConvTranspose2d(cp["channels_1"], depth, (cp["filter_1"], cp["filter_1"])),
-            snn.Leaky(beta=beta, spike_grad=spike_grad),
             nn.ConvTranspose2d(cp["channels_2"], cp["channels_1"], (cp["filter_2"], cp["filter_2"])),
+            snn.Leaky(beta=beta, spike_grad=spike_grad),
+            nn.ConvTranspose2d(cp["channels_1"], depth, (cp["filter_1"], cp["filter_1"])),
             snn.Leaky(beta=beta, spike_grad=spike_grad)
             )
            
@@ -84,16 +84,10 @@ class autoNet(nn.Module):
           x = x.type(torch.FloatTensor)
         
         # Initialize hidden states and outputs at t=0
-        mem_latent = self.lif_latent.init_leaky()
-        mem_reconstruction = self.lif_conv2.init_leaky()
-        
         batch_size = len(x[0])
         
-        
-        spk_reconstruction = torch.zeros(batch_size, channels_2, conv2_size, conv2_size).to(self.device)
-        spk_rec = torch.zeros(batch_size, num_rec).to(self.device)
-        
-        batch_size = len(x[0])
+        spk_outs = torch.zeros(batch_size, channels_2, conv2_size, conv2_size).to(self.device)
+        spk_latents = torch.zeros(batch_size, num_rec).to(self.device)
         
         spk_outs, spk_latents = [], []
         
