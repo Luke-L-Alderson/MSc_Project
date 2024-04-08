@@ -7,7 +7,6 @@ from snntorch import backprop
 
 from brian2 import *
 
-
 class SAE(nn.Module):
     def __init__(self, tp, netp, op, fp, cp, device):
         super().__init__()
@@ -46,33 +45,45 @@ class SAE(nn.Module):
            
         '''    
         
-        #convolution (encoder)
+        #convolution (encoder) - Input size: [8, 3, 28, 28]
+        
         self.conv1 = nn.Conv2d(depth, cp["channels_1"], (cp["filter_1"], cp["filter_1"]))
         self.lif_conv1 = snn.Leaky(beta=beta, spike_grad=spike_grad)
+        # conv1 output size: [8, 12, 26, 26]
+        
         self.conv2 = nn.Conv2d(cp["channels_1"], cp["channels_2"], (cp["filter_2"], cp["filter_2"]))
         self.lif_conv2 = snn.Leaky(beta=beta, spike_grad=spike_grad)
+        # conv2 output size: [8, 64, 24, 24]  
 
-        #recurrent pool
-        self.ff_in = nn.Linear(num_conv2, num_rec)
-        self.ff_rec = nn.Linear(num_rec, num_rec)
+        # I think I should flatten conv2        
+
+        # recurrent (latent)
+        self.ff_in = nn.Linear(num_conv2, num_rec) # 8x24x64 (12288) -> 100
+        self.ff_rec = nn.Linear(num_rec, num_rec)  # 100 -> 100 (same nodes)
         self.net_rec = snn.Leaky(beta=beta, spike_grad=spike_grad, reset_mechanism="zero")
-
-        # latent
-        self.ff_latent = nn.Linear(num_rec, num_latent)
-        self.lif_latent = snn.Leaky(beta=beta, spike_grad=spike_grad)
         
-        self.linearNet = nn.Sequential(
-            nn.Linear(num_latent, 128*4*4),
-            snn.Leaky(beta=beta, spike_grad=spike_grad, reset_mechanism="zero"),
-            nn.Unflatten(1,(128,4,4)), #Unflatten data from 1 dim to tensor of 128 x 4 x 4
-            snn.Leaky(beta=beta, spike_grad=spike_grad, reset_mechanism="zero")
-            )
+        self.ff_out = nn.Linear(num_rec, num_conv2)
+        # reshape the input to convTranspose to be 
+        
+
+        '''
+        # latent - remove this
+        self.ff_latent = nn.Linear(num_rec, num_latent) # 100 -> 8
+        self.lif_latent = snn.Leaky(beta=beta, spike_grad=spike_grad)
+        # latent output size: [8, 8]  
+        '''
+        
+        # needs to be [8, 64, 24, 24] format for convTrans
         
         # convolution (decoder)
+        
+        self.deconv2 = nn.ConvTranspose2d(cp["channels_2"], cp["channels_1"], (cp["filter_2"], cp["filter_2"])) 
+        self.lif_deconv2 = snn.Leaky(beta=beta, spike_grad=spike_grad)
+        # deconv2 output size: [8, 12, 26, 26]  
+        
         self.reconstruction = nn.ConvTranspose2d(cp["channels_1"], depth, (cp["filter_1"], cp["filter_1"]))
         self.lif_reconstruction = snn.Leaky(beta=beta, spike_grad=spike_grad)
-        self.deconv2 = nn.ConvTranspose2d(cp["channels_2"], cp["channels_1"], (cp["filter_2"], cp["filter_2"]))
-        self.lif_deconv2 = snn.Leaky(beta=beta, spike_grad=spike_grad)
+        # recontruction should be [8, 3, 28, 28]
         
         
     def forward(self, x, recorded_vars=None):
@@ -94,9 +105,9 @@ class SAE(nn.Module):
         mem_conv1 = self.lif_conv1.init_leaky()
         mem_conv2 = self.lif_conv2.init_leaky()
         mem_rec = self.net_rec.init_leaky()
-        mem_latent = self.lif_latent.init_leaky()
-        mem_deconv2 = self.lif_conv1.init_leaky()
-        mem_deconv1 = self.lif_conv2.init_leaky()
+        #mem_latent = self.lif_latent.init_leaky()
+        mem_deconv2 = self.lif_deconv2.init_leaky()
+        mem_reconstruction = self.lif_reconstruction.init_leaky()
         spk_conv1 = torch.zeros(batch_size, channels_1, conv1_size, conv1_size).to(self.device)
         spk_conv2 = torch.zeros(batch_size, channels_2, conv2_size, conv2_size).to(self.device)
         spk_deconv1 = torch.zeros(batch_size, channels_2, conv2_size, conv2_size).to(self.device)
@@ -104,9 +115,8 @@ class SAE(nn.Module):
         spk_rec = torch.zeros(batch_size, num_rec).to(self.device)
         
         spk_outs = torch.zeros(batch_size, channels_2, conv2_size, conv2_size).to(self.device)
-        spk_latents = torch.zeros(batch_size, num_rec).to(self.device)
         
-        spk_outs, spk_latents = [], []
+        spk_outs, spk_recs = [], []
         
         # Record latent and output layer
         if recorded_vars:
@@ -141,24 +151,33 @@ class SAE(nn.Module):
             # convolution (encoder) - layer 2
             curr_conv2 = self.conv2(spk_conv1)
             spk_conv2, mem_conv2 = self.lif_conv2(curr_conv2 + curr_osc, mem_conv2)
-
+            
+            
             #recurrent layer (encoder)
             curr_in = self.ff_in(spk_conv2.view(batch_size, -1))
             curr_rec = self.ff_rec(spk_rec)
             curr_total = curr_in + curr_rec
             spk_rec, mem_rec = self.net_rec(curr_total + curr_osc, mem_rec)
-
-            #latent layer (code)
-            curr_latent = self.ff_latent(spk_rec)
-            spk_latent, mem_latent = self.lif_latent(curr_latent + curr_osc, mem_latent)
+            
+            print(f'\nInput Size: {x[timestep].size()}\n\
+                    Conv1 Size: {curr_conv1.size()}\n\
+                    Spk1 Size: {spk_conv1.size()}\n\
+                    Conv2 Size: {curr_conv2.size()}\n\
+                    Spk2 Size {spk_conv2.size()}\n\
+                    SpkR Size {spk_rec.size()}')
+            
+            
+            curr_out = self.ff_out(spk_rec)
             
             # convolution (decoder) - undo layer 2
-            curr_deconv2 = self.deconv2(spk_latent)
+            curr_deconv2 = self.deconv2(curr_out.view(curr_out.size(0), channels_2, conv2_size, conv2_size))
             spk_deconv2, mem_deconv2 = self.lif_conv2(curr_deconv2 + curr_osc, mem_deconv2)
+            print(f'\n{spk_deconv2.size()}\n{curr_deconv2.size()}')
             
             # convolution (decoder) - undo layer 1
-            curr_reconstruction = self.deconv1(spk_deconv2)
+            curr_reconstruction = self.reconstruction(spk_deconv2)
             spk_reconstruction, mem_reconstruction = self.lif_reconstruction(curr_reconstruction + curr_osc, mem_reconstruction)
+            print(f'\n{spk_reconstruction.size()}\n{curr_reconstruction.size()}')
             
             ''' Noise if needed
             #mem_conv1 += noise_amp*torch.randn(mem_conv1.shape).to(self.device)
@@ -169,7 +188,8 @@ class SAE(nn.Module):
             #mem_reconstruction += noise_amp*torch.randn(mem_reconstruction.shape).to(self.device)
             '''
             
-            spk_latents.append(spk_latent)
+            #spk_latents.append(spk_latent)
+            spk_recs.append(spk_rec)
             spk_outs.append(spk_reconstruction)
 
             if recorded_vars:

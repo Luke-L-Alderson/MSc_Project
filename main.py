@@ -130,23 +130,23 @@ for filename in os.listdir(folder):
         print('Failed to delete %s. Reason: %s' % (file_path, e))
         
 # create dataset in /content
-print("Making Datasets...")
+print("1/5: Making Datasets...")
 make_dataset(train_samples=3000, test_samples=300,  width=28, M_min=1, M_max=1, restrictions={}, path=folder)
 make_exam_tests(test_samples=1000, width=28, M_min=1, M_max=1, path=folder)
 
 #load dataset
-print("Dividing train/test...")
+print("2/5: Dividing train/test...")
 train_dataset = H5Dataset('data/world_data_1_1/train.hdf5')
 test_dataset = H5Dataset('data/world_data_1_1/test.hdf5')
 
 # Create DataLoader
-print("Creating Loaders...")
+print("3/5: Creating Loaders...")
 batch_size = 8
 train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True, drop_last=True)
 test_loader = DataLoader(test_dataset, batch_size=batch_size, shuffle=True, drop_last=True)
 
 """## Define network architecutre and parameters"""
-
+# get MNIST in, get correct targets, try and vary some biophys params with plots
 time_params = {}
 time_params["dt"] = 1*ms
 time_params["total_time"] = 200*ms
@@ -156,7 +156,7 @@ network_params["tau_m"] = 24*ms
 network_params["tau_syn"] = 10*ms
 network_params["R_m"] = 146*Mohm
 network_params["v_th"] = 15*mV
-network_params["eta"] = 0.0
+network_params["eta"] = 0.0 # controls noise amplitude - try adding noise in rec layer
 network_params["num_rec"] = 100
 network_params["num_latent"] = 8
 
@@ -175,7 +175,8 @@ convolution_params["filter_1"] = 3
 convolution_params["channels_2"] = 64
 convolution_params["filter_2"] = 3
 
-print("Defining network...")
+#%%
+print("4/5: Defining network...")
 network = SAE(time_params, network_params, oscillation_params, frame_params, convolution_params, device).to(device)
 #print_network_architecure(network)
 
@@ -217,7 +218,7 @@ num_epochs = 1
 # set retrieval to load pre-trained network
 retrieval = 1;
 
-print("Training network...")
+print("5/5: Training network...")
 if retrieval:
     for epoch in range(num_epochs):
       network = train_network(network, train_loader, test_loader, input_specs, label_specs, train_specs)
