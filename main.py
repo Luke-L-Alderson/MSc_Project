@@ -205,12 +205,12 @@ if not os.path.isdir('figures/testing'):
     os.makedirs('figures/testing')
 
 data_path='/tmp/data/mnist'
-'''
+
 transform = transforms.Compose([
             transforms.Grayscale(),
             transforms.ToTensor(),
             transforms.Normalize((0,), (1,))])
-'''
+
 batch_size = 8
 
 # create dataset in /content
@@ -276,7 +276,7 @@ network = SAE(time_params, network_params, oscillation_params, frame_params, con
 
 #%%
 """## Training the network"""
-num_epochs = 1
+num_epochs = train_specs["num_epochs"]
 
 # unset retrieval to load pre-trained network
 retrieval = 1;
@@ -284,7 +284,7 @@ retrieval = 1;
 
 if retrieval:
     for epoch in range(num_epochs):
-      network = train_network(network, train_loader, test_loader, input_specs, label_specs, train_specs)
+      network, epoch_training_loss, epoch_testing_loss = train_network(network, train_loader, test_loader, input_specs, label_specs, train_specs, reporting = False)
       #exams_dict, av_recorded_dict = get_exam_per_constant(network, input_specs, label_specs, exam_specs, device)
       #print(f'Epoch: {epoch} - {exams_dict["none"]}')
     torch.save(network.state_dict(), 'data/content/pt_model_10_500.pth')
@@ -299,27 +299,47 @@ input_specs["rate_off"] = 10*Hz
 # Plot originally input as image and as spiking representation - save gif.
 inputs, labels = next(iter(train_loader))
 poisson_inputs = get_poisson_inputs(inputs, **input_specs).to(device)
-image_rec = network(poisson_inputs)[1].detach()
+
+img_spk_recs, img_spk_outs = network(poisson_inputs)
 
 # img
 input_index = 0
-plt.imshow(to_np(torch.transpose(inputs[input_index], 0 ,2)), cmap = 'grey')
+poisson_inputs = poisson_inputs[:, input_index, 0]
+img_spk_outs = img_spk_outs[:, input_index, 0].detach()
+
+plt.imshow(to_np(inputs[input_index, 0]), cmap = 'grey')
 plt.show()
+
+plt.imshow(poisson_inputs.cpu().mean(axis=0), cmap='grey')
+
+
 
 # anim
 fig, ax = plt.subplots()
-anim = splt.animator(torch.transpose(torch.sum(poisson_inputs[:, input_index], 1), 1, 2), fig, ax)
+anim = splt.animator(poisson_inputs, fig, ax)
 HTML(anim.to_html5_video())
 anim.save("spike_mnist.gif")
 plt.show()
 
 # new data
-fig, ax = plt.subplots()
-anim = splt.animator(torch.transpose(torch.sum(image_rec[:, input_index], 1), 1, 2), fig, ax)
-HTML(anim.to_html5_video())
-anim.save("spike_mnistrec.gif")
+plt.imshow(img_spk_outs.cpu().mean(axis=0), cmap='grey')
+
+fig1, ax1 = plt.subplots()
+animrec = splt.animator(img_spk_outs, fig1, ax1)
+HTML(animrec.to_html5_video())
+animrec.save("spike_mnistrec.gif")
 plt.show()
 
+fig = plt.figure(facecolor="w", figsize=(10, 5))
+ax = fig.add_subplot(111)
+splt.raster(poisson_inputs.reshape(200, -1), ax, s=1.5, c="black")
+
+fig = plt.figure(facecolor="w", figsize=(10, 5))
+ax = fig.add_subplot(111)
+splt.raster(img_spk_outs.reshape(200, -1), ax, s=1.5, c="black")
+ax.set_xlim([0, 200])
+
+'''
 input_specs["rate_on"] = 0*Hz
 input_specs["rate_off"] = 0*Hz
 recorded_vars = ["mem_conv1", "mem_conv2", "mem_rec", "mem_latent"]
@@ -355,4 +375,4 @@ var_th = (1 - np.exp(-t_values/network.network_params["tau_m"]))*network.network
 fig, axs = plt.subplots(1, len(recorded_vars), sharey=True)
 fig.suptitle(r"$u$ trajectories (addition of noise)", y= 1.05, fontsize=20)
 fig.set_size_inches(16, 5)
-
+'''
