@@ -1,9 +1,15 @@
 import torch
 import torch.nn as nn
+import torch.nn.functional as F
+
+from torchvision import datasets, transforms
+from torch.utils.data import DataLoader
+from torchvision import utils as utls
 
 import snntorch as snn
+import snntorch.spikeplot as splt
+from snntorch import utils
 from snntorch import surrogate
-from snntorch import backprop
 
 from brian2 import *
 
@@ -158,26 +164,26 @@ class SAE(nn.Module):
             curr_rec = self.ff_rec(spk_rec)
             curr_total = curr_in + curr_rec
             spk_rec, mem_rec = self.net_rec(curr_total + curr_osc, mem_rec)
-            
-            print(f'\nInput Size: {x[timestep].size()}\n\
-                    Conv1 Size: {curr_conv1.size()}\n\
-                    Spk1 Size: {spk_conv1.size()}\n\
-                    Conv2 Size: {curr_conv2.size()}\n\
-                    Spk2 Size {spk_conv2.size()}\n\
-                    SpkR Size {spk_rec.size()}')
-            
+            '''
+            print(f'\nInput Size: {x[timestep].size()}\
+                    \nConv1 Size: {curr_conv1.size()}\
+                    \nSpk1 Size: {spk_conv1.size()}\
+                    \nConv2 Size: {curr_conv2.size()}\
+                    \nSpk2 Size {spk_conv2.size()}\
+                    \nSpkR Size {spk_rec.size()}')
+            '''
             
             curr_out = self.ff_out(spk_rec)
             
             # convolution (decoder) - undo layer 2
             curr_deconv2 = self.deconv2(curr_out.view(curr_out.size(0), channels_2, conv2_size, conv2_size))
             spk_deconv2, mem_deconv2 = self.lif_conv2(curr_deconv2 + curr_osc, mem_deconv2)
-            print(f'\n{spk_deconv2.size()}\n{curr_deconv2.size()}')
+            #print(f'\n{spk_deconv2.size()}\n{curr_deconv2.size()}')
             
             # convolution (decoder) - undo layer 1
             curr_reconstruction = self.reconstruction(spk_deconv2)
             spk_reconstruction, mem_reconstruction = self.lif_reconstruction(curr_reconstruction + curr_osc, mem_reconstruction)
-            print(f'\n{spk_reconstruction.size()}\n{curr_reconstruction.size()}')
+            #print(f'\n{spk_reconstruction.size()}\n{curr_reconstruction.size()}')
             
             ''' Noise if needed
             #mem_conv1 += noise_amp*torch.randn(mem_conv1.shape).to(self.device)
