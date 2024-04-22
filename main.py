@@ -9,11 +9,14 @@ Original file is located at
 
 ## Generate GitHub keys and clone repository
 """## Imports"""
-
+print("Importing modules and defining functions")
 #importing module
 import sys
 sys.path.append('snn-project')
 import os, shutil
+import random as rand
+import numpy as np
+import wandb
 
 import torch
 import torch.nn as nn
@@ -22,6 +25,7 @@ import torch.nn.functional as F
 from torchvision import datasets, transforms
 from torch.utils.data import DataLoader
 from torchvision import utils as utls
+from torch.utils.data import Subset
 
 import snntorch as snn
 import snntorch.spikeplot as splt
@@ -117,49 +121,51 @@ def print_network_architecure(network):
     print(Tconv1_text)
     print(output_layer_text)
     
-def clear_all():
-    """Clears all the variables from the workspace of the spyder application."""
-    gl = globals().copy()
-    for var in gl:
-        if var[0] == '_': continue
-        if 'func' in str(globals()[var]): continue
-        if 'module' in str(globals()[var]): continue
 
-        del globals()[var]
+def set_seed(value = 42):
+    np.random.seed(value)
+    torch.manual_seed(value)
+    torch.cuda.manual_seed(value)
+    #rand.seed(value)
+    # When running on the CuDNN backend, two further options must be set
+    torch.backends.cudnn.deterministic = True
+    torch.backends.cudnn.benchmark = False
+    # Set a fixed value for the hash seed
+    os.environ["PYTHONHASHSEED"] = str(value)
+    print(f"Setting Seed to {value}")
+
+
+set_seed()
+
+epochs = [1, 5, 7]
+lrs = [1e-2, 1e-3, 1e-4]
+
+#for lr in lrs:
+#    print('f')
 
 """## Define network architecutre and parameters"""
 # get MNIST in, get correct targets, try and vary some biophys params with plots
-time_params = {}
+time_params, network_params, oscillation_params, frame_params, \
+convolution_params, input_specs, label_specs, train_specs = {}, {}, {}, {}, {}, {}, {}, {}
+
 time_params["dt"] = 1*ms
 time_params["total_time"] = 200*ms
 
-network_params = {}
-network_params["tau_m"] = 24*ms
-network_params["tau_syn"] = 10*ms
-network_params["R_m"] = 146*Mohm
-network_params["v_th"] = 15*mV
-network_params["eta"] = 0.0 # controls noise amplitude - try adding noise in rec layer
+network_params["tau_m"] = 24*ms     # affects beta
+network_params["tau_syn"] = 10*ms   # not currently used
+network_params["R_m"] = 146*Mohm    # not currently used
+network_params["v_th"] = 1#15*mV    # snn default = 1
+network_params["eta"] = 0.0         # controls noise amplitude - try adding noise in rec layer
 network_params["num_rec"] = 100
 network_params["num_latent"] = 8
 
-oscillation_params = {}
-oscillation_params["f"] = 10*Hz
-oscillation_params["I_osc"] = 0*pA
-#oscillation_params["phis"] = [0, 0, 0, 0]
-
-frame_params = {}
 frame_params["depth"] = 1
 frame_params["size"] = 28
 
-convolution_params = {}
 convolution_params["channels_1"] = 12
 convolution_params["filter_1"] = 3
 convolution_params["channels_2"] = 64
 convolution_params["filter_2"] = 3
-
-input_specs = {}
-label_specs = {}
-train_specs = {}
 
 input_specs["total_time"] = 200*ms
 input_specs["bin_size"] = 1*ms
@@ -171,33 +177,33 @@ label_specs["code"] = 'rate'
 label_specs["rate"] = 75*Hz
 
 train_specs["num_epochs"] = 1
-train_specs["early_stop"] = 1000
+train_specs["early_stop"] = -1
 train_specs["device"] = device
-train_specs["lr"] = 1e-3
+train_specs["lr"] = 1e-4
 train_specs["loss_fn"] = "spike_count"
 train_specs["lambda_rate"] = 0.0
 train_specs["lambda_weights"] = None
+batch_size = 32
 
-exam_specs = {}
-exam_specs["constant_list"] = ["none"]
-exam_specs["batch_size"] = 16
-exam_specs["recorded_vars"] = ["curr_conv1", "spk_conv1", "curr_conv2", "spk_conv2", "curr_total", "spk_rec", "curr_latent", "spk_latent"]
-exam_specs["path"] = 'data/content/exam_world_data_1_1'
+wandb.init(
+    # set the wandb project where this run will be logged
+    project="MSc Project",
+
+    # track hyperparameters and run metadata
+    config={
+    "learning_rate": train_specs["lr"],
+    "architecture": "SCAE",
+    "dataset": "MNIST",
+    "epochs": train_specs["num_epochs"],
+    "batch size": batch_size,
+    "v_th": network_params["v_th"],
+    "tau_m": network_params["tau_m"]
+    }
+)
 
 #%%
 """## Make or access existing datasets"""
-folder = 'data/content'
-for filename in os.listdir(folder):
-    file_path = os.path.join(folder, filename)
-    try:
-        if os.path.isfile(file_path) or os.path.islink(file_path):
-            os.unlink(file_path)
-        elif os.path.isdir(file_path):
-            shutil.rmtree(file_path)
-    except Exception as e:
-        print('Failed to delete %s. Reason: %s' % (file_path, e))
-
-# create training/ and testing/ folders in your chosen path
+# create training/ and testing/ folders in the chosen path
 if not os.path.isdir('figures/training'):
     os.makedirs('figures/training')
 
@@ -211,16 +217,20 @@ transform = transforms.Compose([
             transforms.ToTensor(),
             transforms.Normalize((0,), (1,))])
 
-batch_size = 8
-
 # create dataset in /content
-print("1/5: Making Datasets...")
+print("Making Datasets...")
 
 # Load MNIST
+'''
+train_dataset = Subset(datasets.MNIST(root='dataset/', train=True, transform=transform, download=True), range(1000))
+test_dataset = Subset(datasets.MNIST(root='dataset/', train=False, transform=transform, download=True), range(200))
+
+'''
 train_dataset = datasets.MNIST(root='dataset/', train=True, transform=transform, download=True)
 test_dataset = datasets.MNIST(root='dataset/', train=False, transform=transform, download=True)
 
-print("2/5: Making Dataloaders...")
+
+print("Making Dataloaders...")
 
 train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
 test_loader = DataLoader(test_dataset, batch_size=batch_size, shuffle=True)
@@ -250,46 +260,23 @@ plt.tight_layout()
 plt.show()
 
 
-'''
-make_dataset(train_samples=3000, test_samples=300,  width=28, M_min=1, M_max=1, restrictions={}, path=folder)
-make_exam_tests(test_samples=1000, width=28, M_min=1, M_max=1, path=folder)
-
-#load dataset
-print("2/5: Dividing train/test...")
-train_dataset = H5Dataset('data/world_data_1_1/train.hdf5')
-test_dataset = H5Dataset('data/world_data_1_1/test.hdf5')
-
-# Create DataLoader
-print("3/5: Creating Loaders...")
-
-train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True, drop_last=True)
-test_loader = DataLoader(test_dataset, batch_size=batch_size, shuffle=True, drop_last=True)
-'''
-
-
-
 #%%
-print("4/5: Defining network...")
-network = SAE(time_params, network_params, oscillation_params, frame_params, convolution_params, device).to(device)
+print("Defining network...")
+network = SAE(time_params, network_params, frame_params, convolution_params, device).to(device)
 #print_network_architecure(network)
 
 
 #%%
 """## Training the network"""
-num_epochs = train_specs["num_epochs"]
-
 # unset retrieval to load pre-trained network
 retrieval = 1;
 
-
 if retrieval:
-    for epoch in range(num_epochs):
-      network, epoch_training_loss, epoch_testing_loss = train_network(network, train_loader, test_loader, input_specs, label_specs, train_specs, reporting = False)
-      #exams_dict, av_recorded_dict = get_exam_per_constant(network, input_specs, label_specs, exam_specs, device)
-      #print(f'Epoch: {epoch} - {exams_dict["none"]}')
+    network, train_loss, test_loss = train_network(network, train_loader, test_loader, input_specs, label_specs, train_specs, reporting = False)
     torch.save(network.state_dict(), 'data/content/pt_model_10_500.pth')
+    print('\a')
 else:
-    network.load_state_dict(torch.load('pt_model_10_500.pth'), strict=False)
+    network.load_state_dict(torch.load('data/content/pt_model_10_500.pth'), strict=False)
 
 #%% Plotting
 
@@ -297,82 +284,146 @@ input_specs["rate_on"] = 500*Hz
 input_specs["rate_off"] = 10*Hz
 
 # Plot originally input as image and as spiking representation - save gif.
-inputs, labels = next(iter(train_loader))
+inputs, labels = next(iter(test_loader))
 poisson_inputs = get_poisson_inputs(inputs, **input_specs).to(device)
 
 img_spk_recs, img_spk_outs = network(poisson_inputs)
 
 # img
 input_index = 0
-poisson_inputs = poisson_inputs[:, input_index, 0]
-img_spk_outs = img_spk_outs[:, input_index, 0].detach()
+poisson_inputs = poisson_inputs.squeeze().cpu()
+img_spk_outs = img_spk_outs.squeeze().detach().cpu()
 
 plt.imshow(to_np(inputs[input_index, 0]), cmap = 'grey')
 plt.show()
 
-plt.imshow(poisson_inputs.cpu().mean(axis=0), cmap='grey')
-
-
+plt.imshow(poisson_inputs[:, input_index].mean(axis=0), cmap='grey')
 
 # anim
 fig, ax = plt.subplots()
-anim = splt.animator(poisson_inputs, fig, ax)
+anim = splt.animator(poisson_inputs[:, input_index], fig, ax)
 HTML(anim.to_html5_video())
 anim.save("spike_mnist.gif")
 plt.show()
 
+wandb.log({"Spike Animation": wandb.Video("spike_mnist.gif", fps=4, format="gif")}, commit = False)
+
+# 4 x 5 grid of numbers
+seen_labels = set()
+unique_ims = []
+orig_ims = []
+print(labels)
+for number in range(batch_size):
+    curr_label = labels[number].item()
+    
+    #fig, (ax1, ax2) = plt.subplots(1, 2)
+    #ax1.set_title("Original")
+    #ax2.set_title("Reconstruction")
+    #ax1.imshow(poisson_inputs[:, number].mean(axis=0), cmap='grey')
+    #ax2.imshow(img_spk_outs[:, number].mean(axis=0), cmap='grey')
+    if curr_label not in seen_labels:
+        seen_labels.add(curr_label)
+        print(f'{curr_label} added')
+        unique_ims.append((img_spk_outs[:, number].mean(axis=0), curr_label))
+        orig_ims.append((poisson_inputs[:, number].mean(axis=0), curr_label))
+        fig.savefig(f"Number{curr_label}")
+
+unique_ims.sort(key=lambda x: x[1])
+orig_ims.sort(key=lambda x: x[1])
+
+fig, axs = plt.subplots(4, 5, figsize=(12, 10))
+
+# Flatten the axis array for easier indexing
+axs = axs.flatten()
+
+# Plot the first 5 images from orig_ims
+for i in range(5):
+    axs[i].imshow(orig_ims[i][0], cmap='grey')
+    if i==2:
+        axs[i].set_title('Originals: 0 - 4')
+    axs[i].axis('off')
+
+# Plot the first 5 images from unique_ims
+for i in range(5):
+    axs[i+5].imshow(unique_ims[i][0], cmap='grey')
+    if i==2:
+        axs[i+5].set_title('Reconstructions: 0 - 4')
+    axs[i+5].axis('off')
+
+# Plot the remaining images from orig_ims
+for i in range(5, 10):
+    axs[i+5].imshow(orig_ims[i][0], cmap='grey')
+    if i==7:
+        axs[i+5].set_title('Originals: 5 - 9')
+    axs[i+5].axis('off')
+
+# Plot the remaining images from unique_ims
+for i in range(5, 10):
+    axs[i+10].imshow(unique_ims[i][0], cmap='grey')
+    if i==7:
+        axs[i+10].set_title('Reconstructions: 5 - 9')
+    axs[i+10].axis('off')
+
+plt.tight_layout()
+plt.show()
+fig.savefig("result_summary.png")
+
+# Training Loss
+fig, axs = plt.subplots()
+axs.plot(np.array(train_loss), 'k')
+axs.grid(True)
+#axs.set_xlim(0, 1000)
+axs.set_ylim(0, 40)
+axs.set_ylabel("MSE of Spike Count")
+axs.set_xlabel("Epochs")
+#axs.set_xticks([187, 374, 561, 748, 935], labels = ["1", "2", "3", "4", "5"])
+wandb.log({"Training Loss": fig}, commit = False)
+fig.savefig("train_loss.png")
+
 # new data
-plt.imshow(img_spk_outs.cpu().mean(axis=0), cmap='grey')
+plt.imshow(img_spk_outs[:, input_index].mean(axis=0), cmap='grey')
 
 fig1, ax1 = plt.subplots()
-animrec = splt.animator(img_spk_outs, fig1, ax1)
+animrec = splt.animator(img_spk_outs[:, input_index], fig1, ax1)
 HTML(animrec.to_html5_video())
 animrec.save("spike_mnistrec.gif")
+
 plt.show()
 
 fig = plt.figure(facecolor="w", figsize=(10, 5))
 ax = fig.add_subplot(111)
-splt.raster(poisson_inputs.reshape(200, -1), ax, s=1.5, c="black")
+splt.raster(poisson_inputs[:, input_index].reshape(200, -1), ax, s=1.5, c="black")
 
 fig = plt.figure(facecolor="w", figsize=(10, 5))
 ax = fig.add_subplot(111)
-splt.raster(img_spk_outs.reshape(200, -1), ax, s=1.5, c="black")
+splt.raster(img_spk_outs[:, input_index].reshape(200, -1), ax, s=1.5, c="black")
 ax.set_xlim([0, 200])
 
+wandb.log({"Loss Plot": wandb.Image("train_loss.png"),
+           "Results Grid": wandb.Image("result_summary.png"),
+           "Spike Animation": wandb.Video("spike_mnistrec.gif", fps=4, format="gif")})
+wandb.finish()
 '''
-input_specs["rate_on"] = 0*Hz
-input_specs["rate_off"] = 0*Hz
-recorded_vars = ["mem_conv1", "mem_conv2", "mem_rec", "mem_latent"]
+# Plot examples from MNIST
+unique_images = []
+seen_labels = set()
 
-traj_loader = DataLoader(train_dataset, batch_size=1, shuffle=True, drop_last=True)
-inputs, labels = next(iter(traj_loader))
-traj_inputs = get_poisson_inputs(inputs, **input_specs).to(device)
+for image, label in train_dataset:
+    if label not in seen_labels:
+        unique_images.append((image, label))
+        seen_labels.add(label)
 
-num_trials = 100
-trajectories = {var : [] for var in recorded_vars}
-index = {var : [] for var in recorded_vars}
+unique_images.sort(key=lambda x: x[1])
 
-for trial in range(num_trials):
-  print(f'Getting Recordings: {trial+1} / {num_trials}')
-  recordings = network(traj_inputs, recorded_vars=recorded_vars)
-  for var in recorded_vars:
-    trajectories[var].append(to_np(recordings[var].view(int(network.time_params["total_time"]/ms), -1)[:, index[var]])*15)
+fig, axes = plt.subplots(2, 5, figsize=(15, 6))
 
-index["mem_conv1"] = 26*26*2 + 1
-plt.plot(to_np(recordings["mem_conv1"].view(int(network.time_params["total_time"]/ms), -1)[:, index["mem_conv1"]]))
+axes = axes.flatten()
 
-index["mem_conv2"] = 24*24*8 + 1
-plt.plot(to_np(recordings["mem_conv2"].view(int(network.time_params["total_time"]/ms), -1)[:, index["mem_conv2"]]))
+# Loop over each subplot
+for i, ax in enumerate(axes):
+    ax.set_title(f'Number: {unique_images[i][1]}')
+    ax.imshow(unique_images[i][0].reshape(28,28), cmap = 'gray')  # Blank image, you can replace this with your content
+    ax.axis('off')
 
-index["mem_rec"] = 7
-plt.plot(to_np(recordings["mem_rec"].view(int(network.time_params["total_time"]/ms), -1)[:, index["mem_rec"]]))
-
-index["mem_latent"] = 5
-plt.plot(to_np(recordings["mem_latent"].view(int(network.time_params["total_time"]/ms), -1)[:, index["mem_latent"]]))
-
-t_values = np.arange(0, network.time_params["total_time"], step=network.time_params["dt"])
-var_th = (1 - np.exp(-t_values/network.network_params["tau_m"]))*network.network_params["eta"]*network_params["v_th"]/mV
-fig, axs = plt.subplots(1, len(recorded_vars), sharey=True)
-fig.suptitle(r"$u$ trajectories (addition of noise)", y= 1.05, fontsize=20)
-fig.set_size_inches(16, 5)
-'''
+plt.tight_layout()
+plt.show()'''
