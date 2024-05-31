@@ -1,0 +1,27 @@
+2024-04-24 21:45:28,898 INFO    MainThread:14352 [wandb_setup.py:_flush():76] Current SDK version is 0.16.6
+2024-04-24 21:45:28,900 INFO    MainThread:14352 [wandb_setup.py:_flush():76] Configure stats pid to 14352
+2024-04-24 21:45:28,900 INFO    MainThread:14352 [wandb_setup.py:_flush():76] Loading settings from C:\Users\lukea\.config\wandb\settings
+2024-04-24 21:45:28,900 INFO    MainThread:14352 [wandb_setup.py:_flush():76] Loading settings from G:\My Drive\MSc\0_Project\MSc_Project\wandb\settings
+2024-04-24 21:45:28,900 INFO    MainThread:14352 [wandb_setup.py:_flush():76] Loading settings from environment variables: {}
+2024-04-24 21:45:28,901 INFO    MainThread:14352 [wandb_setup.py:_flush():76] Applying setup settings: {'_disable_service': False}
+2024-04-24 21:45:28,901 INFO    MainThread:14352 [wandb_setup.py:_flush():76] Inferring run settings from compute environment: {'program_relpath': 'main.py', 'program_abspath': 'g:\\my drive\\msc\\0_project\\msc_project\\main.py', 'program': 'g:\\my drive\\msc\\0_project\\msc_project\\main.py'}
+2024-04-24 21:45:28,901 INFO    MainThread:14352 [wandb_setup.py:_flush():76] Applying login settings: {}
+2024-04-24 21:45:28,902 INFO    MainThread:14352 [wandb_init.py:_log_setup():521] Logging user logs to G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240424_214528-01l57ydw\logs\debug.log
+2024-04-24 21:45:28,902 INFO    MainThread:14352 [wandb_init.py:_log_setup():522] Logging internal logs to G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240424_214528-01l57ydw\logs\debug-internal.log
+2024-04-24 21:45:28,902 INFO    MainThread:14352 [wandb_init.py:init():561] calling init triggers
+2024-04-24 21:45:28,903 INFO    MainThread:14352 [wandb_init.py:init():568] wandb.init called with sweep_config: {}
+config: {'learning_rate': 0.001, 'architecture': 'SCAE', 'dataset': 'MNIST', 'epochs': 3, 'batch size': 64, 'v_th': 1, 'tau_m': 24. * msecond}
+2024-04-24 21:45:28,903 INFO    MainThread:14352 [wandb_init.py:init():611] starting backend
+2024-04-24 21:45:28,903 INFO    MainThread:14352 [wandb_init.py:init():615] setting up manager
+2024-04-24 21:45:28,908 INFO    MainThread:14352 [backend.py:_multiprocessing_setup():105] multiprocessing start_methods=spawn, using: spawn
+2024-04-24 21:45:28,910 INFO    MainThread:14352 [wandb_init.py:init():623] backend started and connected
+2024-04-24 21:45:28,922 INFO    MainThread:14352 [wandb_init.py:init():715] updated telemetry
+2024-04-24 21:45:28,982 INFO    MainThread:14352 [wandb_init.py:init():748] communicating run to backend with 90.0 second timeout
+2024-04-24 21:45:29,656 INFO    MainThread:14352 [wandb_run.py:_on_init():2357] communicating current version
+2024-04-24 21:45:30,078 INFO    MainThread:14352 [wandb_run.py:_on_init():2366] got version response 
+2024-04-24 21:45:30,078 INFO    MainThread:14352 [wandb_init.py:init():799] starting run threads in backend
+2024-04-24 21:45:30,546 INFO    MainThread:14352 [wandb_run.py:_console_start():2335] atexit reg
+2024-04-24 21:45:30,547 INFO    MainThread:14352 [wandb_run.py:_redirect():2190] redirect: wrap_raw
+2024-04-24 21:45:30,548 INFO    MainThread:14352 [wandb_run.py:_redirect():2255] Wrapping output streams.
+2024-04-24 21:45:30,548 INFO    MainThread:14352 [wandb_run.py:_redirect():2280] Redirects installed.
+2024-04-24 21:45:30,549 INFO    MainThread:14352 [wandb_init.py:init():842] run started, returning control to user process

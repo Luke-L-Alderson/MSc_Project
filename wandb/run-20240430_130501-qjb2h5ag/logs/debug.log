@@ -1,0 +1,34 @@
+2024-04-30 13:05:01,956 INFO    MainThread:43384 [wandb_setup.py:_flush():76] Current SDK version is 0.16.6
+2024-04-30 13:05:01,957 INFO    MainThread:43384 [wandb_setup.py:_flush():76] Configure stats pid to 43384
+2024-04-30 13:05:01,957 INFO    MainThread:43384 [wandb_setup.py:_flush():76] Loading settings from C:\Users\lukea\.config\wandb\settings
+2024-04-30 13:05:01,958 INFO    MainThread:43384 [wandb_setup.py:_flush():76] Loading settings from G:\My Drive\MSc\0_Project\MSc_Project\wandb\settings
+2024-04-30 13:05:01,958 INFO    MainThread:43384 [wandb_setup.py:_flush():76] Loading settings from environment variables: {}
+2024-04-30 13:05:01,958 INFO    MainThread:43384 [wandb_setup.py:_flush():76] Applying setup settings: {'_disable_service': False}
+2024-04-30 13:05:01,958 INFO    MainThread:43384 [wandb_setup.py:_flush():76] Inferring run settings from compute environment: {'program_relpath': 'main.py', 'program_abspath': 'g:\\my drive\\msc\\0_project\\msc_project\\main.py', 'program': 'g:\\my drive\\msc\\0_project\\msc_project\\main.py'}
+2024-04-30 13:05:01,958 INFO    MainThread:43384 [wandb_setup.py:_flush():76] Applying login settings: {}
+2024-04-30 13:05:01,959 INFO    MainThread:43384 [wandb_init.py:_log_setup():521] Logging user logs to G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240430_130501-qjb2h5ag\logs\debug.log
+2024-04-30 13:05:01,959 INFO    MainThread:43384 [wandb_init.py:_log_setup():522] Logging internal logs to G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240430_130501-qjb2h5ag\logs\debug-internal.log
+2024-04-30 13:05:01,959 INFO    MainThread:43384 [wandb_init.py:init():561] calling init triggers
+2024-04-30 13:05:01,960 INFO    MainThread:43384 [wandb_init.py:init():568] wandb.init called with sweep_config: {}
+config: {'learning_rate': 1e-05, 'architecture': 'SCAE', 'dataset': 'MNIST', 'epochs': 3, 'batch size': 16, 'v_th': 1, 'tau_m': 24. * msecond}
+2024-04-30 13:05:01,960 INFO    MainThread:43384 [wandb_init.py:init():611] starting backend
+2024-04-30 13:05:01,960 INFO    MainThread:43384 [wandb_init.py:init():615] setting up manager
+2024-04-30 13:05:01,965 INFO    MainThread:43384 [backend.py:_multiprocessing_setup():105] multiprocessing start_methods=spawn, using: spawn
+2024-04-30 13:05:01,968 INFO    MainThread:43384 [wandb_init.py:init():623] backend started and connected
+2024-04-30 13:05:01,982 INFO    MainThread:43384 [wandb_init.py:init():715] updated telemetry
+2024-04-30 13:05:02,046 INFO    MainThread:43384 [wandb_init.py:init():748] communicating run to backend with 90.0 second timeout
+2024-04-30 13:05:02,782 INFO    MainThread:43384 [wandb_run.py:_on_init():2357] communicating current version
+2024-04-30 13:05:03,337 INFO    MainThread:43384 [wandb_run.py:_on_init():2366] got version response 
+2024-04-30 13:05:03,337 INFO    MainThread:43384 [wandb_init.py:init():799] starting run threads in backend
+2024-04-30 13:05:03,934 INFO    MainThread:43384 [wandb_run.py:_console_start():2335] atexit reg
+2024-04-30 13:05:03,936 INFO    MainThread:43384 [wandb_run.py:_redirect():2190] redirect: wrap_raw
+2024-04-30 13:05:03,937 INFO    MainThread:43384 [wandb_run.py:_redirect():2255] Wrapping output streams.
+2024-04-30 13:05:03,937 INFO    MainThread:43384 [wandb_run.py:_redirect():2280] Redirects installed.
+2024-04-30 13:05:03,938 INFO    MainThread:43384 [wandb_init.py:init():842] run started, returning control to user process
+2024-04-30 17:37:07,585 INFO    MainThread:43384 [wandb_run.py:_finish():2064] finishing run llalderson/MSc Project/qjb2h5ag
+2024-04-30 17:37:07,585 INFO    MainThread:43384 [wandb_run.py:_atexit_cleanup():2304] got exitcode: 0
+2024-04-30 17:37:07,586 INFO    MainThread:43384 [wandb_run.py:_restore():2287] restore
+2024-04-30 17:37:07,586 INFO    MainThread:43384 [wandb_run.py:_restore():2293] restore done
+2024-04-30 17:37:12,520 INFO    MainThread:43384 [wandb_run.py:_footer_history_summary_info():3936] rendering history
+2024-04-30 17:37:12,520 INFO    MainThread:43384 [wandb_run.py:_footer_history_summary_info():3968] rendering summary
+2024-04-30 17:37:12,530 INFO    MainThread:43384 [wandb_run.py:_footer_sync_info():3895] logging synced files

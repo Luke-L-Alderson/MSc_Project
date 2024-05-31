@@ -28,16 +28,13 @@ class SAE(nn.Module):
           
         
         #convolution (encoder) - Input size: [8, 3, 28, 28]
-        
         self.conv1 = nn.Conv2d(depth, cp["channels_1"], (cp["filter_1"], cp["filter_1"]))
         self.lif_conv1 = snn.Leaky(beta=beta, spike_grad=spike_grad, threshold = threshold)
         # conv1 output size: [8, 12, 26, 26]
-        
         self.conv2 = nn.Conv2d(cp["channels_1"], cp["channels_2"], (cp["filter_2"], cp["filter_2"]))
         self.lif_conv2 = snn.Leaky(beta=beta, spike_grad=spike_grad, threshold = threshold)
         # conv2 output size: [8, 64, 24, 24]  
 
-        # I think I should flatten conv2        
 
         # recurrent (latent)
         self.ff_in = nn.Linear(num_conv2, num_rec) # 8x24x64 (12288) -> 100
@@ -96,7 +93,7 @@ class SAE(nn.Module):
         
         spk_outs = torch.zeros(batch_size, channels_2, conv2_size, conv2_size).to(self.device)
         
-        spk_outs, spk_recs = [], []
+        spk_outs, spk_recs, mem_outs, mem_recs = [], [], [], []
         
         # Record latent and output layer
         if recorded_vars:
@@ -170,6 +167,8 @@ class SAE(nn.Module):
             #spk_latents.append(spk_latent)
             spk_recs.append(spk_rec)
             spk_outs.append(spk_reconstruction)
+            mem_recs.append(mem_rec)
+            mem_outs.append(mem_reconstruction)
 
             if recorded_vars:
                 for key in recorded:

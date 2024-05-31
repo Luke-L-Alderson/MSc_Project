@@ -1,0 +1,486 @@
+Making Datasets...
+Making Dataloaders...
+Defining network...
+5/5: Training network...
+[1/3, 10/469] Training Loss: 1.0387210249900818
+[1/3, 20/469] Training Loss: 1.0035789072513581
+[1/3, 30/469] Training Loss: 1.0050081610679626
+[1/3, 40/469] Training Loss: 0.9942323386669158
+[1/3, 50/469] Training Loss: 0.9444975972175598
+[1/3, 60/469] Training Loss: 0.9436787664890289
+[1/3, 70/469] Training Loss: 0.9199804604053498
+[1/3, 80/469] Training Loss: 0.9162195384502411
+[1/3, 90/469] Training Loss: 0.9181342661380768
+[1/3, 100/469] Training Loss: 0.9214853286743164
+[1/3, 110/469] Training Loss: 0.903788584470749
+[1/3, 120/469] Training Loss: 0.8684442818164826
+[1/3, 130/469] Training Loss: 0.8680405557155609
+[1/3, 140/469] Training Loss: 0.8724230766296387
+[1/3, 150/469] Training Loss: 0.857520866394043
+[1/3, 160/469] Training Loss: 0.8245758891105652
+[1/3, 170/469] Training Loss: 0.8382014453411102
+[1/3, 180/469] Training Loss: 0.7724691808223725
+[1/3, 190/469] Training Loss: 0.7977692067623139
+[1/3, 200/469] Training Loss: 0.7919211208820343
+[1/3, 210/469] Training Loss: 0.769481086730957
+[1/3, 220/469] Training Loss: 0.7499362707138062
+[1/3, 230/469] Training Loss: 0.7429117143154145
+[1/3, 240/469] Training Loss: 0.7188934564590455
+[1/3, 250/469] Training Loss: 0.710320669412613
+[1/3, 260/469] Training Loss: 0.6928533136844635
+[1/3, 270/469] Training Loss: 0.6787536203861236
+[1/3, 280/469] Training Loss: 0.6701021254062652
+[1/3, 290/469] Training Loss: 0.6310729146003723
+[1/3, 300/469] Training Loss: 0.6569673955440521
+[1/3, 310/469] Training Loss: 0.6364189684391022
+[1/3, 320/469] Training Loss: 0.6169597506523132
+[1/3, 330/469] Training Loss: 0.6142994105815888
+[1/3, 340/469] Training Loss: 0.603550386428833
+[1/3, 350/469] Training Loss: 0.5957797229290008
+[1/3, 360/469] Training Loss: 0.5861845374107361
+[1/3, 370/469] Training Loss: 0.5558260232210159
+[1/3, 380/469] Training Loss: 0.5766677856445312
+[1/3, 390/469] Training Loss: 0.5844509243965149
+[1/3, 400/469] Training Loss: 0.5603311419486999
+[1/3, 410/469] Training Loss: 0.5259168714284896
+[1/3, 420/469] Training Loss: 0.5457876265048981
+[1/3, 430/469] Training Loss: 0.5413588255643844
+[1/3, 440/469] Training Loss: 0.5228103339672089
+[1/3, 450/469] Training Loss: 0.5270951747894287
+[1/3, 460/469] Training Loss: 0.5168347597122193
+5/5: Testing network...
+Testing: 1/79
+Testing: 2/79
+Testing: 3/79
+Testing: 4/79
+Testing: 5/79
+Testing: 6/79
+Testing: 7/79
+Testing: 8/79
+Testing: 9/79
+Testing: 10/79
+Testing: 11/79
+Testing: 12/79
+Testing: 13/79
+Testing: 14/79
+Testing: 15/79
+Testing: 16/79
+Testing: 17/79
+Testing: 18/79
+Testing: 19/79
+Testing: 20/79
+Testing: 21/79
+Testing: 22/79
+Testing: 23/79
+Testing: 24/79
+Testing: 25/79
+Testing: 26/79
+Testing: 27/79
+Testing: 28/79
+Testing: 29/79
+Testing: 30/79
+Testing: 31/79
+Testing: 32/79
+Testing: 33/79
+Testing: 34/79
+Testing: 35/79
+Testing: 36/79
+Testing: 37/79
+Testing: 38/79
+Testing: 39/79
+Testing: 40/79
+Testing: 41/79
+Testing: 42/79
+Testing: 43/79
+Testing: 44/79
+Testing: 45/79
+Testing: 46/79
+Testing: 47/79
+Testing: 48/79
+Testing: 49/79
+Testing: 50/79
+Testing: 51/79
+Testing: 52/79
+Testing: 53/79
+Testing: 54/79
+Testing: 55/79
+Testing: 56/79
+Testing: 57/79
+Testing: 58/79
+Testing: 59/79
+Testing: 60/79
+Testing: 61/79
+Testing: 62/79
+Testing: 63/79
+Testing: 64/79
+Testing: 65/79
+Testing: 66/79
+Testing: 67/79
+Testing: 68/79
+Testing: 69/79
+Testing: 70/79
+Testing: 71/79
+Testing: 72/79
+Testing: 73/79
+Testing: 74/79
+Testing: 75/79
+Testing: 76/79
+Testing: 77/79
+Testing: 78/79
+Testing: 79/79
+Testing Loss: 0.5085384709494455
+5/5: Training network...
+[2/3, 10/469] Training Loss: 0.5191707283258438
+[2/3, 20/469] Training Loss: 0.4946338474750519
+[2/3, 30/469] Training Loss: 0.5051783829927444
+[2/3, 40/469] Training Loss: 0.49382382035255434
+[2/3, 50/469] Training Loss: 0.4896628439426422
+[2/3, 60/469] Training Loss: 0.4818154513835907
+[2/3, 70/469] Training Loss: 0.474978032708168
+[2/3, 80/469] Training Loss: 0.4692727327346802
+[2/3, 90/469] Training Loss: 0.45717682838439944
+[2/3, 100/469] Training Loss: 0.4548367619514465
+[2/3, 110/469] Training Loss: 0.4602979481220245
+[2/3, 120/469] Training Loss: 0.4464075654745102
+[2/3, 130/469] Training Loss: 0.4406129837036133
+[2/3, 140/469] Training Loss: 0.434131520986557
+[2/3, 150/469] Training Loss: 0.42122955024242403
+[2/3, 160/469] Training Loss: 0.42468328177928927
+[2/3, 170/469] Training Loss: 0.41174209415912627
+[2/3, 180/469] Training Loss: 0.41586925089359283
+[2/3, 190/469] Training Loss: 0.41883946061134336
+[2/3, 200/469] Training Loss: 0.4042655110359192
+[2/3, 210/469] Training Loss: 0.3953207939863205
+[2/3, 220/469] Training Loss: 0.4026556730270386
+[2/3, 230/469] Training Loss: 0.397436261177063
+[2/3, 240/469] Training Loss: 0.40007980465888976
+[2/3, 250/469] Training Loss: 0.3846309453248978
+[2/3, 260/469] Training Loss: 0.3863876312971115
+[2/3, 270/469] Training Loss: 0.3909222990274429
+[2/3, 280/469] Training Loss: 0.3821741878986359
+[2/3, 290/469] Training Loss: 0.37435137033462523
+[2/3, 300/469] Training Loss: 0.37048297822475434
+[2/3, 310/469] Training Loss: 0.35727050602436067
+[2/3, 320/469] Training Loss: 0.3635198324918747
+[2/3, 330/469] Training Loss: 0.37081111669540406
+[2/3, 340/469] Training Loss: 0.3598028361797333
+[2/3, 350/469] Training Loss: 0.3533910006284714
+[2/3, 360/469] Training Loss: 0.35727979242801666
+[2/3, 370/469] Training Loss: 0.3517260581254959
+[2/3, 380/469] Training Loss: 0.35461084842681884
+[2/3, 390/469] Training Loss: 0.34604627788066866
+[2/3, 400/469] Training Loss: 0.34477480947971345
+[2/3, 410/469] Training Loss: 0.3479738265275955
+[2/3, 420/469] Training Loss: 0.34901319444179535
+[2/3, 430/469] Training Loss: 0.3423672586679459
+[2/3, 440/469] Training Loss: 0.3175437808036804
+[2/3, 450/469] Training Loss: 0.3240327090024948
+[2/3, 460/469] Training Loss: 0.3283791422843933
+5/5: Testing network...
+Testing: 1/79
+Testing: 2/79
+Testing: 3/79
+Testing: 4/79
+Testing: 5/79
+Testing: 6/79
+Testing: 7/79
+Testing: 8/79
+Testing: 9/79
+Testing: 10/79
+Testing: 11/79
+Testing: 12/79
+Testing: 13/79
+Testing: 14/79
+Testing: 15/79
+Testing: 16/79
+Testing: 17/79
+Testing: 18/79
+Testing: 19/79
+Testing: 20/79
+Testing: 21/79
+Testing: 22/79
+Testing: 23/79
+Testing: 24/79
+Testing: 25/79
+Testing: 26/79
+Testing: 27/79
+Testing: 28/79
+Testing: 29/79
+Testing: 30/79
+Testing: 31/79
+Testing: 32/79
+Testing: 33/79
+Testing: 34/79
+Testing: 35/79
+Testing: 36/79
+Testing: 37/79
+Testing: 38/79
+Testing: 39/79
+Testing: 40/79
+Testing: 41/79
+Testing: 42/79
+Testing: 43/79
+Testing: 44/79
+Testing: 45/79
+Testing: 46/79
+Testing: 47/79
+Testing: 48/79
+Testing: 49/79
+Testing: 50/79
+Testing: 51/79
+Testing: 52/79
+Testing: 53/79
+Testing: 54/79
+Testing: 55/79
+Testing: 56/79
+Testing: 57/79
+Testing: 58/79
+Testing: 59/79
+Testing: 60/79
+Testing: 61/79
+Testing: 62/79
+Testing: 63/79
+Testing: 64/79
+Testing: 65/79
+Testing: 66/79
+Testing: 67/79
+Testing: 68/79
+Testing: 69/79
+Testing: 70/79
+Testing: 71/79
+Testing: 72/79
+Testing: 73/79
+Testing: 74/79
+Testing: 75/79
+Testing: 76/79
+Testing: 77/79
+Testing: 78/79
+Testing: 79/79
+Testing Loss: 0.4147005726184164
+5/5: Training network...
+[3/3, 10/469] Training Loss: 0.3227169245481491
+[3/3, 20/469] Training Loss: 0.322661891579628
+[3/3, 30/469] Training Loss: 0.30493256747722625
+[3/3, 40/469] Training Loss: 0.3134550839662552
+[3/3, 50/469] Training Loss: 0.313944485783577
+[3/3, 60/469] Training Loss: 0.30566470324993134
+[3/3, 70/469] Training Loss: 0.3039079517126083
+[3/3, 80/469] Training Loss: 0.3059605658054352
+[3/3, 90/469] Training Loss: 0.3057997852563858
+[3/3, 100/469] Training Loss: 0.300984850525856
+[3/3, 110/469] Training Loss: 0.2929586827754974
+[3/3, 120/469] Training Loss: 0.29577165842056274
+[3/3, 130/469] Training Loss: 0.29689944684505465
+[3/3, 140/469] Training Loss: 0.2920630216598511
+[3/3, 150/469] Training Loss: 0.28824005722999574
+[3/3, 160/469] Training Loss: 0.27756069600582123
+[3/3, 170/469] Training Loss: 0.2866431772708893
+[3/3, 180/469] Training Loss: 0.2805821090936661
+[3/3, 190/469] Training Loss: 0.2786683410406113
+[3/3, 200/469] Training Loss: 0.27826744318008423
+[3/3, 210/469] Training Loss: 0.25926150679588317
+[3/3, 220/469] Training Loss: 0.26573401838541033
+[3/3, 230/469] Training Loss: 0.2634213179349899
+[3/3, 240/469] Training Loss: 0.26907327622175214
+[3/3, 250/469] Training Loss: 0.25273463875055313
+[3/3, 260/469] Training Loss: 0.2644184619188309
+[3/3, 270/469] Training Loss: 0.2583202585577965
+[3/3, 280/469] Training Loss: 0.26610790491104125
+[3/3, 290/469] Training Loss: 0.2560235232114792
+[3/3, 300/469] Training Loss: 0.25497623831033706
+[3/3, 310/469] Training Loss: 0.2564418464899063
+[3/3, 320/469] Training Loss: 0.24709372520446776
+[3/3, 330/469] Training Loss: 0.24830470681190492
+[3/3, 340/469] Training Loss: 0.24771651029586791
+[3/3, 350/469] Training Loss: 0.2408776819705963
+[3/3, 360/469] Training Loss: 0.24502521902322769
+[3/3, 370/469] Training Loss: 0.24890502393245698
+[3/3, 380/469] Training Loss: 0.24511454552412032
+[3/3, 390/469] Training Loss: 0.23960676193237304
+[3/3, 400/469] Training Loss: 0.2423531860113144
+[3/3, 410/469] Training Loss: 0.2380969598889351
+[3/3, 420/469] Training Loss: 0.24109476655721665
+[3/3, 430/469] Training Loss: 0.24410320818424225
+[3/3, 440/469] Training Loss: 0.23788186758756638
+[3/3, 450/469] Training Loss: 0.23951168209314347
+[3/3, 460/469] Training Loss: 0.23438442647457122
+5/5: Testing network...
+Testing: 1/79
+Testing: 2/79
+Testing: 3/79
+Testing: 4/79
+Testing: 5/79
+Testing: 6/79
+Testing: 7/79
+Testing: 8/79
+Testing: 9/79
+Testing: 10/79
+Testing: 11/79
+Testing: 12/79
+Testing: 13/79
+Testing: 14/79
+Testing: 15/79
+Testing: 16/79
+Testing: 17/79
+Testing: 18/79
+Testing: 19/79
+Testing: 20/79
+Testing: 21/79
+Testing: 22/79
+Testing: 23/79
+Testing: 24/79
+Testing: 25/79
+Testing: 26/79
+Testing: 27/79
+Testing: 28/79
+Testing: 29/79
+Testing: 30/79
+Testing: 31/79
+Testing: 32/79
+Testing: 33/79
+Testing: 34/79
+Testing: 35/79
+Testing: 36/79
+Testing: 37/79
+Testing: 38/79
+Testing: 39/79
+Testing: 40/79
+Testing: 41/79
+Testing: 42/79
+Testing: 43/79
+Testing: 44/79
+Testing: 45/79
+Testing: 46/79
+Testing: 47/79
+Testing: 48/79
+Testing: 49/79
+Testing: 50/79
+Testing: 51/79
+Testing: 52/79
+Testing: 53/79
+Testing: 54/79
+Testing: 55/79
+Testing: 56/79
+Testing: 57/79
+Testing: 58/79
+Testing: 59/79
+Testing: 60/79
+Testing: 61/79
+Testing: 62/79
+Testing: 63/79
+Testing: 64/79
+Testing: 65/79
+Testing: 66/79
+Testing: 67/79
+Testing: 68/79
+Testing: 69/79
+Testing: 70/79
+Testing: 71/79
+Testing: 72/79
+Testing: 73/79
+Testing: 74/79
+Testing: 75/79
+Testing: 76/79
+Testing: 77/79
+Testing: 78/79
+Testing: 79/79
+Testing Loss: 0.35313594447714947
+Training and Testing Finished
+Assembling test data for t-sne projection
+Batch: 1/79
+Batch: 2/79
+Batch: 3/79
+Batch: 4/79
+Batch: 5/79
+Batch: 6/79
+Batch: 7/79
+Batch: 8/79
+Batch: 9/79
+Batch: 10/79
+Batch: 11/79
+Batch: 12/79
+Batch: 13/79
+Batch: 14/79
+Batch: 15/79
+Batch: 16/79
+Batch: 17/79
+Batch: 18/79
+Batch: 19/79
+Batch: 20/79
+Batch: 21/79
+Batch: 22/79
+Batch: 23/79
+Batch: 24/79
+Batch: 25/79
+Batch: 26/79
+Batch: 27/79
+Batch: 28/79
+Batch: 29/79
+Batch: 30/79
+Batch: 31/79
+Batch: 32/79
+Batch: 33/79
+Batch: 34/79
+Batch: 35/79
+Batch: 36/79
+Batch: 37/79
+Batch: 38/79
+Batch: 39/79
+Batch: 40/79
+Batch: 41/79
+Batch: 42/79
+Batch: 43/79
+Batch: 44/79
+Batch: 45/79
+Batch: 46/79
+Batch: 47/79
+Batch: 48/79
+Batch: 49/79
+Batch: 50/79
+Batch: 51/79
+Batch: 52/79
+Batch: 53/79
+Batch: 54/79
+Batch: 55/79
+Batch: 56/79
+Batch: 57/79
+Batch: 58/79
+Batch: 59/79
+Batch: 60/79
+Batch: 61/79
+Batch: 62/79
+Batch: 63/79
+Batch: 64/79
+Batch: 65/79
+Batch: 66/79
+Batch: 67/79
+Batch: 68/79
+Batch: 69/79
+Batch: 70/79
+Batch: 71/79
+Batch: 72/79
+Batch: 73/79
+Batch: 74/79
+Batch: 75/79
+Batch: 76/79
+Batch: 77/79
+Batch: 78/79
+Batch: 79/79
+9 added
+2 added
+7 added
+3 added
+1 added
+4 added
+8 added
+5 added
+0 added
+6 added
+Applying t-SNE
+WARNING    C:\Users\lukea\anaconda3\envs\diss\Lib\site-packages\joblib\externals\loky\backend\context.py:110: UserWarning: Could not find the number of physical cores for the following reason:
+found 0 physical cores < 1
+Returning the number of logical cores instead. You can silence this warning by setting LOKY_MAX_CPU_COUNT to the number of cores you want to use.
+  warnings.warn(
+ [py.warnings]
+  File "C:\Users\lukea\anaconda3\envs\diss\Lib\site-packages\joblib\externals\loky\backend\context.py", line 217, in _count_physical_cores
+    raise ValueError(

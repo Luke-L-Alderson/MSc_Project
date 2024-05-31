@@ -1,0 +1,1978 @@
+Making Datasets...
+Making Dataloaders...
+Defining network...
+5/5: Training network...
+[1/2, 10/1875] train_loss: 1.0892875790596008
+[1/2, 20/1875] train_loss: 1.106812584400177
+[1/2, 30/1875] train_loss: 1.0371467232704163
+[1/2, 40/1875] train_loss: 1.0075183928012847
+[1/2, 50/1875] train_loss: 1.051230537891388
+[1/2, 60/1875] train_loss: 1.0317342400550842
+[1/2, 70/1875] train_loss: 1.0265373528003692
+[1/2, 80/1875] train_loss: 0.9506420969963074
+[1/2, 90/1875] train_loss: 0.9563649594783783
+[1/2, 100/1875] train_loss: 0.9589354515075683
+[1/2, 110/1875] train_loss: 0.9491766035556793
+[1/2, 120/1875] train_loss: 0.9470214545726776
+[1/2, 130/1875] train_loss: 0.8801395893096924
+[1/2, 140/1875] train_loss: 0.8866003453731537
+[1/2, 150/1875] train_loss: 0.892229700088501
+[1/2, 160/1875] train_loss: 0.8997258365154266
+[1/2, 170/1875] train_loss: 0.9111819267272949
+[1/2, 180/1875] train_loss: 0.8298280835151672
+[1/2, 190/1875] train_loss: 0.8736098945140839
+[1/2, 200/1875] train_loss: 0.8486669957637787
+[1/2, 210/1875] train_loss: 0.828490388393402
+[1/2, 220/1875] train_loss: 0.8198257446289062
+[1/2, 230/1875] train_loss: 0.8052798509597778
+[1/2, 240/1875] train_loss: 0.8257273733615875
+[1/2, 250/1875] train_loss: 0.8241025984287262
+[1/2, 260/1875] train_loss: 0.7870416343212128
+[1/2, 270/1875] train_loss: 0.7827791750431061
+[1/2, 280/1875] train_loss: 0.7839059114456177
+[1/2, 290/1875] train_loss: 0.7565676271915436
+[1/2, 300/1875] train_loss: 0.7451554715633393
+[1/2, 310/1875] train_loss: 0.7443984150886536
+[1/2, 320/1875] train_loss: 0.7255953431129456
+[1/2, 330/1875] train_loss: 0.7188618004322052
+[1/2, 340/1875] train_loss: 0.7300593912601471
+[1/2, 350/1875] train_loss: 0.7203434944152832
+[1/2, 360/1875] train_loss: 0.716474324464798
+[1/2, 370/1875] train_loss: 0.6818257629871368
+[1/2, 380/1875] train_loss: 0.6679739773273468
+[1/2, 390/1875] train_loss: 0.6633276641368866
+[1/2, 400/1875] train_loss: 0.6636542916297913
+[1/2, 410/1875] train_loss: 0.6626004040241241
+[1/2, 420/1875] train_loss: 0.638220363855362
+[1/2, 430/1875] train_loss: 0.6041190266609192
+[1/2, 440/1875] train_loss: 0.6102801203727722
+[1/2, 450/1875] train_loss: 0.6045406341552735
+[1/2, 460/1875] train_loss: 0.6011092662811279
+[1/2, 470/1875] train_loss: 0.6094061672687531
+[1/2, 480/1875] train_loss: 0.5744458854198455
+[1/2, 490/1875] train_loss: 0.5978888928890228
+[1/2, 500/1875] train_loss: 0.6123954653739929
+[1/2, 510/1875] train_loss: 0.5906336843967438
+[1/2, 520/1875] train_loss: 0.5598671019077301
+[1/2, 530/1875] train_loss: 0.5685559660196304
+[1/2, 540/1875] train_loss: 0.5456335932016373
+[1/2, 550/1875] train_loss: 0.5521655917167664
+[1/2, 560/1875] train_loss: 0.5449247241020203
+[1/2, 570/1875] train_loss: 0.5584223687648773
+[1/2, 580/1875] train_loss: 0.5510774433612824
+[1/2, 590/1875] train_loss: 0.5508730173110962
+[1/2, 600/1875] train_loss: 0.5254211485385895
+[1/2, 610/1875] train_loss: 0.5501108318567276
+[1/2, 620/1875] train_loss: 0.5297219097614289
+[1/2, 630/1875] train_loss: 0.5216219425201416
+[1/2, 640/1875] train_loss: 0.5253972113132477
+[1/2, 650/1875] train_loss: 0.5016073137521744
+[1/2, 660/1875] train_loss: 0.5137058168649673
+[1/2, 670/1875] train_loss: 0.50153389275074
+[1/2, 680/1875] train_loss: 0.5184120655059814
+[1/2, 690/1875] train_loss: 0.4843600571155548
+[1/2, 700/1875] train_loss: 0.49387824833393096
+[1/2, 710/1875] train_loss: 0.48794667422771454
+[1/2, 720/1875] train_loss: 0.4994977295398712
+[1/2, 730/1875] train_loss: 0.48536202013492585
+[1/2, 740/1875] train_loss: 0.48350395262241364
+[1/2, 750/1875] train_loss: 0.48422591984272
+[1/2, 760/1875] train_loss: 0.48400614857673646
+[1/2, 770/1875] train_loss: 0.44738044738769533
+[1/2, 780/1875] train_loss: 0.4536715179681778
+[1/2, 790/1875] train_loss: 0.45915079712867735
+[1/2, 800/1875] train_loss: 0.45783197581768037
+[1/2, 810/1875] train_loss: 0.4440755248069763
+[1/2, 820/1875] train_loss: 0.44931707382202146
+[1/2, 830/1875] train_loss: 0.4608636885881424
+[1/2, 840/1875] train_loss: 0.44676814079284666
+[1/2, 850/1875] train_loss: 0.43612601459026334
+[1/2, 860/1875] train_loss: 0.4332110553979874
+[1/2, 870/1875] train_loss: 0.44796690344810486
+[1/2, 880/1875] train_loss: 0.44351052939891816
+[1/2, 890/1875] train_loss: 0.4183844715356827
+[1/2, 900/1875] train_loss: 0.41991500556468964
+[1/2, 910/1875] train_loss: 0.4256831526756287
+[1/2, 920/1875] train_loss: 0.42316168248653413
+[1/2, 930/1875] train_loss: 0.41156148016452787
+[1/2, 940/1875] train_loss: 0.4041291266679764
+[1/2, 950/1875] train_loss: 0.4080399960279465
+[1/2, 960/1875] train_loss: 0.399629208445549
+[1/2, 970/1875] train_loss: 0.3968718409538269
+[1/2, 980/1875] train_loss: 0.3990356743335724
+[1/2, 990/1875] train_loss: 0.3956919997930527
+[1/2, 1000/1875] train_loss: 0.38565933108329775
+[1/2, 1010/1875] train_loss: 0.4017984241247177
+[1/2, 1020/1875] train_loss: 0.3802540242671967
+[1/2, 1030/1875] train_loss: 0.3724150240421295
+[1/2, 1040/1875] train_loss: 0.3854113519191742
+[1/2, 1050/1875] train_loss: 0.37838950753211975
+[1/2, 1060/1875] train_loss: 0.3722043663263321
+[1/2, 1070/1875] train_loss: 0.3839095324277878
+[1/2, 1080/1875] train_loss: 0.3832424610853195
+[1/2, 1090/1875] train_loss: 0.37695681154727934
+[1/2, 1100/1875] train_loss: 0.3690053731203079
+[1/2, 1110/1875] train_loss: 0.377530574798584
+[1/2, 1120/1875] train_loss: 0.3624734073877335
+[1/2, 1130/1875] train_loss: 0.3597547709941864
+[1/2, 1140/1875] train_loss: 0.3583128035068512
+[1/2, 1150/1875] train_loss: 0.3377948671579361
+[1/2, 1160/1875] train_loss: 0.3421031177043915
+[1/2, 1170/1875] train_loss: 0.33621088564395907
+[1/2, 1180/1875] train_loss: 0.34580312967300414
+[1/2, 1190/1875] train_loss: 0.3376133948564529
+[1/2, 1200/1875] train_loss: 0.34151544868946077
+[1/2, 1210/1875] train_loss: 0.33214003443717954
+[1/2, 1220/1875] train_loss: 0.32891311049461364
+[1/2, 1230/1875] train_loss: 0.3290929049253464
+[1/2, 1240/1875] train_loss: 0.33006970286369325
+[1/2, 1250/1875] train_loss: 0.3156719595193863
+[1/2, 1260/1875] train_loss: 0.3253407835960388
+[1/2, 1270/1875] train_loss: 0.3236872524023056
+[1/2, 1280/1875] train_loss: 0.31234479546546934
+[1/2, 1290/1875] train_loss: 0.30691046118736265
+[1/2, 1300/1875] train_loss: 0.29887138307094574
+[1/2, 1310/1875] train_loss: 0.3184435129165649
+[1/2, 1320/1875] train_loss: 0.31196719110012056
+[1/2, 1330/1875] train_loss: 0.30392666161060333
+[1/2, 1340/1875] train_loss: 0.3025990515947342
+[1/2, 1350/1875] train_loss: 0.298215439915657
+[1/2, 1360/1875] train_loss: 0.29055399596691134
+[1/2, 1370/1875] train_loss: 0.2891689419746399
+[1/2, 1380/1875] train_loss: 0.2875734806060791
+[1/2, 1390/1875] train_loss: 0.29771868586540223
+[1/2, 1400/1875] train_loss: 0.2926529347896576
+[1/2, 1410/1875] train_loss: 0.2877079635858536
+[1/2, 1420/1875] train_loss: 0.2768927201628685
+[1/2, 1430/1875] train_loss: 0.2873236179351807
+[1/2, 1440/1875] train_loss: 0.28185983598232267
+[1/2, 1450/1875] train_loss: 0.275749696791172
+[1/2, 1460/1875] train_loss: 0.28440442979335784
+[1/2, 1470/1875] train_loss: 0.28295178413391114
+[1/2, 1480/1875] train_loss: 0.27061752080917356
+[1/2, 1490/1875] train_loss: 0.27090279161930086
+[1/2, 1500/1875] train_loss: 0.2714485481381416
+[1/2, 1510/1875] train_loss: 0.25848263651132586
+[1/2, 1520/1875] train_loss: 0.2681827381253242
+[1/2, 1530/1875] train_loss: 0.28059203624725343
+[1/2, 1540/1875] train_loss: 0.26433068960905076
+[1/2, 1550/1875] train_loss: 0.26576413214206696
+[1/2, 1560/1875] train_loss: 0.2649965226650238
+[1/2, 1570/1875] train_loss: 0.25860250145196917
+[1/2, 1580/1875] train_loss: 0.26187341958284377
+[1/2, 1590/1875] train_loss: 0.25413559973239896
+[1/2, 1600/1875] train_loss: 0.2735923811793327
+[1/2, 1610/1875] train_loss: 0.2609242096543312
+[1/2, 1620/1875] train_loss: 0.259833362698555
+[1/2, 1630/1875] train_loss: 0.24695824533700944
+[1/2, 1640/1875] train_loss: 0.2547683402895927
+[1/2, 1650/1875] train_loss: 0.2451015144586563
+[1/2, 1660/1875] train_loss: 0.24112875312566756
+[1/2, 1670/1875] train_loss: 0.2533317878842354
+[1/2, 1680/1875] train_loss: 0.2399115264415741
+[1/2, 1690/1875] train_loss: 0.24791333377361296
+[1/2, 1700/1875] train_loss: 0.24674005657434464
+[1/2, 1710/1875] train_loss: 0.24322785586118698
+[1/2, 1720/1875] train_loss: 0.252820685505867
+[1/2, 1730/1875] train_loss: 0.2376076653599739
+[1/2, 1740/1875] train_loss: 0.23802015334367752
+[1/2, 1750/1875] train_loss: 0.24072906821966172
+[1/2, 1760/1875] train_loss: 0.2476651832461357
+[1/2, 1770/1875] train_loss: 0.239213290810585
+[1/2, 1780/1875] train_loss: 0.24511113315820693
+[1/2, 1790/1875] train_loss: 0.2485106036067009
+[1/2, 1800/1875] train_loss: 0.24002668708562852
+[1/2, 1810/1875] train_loss: 0.2377564787864685
+[1/2, 1820/1875] train_loss: 0.24345422238111497
+[1/2, 1830/1875] train_loss: 0.22840799540281295
+[1/2, 1840/1875] train_loss: 0.22946546226739883
+[1/2, 1850/1875] train_loss: 0.23487090468406677
+[1/2, 1860/1875] train_loss: 0.2307214096188545
+[1/2, 1870/1875] train_loss: 0.2332499995827675
+5/5: Testing network...
+test_loss: 0.7239989787340164
+5/5: Training network...
+[2/2, 10/1875] train_loss: 0.23441922515630723
+[2/2, 20/1875] train_loss: 0.24276249408721923
+[2/2, 30/1875] train_loss: 0.2379131644964218
+[2/2, 40/1875] train_loss: 0.22695731669664382
+[2/2, 50/1875] train_loss: 0.22915091663599013
+[2/2, 60/1875] train_loss: 0.23879100233316422
+[2/2, 70/1875] train_loss: 0.2351997196674347
+[2/2, 80/1875] train_loss: 0.23822662681341172
+[2/2, 90/1875] train_loss: 0.2335509791970253
+[2/2, 100/1875] train_loss: 0.22760558277368545
+[2/2, 110/1875] train_loss: 0.23246250599622725
+[2/2, 120/1875] train_loss: 0.2376181736588478
+[2/2, 130/1875] train_loss: 0.23029439747333527
+[2/2, 140/1875] train_loss: 0.22359097450971605
+[2/2, 150/1875] train_loss: 0.2276067391037941
+[2/2, 160/1875] train_loss: 0.22517813891172409
+[2/2, 170/1875] train_loss: 0.22585605531930925
+[2/2, 180/1875] train_loss: 0.22376797050237657
+[2/2, 190/1875] train_loss: 0.22511610984802247
+[2/2, 200/1875] train_loss: 0.21988148838281632
+[2/2, 210/1875] train_loss: 0.23720438480377198
+[2/2, 220/1875] train_loss: 0.22000661492347717
+[2/2, 230/1875] train_loss: 0.22222702354192733
+[2/2, 240/1875] train_loss: 0.22006858438253402
+[2/2, 250/1875] train_loss: 0.22304230332374572
+[2/2, 260/1875] train_loss: 0.2284041464328766
+[2/2, 270/1875] train_loss: 0.22434310913085936
+[2/2, 280/1875] train_loss: 0.22124118059873582
+[2/2, 290/1875] train_loss: 0.21731263250112534
+[2/2, 300/1875] train_loss: 0.22089473456144332
+[2/2, 310/1875] train_loss: 0.223500557243824
+[2/2, 320/1875] train_loss: 0.2326551929116249
+[2/2, 330/1875] train_loss: 0.21282104700803756
+[2/2, 340/1875] train_loss: 0.22472182810306549
+[2/2, 350/1875] train_loss: 0.22128711193799971
+[2/2, 360/1875] train_loss: 0.21385167837142943
+[2/2, 370/1875] train_loss: 0.22206292450428008
+[2/2, 380/1875] train_loss: 0.21634218692779542
+[2/2, 390/1875] train_loss: 0.22046797424554826
+[2/2, 400/1875] train_loss: 0.21916695237159728
+[2/2, 410/1875] train_loss: 0.21952856630086898
+[2/2, 420/1875] train_loss: 0.22109203785657883
+[2/2, 430/1875] train_loss: 0.2086067393422127
+[2/2, 440/1875] train_loss: 0.21982171386480331
+[2/2, 450/1875] train_loss: 0.21541836559772493
+[2/2, 460/1875] train_loss: 0.2131136640906334
+[2/2, 470/1875] train_loss: 0.21410154849290847
+[2/2, 480/1875] train_loss: 0.21849059760570527
+[2/2, 490/1875] train_loss: 0.21538831144571305
+[2/2, 500/1875] train_loss: 0.21390502005815507
+[2/2, 510/1875] train_loss: 0.2078786998987198
+[2/2, 520/1875] train_loss: 0.21181428879499437
+[2/2, 530/1875] train_loss: 0.21072357147932053
+[2/2, 540/1875] train_loss: 0.20973190367221833
+[2/2, 550/1875] train_loss: 0.21634190529584885
+[2/2, 560/1875] train_loss: 0.20870494842529297
+[2/2, 570/1875] train_loss: 0.21102970987558364
+[2/2, 580/1875] train_loss: 0.21087590157985686
+[2/2, 590/1875] train_loss: 0.2119944602251053
+[2/2, 600/1875] train_loss: 0.2063758611679077
+[2/2, 610/1875] train_loss: 0.20994926393032073
+[2/2, 620/1875] train_loss: 0.20986814349889754
+[2/2, 630/1875] train_loss: 0.21286755353212355
+[2/2, 640/1875] train_loss: 0.21160931438207625
+[2/2, 650/1875] train_loss: 0.20515846014022826
+[2/2, 660/1875] train_loss: 0.20016705989837646
+[2/2, 670/1875] train_loss: 0.20561001002788543
+[2/2, 680/1875] train_loss: 0.20216075778007508
+[2/2, 690/1875] train_loss: 0.20539453327655793
+[2/2, 700/1875] train_loss: 0.20209271013736724
+[2/2, 710/1875] train_loss: 0.2105401948094368
+[2/2, 720/1875] train_loss: 0.2002273216843605
+[2/2, 730/1875] train_loss: 0.20998614877462388
+[2/2, 740/1875] train_loss: 0.20440103113651276
+[2/2, 750/1875] train_loss: 0.1988583043217659
+[2/2, 760/1875] train_loss: 0.19886348992586136
+[2/2, 770/1875] train_loss: 0.19852701872587203
+[2/2, 780/1875] train_loss: 0.20496535897254944
+[2/2, 790/1875] train_loss: 0.20182623565196992
+[2/2, 800/1875] train_loss: 0.20366935580968856
+[2/2, 810/1875] train_loss: 0.19750350564718247
+[2/2, 820/1875] train_loss: 0.20227946043014527
+[2/2, 830/1875] train_loss: 0.20656885504722594
+[2/2, 840/1875] train_loss: 0.20659603029489518
+[2/2, 850/1875] train_loss: 0.210921274125576
+[2/2, 860/1875] train_loss: 0.19687761962413788
+[2/2, 870/1875] train_loss: 0.19017697125673294
+[2/2, 880/1875] train_loss: 0.20037493258714675
+[2/2, 890/1875] train_loss: 0.1988212615251541
+[2/2, 900/1875] train_loss: 0.1954644277691841
+[2/2, 910/1875] train_loss: 0.19934629648923874
+[2/2, 920/1875] train_loss: 0.2032128468155861
+[2/2, 930/1875] train_loss: 0.20100419819355012
+[2/2, 940/1875] train_loss: 0.1992286428809166
+[2/2, 950/1875] train_loss: 0.20543017089366913
+[2/2, 960/1875] train_loss: 0.20134947299957276
+[2/2, 970/1875] train_loss: 0.19682126492261887
+[2/2, 980/1875] train_loss: 0.19608015418052674
+[2/2, 990/1875] train_loss: 0.1953115701675415
+[2/2, 1000/1875] train_loss: 0.20162842720746993
+[2/2, 1010/1875] train_loss: 0.20050456672906875
+[2/2, 1020/1875] train_loss: 0.19631470143795013
+[2/2, 1030/1875] train_loss: 0.20221736878156663
+[2/2, 1040/1875] train_loss: 0.20061542093753815
+[2/2, 1050/1875] train_loss: 0.20132485181093215
+[2/2, 1060/1875] train_loss: 0.1981644243001938
+[2/2, 1070/1875] train_loss: 0.1939121499657631
+[2/2, 1080/1875] train_loss: 0.20712257623672486
+[2/2, 1090/1875] train_loss: 0.19544525146484376
+[2/2, 1100/1875] train_loss: 0.19921240359544753
+[2/2, 1110/1875] train_loss: 0.20191187262535096
+[2/2, 1120/1875] train_loss: 0.19034545570611955
+[2/2, 1130/1875] train_loss: 0.19976360350847244
+[2/2, 1140/1875] train_loss: 0.19374864995479585
+[2/2, 1150/1875] train_loss: 0.1877727434039116
+[2/2, 1160/1875] train_loss: 0.18705105930566787
+[2/2, 1170/1875] train_loss: 0.19733643680810928
+[2/2, 1180/1875] train_loss: 0.19461907297372819
+[2/2, 1190/1875] train_loss: 0.19532439559698106
+[2/2, 1200/1875] train_loss: 0.19369805455207825
+[2/2, 1210/1875] train_loss: 0.19082528054714204
+[2/2, 1220/1875] train_loss: 0.19768831729888917
+[2/2, 1230/1875] train_loss: 0.19708913415670395
+[2/2, 1240/1875] train_loss: 0.18723234981298448
+[2/2, 1250/1875] train_loss: 0.1896791622042656
+[2/2, 1260/1875] train_loss: 0.1949470430612564
+[2/2, 1270/1875] train_loss: 0.19923511147499084
+[2/2, 1280/1875] train_loss: 0.1938707321882248
+[2/2, 1290/1875] train_loss: 0.18881009966135026
+[2/2, 1300/1875] train_loss: 0.18732406497001647
+[2/2, 1310/1875] train_loss: 0.19634900391101837
+[2/2, 1320/1875] train_loss: 0.1979263022542
+[2/2, 1330/1875] train_loss: 0.19272954016923904
+[2/2, 1340/1875] train_loss: 0.19841076880693437
+[2/2, 1350/1875] train_loss: 0.1966672271490097
+[2/2, 1360/1875] train_loss: 0.19586568623781203
+[2/2, 1370/1875] train_loss: 0.19042621850967406
+[2/2, 1380/1875] train_loss: 0.1890342876315117
+[2/2, 1390/1875] train_loss: 0.1933074414730072
+[2/2, 1400/1875] train_loss: 0.1960314616560936
+[2/2, 1410/1875] train_loss: 0.19352776259183885
+[2/2, 1420/1875] train_loss: 0.1988011360168457
+[2/2, 1430/1875] train_loss: 0.194574773311615
+[2/2, 1440/1875] train_loss: 0.18749818354845046
+[2/2, 1450/1875] train_loss: 0.18986920714378358
+[2/2, 1460/1875] train_loss: 0.19560879915952684
+[2/2, 1470/1875] train_loss: 0.18219192773103715
+[2/2, 1480/1875] train_loss: 0.19443619400262832
+[2/2, 1490/1875] train_loss: 0.18872089087963104
+[2/2, 1500/1875] train_loss: 0.1888781741261482
+[2/2, 1510/1875] train_loss: 0.1891539990901947
+[2/2, 1520/1875] train_loss: 0.18957718312740326
+[2/2, 1530/1875] train_loss: 0.19217956960201263
+[2/2, 1540/1875] train_loss: 0.18803741484880448
+[2/2, 1550/1875] train_loss: 0.18994869887828827
+[2/2, 1560/1875] train_loss: 0.18717623203992845
+[2/2, 1570/1875] train_loss: 0.1893276184797287
+[2/2, 1580/1875] train_loss: 0.18816943913698198
+[2/2, 1590/1875] train_loss: 0.18850174993276597
+[2/2, 1600/1875] train_loss: 0.19051516354084014
+[2/2, 1610/1875] train_loss: 0.18971989750862123
+[2/2, 1620/1875] train_loss: 0.19405532032251357
+[2/2, 1630/1875] train_loss: 0.19036162793636321
+[2/2, 1640/1875] train_loss: 0.19052026867866517
+[2/2, 1650/1875] train_loss: 0.19318972826004027
+[2/2, 1660/1875] train_loss: 0.19255997985601425
+[2/2, 1670/1875] train_loss: 0.19628154635429382
+[2/2, 1680/1875] train_loss: 0.19048517644405366
+[2/2, 1690/1875] train_loss: 0.1904110848903656
+[2/2, 1700/1875] train_loss: 0.18581836819648742
+[2/2, 1710/1875] train_loss: 0.18489875197410582
+[2/2, 1720/1875] train_loss: 0.18539794981479646
+[2/2, 1730/1875] train_loss: 0.1856886103749275
+[2/2, 1740/1875] train_loss: 0.18805718570947647
+[2/2, 1750/1875] train_loss: 0.18536367863416672
+[2/2, 1760/1875] train_loss: 0.18143147379159927
+[2/2, 1770/1875] train_loss: 0.1859916016459465
+[2/2, 1780/1875] train_loss: 0.18900276571512223
+[2/2, 1790/1875] train_loss: 0.18915718346834182
+[2/2, 1800/1875] train_loss: 0.18723555505275727
+[2/2, 1810/1875] train_loss: 0.18832539469003678
+[2/2, 1820/1875] train_loss: 0.18246016651391983
+[2/2, 1830/1875] train_loss: 0.18732942640781403
+[2/2, 1840/1875] train_loss: 0.18633760064840316
+[2/2, 1850/1875] train_loss: 0.19245790243148803
+[2/2, 1860/1875] train_loss: 0.18304732888936998
+[2/2, 1870/1875] train_loss: 0.17908668667078018
+5/5: Testing network...
+test_loss: 0.5509256571531296
+Training and Testing Finished
+Assembling test data for t-sne projection
+Batch: 1/313
+Batch: 2/313
+Batch: 3/313
+Batch: 4/313
+Batch: 5/313
+Batch: 6/313
+Batch: 7/313
+Batch: 8/313
+Batch: 9/313
+Batch: 10/313
+Batch: 11/313
+Batch: 12/313
+Batch: 13/313
+Batch: 14/313
+Batch: 15/313
+Batch: 16/313
+Batch: 17/313
+Batch: 18/313
+Batch: 19/313
+Batch: 20/313
+Batch: 21/313
+Batch: 22/313
+Batch: 23/313
+Batch: 24/313
+Batch: 25/313
+Batch: 26/313
+Batch: 27/313
+Batch: 28/313
+Batch: 29/313
+Batch: 30/313
+Batch: 31/313
+Batch: 32/313
+Batch: 33/313
+Batch: 34/313
+Batch: 35/313
+Batch: 36/313
+Batch: 37/313
+Batch: 38/313
+Batch: 39/313
+Batch: 40/313
+Batch: 41/313
+Batch: 42/313
+Batch: 43/313
+Batch: 44/313
+Batch: 45/313
+Batch: 46/313
+Batch: 47/313
+Batch: 48/313
+Batch: 49/313
+Batch: 50/313
+Batch: 51/313
+Batch: 52/313
+Batch: 53/313
+Batch: 54/313
+Batch: 55/313
+Batch: 56/313
+Batch: 57/313
+Batch: 58/313
+Batch: 59/313
+Batch: 60/313
+Batch: 61/313
+Batch: 62/313
+Batch: 63/313
+Batch: 64/313
+Batch: 65/313
+Batch: 66/313
+Batch: 67/313
+Batch: 68/313
+Batch: 69/313
+Batch: 70/313
+Batch: 71/313
+Batch: 72/313
+Batch: 73/313
+Batch: 74/313
+Batch: 75/313
+Batch: 76/313
+Batch: 77/313
+Batch: 78/313
+Batch: 79/313
+Batch: 80/313
+Batch: 81/313
+Batch: 82/313
+Batch: 83/313
+Batch: 84/313
+Batch: 85/313
+Batch: 86/313
+Batch: 87/313
+Batch: 88/313
+Batch: 89/313
+Batch: 90/313
+Batch: 91/313
+Batch: 92/313
+Batch: 93/313
+Batch: 94/313
+Batch: 95/313
+Batch: 96/313
+Batch: 97/313
+Batch: 98/313
+Batch: 99/313
+Batch: 100/313
+Batch: 101/313
+Batch: 102/313
+Batch: 103/313
+Batch: 104/313
+Batch: 105/313
+Batch: 106/313
+Batch: 107/313
+Batch: 108/313
+Batch: 109/313
+Batch: 110/313
+Batch: 111/313
+Batch: 112/313
+Batch: 113/313
+Batch: 114/313
+Batch: 115/313
+Batch: 116/313
+Batch: 117/313
+Batch: 118/313
+Batch: 119/313
+Batch: 120/313
+Batch: 121/313
+Batch: 122/313
+Batch: 123/313
+Batch: 124/313
+Batch: 125/313
+Batch: 126/313
+Batch: 127/313
+Batch: 128/313
+Batch: 129/313
+Batch: 130/313
+Batch: 131/313
+Batch: 132/313
+Batch: 133/313
+Batch: 134/313
+Batch: 135/313
+Batch: 136/313
+Batch: 137/313
+Batch: 138/313
+Batch: 139/313
+Batch: 140/313
+Batch: 141/313
+Batch: 142/313
+Batch: 143/313
+Batch: 144/313
+Batch: 145/313
+Batch: 146/313
+Batch: 147/313
+Batch: 148/313
+Batch: 149/313
+Batch: 150/313
+Batch: 151/313
+Batch: 152/313
+Batch: 153/313
+Batch: 154/313
+Batch: 155/313
+Batch: 156/313
+Batch: 157/313
+Batch: 158/313
+Batch: 159/313
+Batch: 160/313
+Batch: 161/313
+Batch: 162/313
+Batch: 163/313
+Batch: 164/313
+Batch: 165/313
+Batch: 166/313
+Batch: 167/313
+Batch: 168/313
+Batch: 169/313
+Batch: 170/313
+Batch: 171/313
+Batch: 172/313
+Batch: 173/313
+Batch: 174/313
+Batch: 175/313
+Batch: 176/313
+Batch: 177/313
+Batch: 178/313
+Batch: 179/313
+Batch: 180/313
+Batch: 181/313
+Batch: 182/313
+Batch: 183/313
+Batch: 184/313
+Batch: 185/313
+Batch: 186/313
+Batch: 187/313
+Batch: 188/313
+Batch: 189/313
+Batch: 190/313
+Batch: 191/313
+Batch: 192/313
+Batch: 193/313
+Batch: 194/313
+Batch: 195/313
+Batch: 196/313
+Batch: 197/313
+Batch: 198/313
+Batch: 199/313
+Batch: 200/313
+Batch: 201/313
+Batch: 202/313
+Batch: 203/313
+Batch: 204/313
+Batch: 205/313
+Batch: 206/313
+Batch: 207/313
+Batch: 208/313
+Batch: 209/313
+Batch: 210/313
+Batch: 211/313
+Batch: 212/313
+Batch: 213/313
+Batch: 214/313
+Batch: 215/313
+Batch: 216/313
+Batch: 217/313
+Batch: 218/313
+Batch: 219/313
+Batch: 220/313
+Batch: 221/313
+Batch: 222/313
+Batch: 223/313
+Batch: 224/313
+Batch: 225/313
+Batch: 226/313
+Batch: 227/313
+Batch: 228/313
+Batch: 229/313
+Batch: 230/313
+Batch: 231/313
+Batch: 232/313
+Batch: 233/313
+Batch: 234/313
+Batch: 235/313
+Batch: 236/313
+Batch: 237/313
+Batch: 238/313
+Batch: 239/313
+Batch: 240/313
+Batch: 241/313
+Batch: 242/313
+Batch: 243/313
+Batch: 244/313
+Batch: 245/313
+Batch: 246/313
+Batch: 247/313
+Batch: 248/313
+Batch: 249/313
+Batch: 250/313
+Batch: 251/313
+Batch: 252/313
+Batch: 253/313
+Batch: 254/313
+Batch: 255/313
+Batch: 256/313
+Batch: 257/313
+Batch: 258/313
+Batch: 259/313
+Batch: 260/313
+Batch: 261/313
+Batch: 262/313
+Batch: 263/313
+Batch: 264/313
+Batch: 265/313
+Batch: 266/313
+Batch: 267/313
+Batch: 268/313
+Batch: 269/313
+Batch: 270/313
+Batch: 271/313
+Batch: 272/313
+Batch: 273/313
+Batch: 274/313
+Batch: 275/313
+Batch: 276/313
+Batch: 277/313
+Batch: 278/313
+Batch: 279/313
+Batch: 280/313
+Batch: 281/313
+Batch: 282/313
+Batch: 283/313
+Batch: 284/313
+Batch: 285/313
+Batch: 286/313
+Batch: 287/313
+Batch: 288/313
+Batch: 289/313
+Batch: 290/313
+Batch: 291/313
+Batch: 292/313
+Batch: 293/313
+Batch: 294/313
+Batch: 295/313
+Batch: 296/313
+Batch: 297/313
+Batch: 298/313
+Batch: 299/313
+Batch: 300/313
+Batch: 301/313
+Batch: 302/313
+Batch: 303/313
+Batch: 304/313
+Batch: 305/313
+Batch: 306/313
+Batch: 307/313
+Batch: 308/313
+Batch: 309/313
+Batch: 310/313
+Batch: 311/313
+Batch: 312/313
+Batch: 313/313
+WARNING    C:\Users\lukea\anaconda3\envs\diss\Lib\site-packages\joblib\externals\loky\backend\context.py:110: UserWarning: Could not find the number of physical cores for the following reason:
+found 0 physical cores < 1
+Returning the number of logical cores instead. You can silence this warning by setting LOKY_MAX_CPU_COUNT to the number of cores you want to use.
+  warnings.warn(
+ [py.warnings]
+  File "C:\Users\lukea\anaconda3\envs\diss\Lib\site-packages\joblib\externals\loky\backend\context.py", line 217, in _count_physical_cores
+    raise ValueError(
+WARNING    C:\Users\lukea\AppData\Local\Temp\ipykernel_16388\3984012667.py:2: UserWarning: No data for colormapping provided via 'c'. Parameters 'cmap' will be ignored
+  plt.scatter(tsne[:, 0], tsne[:, 1], cmap='viridis')
+ [py.warnings]
+WARNING    C:\Users\lukea\AppData\Local\Temp\ipykernel_16388\834043650.py:2: UserWarning: No data for colormapping provided via 'c'. Parameters 'cmap' will be ignored
+  plt.scatter(tsne[:, 0], tsne[:, 1], cmap='viridis')
+ [py.warnings]
+WARNING    C:\Users\lukea\AppData\Local\Temp\ipykernel_16388\834043650.py:8: UserWarning: No data for colormapping provided via 'c'. Parameters 'cmap' will be ignored
+  plt.scatter(tsne[:, 0], tsne[:, 1], cmap='viridis')
+ [py.warnings]
+Assembling test data for t-sne projection
+Batch: 1/313
+Batch: 2/313
+Batch: 3/313
+Batch: 4/313
+Batch: 5/313
+Batch: 6/313
+Batch: 7/313
+Batch: 8/313
+Batch: 9/313
+Batch: 10/313
+Batch: 11/313
+Batch: 12/313
+Batch: 13/313
+Batch: 14/313
+Batch: 15/313
+Batch: 16/313
+Batch: 17/313
+Batch: 18/313
+Batch: 19/313
+Batch: 20/313
+Batch: 21/313
+Batch: 22/313
+Batch: 23/313
+Batch: 24/313
+Batch: 25/313
+Batch: 26/313
+Batch: 27/313
+Batch: 28/313
+Batch: 29/313
+Batch: 30/313
+Batch: 31/313
+Batch: 32/313
+Batch: 33/313
+Batch: 34/313
+Batch: 35/313
+Batch: 36/313
+Batch: 37/313
+Batch: 38/313
+Batch: 39/313
+Batch: 40/313
+Batch: 41/313
+Batch: 42/313
+Batch: 43/313
+Batch: 44/313
+Batch: 45/313
+Batch: 46/313
+Batch: 47/313
+Batch: 48/313
+Batch: 49/313
+Batch: 50/313
+Batch: 51/313
+Batch: 52/313
+Batch: 53/313
+Batch: 54/313
+Batch: 55/313
+Batch: 56/313
+Batch: 57/313
+Batch: 58/313
+Batch: 59/313
+Batch: 60/313
+Batch: 61/313
+Batch: 62/313
+Batch: 63/313
+Batch: 64/313
+Batch: 65/313
+Batch: 66/313
+Batch: 67/313
+Batch: 68/313
+Batch: 69/313
+Batch: 70/313
+Batch: 71/313
+Batch: 72/313
+Batch: 73/313
+Batch: 74/313
+Batch: 75/313
+Batch: 76/313
+Batch: 77/313
+Batch: 78/313
+Batch: 79/313
+Batch: 80/313
+Batch: 81/313
+Batch: 82/313
+Batch: 83/313
+Batch: 84/313
+Batch: 85/313
+Batch: 86/313
+Batch: 87/313
+Batch: 88/313
+Batch: 89/313
+Batch: 90/313
+Batch: 91/313
+Batch: 92/313
+Batch: 93/313
+Batch: 94/313
+Batch: 95/313
+Batch: 96/313
+Batch: 97/313
+Batch: 98/313
+Batch: 99/313
+Batch: 100/313
+Batch: 101/313
+Batch: 102/313
+Batch: 103/313
+Batch: 104/313
+Batch: 105/313
+Batch: 106/313
+Batch: 107/313
+Batch: 108/313
+Batch: 109/313
+Batch: 110/313
+Batch: 111/313
+Batch: 112/313
+Batch: 113/313
+Batch: 114/313
+Batch: 115/313
+Batch: 116/313
+Batch: 117/313
+Batch: 118/313
+Batch: 119/313
+Batch: 120/313
+Batch: 121/313
+Batch: 122/313
+Batch: 123/313
+Batch: 124/313
+Batch: 125/313
+Batch: 126/313
+Batch: 127/313
+Batch: 128/313
+Batch: 129/313
+Batch: 130/313
+Batch: 131/313
+Batch: 132/313
+Batch: 133/313
+Batch: 134/313
+Batch: 135/313
+Batch: 136/313
+Batch: 137/313
+Batch: 138/313
+Batch: 139/313
+Batch: 140/313
+Batch: 141/313
+Batch: 142/313
+Batch: 143/313
+Batch: 144/313
+Batch: 145/313
+Batch: 146/313
+Batch: 147/313
+Batch: 148/313
+Batch: 149/313
+Batch: 150/313
+Batch: 151/313
+Batch: 152/313
+Batch: 153/313
+Batch: 154/313
+Batch: 155/313
+Batch: 156/313
+Batch: 157/313
+Batch: 158/313
+Batch: 159/313
+Batch: 160/313
+Batch: 161/313
+Batch: 162/313
+Batch: 163/313
+Batch: 164/313
+Batch: 165/313
+Batch: 166/313
+Batch: 167/313
+Batch: 168/313
+Batch: 169/313
+Batch: 170/313
+Batch: 171/313
+Batch: 172/313
+Batch: 173/313
+Batch: 174/313
+Batch: 175/313
+Batch: 176/313
+Batch: 177/313
+Batch: 178/313
+Batch: 179/313
+Batch: 180/313
+Batch: 181/313
+Batch: 182/313
+Batch: 183/313
+Batch: 184/313
+Batch: 185/313
+Batch: 186/313
+Batch: 187/313
+Batch: 188/313
+Batch: 189/313
+Batch: 190/313
+Batch: 191/313
+Batch: 192/313
+Batch: 193/313
+Batch: 194/313
+Batch: 195/313
+Batch: 196/313
+Batch: 197/313
+Batch: 198/313
+Batch: 199/313
+Batch: 200/313
+Batch: 201/313
+Batch: 202/313
+Batch: 203/313
+Batch: 204/313
+Batch: 205/313
+Batch: 206/313
+Batch: 207/313
+Batch: 208/313
+Batch: 209/313
+Batch: 210/313
+Batch: 211/313
+Batch: 212/313
+Batch: 213/313
+Batch: 214/313
+Batch: 215/313
+Batch: 216/313
+Batch: 217/313
+Batch: 218/313
+Batch: 219/313
+Batch: 220/313
+Batch: 221/313
+Batch: 222/313
+Batch: 223/313
+Batch: 224/313
+Batch: 225/313
+Batch: 226/313
+Batch: 227/313
+Batch: 228/313
+Batch: 229/313
+Batch: 230/313
+Batch: 231/313
+Batch: 232/313
+Batch: 233/313
+Batch: 234/313
+Batch: 235/313
+Batch: 236/313
+Batch: 237/313
+Batch: 238/313
+Batch: 239/313
+Batch: 240/313
+Batch: 241/313
+Batch: 242/313
+Batch: 243/313
+Batch: 244/313
+Batch: 245/313
+Batch: 246/313
+Batch: 247/313
+Batch: 248/313
+Batch: 249/313
+Batch: 250/313
+Batch: 251/313
+Batch: 252/313
+Batch: 253/313
+Batch: 254/313
+Batch: 255/313
+Batch: 256/313
+Batch: 257/313
+Batch: 258/313
+Batch: 259/313
+Batch: 260/313
+Batch: 261/313
+Batch: 262/313
+Batch: 263/313
+Batch: 264/313
+Batch: 265/313
+Batch: 266/313
+Batch: 267/313
+Batch: 268/313
+Batch: 269/313
+Batch: 270/313
+Batch: 271/313
+Batch: 272/313
+Batch: 273/313
+Batch: 274/313
+Batch: 275/313
+Batch: 276/313
+Batch: 277/313
+Batch: 278/313
+Batch: 279/313
+Batch: 280/313
+Batch: 281/313
+Batch: 282/313
+Batch: 283/313
+Batch: 284/313
+Batch: 285/313
+Batch: 286/313
+Batch: 287/313
+Batch: 288/313
+Batch: 289/313
+Batch: 290/313
+Batch: 291/313
+Batch: 292/313
+Batch: 293/313
+Batch: 294/313
+Batch: 295/313
+Batch: 296/313
+Batch: 297/313
+Batch: 298/313
+Batch: 299/313
+Batch: 300/313
+Batch: 301/313
+Batch: 302/313
+Batch: 303/313
+Batch: 304/313
+Batch: 305/313
+Batch: 306/313
+Batch: 307/313
+Batch: 308/313
+Batch: 309/313
+Batch: 310/313
+Batch: 311/313
+Batch: 312/313
+Batch: 313/313
+WARNING    C:\Users\lukea\AppData\Local\Temp\ipykernel_16388\1990727042.py:19: UserWarning: No data for colormapping provided via 'c'. Parameters 'cmap' will be ignored
+  plt.scatter(tsne[:, 0], tsne[:, 1], cmap='viridis')
+ [py.warnings]
+Assembling test data for t-sne projection
+Batch: 1/313
+Batch: 2/313
+Batch: 3/313
+Batch: 4/313
+Batch: 5/313
+Batch: 6/313
+Batch: 7/313
+Batch: 8/313
+Batch: 9/313
+Batch: 10/313
+Batch: 11/313
+Batch: 12/313
+Batch: 13/313
+Batch: 14/313
+Batch: 15/313
+Batch: 16/313
+Batch: 17/313
+Batch: 18/313
+Batch: 19/313
+Batch: 20/313
+Batch: 21/313
+Batch: 22/313
+Batch: 23/313
+Batch: 24/313
+Batch: 25/313
+Batch: 26/313
+Batch: 27/313
+Batch: 28/313
+Batch: 29/313
+Batch: 30/313
+Batch: 31/313
+Batch: 32/313
+Batch: 33/313
+Batch: 34/313
+Batch: 35/313
+Batch: 36/313
+Batch: 37/313
+Batch: 38/313
+Batch: 39/313
+Batch: 40/313
+Batch: 41/313
+Batch: 42/313
+Batch: 43/313
+Batch: 44/313
+Batch: 45/313
+Batch: 46/313
+Batch: 47/313
+Batch: 48/313
+Batch: 49/313
+Batch: 50/313
+Batch: 51/313
+Batch: 52/313
+Batch: 53/313
+Batch: 54/313
+Batch: 55/313
+Batch: 56/313
+Batch: 57/313
+Batch: 58/313
+Batch: 59/313
+Batch: 60/313
+Batch: 61/313
+Batch: 62/313
+Batch: 63/313
+Batch: 64/313
+Batch: 65/313
+Batch: 66/313
+Batch: 67/313
+Batch: 68/313
+Batch: 69/313
+Batch: 70/313
+Batch: 71/313
+Batch: 72/313
+Batch: 73/313
+Batch: 74/313
+Batch: 75/313
+Batch: 76/313
+Batch: 77/313
+Batch: 78/313
+Batch: 79/313
+Batch: 80/313
+Batch: 81/313
+Batch: 82/313
+Batch: 83/313
+Batch: 84/313
+Batch: 85/313
+Batch: 86/313
+Batch: 87/313
+Batch: 88/313
+Batch: 89/313
+Batch: 90/313
+Batch: 91/313
+Batch: 92/313
+Batch: 93/313
+Batch: 94/313
+Batch: 95/313
+Batch: 96/313
+Batch: 97/313
+Batch: 98/313
+Batch: 99/313
+Batch: 100/313
+Batch: 101/313
+Batch: 102/313
+Batch: 103/313
+Batch: 104/313
+Batch: 105/313
+Batch: 106/313
+Batch: 107/313
+Batch: 108/313
+Batch: 109/313
+Batch: 110/313
+Batch: 111/313
+Batch: 112/313
+Batch: 113/313
+Batch: 114/313
+Batch: 115/313
+Batch: 116/313
+Batch: 117/313
+Batch: 118/313
+Batch: 119/313
+Batch: 120/313
+Batch: 121/313
+Batch: 122/313
+Batch: 123/313
+Batch: 124/313
+Batch: 125/313
+Batch: 126/313
+Batch: 127/313
+Batch: 128/313
+Batch: 129/313
+Batch: 130/313
+Batch: 131/313
+Batch: 132/313
+Batch: 133/313
+Batch: 134/313
+Batch: 135/313
+Batch: 136/313
+Batch: 137/313
+Batch: 138/313
+Batch: 139/313
+Batch: 140/313
+Batch: 141/313
+Batch: 142/313
+Batch: 143/313
+Batch: 144/313
+Batch: 145/313
+Batch: 146/313
+Batch: 147/313
+Batch: 148/313
+Batch: 149/313
+Batch: 150/313
+Batch: 151/313
+Batch: 152/313
+Batch: 153/313
+Batch: 154/313
+Batch: 155/313
+Batch: 156/313
+Batch: 157/313
+Batch: 158/313
+Batch: 159/313
+Batch: 160/313
+Batch: 161/313
+Batch: 162/313
+Batch: 163/313
+Batch: 164/313
+Batch: 165/313
+Batch: 166/313
+Batch: 167/313
+Batch: 168/313
+Batch: 169/313
+Batch: 170/313
+Batch: 171/313
+Batch: 172/313
+Batch: 173/313
+Batch: 174/313
+Batch: 175/313
+Batch: 176/313
+Batch: 177/313
+Batch: 178/313
+Batch: 179/313
+Batch: 180/313
+Batch: 181/313
+Batch: 182/313
+Batch: 183/313
+Batch: 184/313
+Batch: 185/313
+Batch: 186/313
+Batch: 187/313
+Batch: 188/313
+Batch: 189/313
+Batch: 190/313
+Batch: 191/313
+Batch: 192/313
+Batch: 193/313
+Batch: 194/313
+Batch: 195/313
+Batch: 196/313
+Batch: 197/313
+Batch: 198/313
+Batch: 199/313
+Batch: 200/313
+Batch: 201/313
+Batch: 202/313
+Batch: 203/313
+Batch: 204/313
+Batch: 205/313
+Batch: 206/313
+Batch: 207/313
+Batch: 208/313
+Batch: 209/313
+Batch: 210/313
+Batch: 211/313
+Batch: 212/313
+Batch: 213/313
+Batch: 214/313
+Batch: 215/313
+Batch: 216/313
+Batch: 217/313
+Batch: 218/313
+Batch: 219/313
+Batch: 220/313
+Batch: 221/313
+Batch: 222/313
+Batch: 223/313
+Batch: 224/313
+Batch: 225/313
+Batch: 226/313
+Batch: 227/313
+Batch: 228/313
+Batch: 229/313
+Batch: 230/313
+Batch: 231/313
+Batch: 232/313
+Batch: 233/313
+Batch: 234/313
+Batch: 235/313
+Batch: 236/313
+Batch: 237/313
+Batch: 238/313
+Batch: 239/313
+Batch: 240/313
+Batch: 241/313
+Batch: 242/313
+Batch: 243/313
+Batch: 244/313
+Batch: 245/313
+Batch: 246/313
+Batch: 247/313
+Batch: 248/313
+Batch: 249/313
+Batch: 250/313
+Batch: 251/313
+Batch: 252/313
+Batch: 253/313
+Batch: 254/313
+Batch: 255/313
+Batch: 256/313
+Batch: 257/313
+Batch: 258/313
+Batch: 259/313
+Batch: 260/313
+Batch: 261/313
+Batch: 262/313
+Batch: 263/313
+Batch: 264/313
+Batch: 265/313
+Batch: 266/313
+Batch: 267/313
+Batch: 268/313
+Batch: 269/313
+Batch: 270/313
+Batch: 271/313
+Batch: 272/313
+Batch: 273/313
+Batch: 274/313
+Batch: 275/313
+Batch: 276/313
+Batch: 277/313
+Batch: 278/313
+Batch: 279/313
+Batch: 280/313
+Batch: 281/313
+Batch: 282/313
+Batch: 283/313
+Batch: 284/313
+Batch: 285/313
+Batch: 286/313
+Batch: 287/313
+Batch: 288/313
+Batch: 289/313
+Batch: 290/313
+Batch: 291/313
+Batch: 292/313
+Batch: 293/313
+Batch: 294/313
+Batch: 295/313
+Batch: 296/313
+Batch: 297/313
+Batch: 298/313
+Batch: 299/313
+Batch: 300/313
+Batch: 301/313
+Batch: 302/313
+Batch: 303/313
+Batch: 304/313
+Batch: 305/313
+Batch: 306/313
+Batch: 307/313
+Batch: 308/313
+Batch: 309/313
+Batch: 310/313
+Batch: 311/313
+Batch: 312/313
+Batch: 313/313
+Applying t-SNE
+WARNING    C:\Users\lukea\AppData\Local\Temp\ipykernel_16388\3655233520.py:20: UserWarning: No data for colormapping provided via 'c'. Parameters 'cmap' will be ignored
+  plt.scatter(tsne[:, 0], tsne[:, 1], cmap='viridis')
+ [py.warnings]
+Assembling test data for t-sne projection
+Batch: 1/313
+torch.Size([32, 100])
+Batch: 2/313
+torch.Size([32, 100])
+Batch: 3/313
+torch.Size([32, 100])
+Batch: 4/313
+torch.Size([32, 100])
+Batch: 5/313
+torch.Size([32, 100])
+Batch: 6/313
+torch.Size([32, 100])
+Batch: 7/313
+torch.Size([32, 100])
+Batch: 8/313
+torch.Size([32, 100])
+Batch: 9/313
+torch.Size([32, 100])
+Batch: 10/313
+torch.Size([32, 100])
+Batch: 11/313
+torch.Size([32, 100])
+Batch: 12/313
+torch.Size([32, 100])
+Batch: 13/313
+torch.Size([32, 100])
+Batch: 14/313
+torch.Size([32, 100])
+Batch: 15/313
+torch.Size([32, 100])
+Batch: 16/313
+torch.Size([32, 100])
+Batch: 17/313
+torch.Size([32, 100])
+Batch: 18/313
+torch.Size([32, 100])
+Batch: 19/313
+torch.Size([32, 100])
+Batch: 20/313
+torch.Size([32, 100])
+Batch: 21/313
+torch.Size([32, 100])
+Batch: 22/313
+torch.Size([32, 100])
+Batch: 23/313
+torch.Size([32, 100])
+Batch: 24/313
+torch.Size([32, 100])
+Batch: 25/313
+torch.Size([32, 100])
+Batch: 26/313
+torch.Size([32, 100])
+Batch: 27/313
+torch.Size([32, 100])
+Batch: 28/313
+torch.Size([32, 100])
+Batch: 29/313
+torch.Size([32, 100])
+Batch: 30/313
+torch.Size([32, 100])
+Batch: 31/313
+torch.Size([32, 100])
+Batch: 32/313
+torch.Size([32, 100])
+Batch: 33/313
+torch.Size([32, 100])
+Batch: 34/313
+torch.Size([32, 100])
+Batch: 35/313
+torch.Size([32, 100])
+Batch: 36/313
+torch.Size([32, 100])
+Batch: 37/313
+torch.Size([32, 100])
+Batch: 38/313
+torch.Size([32, 100])
+Batch: 39/313
+torch.Size([32, 100])
+Batch: 40/313
+torch.Size([32, 100])
+Batch: 41/313
+torch.Size([32, 100])
+Batch: 42/313
+torch.Size([32, 100])
+Batch: 43/313
+torch.Size([32, 100])
+Batch: 44/313
+torch.Size([32, 100])
+Batch: 45/313
+torch.Size([32, 100])
+Batch: 46/313
+torch.Size([32, 100])
+Batch: 47/313
+torch.Size([32, 100])
+Batch: 48/313
+torch.Size([32, 100])
+Batch: 49/313
+torch.Size([32, 100])
+Batch: 50/313
+torch.Size([32, 100])
+Batch: 51/313
+torch.Size([32, 100])
+Batch: 52/313
+torch.Size([32, 100])
+Batch: 53/313
+torch.Size([32, 100])
+Batch: 54/313
+torch.Size([32, 100])
+Batch: 55/313
+torch.Size([32, 100])
+Batch: 56/313
+torch.Size([32, 100])
+Batch: 57/313
+torch.Size([32, 100])
+Batch: 58/313
+torch.Size([32, 100])
+Batch: 59/313
+torch.Size([32, 100])
+Batch: 60/313
+torch.Size([32, 100])
+Batch: 61/313
+torch.Size([32, 100])
+Batch: 62/313
+torch.Size([32, 100])
+Batch: 63/313
+torch.Size([32, 100])
+Batch: 64/313
+torch.Size([32, 100])
+Batch: 65/313
+torch.Size([32, 100])
+Batch: 66/313
+torch.Size([32, 100])
+Batch: 67/313
+torch.Size([32, 100])
+Batch: 68/313
+torch.Size([32, 100])
+Batch: 69/313
+torch.Size([32, 100])
+Batch: 70/313
+torch.Size([32, 100])
+Batch: 71/313
+torch.Size([32, 100])
+Batch: 72/313
+torch.Size([32, 100])
+Batch: 73/313
+torch.Size([32, 100])
+Batch: 74/313
+torch.Size([32, 100])
+Batch: 75/313
+torch.Size([32, 100])
+Batch: 76/313
+torch.Size([32, 100])
+Batch: 77/313
+torch.Size([32, 100])
+Batch: 78/313
+torch.Size([32, 100])
+Batch: 79/313
+torch.Size([32, 100])
+Batch: 80/313
+torch.Size([32, 100])
+Batch: 81/313
+torch.Size([32, 100])
+Batch: 82/313
+torch.Size([32, 100])
+Batch: 83/313
+torch.Size([32, 100])
+Batch: 84/313
+torch.Size([32, 100])
+Batch: 85/313
+torch.Size([32, 100])
+Batch: 86/313
+torch.Size([32, 100])
+Batch: 87/313
+torch.Size([32, 100])
+Batch: 88/313
+torch.Size([32, 100])
+Batch: 89/313
+torch.Size([32, 100])
+Batch: 90/313
+torch.Size([32, 100])
+Batch: 91/313
+torch.Size([32, 100])
+Batch: 92/313
+torch.Size([32, 100])
+Batch: 93/313
+torch.Size([32, 100])
+Batch: 94/313
+torch.Size([32, 100])
+Batch: 95/313
+torch.Size([32, 100])
+Batch: 96/313
+torch.Size([32, 100])
+Batch: 97/313
+torch.Size([32, 100])
+Batch: 98/313
+torch.Size([32, 100])
+Batch: 99/313
+torch.Size([32, 100])
+Batch: 100/313
+torch.Size([32, 100])
+Batch: 101/313
+torch.Size([32, 100])
+Batch: 102/313
+torch.Size([32, 100])
+Batch: 103/313
+torch.Size([32, 100])
+Batch: 104/313
+torch.Size([32, 100])
+Batch: 105/313
+torch.Size([32, 100])
+Batch: 106/313
+torch.Size([32, 100])
+Batch: 107/313
+torch.Size([32, 100])
+Batch: 108/313
+torch.Size([32, 100])
+Batch: 109/313
+torch.Size([32, 100])
+Batch: 110/313
+torch.Size([32, 100])
+Batch: 111/313
+torch.Size([32, 100])
+Batch: 112/313
+torch.Size([32, 100])
+Batch: 113/313
+torch.Size([32, 100])
+Batch: 114/313
+torch.Size([32, 100])
+Batch: 115/313
+torch.Size([32, 100])
+Batch: 116/313
+torch.Size([32, 100])
+Batch: 117/313
+torch.Size([32, 100])
+Batch: 118/313
+torch.Size([32, 100])
+Batch: 119/313
+torch.Size([32, 100])
+Batch: 120/313
+torch.Size([32, 100])
+Batch: 121/313
+torch.Size([32, 100])
+Batch: 122/313
+torch.Size([32, 100])
+Batch: 123/313
+torch.Size([32, 100])
+Batch: 124/313
+torch.Size([32, 100])
+Batch: 125/313
+torch.Size([32, 100])
+Batch: 126/313
+torch.Size([32, 100])
+Batch: 127/313
+torch.Size([32, 100])
+Batch: 128/313
+torch.Size([32, 100])
+Batch: 129/313
+torch.Size([32, 100])
+Batch: 130/313
+torch.Size([32, 100])
+Batch: 131/313
+torch.Size([32, 100])
+Batch: 132/313
+torch.Size([32, 100])
+Batch: 133/313
+torch.Size([32, 100])
+Batch: 134/313
+torch.Size([32, 100])
+Batch: 135/313
+torch.Size([32, 100])
+Batch: 136/313
+torch.Size([32, 100])
+Batch: 137/313
+torch.Size([32, 100])
+Batch: 138/313
+torch.Size([32, 100])
+Batch: 139/313
+torch.Size([32, 100])
+Batch: 140/313
+torch.Size([32, 100])
+Batch: 141/313
+torch.Size([32, 100])
+Batch: 142/313
+torch.Size([32, 100])
+Batch: 143/313
+torch.Size([32, 100])
+Batch: 144/313
+torch.Size([32, 100])
+Batch: 145/313
+torch.Size([32, 100])
+Batch: 146/313
+torch.Size([32, 100])
+Batch: 147/313
+torch.Size([32, 100])
+Batch: 148/313
+torch.Size([32, 100])
+Batch: 149/313
+torch.Size([32, 100])
+Batch: 150/313
+torch.Size([32, 100])
+Batch: 151/313
+torch.Size([32, 100])
+Batch: 152/313
+torch.Size([32, 100])
+Batch: 153/313
+torch.Size([32, 100])
+Batch: 154/313
+torch.Size([32, 100])
+Batch: 155/313
+torch.Size([32, 100])
+Batch: 156/313
+torch.Size([32, 100])
+Batch: 157/313
+torch.Size([32, 100])
+Batch: 158/313
+torch.Size([32, 100])
+Batch: 159/313
+torch.Size([32, 100])
+Batch: 160/313
+torch.Size([32, 100])
+Batch: 161/313
+torch.Size([32, 100])
+Batch: 162/313
+torch.Size([32, 100])
+Batch: 163/313
+torch.Size([32, 100])
+Batch: 164/313
+torch.Size([32, 100])
+Batch: 165/313
+torch.Size([32, 100])
+Batch: 166/313
+torch.Size([32, 100])
+Batch: 167/313
+torch.Size([32, 100])
+Batch: 168/313
+torch.Size([32, 100])
+Batch: 169/313
+torch.Size([32, 100])
+Batch: 170/313
+torch.Size([32, 100])
+Batch: 171/313
+torch.Size([32, 100])
+Batch: 172/313
+torch.Size([32, 100])
+Batch: 173/313
+torch.Size([32, 100])
+Batch: 174/313
+torch.Size([32, 100])
+Batch: 175/313
+torch.Size([32, 100])
+Batch: 176/313
+torch.Size([32, 100])
+Batch: 177/313
+torch.Size([32, 100])
+Batch: 178/313
+torch.Size([32, 100])
+Batch: 179/313
+torch.Size([32, 100])
+Batch: 180/313
+torch.Size([32, 100])
+Batch: 181/313
+torch.Size([32, 100])
+Batch: 182/313
+torch.Size([32, 100])
+Batch: 183/313
+torch.Size([32, 100])
+Batch: 184/313
+torch.Size([32, 100])
+Batch: 185/313
+torch.Size([32, 100])
+Batch: 186/313
+torch.Size([32, 100])
+Batch: 187/313
+torch.Size([32, 100])
+Batch: 188/313
+torch.Size([32, 100])
+Batch: 189/313
+torch.Size([32, 100])
+Batch: 190/313
+torch.Size([32, 100])
+Batch: 191/313
+torch.Size([32, 100])
+Batch: 192/313
+torch.Size([32, 100])
+Batch: 193/313
+torch.Size([32, 100])
+Batch: 194/313
+torch.Size([32, 100])
+Batch: 195/313
+torch.Size([32, 100])
+Batch: 196/313
+torch.Size([32, 100])
+Batch: 197/313
+torch.Size([32, 100])
+Batch: 198/313
+torch.Size([32, 100])
+Batch: 199/313
+torch.Size([32, 100])
+Batch: 200/313
+torch.Size([32, 100])
+Batch: 201/313
+torch.Size([32, 100])
+Batch: 202/313
+torch.Size([32, 100])
+Batch: 203/313
+torch.Size([32, 100])
+Batch: 204/313
+torch.Size([32, 100])
+Batch: 205/313
+torch.Size([32, 100])
+Batch: 206/313
+torch.Size([32, 100])
+Batch: 207/313
+torch.Size([32, 100])
+Batch: 208/313
+torch.Size([32, 100])
+Batch: 209/313
+torch.Size([32, 100])
+Batch: 210/313
+torch.Size([32, 100])
+Batch: 211/313
+torch.Size([32, 100])
+Batch: 212/313
+torch.Size([32, 100])
+Batch: 213/313
+torch.Size([32, 100])
+Batch: 214/313
+torch.Size([32, 100])
+Batch: 215/313
+torch.Size([32, 100])
+Batch: 216/313
+torch.Size([32, 100])
+Batch: 217/313
+torch.Size([32, 100])
+Batch: 218/313
+torch.Size([32, 100])
+Batch: 219/313
+torch.Size([32, 100])
+Batch: 220/313
+torch.Size([32, 100])
+Batch: 221/313
+torch.Size([32, 100])
+Batch: 222/313
+torch.Size([32, 100])
+Batch: 223/313
+torch.Size([32, 100])
+Batch: 224/313
+torch.Size([32, 100])
+Batch: 225/313
+torch.Size([32, 100])
+Batch: 226/313
+torch.Size([32, 100])
+Batch: 227/313
+torch.Size([32, 100])
+Batch: 228/313
+torch.Size([32, 100])
+Batch: 229/313
+torch.Size([32, 100])
+Batch: 230/313
+torch.Size([32, 100])
+Batch: 231/313
+torch.Size([32, 100])
+Batch: 232/313
+torch.Size([32, 100])
+Batch: 233/313
+torch.Size([32, 100])
+Batch: 234/313
+torch.Size([32, 100])
+Batch: 235/313
+torch.Size([32, 100])
+Batch: 236/313
+torch.Size([32, 100])
+Batch: 237/313
+torch.Size([32, 100])
+Batch: 238/313
+torch.Size([32, 100])
+Batch: 239/313
+torch.Size([32, 100])
+Batch: 240/313
+torch.Size([32, 100])
+Batch: 241/313
+torch.Size([32, 100])
+Batch: 242/313
+torch.Size([32, 100])
+Batch: 243/313
+torch.Size([32, 100])
+Batch: 244/313
+torch.Size([32, 100])
+Batch: 245/313
+torch.Size([32, 100])
+Batch: 246/313
+torch.Size([32, 100])
+Batch: 247/313
+torch.Size([32, 100])
+Batch: 248/313
+torch.Size([32, 100])
+Batch: 249/313
+torch.Size([32, 100])
+Batch: 250/313
+torch.Size([32, 100])
+Batch: 251/313
+torch.Size([32, 100])
+Batch: 252/313
+torch.Size([32, 100])
+Batch: 253/313
+torch.Size([32, 100])
+Batch: 254/313
+torch.Size([32, 100])
+Batch: 255/313
+torch.Size([32, 100])
+Batch: 256/313
+torch.Size([32, 100])
+Batch: 257/313
+torch.Size([32, 100])
+Batch: 258/313
+torch.Size([32, 100])
+Batch: 259/313
+torch.Size([32, 100])
+Batch: 260/313
+torch.Size([32, 100])
+Batch: 261/313
+torch.Size([32, 100])
+Batch: 262/313
+torch.Size([32, 100])
+Batch: 263/313
+torch.Size([32, 100])
+Batch: 264/313
+torch.Size([32, 100])
+Batch: 265/313
+torch.Size([32, 100])
+Batch: 266/313
+torch.Size([32, 100])
+Batch: 267/313
+torch.Size([32, 100])
+Batch: 268/313
+torch.Size([32, 100])
+Batch: 269/313
+torch.Size([32, 100])
+Batch: 270/313
+torch.Size([32, 100])
+Batch: 271/313
+torch.Size([32, 100])
+Batch: 272/313
+torch.Size([32, 100])
+Batch: 273/313
+torch.Size([32, 100])
+Batch: 274/313
+torch.Size([32, 100])
+Batch: 275/313
+torch.Size([32, 100])
+Batch: 276/313
+torch.Size([32, 100])
+Batch: 277/313
+torch.Size([32, 100])
+Batch: 278/313
+torch.Size([32, 100])
+Batch: 279/313
+torch.Size([32, 100])
+Batch: 280/313
+torch.Size([32, 100])
+Batch: 281/313
+torch.Size([32, 100])
+Batch: 282/313
+torch.Size([32, 100])
+Batch: 283/313
+torch.Size([32, 100])
+Batch: 284/313
+torch.Size([32, 100])
+Batch: 285/313
+torch.Size([32, 100])
+Batch: 286/313
+torch.Size([32, 100])
+Batch: 287/313
+torch.Size([32, 100])
+Batch: 288/313
+torch.Size([32, 100])
+Batch: 289/313
+torch.Size([32, 100])
+Batch: 290/313
+torch.Size([32, 100])
+Batch: 291/313
+torch.Size([32, 100])
+Batch: 292/313
+torch.Size([32, 100])
+Batch: 293/313
+torch.Size([32, 100])
+Batch: 294/313
+torch.Size([32, 100])
+Batch: 295/313
+torch.Size([32, 100])
+Batch: 296/313
+torch.Size([32, 100])
+Batch: 297/313
+torch.Size([32, 100])
+Batch: 298/313
+torch.Size([32, 100])
+Batch: 299/313
+torch.Size([32, 100])
+Batch: 300/313
+torch.Size([32, 100])
+Batch: 301/313
+torch.Size([32, 100])
+Batch: 302/313
+torch.Size([32, 100])
+Batch: 303/313
+torch.Size([32, 100])
+Batch: 304/313
+torch.Size([32, 100])
+Batch: 305/313
+torch.Size([32, 100])
+Batch: 306/313
+torch.Size([32, 100])
+Batch: 307/313
+torch.Size([32, 100])
+Batch: 308/313
+torch.Size([32, 100])
+Batch: 309/313
+torch.Size([32, 100])
+Batch: 310/313
+torch.Size([32, 100])
+Batch: 311/313
+torch.Size([32, 100])
+Batch: 312/313
+torch.Size([32, 100])
+Batch: 313/313
+torch.Size([32, 100])
+WARNING    C:\Users\lukea\AppData\Local\Temp\ipykernel_16388\3200679844.py:2: UserWarning: No data for colormapping provided via 'c'. Parameters 'cmap' will be ignored
+  plt.scatter(tsne[:, 0], tsne[:, 1], cmap='viridis')

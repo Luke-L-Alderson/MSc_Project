@@ -17,6 +17,8 @@ import os, shutil
 import random as rand
 import numpy as np
 import wandb
+from helpers import *
+from sklearn.manifold import TSNE
 
 import torch
 import torch.nn as nn
@@ -50,123 +52,28 @@ from model.train.trainMNIST import test
 dtype = torch.float
 device = torch.device("cuda") if torch.cuda.is_available() else torch.device("cpu")
 
-def to_np(tensor):
-  return tensor.detach().cpu().numpy()
-
-def plot_input(inputs, index):
-  plt.imshow(to_np(torch.transpose(torch.sum(inputs, 0)[index], 0 ,2)))
-
-def curr_to_pA(curr, network):
-  factor = network.network_params["v_th"]/network.network_params["R_m"]/(1 - network.network_params["beta"])
-  try:
-    return to_np(curr)*factor
-  except:
-    return curr*factor
-
-def transfer(curr, network):
-  T = -network.network_params["tau_m"]*np.log(1 - network.network_params["v_th"]/(curr*network.network_params["R_m"]))
-  return np.clip(1/T, 0*Hz, inf*Hz)
-
-def get_fr(raster, network):
-  return to_np(torch.sum(raster, 0))/network.time_params["total_time"]
-
-def print_network_architecure(network):
-    netp, op, fp, cp = network.network_params, network.oscillation_params, network.frame_params, network.convolution_params
-    input_layer_text = """
-    Input layer: {} channels
-                {}x{} neurons/channel
-                {} total neurons
-    """.format(fp["depth"], fp["size"], fp["size"],fp["depth"]*fp["size"]*fp["size"] )
-
-    conv1_text = """
-    Conv1 layer: {} channels
-                {}x{} neurons/channel
-                {} total neurons
-                {} synapses/neuron (ff)
-                {} total_synapses
-    """.format(cp["channels_1"], cp["conv1_size"], cp["conv1_size"], netp["num_conv1"], cp["filter_1"]*cp["filter_1"], netp["num_conv1"]*cp["filter_1"]*cp["filter_1"])
-
-    conv2_text = """
-    Conv2 layer: {} channels
-                {}x{} neurons/channel
-                {} total neurons
-                {} synapses/neuron (ff)
-                {} total_synapses
-    """.format(cp["channels_2"], cp["conv2_size"], cp["conv2_size"], netp["num_conv2"], cp["filter_2"]*cp["filter_2"], netp["num_conv2"]*cp["filter_2"]*cp["filter_2"])
-
-    rec_text = """
-    Rec layer:   {} total neurons
-                {} synapses/neuron (ff) and {} synapses/neuron (rec)
-                {} total_synapses
-    """.format(netp["num_rec"], netp["num_conv2"], netp["num_rec"], netp["num_conv2"]*netp["num_rec"] + netp["num_rec"]**2)
-
-    latent_text = """
-    Lat layer:   {} total neurons
-                {} synapses/neuron (ff)
-                {} total_synapses
-    """.format(netp["num_latent"], netp["num_rec"], netp["num_rec"], netp["num_rec"]*netp["num_latent"])
-
-    Trec_text = ""
-    Tconv2_text = ""
-    Tconv1_text = ""
-    output_layer_text = ""
-
-    print(input_layer_text)
-    print(conv1_text)
-    print(conv2_text)
-    print(rec_text)
-    print(latent_text)
-    print(Trec_text)
-    print(Tconv2_text)
-    print(Tconv1_text)
-    print(output_layer_text)
-    
-
-def set_seed(value = 42):
-    np.random.seed(value)
-    torch.manual_seed(value)
-    torch.cuda.manual_seed(value)
-    #rand.seed(value)
-    # When running on the CuDNN backend, two further options must be set
-    torch.backends.cudnn.deterministic = True
-    torch.backends.cudnn.benchmark = False
-    # Set a fixed value for the hash seed
-    os.environ["PYTHONHASHSEED"] = str(value)
-    print(f"Setting Seed to {value}")
-
-
 set_seed()
 
-epochs = [1, 5, 7]
-lrs = [1e-2, 1e-3, 1e-4]
+sweep_config = {
+    'program': "main.py",
+    'method': 'random',
+    'metric': {'name': 'final_test_loss',
+                'goal': 'minimize'   
+                },
+    'parameters': {'bs': {'values': [64, 32, 16, 8]},
+                    'lr': {'values': [1e-3, 1e-4, 1e-5, 1e-6]},
+                    'epochs': {'value': 3},
+                    }
+    }
 
-#for lr in lrs:
-#    print('f')
 
 """## Define network architecutre and parameters"""
 # get MNIST in, get correct targets, try and vary some biophys params with plots
 time_params, network_params, oscillation_params, frame_params, \
 convolution_params, input_specs, label_specs, train_specs = {}, {}, {}, {}, {}, {}, {}, {}
 
-time_params["dt"] = 1*ms
-time_params["total_time"] = 200*ms
 
-network_params["tau_m"] = 24*ms     # affects beta
-network_params["tau_syn"] = 10*ms   # not currently used
-network_params["R_m"] = 146*Mohm    # not currently used
-network_params["v_th"] = 1#15*mV    # snn default = 1
-network_params["eta"] = 0.0         # controls noise amplitude - try adding noise in rec layer
-network_params["num_rec"] = 100
-network_params["num_latent"] = 8
-
-frame_params["depth"] = 1
-frame_params["size"] = 28
-
-convolution_params["channels_1"] = 12
-convolution_params["filter_1"] = 3
-convolution_params["channels_2"] = 64
-convolution_params["filter_2"] = 3
-
+# Parameters for use in training
 input_specs["total_time"] = 200*ms
 input_specs["bin_size"] = 1*ms
 input_specs["rate_on"] = 75*Hz
@@ -176,65 +83,51 @@ label_specs["total_time"] = 200*ms
 label_specs["code"] = 'rate'
 label_specs["rate"] = 75*Hz
 
-train_specs["num_epochs"] = 1
+train_specs["num_epochs"] = 3
 train_specs["early_stop"] = -1
 train_specs["device"] = device
 train_specs["lr"] = 1e-4
 train_specs["loss_fn"] = "spike_count"
 train_specs["lambda_rate"] = 0.0
 train_specs["lambda_weights"] = None
-batch_size = 32
+batch_size = 64
 
-wandb.init(
-    # set the wandb project where this run will be logged
-    project="MSc Project",
+#sweep_id = wand.sweep(sweep_config, "pytorch-sweeps-demo")
 
-    # track hyperparameters and run metadata
-    config={
+#wandb.agent(sweep_id, train_network)
+
+solo_config = {
     "learning_rate": train_specs["lr"],
     "architecture": "SCAE",
     "dataset": "MNIST",
     "epochs": train_specs["num_epochs"],
     "batch size": batch_size,
-    "v_th": network_params["v_th"],
-    "tau_m": network_params["tau_m"]
-    }
+    #"v_th": network_params["v_th"],
+    #"tau_m": network_params["tau_m"]
+}
+
+
+wandb.init(
+    # set the wandb project where this run will be logged
+    project="MSc Project",
+    name = f"Foundation_lr_{train_specs["lr"]}_bs_{batch_size}",
+    # track hyperparameters and run metadata
+    config = solo_config
 )
 
+print(f'Starting Sweep: Batch Size: {batch_size}, Learning Rate: {train_specs["lr"]}')
+
+#build dataset and loaders
+train_dataset, train_loader, test_dataset, test_loader = build_datasets(batch_size)
+
+#build network
+network = build_network(device)
+
 #%%
-"""## Make or access existing datasets"""
-# create training/ and testing/ folders in the chosen path
-if not os.path.isdir('figures/training'):
-    os.makedirs('figures/training')
+"""## Training the network"""
+network, train_loss, test_loss, final_train_loss, final_test_loss = train_network(network, train_loader, test_loader, input_specs, label_specs, train_specs, reporting = False)
 
-if not os.path.isdir('figures/testing'):
-    os.makedirs('figures/testing')
-
-data_path='/tmp/data/mnist'
-
-transform = transforms.Compose([
-            transforms.Grayscale(),
-            transforms.ToTensor(),
-            transforms.Normalize((0,), (1,))])
-
-# create dataset in /content
-print("Making Datasets...")
-
-# Load MNIST
-'''
-train_dataset = Subset(datasets.MNIST(root='dataset/', train=True, transform=transform, download=True), range(1000))
-test_dataset = Subset(datasets.MNIST(root='dataset/', train=False, transform=transform, download=True), range(200))
-
-'''
-train_dataset = datasets.MNIST(root='dataset/', train=True, transform=transform, download=True)
-test_dataset = datasets.MNIST(root='dataset/', train=False, transform=transform, download=True)
-
-
-print("Making Dataloaders...")
-
-train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
-test_loader = DataLoader(test_dataset, batch_size=batch_size, shuffle=True)
-
+#%% Plotting
 # Plot examples from MNIST
 unique_images = []
 seen_labels = set()
@@ -259,74 +152,58 @@ for i, ax in enumerate(axes):
 plt.tight_layout()
 plt.show()
 
-
-#%%
-print("Defining network...")
-network = SAE(time_params, network_params, frame_params, convolution_params, device).to(device)
-#print_network_architecure(network)
-
-
-#%%
-"""## Training the network"""
-# unset retrieval to load pre-trained network
-retrieval = 1;
-
-if retrieval:
-    network, train_loss, test_loss = train_network(network, train_loader, test_loader, input_specs, label_specs, train_specs, reporting = False)
-    torch.save(network.state_dict(), 'data/content/pt_model_10_500.pth')
-    print('\a')
-else:
-    network.load_state_dict(torch.load('data/content/pt_model_10_500.pth'), strict=False)
-
-#%% Plotting
-
 input_specs["rate_on"] = 500*Hz
 input_specs["rate_off"] = 10*Hz
 
 # Plot originally input as image and as spiking representation - save gif.
 inputs, labels = next(iter(test_loader))
-poisson_inputs = get_poisson_inputs(inputs, **input_specs).to(device)
+poisson_inputs = get_poisson_inputs(inputs, **input_specs)
 
 img_spk_recs, img_spk_outs = network(poisson_inputs)
 
-# img
-input_index = 0
-poisson_inputs = poisson_inputs.squeeze().cpu()
-img_spk_outs = img_spk_outs.squeeze().detach().cpu()
+print("Assembling test data for t-sne projection")
+with torch.no_grad():
+   features = []
+   all_labs = []
+   all_decs = []
+   all_orig_ims = []
+   for i,(data, labs) in enumerate(test_loader):
+       data = get_poisson_inputs(data, **input_specs)
+       code_layer, decoded = network(data)
+       code_layer = code_layer.mean(0)
+       print(f'Batch: {i+1}/{len(test_loader)}')
+       features.append(code_layer.view(-1, network_params["num_rec"]).cpu().numpy())
+       all_labs.append(labs)
+       all_decs.append(decoded.mean(0).squeeze().cpu())
+       all_orig_ims.append(data.mean(0).squeeze())
 
-plt.imshow(to_np(inputs[input_index, 0]), cmap = 'grey')
+features = np.concatenate(features, axis = 0)
+all_labs = np.concatenate(all_labs, axis = 0)
+all_orig_ims = np.concatenate(all_orig_ims, axis = 0)
+all_decs = np.concatenate(all_decs, axis = 0)
+
+print("Applying t-SNE")
+# Apply TSNE for dimensionality reduction
+tsne = TSNE().fit_transform(features)
+
+# Plot the TSNE results with label
+plt.figure(figsize=(10, 6))
+plt.scatter(tsne[:, 0], tsne[:, 1], c=all_labs, cmap='viridis')
+plt.xlabel('t-SNE 1')
+plt.ylabel('t-SNE 2')
+plt.colorbar(label='Digit Class')
+plt.savefig("tsne.png")
 plt.show()
 
-plt.imshow(poisson_inputs[:, input_index].mean(axis=0), cmap='grey')
-
-# anim
-fig, ax = plt.subplots()
-anim = splt.animator(poisson_inputs[:, input_index], fig, ax)
-HTML(anim.to_html5_video())
-anim.save("spike_mnist.gif")
-plt.show()
-
-wandb.log({"Spike Animation": wandb.Video("spike_mnist.gif", fps=4, format="gif")}, commit = False)
-
-# 4 x 5 grid of numbers
 seen_labels = set()
 unique_ims = []
 orig_ims = []
-print(labels)
-for number in range(batch_size):
-    curr_label = labels[number].item()
-    
-    #fig, (ax1, ax2) = plt.subplots(1, 2)
-    #ax1.set_title("Original")
-    #ax2.set_title("Reconstruction")
-    #ax1.imshow(poisson_inputs[:, number].mean(axis=0), cmap='grey')
-    #ax2.imshow(img_spk_outs[:, number].mean(axis=0), cmap='grey')
-    if curr_label not in seen_labels:
-        seen_labels.add(curr_label)
-        print(f'{curr_label} added')
-        unique_ims.append((img_spk_outs[:, number].mean(axis=0), curr_label))
-        orig_ims.append((poisson_inputs[:, number].mean(axis=0), curr_label))
-        fig.savefig(f"Number{curr_label}")
+for i, label in enumerate(all_labs):
+    if label not in seen_labels:
+        seen_labels.add(label)
+        print(f'{label} added')
+        unique_ims.append((all_decs[i], label))
+        orig_ims.append((all_orig_ims[i], label))
 
 unique_ims.sort(key=lambda x: x[1])
 orig_ims.sort(key=lambda x: x[1])
@@ -368,20 +245,38 @@ plt.tight_layout()
 plt.show()
 fig.savefig("result_summary.png")
 
+# img
+input_index = 0
+poisson_inputs = poisson_inputs.squeeze().cpu()
+img_spk_outs = img_spk_outs.squeeze().detach().cpu()
+
+plt.imshow(to_np(inputs[input_index, 0]), cmap = 'grey')
+plt.show()
+
+plt.imshow(poisson_inputs[:, input_index].mean(axis=0), cmap='grey')
+
+# anim
+fig, ax = plt.subplots()
+anim = splt.animator(poisson_inputs[:, input_index], fig, ax)
+HTML(anim.to_html5_video())
+anim.save("spike_mnist.gif")
+plt.show()
+
+wandb.log({"Spike Animation": wandb.Video("spike_mnist.gif", fps=4, format="gif")}, commit = False)
+
+
 # Training Loss
 fig, axs = plt.subplots()
 axs.plot(np.array(train_loss), 'k')
 axs.grid(True)
-#axs.set_xlim(0, 1000)
-axs.set_ylim(0, 40)
 axs.set_ylabel("MSE of Spike Count")
 axs.set_xlabel("Epochs")
-#axs.set_xticks([187, 374, 561, 748, 935], labels = ["1", "2", "3", "4", "5"])
-wandb.log({"Training Loss": fig}, commit = False)
+wandb.log({"Training Loss Plot": wandb.Image(fig)}, commit = False)
 fig.savefig("train_loss.png")
 
 # new data
-plt.imshow(img_spk_outs[:, input_index].mean(axis=0), cmap='grey')
+fig, axs = plt.subplots()
+axs.imshow(img_spk_outs[:, input_index].mean(axis=0), cmap='grey')
 
 fig1, ax1 = plt.subplots()
 animrec = splt.animator(img_spk_outs[:, input_index], fig1, ax1)
@@ -393,37 +288,21 @@ plt.show()
 fig = plt.figure(facecolor="w", figsize=(10, 5))
 ax = fig.add_subplot(111)
 splt.raster(poisson_inputs[:, input_index].reshape(200, -1), ax, s=1.5, c="black")
+fig.savefig("input_raster.png")
 
 fig = plt.figure(facecolor="w", figsize=(10, 5))
 ax = fig.add_subplot(111)
 splt.raster(img_spk_outs[:, input_index].reshape(200, -1), ax, s=1.5, c="black")
 ax.set_xlim([0, 200])
 
+fig.savefig("output_raster.png")
+
 wandb.log({"Loss Plot": wandb.Image("train_loss.png"),
            "Results Grid": wandb.Image("result_summary.png"),
-           "Spike Animation": wandb.Video("spike_mnistrec.gif", fps=4, format="gif")})
+           "t-SNE": wandb.Image("tsne.png"),
+           "Spike Animation": wandb.Video("spike_mnistrec.gif", fps=4, format="gif"),
+           "Input Raster": wandb.Image("input_raster.png"),
+           "Output Raster": wandb.Image("output_raster.png")})
 wandb.finish()
-'''
-# Plot examples from MNIST
-unique_images = []
-seen_labels = set()
 
-for image, label in train_dataset:
-    if label not in seen_labels:
-        unique_images.append((image, label))
-        seen_labels.add(label)
-
-unique_images.sort(key=lambda x: x[1])
-
-fig, axes = plt.subplots(2, 5, figsize=(15, 6))
-
-axes = axes.flatten()
-
-# Loop over each subplot
-for i, ax in enumerate(axes):
-    ax.set_title(f'Number: {unique_images[i][1]}')
-    ax.imshow(unique_images[i][0].reshape(28,28), cmap = 'gray')  # Blank image, you can replace this with your content
-    ax.axis('off')
-
-plt.tight_layout()
-plt.show()'''
+#return network, train_loss, test_loss, final_train_loss, final_test_loss
