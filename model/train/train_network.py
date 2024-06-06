@@ -3,12 +3,18 @@ from ..aux.functions import get_poisson_inputs, process_labels, mse_count_loss
 import torch
 import numpy as np
 import wandb
+from math import floor, ceil
+from datetime import datetime
 
-def train_network(network, train_loader, test_loader, input_specs, label_specs, train_specs, reporting = False):
+def train_network(network, train_loader, test_loader, input_specs, label_specs, train_specs):
+    startTime = datetime.now()
+    print(startTime)
     device = train_specs["device"]
     num_epochs = train_specs["num_epochs"]
     early_stop = train_specs["early_stop"]
-    logging_freq = 10
+    batch_size = train_specs["batch_size"]
+    train_logging_freq = ceil(0.05*len(train_loader))
+    test_logging_freq = ceil(0.05*len(test_loader))
     
     loss_fn = mse_count_loss(lambda_rate=train_specs["lambda_rate"],lambda_weights=None)
     optimizer = torch.optim.Adam(network.parameters(), lr=train_specs["lr"], betas=(0.9, 0.999))
@@ -16,69 +22,58 @@ def train_network(network, train_loader, test_loader, input_specs, label_specs, 
     epoch_training_loss = [];
     epoch_testing_loss = [];
     
-    for epoch in range(1, num_epochs+1):  # loop over the dataset multiple times
-        print("5/5: Training network...")
-        train_running_loss = 0.0
+    for epoch in range(1, num_epochs+1):
+        print("\nTraining!")
+        train_running_loss = 0.0 
         test_running_loss = 0.0
-        for i, (train_inputs, train_labels) in enumerate(train_loader, 1):
+
+        for i, (train_inputs, train_labels) in enumerate(train_loader, 1): #something here takes 30 seconds
+            if i == 1: print(datetime.now() - startTime)     
             if i == early_stop+1:
+                print("Stopped early")
                 break
-                
+   
             train_inputs = get_poisson_inputs(train_inputs, **input_specs).to(device)
-            train_labels = process_labels(train_labels, **label_specs).to(device).type(torch.cuda.FloatTensor)
-            
-            # zero the parameter gradients
+
             optimizer.zero_grad()
 
-            # forward + backward + optimize
-            train_spk_recs, train_spk_outs  = network(train_inputs)
+            train_spk_recs, train_spk_outs  = network(train_inputs) #takes a long time
+
             train_loss = loss_fn(train_spk_recs, train_spk_outs, train_inputs)
-            
-            if reporting:
-                print(f'train_spk_recs: {train_spk_recs.size()}\
-                      \ntrain_spk_outs: {train_spk_outs.size()}\
-                      \ntrain_inputs: {train_inputs.size()}')
-                
+      
             train_loss.backward()
+
             optimizer.step()
 
-            # print statistics
-            train_running_loss += train_loss.item()
-            wandb.log({"Training Loss": train_loss.item()})
-            
-            if i % logging_freq == 0:    # print every 10 mini-batches
-                print(f'[{epoch}/{num_epochs}, {i}/{len(train_loader)}] Training Loss: {train_running_loss/logging_freq}')
-                epoch_training_loss.append(train_running_loss/logging_freq)
+            train_running_loss += train_loss.detach()#.item()
+
+            if i % train_logging_freq == 0:
+                print(f'[{epoch}/{num_epochs}, {i}/{len(train_loader)}] Training Loss: {train_running_loss/train_logging_freq}')
+                epoch_training_loss.append(train_running_loss/train_logging_freq)
+                wandb.log({"Training Loss": epoch_training_loss[-1]})
                 train_running_loss = 0.0
                 
-        print("5/5: Testing network...")
-        features = []
-        all_labs = []
-        all_decs = []
+        print("\nTesting!")
         with torch.no_grad():
-            for j, (test_inputs, test_labels) in enumerate(test_loader, 1):
-                if j == early_stop+1:
+            for j, (test_inputs, test_labels) in enumerate(test_loader):
+                if j == early_stop:
+                    print("Stopped early")
                     break
-                print(f'Testing: {j}/{len(test_loader)}')
+                
                 test_inputs = get_poisson_inputs(test_inputs, **input_specs).to(device)
-                test_labels = process_labels(test_labels, **label_specs).to(device).type(torch.cuda.FloatTensor)
-    
                 test_spk_recs, test_spk_outs  = network(test_inputs)
                 test_loss = loss_fn(test_spk_recs, test_spk_outs, test_inputs)
-                test_running_loss += test_loss.item()
-                wandb.log({"Testing Loss": test_loss.item()})
+                test_running_loss += test_loss.detach()#.item()
                 
-                if j % logging_freq == 0:
-                    epoch_testing_loss.append(test_running_loss/logging_freq)
+                
+                if j % test_logging_freq == 0:
+                    print(f'[{epoch}/{num_epochs}, {j+1}/{len(test_loader)}]')
+                    epoch_testing_loss.append(test_running_loss/test_logging_freq)
+                    wandb.log({"Testing Loss": epoch_testing_loss[-1]})
                     test_running_loss = 0
-                
-                if reporting:
-                    print(f'train_spk_recs: {test_spk_recs.size()}\
-                          \ntrain_spk_outs: {test_spk_outs.size()}\
-                          \ntrain_inputs: {test_inputs.size()}')
-                      
-        #wandb.log({"Training Loss Final": epoch_training_loss[-1], "Testing Loss Final": epoch_testing_loss[-1]})
-        print(f"Testing Loss: {np.mean(epoch_testing_loss)}")
+  
+            print(f"Testing Loss: {epoch_testing_loss[-1]}")
 
-    print('Training and Testing Finished')
-    return network, epoch_training_loss, epoch_testing_loss, train_loss.item(), test_loss.item()
+    print('\nTraining and Testing Finished')
+    return network, epoch_training_loss, epoch_testing_loss, epoch_training_loss[-1].item(), epoch_testing_loss[-1].item()#, \
+        #features, all_labs, all_decs, all_orig_ims

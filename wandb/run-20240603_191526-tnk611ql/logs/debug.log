@@ -1,0 +1,36 @@
+2024-06-03 19:15:26,906 INFO    Thread-24 (_run_job):25448 [wandb_setup.py:_flush():76] Current SDK version is 0.16.6
+2024-06-03 19:15:26,907 INFO    Thread-24 (_run_job):25448 [wandb_setup.py:_flush():76] Configure stats pid to 25448
+2024-06-03 19:15:26,907 INFO    Thread-24 (_run_job):25448 [wandb_setup.py:_flush():76] Loading settings from C:\Users\lukea\.config\wandb\settings
+2024-06-03 19:15:26,907 INFO    Thread-24 (_run_job):25448 [wandb_setup.py:_flush():76] Loading settings from G:\My Drive\MSc\0_Project\MSc_Project\wandb\settings
+2024-06-03 19:15:26,907 INFO    Thread-24 (_run_job):25448 [wandb_setup.py:_flush():76] Loading settings from environment variables: {'project': 'MSc Project', 'entity': 'llalderson', 'root_dir': 'G:\\My Drive\\MSc\\0_Project\\MSc_Project', 'run_id': 'tnk611ql', 'sweep_param_path': 'G:\\My Drive\\MSc\\0_Project\\MSc_Project\\wandb\\sweep-8cd938he\\config-tnk611ql.yaml', 'sweep_id': '8cd938he'}
+2024-06-03 19:15:26,908 INFO    Thread-24 (_run_job):25448 [wandb_setup.py:_flush():76] Applying setup settings: {'_disable_service': False}
+2024-06-03 19:15:26,908 INFO    Thread-24 (_run_job):25448 [wandb_setup.py:_flush():76] Inferring run settings from compute environment: {'program_relpath': 'main.py', 'program_abspath': 'g:\\my drive\\msc\\0_project\\msc_project\\main.py', 'program': 'g:\\my drive\\msc\\0_project\\msc_project\\main.py'}
+2024-06-03 19:15:26,908 INFO    Thread-24 (_run_job):25448 [wandb_setup.py:_flush():76] Applying login settings: {}
+2024-06-03 19:15:26,908 INFO    Thread-24 (_run_job):25448 [wandb_init.py:_log_setup():521] Logging user logs to G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240603_191526-tnk611ql\logs\debug.log
+2024-06-03 19:15:26,909 INFO    Thread-24 (_run_job):25448 [wandb_init.py:_log_setup():522] Logging internal logs to G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240603_191526-tnk611ql\logs\debug-internal.log
+2024-06-03 19:15:26,909 INFO    Thread-24 (_run_job):25448 [wandb_init.py:init():561] calling init triggers
+2024-06-03 19:15:26,909 INFO    Thread-24 (_run_job):25448 [wandb_init.py:init():568] wandb.init called with sweep_config: {'bs': 64, 'epochs': 3, 'lr': 0.0001, 'subset_size': 0.75}
+config: {}
+2024-06-03 19:15:26,909 INFO    Thread-24 (_run_job):25448 [wandb_init.py:init():611] starting backend
+2024-06-03 19:15:26,909 INFO    Thread-24 (_run_job):25448 [wandb_init.py:init():615] setting up manager
+2024-06-03 19:15:26,920 INFO    Thread-24 (_run_job):25448 [backend.py:_multiprocessing_setup():105] multiprocessing start_methods=spawn, using: spawn
+2024-06-03 19:15:26,921 INFO    Thread-24 (_run_job):25448 [wandb_init.py:init():623] backend started and connected
+2024-06-03 19:15:26,945 INFO    Thread-24 (_run_job):25448 [wandb_run.py:_config_callback():1347] config_cb None None {'bs': 64, 'epochs': 3, 'lr': 0.0001, 'subset_size': 0.75}
+2024-06-03 19:15:26,946 INFO    Thread-24 (_run_job):25448 [wandb_init.py:init():715] updated telemetry
+2024-06-03 19:15:27,000 INFO    Thread-24 (_run_job):25448 [wandb_init.py:init():748] communicating run to backend with 90.0 second timeout
+2024-06-03 19:15:27,572 INFO    Thread-24 (_run_job):25448 [wandb_run.py:_on_init():2357] communicating current version
+2024-06-03 19:15:27,960 INFO    Thread-24 (_run_job):25448 [wandb_run.py:_on_init():2366] got version response upgrade_message: "wandb version 0.17.0 is available!  To upgrade, please run:\n $ pip install wandb --upgrade"
+
+2024-06-03 19:15:27,961 INFO    Thread-24 (_run_job):25448 [wandb_init.py:init():799] starting run threads in backend
+2024-06-03 19:15:28,380 INFO    Thread-24 (_run_job):25448 [wandb_run.py:_console_start():2335] atexit reg
+2024-06-03 19:15:28,383 INFO    Thread-24 (_run_job):25448 [wandb_run.py:_redirect():2190] redirect: wrap_raw
+2024-06-03 19:15:28,384 INFO    Thread-24 (_run_job):25448 [wandb_run.py:_redirect():2255] Wrapping output streams.
+2024-06-03 19:15:28,384 INFO    Thread-24 (_run_job):25448 [wandb_run.py:_redirect():2280] Redirects installed.
+2024-06-03 19:15:28,385 INFO    Thread-24 (_run_job):25448 [wandb_init.py:init():842] run started, returning control to user process
+2024-06-03 19:15:28,387 INFO    Thread-24 (_run_job):25448 [wandb_run.py:_finish():2064] finishing run llalderson/MSc Project/tnk611ql
+2024-06-03 19:15:28,387 INFO    Thread-24 (_run_job):25448 [wandb_run.py:_atexit_cleanup():2304] got exitcode: 1
+2024-06-03 19:15:28,387 INFO    Thread-24 (_run_job):25448 [wandb_run.py:_restore():2287] restore
+2024-06-03 19:15:28,387 INFO    Thread-24 (_run_job):25448 [wandb_run.py:_restore():2293] restore done
+2024-06-03 19:15:34,254 INFO    Thread-24 (_run_job):25448 [wandb_run.py:_footer_history_summary_info():3936] rendering history
+2024-06-03 19:15:34,254 INFO    Thread-24 (_run_job):25448 [wandb_run.py:_footer_history_summary_info():3968] rendering summary
+2024-06-03 19:15:34,263 INFO    Thread-24 (_run_job):25448 [wandb_run.py:_footer_sync_info():3895] logging synced files

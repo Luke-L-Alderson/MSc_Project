@@ -1,0 +1,86 @@
+Starting Sweep: Batch Size: 64, Learning Rate: 0.01
+Making datasets and defining subsets
+Training: 60000 -> 6000
+Testing: 10000 -> 1000
+Making Subsets
+Training: 6000
+Testing: 1000
+Making Dataloaders
+Defining network
+2024-06-05 19:55:43.612630
+Training!
+0:00:00.038690
+[1/1, 5/94] Training Loss: 13.035008430480957
+[1/1, 10/94] Training Loss: 1.1042249202728271
+[1/1, 15/94] Training Loss: 1.1128090620040894
+[1/1, 20/94] Training Loss: 1.140462875366211
+[1/1, 25/94] Training Loss: 1.1205461025238037
+[1/1, 30/94] Training Loss: 1.0855623483657837
+[1/1, 35/94] Training Loss: 1.1237767934799194
+[1/1, 40/94] Training Loss: 1.169659972190857
+[1/1, 45/94] Training Loss: 1.062780737876892
+[1/1, 50/94] Training Loss: 1.131588339805603
+[1/1, 55/94] Training Loss: 1.108119010925293
+[1/1, 60/94] Training Loss: 1.146971583366394
+[1/1, 65/94] Training Loss: 1.1073631048202515
+[1/1, 70/94] Training Loss: 1.1231096982955933
+[1/1, 75/94] Training Loss: 1.1050258874893188
+[1/1, 80/94] Training Loss: 1.0573910474777222
+[1/1, 85/94] Training Loss: 1.073409080505371
+[1/1, 90/94] Training Loss: 1.1275500059127808
+Testing!
+[1/1, 1/16]
+[1/1, 2/16]
+[1/1, 3/16]
+[1/1, 4/16]
+[1/1, 5/16]
+[1/1, 6/16]
+[1/1, 7/16]
+[1/1, 8/16]
+[1/1, 9/16]
+[1/1, 10/16]
+[1/1, 11/16]
+[1/1, 12/16]
+[1/1, 13/16]
+[1/1, 14/16]
+[1/1, 15/16]
+[1/1, 16/16]
+Testing Loss: 1.1433815956115723
+Training and Testing Finished
+Assembling test data for t-sne projection
+-- 1/16 --
+-- 2/16 --
+-- 3/16 --
+-- 4/16 --
+-- 5/16 --
+-- 6/16 --
+-- 7/16 --
+-- 8/16 --
+-- 9/16 --
+-- 10/16 --
+-- 11/16 --
+-- 12/16 --
+-- 13/16 --
+-- 14/16 --
+-- 15/16 --
+-- 16/16 --
+[[0.    0.995 0.995 ... 0.    0.    0.   ]
+ [0.    0.995 0.995 ... 0.    0.    0.   ]
+ [0.    0.995 0.995 ... 0.    0.    0.   ]
+ ...
+ [0.    0.995 0.995 ... 0.    0.    0.   ]
+ [0.    0.995 0.995 ... 0.    0.    0.   ]
+ [0.    0.995 0.995 ... 0.    0.    0.   ]]
+Applying t-SNE
+WARNING    C:\Users\lukea\anaconda3\envs\diss\Lib\site-packages\joblib\externals\loky\backend\context.py:110: UserWarning: Could not find the number of physical cores for the following reason:
+found 0 physical cores < 1
+Returning the number of logical cores instead. You can silence this warning by setting LOKY_MAX_CPU_COUNT to the number of cores you want to use.
+  warnings.warn(
+ [py.warnings]
+  File "C:\Users\lukea\anaconda3\envs\diss\Lib\site-packages\joblib\externals\loky\backend\context.py", line 217, in _count_physical_cores
+    raise ValueError(
+Plotting Results Grid
+Plotting Spiking Input MNIST
+Plotting Spiking Input MNIST Animation
+Plotting Spiking Output MNIST
+Plotting Spiking Output MNIST Animation

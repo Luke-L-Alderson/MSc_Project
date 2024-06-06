@@ -1,0 +1,86 @@
+2024-06-04 11:52:24,088 INFO    StreamThr :49468 [internal.py:wandb_internal():86] W&B internal server running at pid: 49468, started at: 2024-06-04 11:52:24.085177
+2024-06-04 11:52:24,092 DEBUG   HandlerThread:49468 [handler.py:handle_request():146] handle_request: status
+2024-06-04 11:52:24,113 INFO    WriterThread:49468 [datastore.py:open_for_write():87] open: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240604_115224-q8o0q3l6\run-q8o0q3l6.wandb
+2024-06-04 11:52:24,117 DEBUG   SenderThread:49468 [sender.py:send():379] send: header
+2024-06-04 11:52:24,180 DEBUG   SenderThread:49468 [sender.py:send():379] send: run
+2024-06-04 11:52:24,842 INFO    SenderThread:49468 [dir_watcher.py:__init__():211] watching files in: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240604_115224-q8o0q3l6\files
+2024-06-04 11:52:24,843 INFO    SenderThread:49468 [sender.py:_start_run_threads():1124] run started: q8o0q3l6 with start time 1717498344.085177
+2024-06-04 11:52:24,868 DEBUG   HandlerThread:49468 [handler.py:handle_request():146] handle_request: check_version
+2024-06-04 11:52:24,868 DEBUG   SenderThread:49468 [sender.py:send_request():406] send_request: check_version
+2024-06-04 11:52:25,364 DEBUG   HandlerThread:49468 [handler.py:handle_request():146] handle_request: run_start
+2024-06-04 11:52:25,405 DEBUG   HandlerThread:49468 [system_info.py:__init__():26] System info init
+2024-06-04 11:52:25,405 DEBUG   HandlerThread:49468 [system_info.py:__init__():41] System info init done
+2024-06-04 11:52:25,406 INFO    HandlerThread:49468 [system_monitor.py:start():194] Starting system monitor
+2024-06-04 11:52:25,406 INFO    SystemMonitor:49468 [system_monitor.py:_start():158] Starting system asset monitoring threads
+2024-06-04 11:52:25,406 INFO    HandlerThread:49468 [system_monitor.py:probe():214] Collecting system info
+2024-06-04 11:52:25,413 INFO    SystemMonitor:49468 [interfaces.py:start():190] Started cpu monitoring
+2024-06-04 11:52:25,415 INFO    SystemMonitor:49468 [interfaces.py:start():190] Started disk monitoring
+2024-06-04 11:52:25,416 INFO    SystemMonitor:49468 [interfaces.py:start():190] Started gpu monitoring
+2024-06-04 11:52:25,416 INFO    SystemMonitor:49468 [interfaces.py:start():190] Started memory monitoring
+2024-06-04 11:52:25,437 INFO    SystemMonitor:49468 [interfaces.py:start():190] Started network monitoring
+2024-06-04 11:52:25,438 DEBUG   HandlerThread:49468 [system_info.py:probe():150] Probing system
+2024-06-04 11:52:25,443 DEBUG   HandlerThread:49468 [system_info.py:_probe_git():135] Probing git
+2024-06-04 11:52:25,550 DEBUG   HandlerThread:49468 [system_info.py:_probe_git():143] Probing git done
+2024-06-04 11:52:25,550 DEBUG   HandlerThread:49468 [system_info.py:probe():198] Probing system done
+2024-06-04 11:52:25,550 DEBUG   HandlerThread:49468 [system_monitor.py:probe():223] {'os': 'Windows-11-10.0.22631-SP0', 'python': '3.12.2', 'heartbeatAt': '2024-06-04T10:52:25.438008', 'startedAt': '2024-06-04T10:52:24.044036', 'docker': None, 'cuda': None, 'args': (), 'state': 'running', 'program': 'g:\\my drive\\msc\\0_project\\msc_project\\main.py', 'codePathLocal': 'main.py', 'codePath': 'main.py', 'git': {'remote': 'https://github.com/Luke-L-Alderson/MSc_Project.git', 'commit': '460d99e6c990922c3918c0945ec4d88c9e7ab310'}, 'email': 'lukelalderson@gmail.com', 'root': 'G:/My Drive/MSc/0_Project/MSc_Project', 'host': 'L-Alderson-Desktop', 'username': 'lukea', 'executable': 'C:\\Users\\lukea\\anaconda3\\envs\\diss\\python.exe', 'cpu_count': 6, 'cpu_count_logical': 12, 'cpu_freq': {'current': 4101.0, 'min': 0.0, 'max': 4101.0}, 'cpu_freq_per_core': [{'current': 4101.0, 'min': 0.0, 'max': 4101.0}], 'disk': {}, 'gpu': 'NVIDIA GeForce RTX 4070', 'gpu_count': 1, 'gpu_devices': [{'name': 'NVIDIA GeForce RTX 4070', 'memory_total': 12878610432}], 'memory': {'total': 15.92232894897461}}
+2024-06-04 11:52:25,551 INFO    HandlerThread:49468 [system_monitor.py:probe():224] Finished collecting system info
+2024-06-04 11:52:25,551 INFO    HandlerThread:49468 [system_monitor.py:probe():227] Publishing system info
+2024-06-04 11:52:25,551 DEBUG   HandlerThread:49468 [system_info.py:_save_conda():207] Saving list of conda packages installed into the current environment
+2024-06-04 11:52:25,558 ERROR   HandlerThread:49468 [system_info.py:_save_conda():221] Error saving conda packages: [WinError 2] The system cannot find the file specified
+Traceback (most recent call last):
+  File "C:\Users\lukea\anaconda3\envs\diss\Lib\site-packages\wandb\sdk\internal\system\system_info.py", line 214, in _save_conda
+    subprocess.call(
+  File "C:\Users\lukea\anaconda3\envs\diss\Lib\subprocess.py", line 389, in call
+    with Popen(*popenargs, **kwargs) as p:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lukea\anaconda3\envs\diss\Lib\subprocess.py", line 1026, in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+  File "C:\Users\lukea\anaconda3\envs\diss\Lib\subprocess.py", line 1538, in _execute_child
+    hp, ht, pid, tid = _winapi.CreateProcess(executable, args,
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [WinError 2] The system cannot find the file specified
+2024-06-04 11:52:25,560 DEBUG   HandlerThread:49468 [system_info.py:_save_conda():222] Saving conda packages done
+2024-06-04 11:52:25,565 INFO    HandlerThread:49468 [system_monitor.py:probe():229] Finished publishing system info
+2024-06-04 11:52:25,572 DEBUG   SenderThread:49468 [sender.py:send():379] send: files
+2024-06-04 11:52:25,572 INFO    SenderThread:49468 [sender.py:_save_file():1390] saving file wandb-metadata.json with policy now
+2024-06-04 11:52:25,846 INFO    Thread-16 :49468 [dir_watcher.py:_on_file_created():271] file/dir created: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240604_115224-q8o0q3l6\files\wandb-metadata.json
+2024-06-04 11:52:25,847 INFO    Thread-16 :49468 [dir_watcher.py:_on_file_created():271] file/dir created: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240604_115224-q8o0q3l6\files\conda-environment.yaml
+2024-06-04 11:52:25,879 DEBUG   HandlerThread:49468 [handler.py:handle_request():146] handle_request: python_packages
+2024-06-04 11:52:25,879 DEBUG   SenderThread:49468 [sender.py:send_request():406] send_request: python_packages
+2024-06-04 11:52:25,880 DEBUG   HandlerThread:49468 [handler.py:handle_request():146] handle_request: stop_status
+2024-06-04 11:52:25,882 DEBUG   HandlerThread:49468 [handler.py:handle_request():146] handle_request: internal_messages
+2024-06-04 11:52:25,885 DEBUG   SenderThread:49468 [sender.py:send_request():406] send_request: stop_status
+2024-06-04 11:52:26,085 DEBUG   SenderThread:49468 [sender.py:send():379] send: telemetry
+2024-06-04 11:52:26,086 DEBUG   SenderThread:49468 [sender.py:send():379] send: telemetry
+2024-06-04 11:52:26,086 DEBUG   SenderThread:49468 [sender.py:send():379] send: run
+2024-06-04 11:52:26,244 INFO    SenderThread:49468 [sender.py:send_run():997] updated run: q8o0q3l6
+2024-06-04 11:52:26,849 INFO    Thread-16 :49468 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240604_115224-q8o0q3l6\files\config.yaml
+2024-06-04 11:52:26,849 INFO    Thread-16 :49468 [dir_watcher.py:_on_file_created():271] file/dir created: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240604_115224-q8o0q3l6\files\requirements.txt
+2024-06-04 11:52:26,850 INFO    Thread-16 :49468 [dir_watcher.py:_on_file_created():271] file/dir created: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240604_115224-q8o0q3l6\files\output.log
+2024-06-04 11:52:26,972 INFO    wandb-upload_0:49468 [upload_job.py:push():131] Uploaded file C:\Users\lukea\AppData\Local\Temp\tmp9w7gs_xtwandb\mu8j29oc-wandb-metadata.json
+2024-06-04 11:52:29,252 DEBUG   HandlerThread:49468 [handler.py:handle_request():146] handle_request: status_report
+2024-06-04 11:52:34,255 DEBUG   HandlerThread:49468 [handler.py:handle_request():146] handle_request: status_report
+2024-06-04 11:52:39,257 DEBUG   HandlerThread:49468 [handler.py:handle_request():146] handle_request: status_report
+2024-06-04 11:52:40,870 DEBUG   HandlerThread:49468 [handler.py:handle_request():146] handle_request: stop_status
+2024-06-04 11:52:40,870 DEBUG   HandlerThread:49468 [handler.py:handle_request():146] handle_request: internal_messages
+2024-06-04 11:52:40,871 DEBUG   SenderThread:49468 [sender.py:send_request():406] send_request: stop_status
+2024-06-04 11:52:45,106 DEBUG   HandlerThread:49468 [handler.py:handle_request():146] handle_request: status_report
+2024-06-04 11:52:50,108 DEBUG   HandlerThread:49468 [handler.py:handle_request():146] handle_request: status_report
+2024-06-04 11:52:55,114 DEBUG   HandlerThread:49468 [handler.py:handle_request():146] handle_request: status_report
+2024-06-04 11:52:55,875 DEBUG   HandlerThread:49468 [handler.py:handle_request():146] handle_request: internal_messages
+2024-06-04 11:52:55,877 DEBUG   HandlerThread:49468 [handler.py:handle_request():146] handle_request: stop_status
+2024-06-04 11:52:55,877 DEBUG   SenderThread:49468 [sender.py:send_request():406] send_request: stop_status
+2024-06-04 11:52:55,963 INFO    Thread-16 :49468 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240604_115224-q8o0q3l6\files\config.yaml
+2024-06-04 11:53:01,071 DEBUG   HandlerThread:49468 [handler.py:handle_request():146] handle_request: status_report
+2024-06-04 11:53:06,075 DEBUG   HandlerThread:49468 [handler.py:handle_request():146] handle_request: status_report
+2024-06-04 11:53:10,869 DEBUG   HandlerThread:49468 [handler.py:handle_request():146] handle_request: stop_status
+2024-06-04 11:53:10,870 DEBUG   SenderThread:49468 [sender.py:send_request():406] send_request: stop_status
+2024-06-04 11:53:10,877 DEBUG   HandlerThread:49468 [handler.py:handle_request():146] handle_request: internal_messages
+2024-06-04 11:53:12,036 DEBUG   HandlerThread:49468 [handler.py:handle_request():146] handle_request: status_report
+2024-06-04 11:53:17,038 DEBUG   HandlerThread:49468 [handler.py:handle_request():146] handle_request: status_report
+2024-06-04 11:53:19,132 DEBUG   HandlerThread:49468 [handler.py:handle_request():146] handle_request: partial_history
+2024-06-04 11:53:19,133 DEBUG   SenderThread:49468 [sender.py:send():379] send: history
+2024-06-04 11:53:19,133 DEBUG   SenderThread:49468 [sender.py:send_request():406] send_request: summary_record
+2024-06-04 11:53:19,139 INFO    SenderThread:49468 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-06-04 11:53:20,055 INFO    Thread-16 :49468 [dir_watcher.py:_on_file_created():271] file/dir created: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240604_115224-q8o0q3l6\files\wandb-summary.json
+2024-06-04 11:53:22,142 DEBUG   HandlerThread:49468 [handler.py:handle_request():146] handle_request: status_report

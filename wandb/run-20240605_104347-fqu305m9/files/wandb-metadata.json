@@ -1,0 +1,48 @@
+{
+    "os": "Windows-11-10.0.22631-SP0",
+    "python": "3.12.2",
+    "heartbeatAt": "2024-06-05T09:43:48.837849",
+    "startedAt": "2024-06-05T09:43:47.529000",
+    "docker": null,
+    "cuda": null,
+    "args": [],
+    "state": "running",
+    "program": "g:\\my drive\\msc\\0_project\\msc_project\\main.py",
+    "codePathLocal": "main.py",
+    "codePath": "main.py",
+    "git": {
+        "remote": "https://github.com/Luke-L-Alderson/MSc_Project.git",
+        "commit": "460d99e6c990922c3918c0945ec4d88c9e7ab310"
+    },
+    "email": "lukelalderson@gmail.com",
+    "root": "G:/My Drive/MSc/0_Project/MSc_Project",
+    "host": "L-Alderson-Desktop",
+    "username": "lukea",
+    "executable": "C:\\Users\\lukea\\anaconda3\\envs\\diss\\python.exe",
+    "cpu_count": 6,
+    "cpu_count_logical": 12,
+    "cpu_freq": {
+        "current": 4101.0,
+        "min": 0.0,
+        "max": 4101.0
+    },
+    "cpu_freq_per_core": [
+        {
+            "current": 4101.0,
+            "min": 0.0,
+            "max": 4101.0
+        }
+    ],
+    "disk": {},
+    "gpu": "NVIDIA GeForce RTX 4070",
+    "gpu_count": 1,
+    "gpu_devices": [
+        {
+            "name": "NVIDIA GeForce RTX 4070",
+            "memory_total": 12878610432
+        }
+    ],
+    "memory": {
+        "total": 15.92232894897461
+    }
+}

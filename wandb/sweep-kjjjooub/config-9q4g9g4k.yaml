@@ -1,0 +1,10 @@
+wandb_version: 1
+
+bs:
+  value: 32
+epochs:
+  value: 6
+lr:
+  value: 0.001
+subset_size:
+  value: 1

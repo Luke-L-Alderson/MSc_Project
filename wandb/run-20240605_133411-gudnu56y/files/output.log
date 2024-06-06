@@ -1,0 +1,8 @@
+Starting Sweep: Batch Size: 64, Learning Rate: 0.0001
+Making datasets and defining subsets
+Training: 60000 -> 60000
+Testing: 10000 -> 10000
+Making Dataloaders
+Defining network
+2024-06-05 13:34:14.457652
+Training!

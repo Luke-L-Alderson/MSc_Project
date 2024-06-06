@@ -1,0 +1,118 @@
+Starting Sweep: Batch Size: 64, Learning Rate: 0.001
+Making Subsets (Training: 60000, Testing: 10000)...
+Making Subsets (Training: 6000, Testing: 1000)...
+Making Dataloaders...
+Defining network...
+5/5: Training network...
+[1/3, 10/94] Training Loss: 3.7583914697170258
+[1/3, 20/94] Training Loss: 1.0703244864940644
+[1/3, 30/94] Training Loss: 1.041113293170929
+[1/3, 40/94] Training Loss: 1.0799060463905334
+[1/3, 50/94] Training Loss: 1.028410053253174
+[1/3, 60/94] Training Loss: 1.0540526151657104
+[1/3, 70/94] Training Loss: 1.0367909133434297
+[1/3, 80/94] Training Loss: 1.0093518674373627
+[1/3, 90/94] Training Loss: 1.022724974155426
+5/5: Testing network...
+Testing: 1/16
+Testing: 2/16
+Testing: 3/16
+Testing: 4/16
+Testing: 5/16
+Testing: 6/16
+Testing: 7/16
+Testing: 8/16
+Testing: 9/16
+Testing: 10/16
+Testing: 11/16
+Testing: 12/16
+Testing: 13/16
+Testing: 14/16
+Testing: 15/16
+Testing: 16/16
+Testing Loss: 1.0484335757791996
+5/5: Training network...
+[2/3, 10/94] Training Loss: 1.0584794998168945
+[2/3, 20/94] Training Loss: 1.007174986600876
+[2/3, 30/94] Training Loss: 1.0290620744228363
+[2/3, 40/94] Training Loss: 1.0312171876430511
+[2/3, 50/94] Training Loss: 1.0549427449703217
+[2/3, 60/94] Training Loss: 1.0456041932106017
+[2/3, 70/94] Training Loss: 1.049937468767166
+[2/3, 80/94] Training Loss: 1.0263996183872224
+[2/3, 90/94] Training Loss: 1.0371184825897217
+5/5: Testing network...
+Testing: 1/16
+Testing: 2/16
+Testing: 3/16
+Testing: 4/16
+Testing: 5/16
+Testing: 6/16
+Testing: 7/16
+Testing: 8/16
+Testing: 9/16
+Testing: 10/16
+Testing: 11/16
+Testing: 12/16
+Testing: 13/16
+Testing: 14/16
+Testing: 15/16
+Testing: 16/16
+Testing Loss: 1.0510596670210361
+5/5: Training network...
+[3/3, 10/94] Training Loss: 1.0405271112918855
+[3/3, 20/94] Training Loss: 0.9946765303611755
+[3/3, 30/94] Training Loss: 1.0235529720783234
+[3/3, 40/94] Training Loss: 1.0494200050830842
+[3/3, 50/94] Training Loss: 1.004029494524002
+[3/3, 60/94] Training Loss: 1.024353063106537
+[3/3, 70/94] Training Loss: 1.0207418859004975
+[3/3, 80/94] Training Loss: 1.0609408557415008
+[3/3, 90/94] Training Loss: 1.0405949234962464
+5/5: Testing network...
+Testing: 1/16
+Testing: 2/16
+Testing: 3/16
+Testing: 4/16
+Testing: 5/16
+Testing: 6/16
+Testing: 7/16
+Testing: 8/16
+Testing: 9/16
+Testing: 10/16
+Testing: 11/16
+Testing: 12/16
+Testing: 13/16
+Testing: 14/16
+Testing: 15/16
+Testing: 16/16
+Testing Loss: 1.0551443671186764
+Training and Testing Finished
+Assembling test data for t-sne projection
+Batch: 1/16
+Batch: 2/16
+Batch: 3/16
+Batch: 4/16
+Batch: 5/16
+Batch: 6/16
+Batch: 7/16
+Batch: 8/16
+Batch: 9/16
+Batch: 10/16
+Batch: 11/16
+Batch: 12/16
+Batch: 13/16
+Batch: 14/16
+Batch: 15/16
+Batch: 16/16
+Applying t-SNE
+3 added
+6 added
+0 added
+9 added
+2 added
+1 added
+7 added
+8 added
+5 added
+4 added

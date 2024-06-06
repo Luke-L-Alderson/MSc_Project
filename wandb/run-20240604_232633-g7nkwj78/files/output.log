@@ -1,0 +1,65 @@
+Starting Sweep: Batch Size: 64, Learning Rate: 0.0001
+Making datasets and defining subsets
+Training: 60000 -> 3000
+Testing: 10000 -> 500
+Making Subsets
+Training: 3000
+Testing: 500
+Making Dataloaders
+Defining network
+Training!
+[1/1, 3/47] Training Loss: 14.296824137369791
+[1/1, 6/47] Training Loss: 11.386521021525065
+[1/1, 9/47] Training Loss: 10.620681762695312
+[1/1, 12/47] Training Loss: 8.315207958221436
+[1/1, 15/47] Training Loss: 6.374182224273682
+[1/1, 18/47] Training Loss: 5.168557802836101
+[1/1, 21/47] Training Loss: 3.8668243885040283
+[1/1, 24/47] Training Loss: 3.2671967347462973
+[1/1, 27/47] Training Loss: 2.8376657168070474
+[1/1, 30/47] Training Loss: 2.6354673703511557
+[1/1, 33/47] Training Loss: 2.320357322692871
+[1/1, 36/47] Training Loss: 2.075686772664388
+[1/1, 39/47] Training Loss: 1.7633765538533528
+[1/1, 42/47] Training Loss: 1.607383926709493
+[1/1, 45/47] Training Loss: 1.450947364171346
+Testing!
+[1/1, 1/8]
+[1/1, 2/8]
+[1/1, 3/8]
+[1/1, 4/8]
+[1/1, 5/8]
+[1/1, 6/8]
+[1/1, 7/8]
+[1/1, 8/8]
+Testing Loss: 1.4044955968856812
+Training and Testing Finished
+Assembling test data for t-sne projection
+Batch: 1/8
+Batch: 2/8
+Batch: 3/8
+Batch: 4/8
+Batch: 5/8
+Batch: 6/8
+Batch: 7/8
+Batch: 8/8
+Features: (500, 100)
+All Labels: (500,)
+All Original Images: (500, 28, 28)
+All Reconstructed Images: (500, 28, 28)
+Applying t-SNE
+Plotting Results Grid
+2 added
+8 added
+9 added
+6 added
+4 added
+3 added
+7 added
+1 added
+0 added
+5 added
+Plotting Spiking Input MNIST
+Plotting Spiking Input MNIST Animation
+Plotting Spiking Output MNIST
+Plotting Spiking Output MNIST Animation

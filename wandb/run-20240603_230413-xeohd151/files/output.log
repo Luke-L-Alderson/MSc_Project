@@ -1,0 +1,93 @@
+Starting Sweep: Batch Size: 64, Learning Rate: 0.0001
+Making Subsets (Training: 60000, Testing: 10000)...
+Making Subsets (Training: 3000, Testing: 500)...
+Making Dataloaders...
+Defining network...
+5/5: Training network...
+[1/3, 5/47] Training Loss: 12.181532096862792
+[1/3, 10/47] Training Loss: 5.267694664001465
+[1/3, 15/47] Training Loss: 2.7356116771698
+[1/3, 20/47] Training Loss: 1.7871132850646974
+[1/3, 25/47] Training Loss: 1.3558057069778442
+[1/3, 30/47] Training Loss: 1.1840093612670899
+[1/3, 35/47] Training Loss: 1.089344072341919
+[1/3, 40/47] Training Loss: 1.0404287576675415
+[1/3, 45/47] Training Loss: 1.0469285726547242
+5/5: Testing network...
+Testing: 1/8
+Testing: 2/8
+Testing: 3/8
+Testing: 4/8
+Testing: 5/8
+Testing: 6/8
+Testing: 7/8
+Testing: 8/8
+Testing Loss: 1.0352090448141098
+5/5: Training network...
+[2/3, 5/47] Training Loss: 0.9922970056533813
+[2/3, 10/47] Training Loss: 1.0009927868843078
+[2/3, 15/47] Training Loss: 1.0061157464981079
+[2/3, 20/47] Training Loss: 0.9874913215637207
+[2/3, 25/47] Training Loss: 1.0050060749053955
+[2/3, 30/47] Training Loss: 0.9909643650054931
+[2/3, 35/47] Training Loss: 1.0118438482284546
+[2/3, 40/47] Training Loss: 0.9882470726966858
+[2/3, 45/47] Training Loss: 0.993211829662323
+5/5: Testing network...
+Testing: 1/8
+Testing: 2/8
+Testing: 3/8
+Testing: 4/8
+Testing: 5/8
+Testing: 6/8
+Testing: 7/8
+Testing: 8/8
+Testing Loss: 1.0144911669194698
+5/5: Training network...
+[3/3, 5/47] Training Loss: 0.9696011424064637
+[3/3, 10/47] Training Loss: 0.9595901489257812
+[3/3, 15/47] Training Loss: 0.9956658363342286
+[3/3, 20/47] Training Loss: 0.9144877552986145
+[3/3, 25/47] Training Loss: 0.9615241050720215
+[3/3, 30/47] Training Loss: 0.9499431610107422
+[3/3, 35/47] Training Loss: 0.9582565784454345
+[3/3, 40/47] Training Loss: 0.9615776419639588
+[3/3, 45/47] Training Loss: 0.9409921526908874
+5/5: Testing network...
+Testing: 1/8
+Testing: 2/8
+Testing: 3/8
+Testing: 4/8
+Testing: 5/8
+Testing: 6/8
+Testing: 7/8
+Testing: 8/8
+Testing Loss: 1.008964570860068
+Training and Testing Finished
+Assembling test data for t-sne projection
+Batch: 1/8
+Batch: 2/8
+Batch: 3/8
+Batch: 4/8
+Batch: 5/8
+Batch: 6/8
+Batch: 7/8
+Batch: 8/8
+Applying t-SNE
+WARNING    C:\Users\lukea\anaconda3\envs\diss\Lib\site-packages\joblib\externals\loky\backend\context.py:110: UserWarning: Could not find the number of physical cores for the following reason:
+found 0 physical cores < 1
+Returning the number of logical cores instead. You can silence this warning by setting LOKY_MAX_CPU_COUNT to the number of cores you want to use.
+  warnings.warn(
+ [py.warnings]
+  File "C:\Users\lukea\anaconda3\envs\diss\Lib\site-packages\joblib\externals\loky\backend\context.py", line 217, in _count_physical_cores
+    raise ValueError(
+1 added
+8 added
+7 added
+0 added
+4 added
+3 added
+9 added
+6 added
+5 added
+2 added

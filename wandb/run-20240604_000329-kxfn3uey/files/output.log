@@ -1,0 +1,370 @@
+Starting Sweep: Batch Size: 64, Learning Rate: 0.0001
+Making Subsets (Training: 60000, Testing: 10000)...
+Making Subsets (Training: 30000, Testing: 5000)...
+Making Dataloaders...
+Defining network...
+5/5: Training network...
+[1/3, 47/469] Training Loss: 3.0247905533364476
+[1/3, 94/469] Training Loss: 0.9818196512283163
+[1/3, 141/469] Training Loss: 0.9447589224957406
+[1/3, 188/469] Training Loss: 0.9199693126881376
+[1/3, 235/469] Training Loss: 0.9188249187266573
+[1/3, 282/469] Training Loss: 0.8860592284101121
+[1/3, 329/469] Training Loss: 0.8950719072463664
+[1/3, 376/469] Training Loss: 0.8681501175494905
+[1/3, 423/469] Training Loss: 0.8537058437124212
+5/5: Testing network...
+Testing: 1/79
+Testing: 2/79
+Testing: 3/79
+Testing: 4/79
+Testing: 5/79
+Testing: 6/79
+Testing: 7/79
+Testing: 8/79
+Testing: 9/79
+Testing: 10/79
+Testing: 11/79
+Testing: 12/79
+Testing: 13/79
+Testing: 14/79
+Testing: 15/79
+Testing: 16/79
+Testing: 17/79
+Testing: 18/79
+Testing: 19/79
+Testing: 20/79
+Testing: 21/79
+Testing: 22/79
+Testing: 23/79
+Testing: 24/79
+Testing: 25/79
+Testing: 26/79
+Testing: 27/79
+Testing: 28/79
+Testing: 29/79
+Testing: 30/79
+Testing: 31/79
+Testing: 32/79
+Testing: 33/79
+Testing: 34/79
+Testing: 35/79
+Testing: 36/79
+Testing: 37/79
+Testing: 38/79
+Testing: 39/79
+Testing: 40/79
+Testing: 41/79
+Testing: 42/79
+Testing: 43/79
+Testing: 44/79
+Testing: 45/79
+Testing: 46/79
+Testing: 47/79
+Testing: 48/79
+Testing: 49/79
+Testing: 50/79
+Testing: 51/79
+Testing: 52/79
+Testing: 53/79
+Testing: 54/79
+Testing: 55/79
+Testing: 56/79
+Testing: 57/79
+Testing: 58/79
+Testing: 59/79
+Testing: 60/79
+Testing: 61/79
+Testing: 62/79
+Testing: 63/79
+Testing: 64/79
+Testing: 65/79
+Testing: 66/79
+Testing: 67/79
+Testing: 68/79
+Testing: 69/79
+Testing: 70/79
+Testing: 71/79
+Testing: 72/79
+Testing: 73/79
+Testing: 74/79
+Testing: 75/79
+Testing: 76/79
+Testing: 77/79
+Testing: 78/79
+Testing: 79/79
+Testing Loss: 0.8318434548046854
+5/5: Training network...
+[2/3, 47/469] Training Loss: 0.813096248088999
+[2/3, 94/469] Training Loss: 0.8142909889525556
+[2/3, 141/469] Training Loss: 0.7910096937037528
+[2/3, 188/469] Training Loss: 0.7788767839999909
+[2/3, 235/469] Training Loss: 0.7537574653929853
+[2/3, 282/469] Training Loss: 0.7222565184248254
+[2/3, 329/469] Training Loss: 0.6976950193973298
+[2/3, 376/469] Training Loss: 0.670979639317127
+[2/3, 423/469] Training Loss: 0.6499669057257632
+5/5: Testing network...
+Testing: 1/79
+Testing: 2/79
+Testing: 3/79
+Testing: 4/79
+Testing: 5/79
+Testing: 6/79
+Testing: 7/79
+Testing: 8/79
+Testing: 9/79
+Testing: 10/79
+Testing: 11/79
+Testing: 12/79
+Testing: 13/79
+Testing: 14/79
+Testing: 15/79
+Testing: 16/79
+Testing: 17/79
+Testing: 18/79
+Testing: 19/79
+Testing: 20/79
+Testing: 21/79
+Testing: 22/79
+Testing: 23/79
+Testing: 24/79
+Testing: 25/79
+Testing: 26/79
+Testing: 27/79
+Testing: 28/79
+Testing: 29/79
+Testing: 30/79
+Testing: 31/79
+Testing: 32/79
+Testing: 33/79
+Testing: 34/79
+Testing: 35/79
+Testing: 36/79
+Testing: 37/79
+Testing: 38/79
+Testing: 39/79
+Testing: 40/79
+Testing: 41/79
+Testing: 42/79
+Testing: 43/79
+Testing: 44/79
+Testing: 45/79
+Testing: 46/79
+Testing: 47/79
+Testing: 48/79
+Testing: 49/79
+Testing: 50/79
+Testing: 51/79
+Testing: 52/79
+Testing: 53/79
+Testing: 54/79
+Testing: 55/79
+Testing: 56/79
+Testing: 57/79
+Testing: 58/79
+Testing: 59/79
+Testing: 60/79
+Testing: 61/79
+Testing: 62/79
+Testing: 63/79
+Testing: 64/79
+Testing: 65/79
+Testing: 66/79
+Testing: 67/79
+Testing: 68/79
+Testing: 69/79
+Testing: 70/79
+Testing: 71/79
+Testing: 72/79
+Testing: 73/79
+Testing: 74/79
+Testing: 75/79
+Testing: 76/79
+Testing: 77/79
+Testing: 78/79
+Testing: 79/79
+Testing Loss: 0.7278048474755552
+5/5: Training network...
+[3/3, 47/469] Training Loss: 0.6199904413933449
+[3/3, 94/469] Training Loss: 0.6070014276403062
+[3/3, 141/469] Training Loss: 0.5860337164807827
+[3/3, 188/469] Training Loss: 0.5769029170908826
+[3/3, 235/469] Training Loss: 0.5541862141578755
+[3/3, 282/469] Training Loss: 0.5442928342109031
+[3/3, 329/469] Training Loss: 0.5315039823663995
+[3/3, 376/469] Training Loss: 0.5069615111706105
+[3/3, 423/469] Training Loss: 0.491781085729599
+5/5: Testing network...
+Testing: 1/79
+Testing: 2/79
+Testing: 3/79
+Testing: 4/79
+Testing: 5/79
+Testing: 6/79
+Testing: 7/79
+Testing: 8/79
+Testing: 9/79
+Testing: 10/79
+Testing: 11/79
+Testing: 12/79
+Testing: 13/79
+Testing: 14/79
+Testing: 15/79
+Testing: 16/79
+Testing: 17/79
+Testing: 18/79
+Testing: 19/79
+Testing: 20/79
+Testing: 21/79
+Testing: 22/79
+Testing: 23/79
+Testing: 24/79
+Testing: 25/79
+Testing: 26/79
+Testing: 27/79
+Testing: 28/79
+Testing: 29/79
+Testing: 30/79
+Testing: 31/79
+Testing: 32/79
+Testing: 33/79
+Testing: 34/79
+Testing: 35/79
+Testing: 36/79
+Testing: 37/79
+Testing: 38/79
+Testing: 39/79
+Testing: 40/79
+Testing: 41/79
+Testing: 42/79
+Testing: 43/79
+Testing: 44/79
+Testing: 45/79
+Testing: 46/79
+Testing: 47/79
+Testing: 48/79
+Testing: 49/79
+Testing: 50/79
+Testing: 51/79
+Testing: 52/79
+Testing: 53/79
+Testing: 54/79
+Testing: 55/79
+Testing: 56/79
+Testing: 57/79
+Testing: 58/79
+Testing: 59/79
+Testing: 60/79
+Testing: 61/79
+Testing: 62/79
+Testing: 63/79
+Testing: 64/79
+Testing: 65/79
+Testing: 66/79
+Testing: 67/79
+Testing: 68/79
+Testing: 69/79
+Testing: 70/79
+Testing: 71/79
+Testing: 72/79
+Testing: 73/79
+Testing: 74/79
+Testing: 75/79
+Testing: 76/79
+Testing: 77/79
+Testing: 78/79
+Testing: 79/79
+Testing Loss: 0.6437700404613106
+Training and Testing Finished
+Assembling test data for t-sne projection
+Batch: 1/79
+Batch: 2/79
+Batch: 3/79
+Batch: 4/79
+Batch: 5/79
+Batch: 6/79
+Batch: 7/79
+Batch: 8/79
+Batch: 9/79
+Batch: 10/79
+Batch: 11/79
+Batch: 12/79
+Batch: 13/79
+Batch: 14/79
+Batch: 15/79
+Batch: 16/79
+Batch: 17/79
+Batch: 18/79
+Batch: 19/79
+Batch: 20/79
+Batch: 21/79
+Batch: 22/79
+Batch: 23/79
+Batch: 24/79
+Batch: 25/79
+Batch: 26/79
+Batch: 27/79
+Batch: 28/79
+Batch: 29/79
+Batch: 30/79
+Batch: 31/79
+Batch: 32/79
+Batch: 33/79
+Batch: 34/79
+Batch: 35/79
+Batch: 36/79
+Batch: 37/79
+Batch: 38/79
+Batch: 39/79
+Batch: 40/79
+Batch: 41/79
+Batch: 42/79
+Batch: 43/79
+Batch: 44/79
+Batch: 45/79
+Batch: 46/79
+Batch: 47/79
+Batch: 48/79
+Batch: 49/79
+Batch: 50/79
+Batch: 51/79
+Batch: 52/79
+Batch: 53/79
+Batch: 54/79
+Batch: 55/79
+Batch: 56/79
+Batch: 57/79
+Batch: 58/79
+Batch: 59/79
+Batch: 60/79
+Batch: 61/79
+Batch: 62/79
+Batch: 63/79
+Batch: 64/79
+Batch: 65/79
+Batch: 66/79
+Batch: 67/79
+Batch: 68/79
+Batch: 69/79
+Batch: 70/79
+Batch: 71/79
+Batch: 72/79
+Batch: 73/79
+Batch: 74/79
+Batch: 75/79
+Batch: 76/79
+Batch: 77/79
+Batch: 78/79
+Batch: 79/79
+Applying t-SNE
+2 added
+3 added
+1 added
+6 added
+4 added
+0 added
+7 added
+9 added
+5 added
+8 added

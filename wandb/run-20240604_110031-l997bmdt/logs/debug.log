@@ -1,0 +1,29 @@
+2024-06-04 11:00:31,960 INFO    Thread-24 (_run_job):2620 [wandb_setup.py:_flush():76] Current SDK version is 0.16.6
+2024-06-04 11:00:31,961 INFO    Thread-24 (_run_job):2620 [wandb_setup.py:_flush():76] Configure stats pid to 2620
+2024-06-04 11:00:31,961 INFO    Thread-24 (_run_job):2620 [wandb_setup.py:_flush():76] Loading settings from C:\Users\lukea\.config\wandb\settings
+2024-06-04 11:00:31,962 INFO    Thread-24 (_run_job):2620 [wandb_setup.py:_flush():76] Loading settings from G:\My Drive\MSc\0_Project\MSc_Project\wandb\settings
+2024-06-04 11:00:31,962 INFO    Thread-24 (_run_job):2620 [wandb_setup.py:_flush():76] Loading settings from environment variables: {'project': 'MSc Project', 'entity': 'llalderson', 'root_dir': 'G:\\My Drive\\MSc\\0_Project\\MSc_Project', 'run_id': 'l997bmdt', 'sweep_param_path': 'G:\\My Drive\\MSc\\0_Project\\MSc_Project\\wandb\\sweep-tisfkedp\\config-l997bmdt.yaml', 'sweep_id': 'tisfkedp'}
+2024-06-04 11:00:31,962 INFO    Thread-24 (_run_job):2620 [wandb_setup.py:_flush():76] Applying setup settings: {'_disable_service': False}
+2024-06-04 11:00:31,962 INFO    Thread-24 (_run_job):2620 [wandb_setup.py:_flush():76] Inferring run settings from compute environment: {'program_relpath': 'main.py', 'program_abspath': 'g:\\my drive\\msc\\0_project\\msc_project\\main.py', 'program': 'g:\\my drive\\msc\\0_project\\msc_project\\main.py'}
+2024-06-04 11:00:31,962 INFO    Thread-24 (_run_job):2620 [wandb_setup.py:_flush():76] Applying login settings: {}
+2024-06-04 11:00:31,963 INFO    Thread-24 (_run_job):2620 [wandb_init.py:_log_setup():521] Logging user logs to G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240604_110031-l997bmdt\logs\debug.log
+2024-06-04 11:00:31,964 INFO    Thread-24 (_run_job):2620 [wandb_init.py:_log_setup():522] Logging internal logs to G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240604_110031-l997bmdt\logs\debug-internal.log
+2024-06-04 11:00:31,964 INFO    Thread-24 (_run_job):2620 [wandb_init.py:init():561] calling init triggers
+2024-06-04 11:00:31,964 INFO    Thread-24 (_run_job):2620 [wandb_init.py:init():568] wandb.init called with sweep_config: {'bs': 64, 'epochs': 3, 'lr': 0.0001, 'subset_size': 0.1}
+config: {}
+2024-06-04 11:00:31,964 INFO    Thread-24 (_run_job):2620 [wandb_init.py:init():611] starting backend
+2024-06-04 11:00:31,964 INFO    Thread-24 (_run_job):2620 [wandb_init.py:init():615] setting up manager
+2024-06-04 11:00:31,978 INFO    Thread-24 (_run_job):2620 [backend.py:_multiprocessing_setup():105] multiprocessing start_methods=spawn, using: spawn
+2024-06-04 11:00:31,979 INFO    Thread-24 (_run_job):2620 [wandb_init.py:init():623] backend started and connected
+2024-06-04 11:00:32,002 INFO    Thread-24 (_run_job):2620 [wandb_run.py:_config_callback():1347] config_cb None None {'bs': 64, 'epochs': 3, 'lr': 0.0001, 'subset_size': 0.1}
+2024-06-04 11:00:32,004 INFO    Thread-24 (_run_job):2620 [wandb_init.py:init():715] updated telemetry
+2024-06-04 11:00:32,091 INFO    Thread-24 (_run_job):2620 [wandb_init.py:init():748] communicating run to backend with 90.0 second timeout
+2024-06-04 11:00:32,819 INFO    Thread-24 (_run_job):2620 [wandb_run.py:_on_init():2357] communicating current version
+2024-06-04 11:00:33,272 INFO    Thread-24 (_run_job):2620 [wandb_run.py:_on_init():2366] got version response upgrade_message: "wandb version 0.17.0 is available!  To upgrade, please run:\n $ pip install wandb --upgrade"
+
+2024-06-04 11:00:33,272 INFO    Thread-24 (_run_job):2620 [wandb_init.py:init():799] starting run threads in backend
+2024-06-04 11:00:33,821 INFO    Thread-24 (_run_job):2620 [wandb_run.py:_console_start():2335] atexit reg
+2024-06-04 11:00:33,822 INFO    Thread-24 (_run_job):2620 [wandb_run.py:_redirect():2190] redirect: wrap_raw
+2024-06-04 11:00:33,822 INFO    Thread-24 (_run_job):2620 [wandb_run.py:_redirect():2255] Wrapping output streams.
+2024-06-04 11:00:33,823 INFO    Thread-24 (_run_job):2620 [wandb_run.py:_redirect():2280] Redirects installed.
+2024-06-04 11:00:33,824 INFO    Thread-24 (_run_job):2620 [wandb_init.py:init():842] run started, returning control to user process

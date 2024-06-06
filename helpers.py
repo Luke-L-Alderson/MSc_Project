@@ -1,11 +1,10 @@
 import sys
 sys.path.append('snn-project')
-import os, shutil
-import random as rand
+import random
 import numpy as np
 import wandb
 from sklearn.manifold import TSNE
-
+import os
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
@@ -35,38 +34,47 @@ from testing.exam import get_exam_per_constant
 from model.train.trainMNIST import train
 from model.train.trainMNIST import test
 
-__all__ = ["build_datasets", "build_network", "to_np", "plot_input", "curr_to_pA", "transfer", "get_fr", "print_network_architecure", "set_seed"]
+__all__ = ["build_datasets", "build_network", "to_np", "plot_input", \
+           "curr_to_pA", "transfer", "get_fr", "print_network_architecure", \
+           "set_seed"]
 
-def build_datasets(batch_size):
-        #%% WRAP THIS IN A FUNCTION
+def build_datasets(batch_size, subset_size, num_workers=0): # add subsampling parameeter
         """## Make or access existing datasets"""
-        # create training/ and testing/ folders in the chosen path
-        if not os.path.isdir('figures/training'):
-            os.makedirs('figures/training')
         
-        if not os.path.isdir('figures/testing'):
-            os.makedirs('figures/testing')
-        
-#        data_path='/tmp/data/mnist'
-        
+        if subset_size > 1 or subset_size < 0:
+            raise Exception("Subset must be a floating number between 0 and 1.")
+               
         transform = transforms.Compose([
                     transforms.Grayscale(),
                     transforms.ToTensor(),
                     transforms.Normalize((0,), (1,))])
         
+        
         # create dataset in /content
-        print("Making Datasets...")
+        print("\nMaking datasets and defining subsets")
         train_dataset = datasets.MNIST(root='dataset/', train=True, transform=transform, download=True)
         test_dataset = datasets.MNIST(root='dataset/', train=False, transform=transform, download=True)
         
-        print("Making Dataloaders...")
-        train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
-        test_loader = DataLoader(test_dataset, batch_size=batch_size, shuffle=True)
-        
+
+        train_subset_size = round(subset_size*len(train_dataset))
+        test_subset_size = round(subset_size*len(test_dataset))
+        print(f"Training: {len(train_dataset)} -> {train_subset_size}\nTesting: {len(test_dataset)} -> {test_subset_size}")
+       
+        if subset_size != 1:     
+            print("\nMaking Subsets")
+            subset_train_indices = torch.randperm(len(train_dataset))[:train_subset_size]
+            subset_test_indices = torch.randperm(len(test_dataset))[:test_subset_size]
+            train_dataset = Subset(train_dataset, subset_train_indices)
+            test_dataset = Subset(test_dataset, subset_test_indices)
+            print(f"Training: {len(train_dataset)}\nTesting: {len(test_dataset)}")
+        print("\nMaking Dataloaders")
+        train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True, pin_memory=True, num_workers=num_workers)
+        test_loader = DataLoader(test_dataset, batch_size=batch_size, shuffle=True, pin_memory=True, num_workers=num_workers)
+    
         return train_dataset, train_loader, test_dataset, test_loader
     
-def build_network(device):
-    print("Defining network...")
+def build_network(device, noise = 0):
+    print("Defining network")
     time_params, network_params, oscillation_params, frame_params, \
     convolution_params, input_specs, label_specs, train_specs = {}, {}, {}, {}, {}, {}, {}, {}
     # Parameters for use in network definition
@@ -77,7 +85,7 @@ def build_network(device):
     network_params["tau_syn"] = 10*ms   # not currently used
     network_params["R_m"] = 146*Mohm    # not currently used
     network_params["v_th"] = 1          # snn default = 1
-    network_params["eta"] = 0.0         # controls noise amplitude - try adding noise in rec layer
+    network_params["eta"] = noise        # controls noise amplitude - try adding noise in rec layer
     network_params["num_rec"] = 100
     network_params["num_latent"] = 8
 
@@ -91,7 +99,7 @@ def build_network(device):
 
     network = SAE(time_params, network_params, frame_params, convolution_params, device).to(device)
     
-    return network
+    return network, network_params
     
 def to_np(tensor):
   return tensor.detach().cpu().numpy()
@@ -169,10 +177,10 @@ def set_seed(value = 42):
     np.random.seed(value)
     torch.manual_seed(value)
     torch.cuda.manual_seed(value)
-    #rand.seed(value)
+    #random.seed(value)
     # When running on the CuDNN backend, two further options must be set
     torch.backends.cudnn.deterministic = True
     torch.backends.cudnn.benchmark = False
     # Set a fixed value for the hash seed
     os.environ["PYTHONHASHSEED"] = str(value)
-    print(f"Setting Seed to {value}")
+    print(f"\nSetting Seed to {value}")

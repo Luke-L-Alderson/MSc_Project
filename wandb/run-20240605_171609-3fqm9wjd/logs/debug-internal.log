@@ -1,0 +1,981 @@
+2024-06-05 17:16:09,604 INFO    StreamThr :62836 [internal.py:wandb_internal():86] W&B internal server running at pid: 62836, started at: 2024-06-05 17:16:09.600897
+2024-06-05 17:16:09,607 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: status
+2024-06-05 17:16:09,624 INFO    WriterThread:62836 [datastore.py:open_for_write():87] open: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\run-3fqm9wjd.wandb
+2024-06-05 17:16:09,628 DEBUG   SenderThread:62836 [sender.py:send():379] send: header
+2024-06-05 17:16:09,677 DEBUG   SenderThread:62836 [sender.py:send():379] send: run
+2024-06-05 17:16:10,263 INFO    SenderThread:62836 [dir_watcher.py:__init__():211] watching files in: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files
+2024-06-05 17:16:10,263 INFO    SenderThread:62836 [sender.py:_start_run_threads():1124] run started: 3fqm9wjd with start time 1717604169.601392
+2024-06-05 17:16:10,285 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: check_version
+2024-06-05 17:16:10,285 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: check_version
+2024-06-05 17:16:10,696 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: run_start
+2024-06-05 17:16:10,731 DEBUG   HandlerThread:62836 [system_info.py:__init__():26] System info init
+2024-06-05 17:16:10,731 DEBUG   HandlerThread:62836 [system_info.py:__init__():41] System info init done
+2024-06-05 17:16:10,731 INFO    HandlerThread:62836 [system_monitor.py:start():194] Starting system monitor
+2024-06-05 17:16:10,732 INFO    SystemMonitor:62836 [system_monitor.py:_start():158] Starting system asset monitoring threads
+2024-06-05 17:16:10,732 INFO    HandlerThread:62836 [system_monitor.py:probe():214] Collecting system info
+2024-06-05 17:16:10,739 INFO    SystemMonitor:62836 [interfaces.py:start():190] Started cpu monitoring
+2024-06-05 17:16:10,740 INFO    SystemMonitor:62836 [interfaces.py:start():190] Started disk monitoring
+2024-06-05 17:16:10,740 INFO    SystemMonitor:62836 [interfaces.py:start():190] Started gpu monitoring
+2024-06-05 17:16:10,740 INFO    SystemMonitor:62836 [interfaces.py:start():190] Started memory monitoring
+2024-06-05 17:16:10,749 INFO    SystemMonitor:62836 [interfaces.py:start():190] Started network monitoring
+2024-06-05 17:16:10,758 DEBUG   HandlerThread:62836 [system_info.py:probe():150] Probing system
+2024-06-05 17:16:10,762 DEBUG   HandlerThread:62836 [system_info.py:_probe_git():135] Probing git
+2024-06-05 17:16:10,850 DEBUG   HandlerThread:62836 [system_info.py:_probe_git():143] Probing git done
+2024-06-05 17:16:10,850 DEBUG   HandlerThread:62836 [system_info.py:probe():198] Probing system done
+2024-06-05 17:16:10,850 DEBUG   HandlerThread:62836 [system_monitor.py:probe():223] {'os': 'Windows-11-10.0.22631-SP0', 'python': '3.12.2', 'heartbeatAt': '2024-06-05T16:16:10.758152', 'startedAt': '2024-06-05T16:16:09.558219', 'docker': None, 'cuda': None, 'args': (), 'state': 'running', 'program': 'g:\\my drive\\msc\\0_project\\msc_project\\main.py', 'codePathLocal': 'main.py', 'codePath': 'main.py', 'git': {'remote': 'https://github.com/Luke-L-Alderson/MSc_Project.git', 'commit': '460d99e6c990922c3918c0945ec4d88c9e7ab310'}, 'email': 'lukelalderson@gmail.com', 'root': 'G:/My Drive/MSc/0_Project/MSc_Project', 'host': 'L-Alderson-Desktop', 'username': 'lukea', 'executable': 'C:\\Users\\lukea\\anaconda3\\envs\\diss\\python.exe', 'cpu_count': 6, 'cpu_count_logical': 12, 'cpu_freq': {'current': 4101.0, 'min': 0.0, 'max': 4101.0}, 'cpu_freq_per_core': [{'current': 4101.0, 'min': 0.0, 'max': 4101.0}], 'disk': {}, 'gpu': 'NVIDIA GeForce RTX 4070', 'gpu_count': 1, 'gpu_devices': [{'name': 'NVIDIA GeForce RTX 4070', 'memory_total': 12878610432}], 'memory': {'total': 15.92232894897461}}
+2024-06-05 17:16:10,851 INFO    HandlerThread:62836 [system_monitor.py:probe():224] Finished collecting system info
+2024-06-05 17:16:10,851 INFO    HandlerThread:62836 [system_monitor.py:probe():227] Publishing system info
+2024-06-05 17:16:10,851 DEBUG   HandlerThread:62836 [system_info.py:_save_conda():207] Saving list of conda packages installed into the current environment
+2024-06-05 17:16:10,857 ERROR   HandlerThread:62836 [system_info.py:_save_conda():221] Error saving conda packages: [WinError 2] The system cannot find the file specified
+Traceback (most recent call last):
+  File "C:\Users\lukea\anaconda3\envs\diss\Lib\site-packages\wandb\sdk\internal\system\system_info.py", line 214, in _save_conda
+    subprocess.call(
+  File "C:\Users\lukea\anaconda3\envs\diss\Lib\subprocess.py", line 389, in call
+    with Popen(*popenargs, **kwargs) as p:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lukea\anaconda3\envs\diss\Lib\subprocess.py", line 1026, in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+  File "C:\Users\lukea\anaconda3\envs\diss\Lib\subprocess.py", line 1538, in _execute_child
+    hp, ht, pid, tid = _winapi.CreateProcess(executable, args,
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [WinError 2] The system cannot find the file specified
+2024-06-05 17:16:10,859 DEBUG   HandlerThread:62836 [system_info.py:_save_conda():222] Saving conda packages done
+2024-06-05 17:16:10,863 INFO    HandlerThread:62836 [system_monitor.py:probe():229] Finished publishing system info
+2024-06-05 17:16:10,869 DEBUG   SenderThread:62836 [sender.py:send():379] send: files
+2024-06-05 17:16:10,869 INFO    SenderThread:62836 [sender.py:_save_file():1390] saving file wandb-metadata.json with policy now
+2024-06-05 17:16:11,112 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: python_packages
+2024-06-05 17:16:11,112 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: python_packages
+2024-06-05 17:16:11,113 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: stop_status
+2024-06-05 17:16:11,115 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: internal_messages
+2024-06-05 17:16:11,118 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: stop_status
+2024-06-05 17:16:11,267 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_created():271] file/dir created: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\wandb-metadata.json
+2024-06-05 17:16:11,267 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_created():271] file/dir created: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\requirements.txt
+2024-06-05 17:16:11,268 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_created():271] file/dir created: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\conda-environment.yaml
+2024-06-05 17:16:11,280 DEBUG   SenderThread:62836 [sender.py:send():379] send: telemetry
+2024-06-05 17:16:11,280 DEBUG   SenderThread:62836 [sender.py:send():379] send: telemetry
+2024-06-05 17:16:11,281 DEBUG   SenderThread:62836 [sender.py:send():379] send: run
+2024-06-05 17:16:11,425 INFO    SenderThread:62836 [sender.py:send_run():997] updated run: 3fqm9wjd
+2024-06-05 17:16:11,702 INFO    wandb-upload_0:62836 [upload_job.py:push():131] Uploaded file C:\Users\lukea\AppData\Local\Temp\tmpkepwcdl_wandb\3gpo0ox6-wandb-metadata.json
+2024-06-05 17:16:12,269 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\config.yaml
+2024-06-05 17:16:12,270 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_created():271] file/dir created: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\output.log
+2024-06-05 17:16:15,438 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: status_report
+2024-06-05 17:16:18,128 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: partial_history
+2024-06-05 17:16:18,129 DEBUG   SenderThread:62836 [sender.py:send():379] send: history
+2024-06-05 17:16:18,129 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: summary_record
+2024-06-05 17:16:18,133 INFO    SenderThread:62836 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-06-05 17:16:18,291 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_created():271] file/dir created: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\wandb-summary.json
+2024-06-05 17:16:20,298 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\output.log
+2024-06-05 17:16:21,135 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: status_report
+2024-06-05 17:16:24,142 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: partial_history
+2024-06-05 17:16:24,143 DEBUG   SenderThread:62836 [sender.py:send():379] send: history
+2024-06-05 17:16:24,143 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: summary_record
+2024-06-05 17:16:24,148 INFO    SenderThread:62836 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-06-05 17:16:24,311 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\wandb-summary.json
+2024-06-05 17:16:26,111 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: stop_status
+2024-06-05 17:16:26,112 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: stop_status
+2024-06-05 17:16:26,116 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: internal_messages
+2024-06-05 17:16:26,293 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: status_report
+2024-06-05 17:16:26,316 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\output.log
+2024-06-05 17:16:30,030 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: partial_history
+2024-06-05 17:16:30,031 DEBUG   SenderThread:62836 [sender.py:send():379] send: history
+2024-06-05 17:16:30,031 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: summary_record
+2024-06-05 17:16:30,035 INFO    SenderThread:62836 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-06-05 17:16:30,328 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\wandb-summary.json
+2024-06-05 17:16:32,037 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: status_report
+2024-06-05 17:16:32,335 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\output.log
+2024-06-05 17:16:35,945 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: partial_history
+2024-06-05 17:16:35,946 DEBUG   SenderThread:62836 [sender.py:send():379] send: history
+2024-06-05 17:16:35,946 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: summary_record
+2024-06-05 17:16:35,950 INFO    SenderThread:62836 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-06-05 17:16:36,349 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\wandb-summary.json
+2024-06-05 17:16:37,952 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: status_report
+2024-06-05 17:16:38,355 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\output.log
+2024-06-05 17:16:41,112 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: stop_status
+2024-06-05 17:16:41,113 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: stop_status
+2024-06-05 17:16:41,118 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: internal_messages
+2024-06-05 17:16:41,925 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: partial_history
+2024-06-05 17:16:41,925 DEBUG   SenderThread:62836 [sender.py:send():379] send: history
+2024-06-05 17:16:41,925 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: summary_record
+2024-06-05 17:16:41,930 INFO    SenderThread:62836 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-06-05 17:16:42,370 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\wandb-summary.json
+2024-06-05 17:16:43,934 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: status_report
+2024-06-05 17:16:44,379 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\output.log
+2024-06-05 17:16:44,379 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\config.yaml
+2024-06-05 17:16:47,871 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: partial_history
+2024-06-05 17:16:47,871 DEBUG   SenderThread:62836 [sender.py:send():379] send: history
+2024-06-05 17:16:47,872 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: summary_record
+2024-06-05 17:16:47,877 INFO    SenderThread:62836 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-06-05 17:16:48,393 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\wandb-summary.json
+2024-06-05 17:16:49,879 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: status_report
+2024-06-05 17:16:50,400 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\output.log
+2024-06-05 17:16:54,175 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: partial_history
+2024-06-05 17:16:54,176 DEBUG   SenderThread:62836 [sender.py:send():379] send: history
+2024-06-05 17:16:54,176 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: summary_record
+2024-06-05 17:16:54,180 INFO    SenderThread:62836 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-06-05 17:16:54,415 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\wandb-summary.json
+2024-06-05 17:16:55,182 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: status_report
+2024-06-05 17:16:56,117 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: stop_status
+2024-06-05 17:16:56,117 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: stop_status
+2024-06-05 17:16:56,120 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: internal_messages
+2024-06-05 17:16:56,421 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\output.log
+2024-06-05 17:17:00,217 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: status_report
+2024-06-05 17:17:00,217 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: partial_history
+2024-06-05 17:17:00,218 DEBUG   SenderThread:62836 [sender.py:send():379] send: history
+2024-06-05 17:17:00,218 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: summary_record
+2024-06-05 17:17:00,223 INFO    SenderThread:62836 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-06-05 17:17:00,435 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\wandb-summary.json
+2024-06-05 17:17:02,445 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\output.log
+2024-06-05 17:17:05,228 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: status_report
+2024-06-05 17:17:06,417 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: partial_history
+2024-06-05 17:17:06,417 DEBUG   SenderThread:62836 [sender.py:send():379] send: history
+2024-06-05 17:17:06,418 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: summary_record
+2024-06-05 17:17:06,423 INFO    SenderThread:62836 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-06-05 17:17:06,459 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\wandb-summary.json
+2024-06-05 17:17:07,463 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\output.log
+2024-06-05 17:17:10,425 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: status_report
+2024-06-05 17:17:10,761 DEBUG   SystemMonitor:62836 [system_monitor.py:_start():172] Starting system metrics aggregation loop
+2024-06-05 17:17:10,762 DEBUG   SenderThread:62836 [sender.py:send():379] send: stats
+2024-06-05 17:17:11,117 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: stop_status
+2024-06-05 17:17:11,117 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: stop_status
+2024-06-05 17:17:11,121 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: internal_messages
+2024-06-05 17:17:12,401 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: partial_history
+2024-06-05 17:17:12,401 DEBUG   SenderThread:62836 [sender.py:send():379] send: history
+2024-06-05 17:17:12,401 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: summary_record
+2024-06-05 17:17:12,406 INFO    SenderThread:62836 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-06-05 17:17:12,480 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\wandb-summary.json
+2024-06-05 17:17:13,483 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\output.log
+2024-06-05 17:17:16,408 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: status_report
+2024-06-05 17:17:18,326 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: partial_history
+2024-06-05 17:17:18,327 DEBUG   SenderThread:62836 [sender.py:send():379] send: history
+2024-06-05 17:17:18,327 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: summary_record
+2024-06-05 17:17:18,331 INFO    SenderThread:62836 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-06-05 17:17:18,500 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\wandb-summary.json
+2024-06-05 17:17:19,504 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\output.log
+2024-06-05 17:17:22,334 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: status_report
+2024-06-05 17:17:24,363 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: partial_history
+2024-06-05 17:17:24,363 DEBUG   SenderThread:62836 [sender.py:send():379] send: history
+2024-06-05 17:17:24,364 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: summary_record
+2024-06-05 17:17:24,368 INFO    SenderThread:62836 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-06-05 17:17:24,523 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\wandb-summary.json
+2024-06-05 17:17:25,525 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\output.log
+2024-06-05 17:17:26,107 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: internal_messages
+2024-06-05 17:17:26,118 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: stop_status
+2024-06-05 17:17:26,119 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: stop_status
+2024-06-05 17:17:28,254 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: status_report
+2024-06-05 17:17:30,508 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: partial_history
+2024-06-05 17:17:30,508 DEBUG   SenderThread:62836 [sender.py:send():379] send: history
+2024-06-05 17:17:30,508 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: summary_record
+2024-06-05 17:17:30,517 INFO    SenderThread:62836 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-06-05 17:17:30,544 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\wandb-summary.json
+2024-06-05 17:17:31,547 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\output.log
+2024-06-05 17:17:33,520 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: status_report
+2024-06-05 17:17:36,580 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: partial_history
+2024-06-05 17:17:36,580 DEBUG   SenderThread:62836 [sender.py:send():379] send: history
+2024-06-05 17:17:36,580 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: summary_record
+2024-06-05 17:17:36,584 INFO    SenderThread:62836 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-06-05 17:17:37,570 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\wandb-summary.json
+2024-06-05 17:17:37,571 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\output.log
+2024-06-05 17:17:38,586 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: status_report
+2024-06-05 17:17:40,765 DEBUG   SenderThread:62836 [sender.py:send():379] send: stats
+2024-06-05 17:17:41,109 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: internal_messages
+2024-06-05 17:17:41,120 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: stop_status
+2024-06-05 17:17:41,120 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: stop_status
+2024-06-05 17:17:42,584 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: partial_history
+2024-06-05 17:17:42,585 DEBUG   SenderThread:62836 [sender.py:send():379] send: history
+2024-06-05 17:17:42,585 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: summary_record
+2024-06-05 17:17:42,589 INFO    SenderThread:62836 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-06-05 17:17:42,595 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\wandb-summary.json
+2024-06-05 17:17:43,605 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: status_report
+2024-06-05 17:17:43,607 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\output.log
+2024-06-05 17:17:48,600 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: status_report
+2024-06-05 17:17:48,743 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: partial_history
+2024-06-05 17:17:48,743 DEBUG   SenderThread:62836 [sender.py:send():379] send: history
+2024-06-05 17:17:48,743 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: summary_record
+2024-06-05 17:17:48,747 INFO    SenderThread:62836 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-06-05 17:17:49,657 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\wandb-summary.json
+2024-06-05 17:17:49,658 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\output.log
+2024-06-05 17:17:53,751 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: status_report
+2024-06-05 17:17:55,002 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: partial_history
+2024-06-05 17:17:55,002 DEBUG   SenderThread:62836 [sender.py:send():379] send: history
+2024-06-05 17:17:55,003 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: summary_record
+2024-06-05 17:17:55,007 INFO    SenderThread:62836 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-06-05 17:17:55,702 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\wandb-summary.json
+2024-06-05 17:17:55,703 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\output.log
+2024-06-05 17:17:56,111 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: stop_status
+2024-06-05 17:17:56,111 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: internal_messages
+2024-06-05 17:17:56,111 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: stop_status
+2024-06-05 17:17:59,277 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: status_report
+2024-06-05 17:18:00,962 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: partial_history
+2024-06-05 17:18:00,962 DEBUG   SenderThread:62836 [sender.py:send():379] send: history
+2024-06-05 17:18:00,962 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: summary_record
+2024-06-05 17:18:00,966 INFO    SenderThread:62836 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-06-05 17:18:01,758 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\wandb-summary.json
+2024-06-05 17:18:01,759 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\output.log
+2024-06-05 17:18:04,970 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: status_report
+2024-06-05 17:18:06,787 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: partial_history
+2024-06-05 17:18:06,788 DEBUG   SenderThread:62836 [sender.py:send():379] send: history
+2024-06-05 17:18:06,788 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: summary_record
+2024-06-05 17:18:06,794 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\wandb-summary.json
+2024-06-05 17:18:06,795 INFO    SenderThread:62836 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-06-05 17:18:07,492 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: partial_history
+2024-06-05 17:18:07,493 DEBUG   SenderThread:62836 [sender.py:send():379] send: history
+2024-06-05 17:18:07,493 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: summary_record
+2024-06-05 17:18:07,497 INFO    SenderThread:62836 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-06-05 17:18:07,808 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\wandb-summary.json
+2024-06-05 17:18:07,808 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\output.log
+2024-06-05 17:18:08,219 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: partial_history
+2024-06-05 17:18:08,220 DEBUG   SenderThread:62836 [sender.py:send():379] send: history
+2024-06-05 17:18:08,220 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: summary_record
+2024-06-05 17:18:08,224 INFO    SenderThread:62836 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-06-05 17:18:08,811 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\wandb-summary.json
+2024-06-05 17:18:08,930 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: partial_history
+2024-06-05 17:18:08,930 DEBUG   SenderThread:62836 [sender.py:send():379] send: history
+2024-06-05 17:18:08,931 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: summary_record
+2024-06-05 17:18:08,935 INFO    SenderThread:62836 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-06-05 17:18:09,617 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: partial_history
+2024-06-05 17:18:09,617 DEBUG   SenderThread:62836 [sender.py:send():379] send: history
+2024-06-05 17:18:09,618 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: summary_record
+2024-06-05 17:18:09,621 INFO    SenderThread:62836 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-06-05 17:18:09,826 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\wandb-summary.json
+2024-06-05 17:18:09,827 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\output.log
+2024-06-05 17:18:10,310 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: status_report
+2024-06-05 17:18:10,310 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: partial_history
+2024-06-05 17:18:10,310 DEBUG   SenderThread:62836 [sender.py:send():379] send: history
+2024-06-05 17:18:10,311 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: summary_record
+2024-06-05 17:18:10,315 INFO    SenderThread:62836 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-06-05 17:18:10,767 DEBUG   SenderThread:62836 [sender.py:send():379] send: stats
+2024-06-05 17:18:10,830 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\wandb-summary.json
+2024-06-05 17:18:10,977 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: partial_history
+2024-06-05 17:18:10,977 DEBUG   SenderThread:62836 [sender.py:send():379] send: history
+2024-06-05 17:18:10,978 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: summary_record
+2024-06-05 17:18:10,982 INFO    SenderThread:62836 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-06-05 17:18:11,114 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: internal_messages
+2024-06-05 17:18:11,123 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: stop_status
+2024-06-05 17:18:11,123 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: stop_status
+2024-06-05 17:18:11,644 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: partial_history
+2024-06-05 17:18:11,644 DEBUG   SenderThread:62836 [sender.py:send():379] send: history
+2024-06-05 17:18:11,644 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: summary_record
+2024-06-05 17:18:11,649 INFO    SenderThread:62836 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-06-05 17:18:11,864 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\wandb-summary.json
+2024-06-05 17:18:11,865 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\output.log
+2024-06-05 17:18:12,339 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: partial_history
+2024-06-05 17:18:12,340 DEBUG   SenderThread:62836 [sender.py:send():379] send: history
+2024-06-05 17:18:12,340 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: summary_record
+2024-06-05 17:18:12,364 INFO    SenderThread:62836 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-06-05 17:18:12,866 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\wandb-summary.json
+2024-06-05 17:18:13,024 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: partial_history
+2024-06-05 17:18:13,024 DEBUG   SenderThread:62836 [sender.py:send():379] send: history
+2024-06-05 17:18:13,025 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: summary_record
+2024-06-05 17:18:13,029 INFO    SenderThread:62836 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-06-05 17:18:13,693 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: partial_history
+2024-06-05 17:18:13,694 DEBUG   SenderThread:62836 [sender.py:send():379] send: history
+2024-06-05 17:18:13,694 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: summary_record
+2024-06-05 17:18:13,698 INFO    SenderThread:62836 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-06-05 17:18:13,871 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\wandb-summary.json
+2024-06-05 17:18:13,871 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\output.log
+2024-06-05 17:18:14,384 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: partial_history
+2024-06-05 17:18:14,384 DEBUG   SenderThread:62836 [sender.py:send():379] send: history
+2024-06-05 17:18:14,385 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: summary_record
+2024-06-05 17:18:14,389 INFO    SenderThread:62836 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-06-05 17:18:14,874 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\wandb-summary.json
+2024-06-05 17:18:15,052 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: partial_history
+2024-06-05 17:18:15,053 DEBUG   SenderThread:62836 [sender.py:send():379] send: history
+2024-06-05 17:18:15,053 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: summary_record
+2024-06-05 17:18:15,057 INFO    SenderThread:62836 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-06-05 17:18:15,732 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: status_report
+2024-06-05 17:18:15,732 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: partial_history
+2024-06-05 17:18:15,733 DEBUG   SenderThread:62836 [sender.py:send():379] send: history
+2024-06-05 17:18:15,733 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: summary_record
+2024-06-05 17:18:15,737 INFO    SenderThread:62836 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-06-05 17:18:15,889 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\wandb-summary.json
+2024-06-05 17:18:15,890 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\output.log
+2024-06-05 17:18:16,423 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: partial_history
+2024-06-05 17:18:16,424 DEBUG   SenderThread:62836 [sender.py:send():379] send: history
+2024-06-05 17:18:16,424 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: summary_record
+2024-06-05 17:18:16,428 INFO    SenderThread:62836 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-06-05 17:18:16,893 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\wandb-summary.json
+2024-06-05 17:18:17,122 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: partial_history
+2024-06-05 17:18:17,123 DEBUG   SenderThread:62836 [sender.py:send():379] send: history
+2024-06-05 17:18:17,123 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: summary_record
+2024-06-05 17:18:17,128 INFO    SenderThread:62836 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-06-05 17:18:17,904 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\wandb-summary.json
+2024-06-05 17:18:17,904 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\output.log
+2024-06-05 17:18:19,917 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\output.log
+2024-06-05 17:18:21,140 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: status_report
+2024-06-05 17:18:23,118 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: partial_history
+2024-06-05 17:18:23,119 DEBUG   SenderThread:62836 [sender.py:send():379] send: history
+2024-06-05 17:18:23,119 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: summary_record
+2024-06-05 17:18:23,123 INFO    SenderThread:62836 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-06-05 17:18:23,947 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\wandb-summary.json
+2024-06-05 17:18:25,961 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\output.log
+2024-06-05 17:18:26,116 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: internal_messages
+2024-06-05 17:18:26,125 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: stop_status
+2024-06-05 17:18:26,126 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: stop_status
+2024-06-05 17:18:26,337 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: status_report
+2024-06-05 17:18:29,122 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: partial_history
+2024-06-05 17:18:29,123 DEBUG   SenderThread:62836 [sender.py:send():379] send: history
+2024-06-05 17:18:29,123 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: summary_record
+2024-06-05 17:18:29,126 INFO    SenderThread:62836 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-06-05 17:18:30,000 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\wandb-summary.json
+2024-06-05 17:18:32,015 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\output.log
+2024-06-05 17:18:32,129 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: status_report
+2024-06-05 17:18:35,023 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: partial_history
+2024-06-05 17:18:35,024 DEBUG   SenderThread:62836 [sender.py:send():379] send: history
+2024-06-05 17:18:35,024 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: summary_record
+2024-06-05 17:18:35,028 INFO    SenderThread:62836 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-06-05 17:18:35,033 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\wandb-summary.json
+2024-06-05 17:18:36,048 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\output.log
+2024-06-05 17:18:38,038 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: status_report
+2024-06-05 17:18:40,768 DEBUG   SenderThread:62836 [sender.py:send():379] send: stats
+2024-06-05 17:18:40,948 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: partial_history
+2024-06-05 17:18:40,949 DEBUG   SenderThread:62836 [sender.py:send():379] send: history
+2024-06-05 17:18:40,949 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: summary_record
+2024-06-05 17:18:40,953 INFO    SenderThread:62836 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-06-05 17:18:41,082 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\wandb-summary.json
+2024-06-05 17:18:41,117 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: internal_messages
+2024-06-05 17:18:41,136 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: stop_status
+2024-06-05 17:18:41,137 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: stop_status
+2024-06-05 17:18:42,111 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\output.log
+2024-06-05 17:18:43,290 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: status_report
+2024-06-05 17:18:46,875 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: partial_history
+2024-06-05 17:18:46,875 DEBUG   SenderThread:62836 [sender.py:send():379] send: history
+2024-06-05 17:18:46,875 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: summary_record
+2024-06-05 17:18:46,880 INFO    SenderThread:62836 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-06-05 17:18:47,133 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\wandb-summary.json
+2024-06-05 17:18:48,145 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\output.log
+2024-06-05 17:18:48,882 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: status_report
+2024-06-05 17:18:52,924 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: partial_history
+2024-06-05 17:18:52,925 DEBUG   SenderThread:62836 [sender.py:send():379] send: history
+2024-06-05 17:18:52,925 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: summary_record
+2024-06-05 17:18:52,929 INFO    SenderThread:62836 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-06-05 17:18:53,182 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\wandb-summary.json
+2024-06-05 17:18:53,931 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: status_report
+2024-06-05 17:18:54,192 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\output.log
+2024-06-05 17:18:56,119 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: internal_messages
+2024-06-05 17:18:56,135 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: stop_status
+2024-06-05 17:18:56,136 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: stop_status
+2024-06-05 17:18:58,926 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: partial_history
+2024-06-05 17:18:58,927 DEBUG   SenderThread:62836 [sender.py:send():379] send: history
+2024-06-05 17:18:58,927 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: summary_record
+2024-06-05 17:18:58,931 INFO    SenderThread:62836 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-06-05 17:18:58,932 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: status_report
+2024-06-05 17:18:59,231 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\wandb-summary.json
+2024-06-05 17:19:00,246 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\output.log
+2024-06-05 17:19:03,934 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: status_report
+2024-06-05 17:19:05,115 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: partial_history
+2024-06-05 17:19:05,116 DEBUG   SenderThread:62836 [sender.py:send():379] send: history
+2024-06-05 17:19:05,116 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: summary_record
+2024-06-05 17:19:05,120 INFO    SenderThread:62836 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-06-05 17:19:05,281 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\wandb-summary.json
+2024-06-05 17:19:08,308 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\output.log
+2024-06-05 17:19:09,124 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: status_report
+2024-06-05 17:19:10,770 DEBUG   SenderThread:62836 [sender.py:send():379] send: stats
+2024-06-05 17:19:11,076 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: partial_history
+2024-06-05 17:19:11,076 DEBUG   SenderThread:62836 [sender.py:send():379] send: history
+2024-06-05 17:19:11,077 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: summary_record
+2024-06-05 17:19:11,081 INFO    SenderThread:62836 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-06-05 17:19:11,121 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: internal_messages
+2024-06-05 17:19:11,128 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: stop_status
+2024-06-05 17:19:11,129 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: stop_status
+2024-06-05 17:19:11,325 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\wandb-summary.json
+2024-06-05 17:19:14,366 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\output.log
+2024-06-05 17:19:14,373 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: status_report
+2024-06-05 17:19:16,992 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: partial_history
+2024-06-05 17:19:16,993 DEBUG   SenderThread:62836 [sender.py:send():379] send: history
+2024-06-05 17:19:16,993 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: summary_record
+2024-06-05 17:19:16,998 INFO    SenderThread:62836 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-06-05 17:19:17,381 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\wandb-summary.json
+2024-06-05 17:19:18,396 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\output.log
+2024-06-05 17:19:20,000 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: status_report
+2024-06-05 17:19:22,875 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: partial_history
+2024-06-05 17:19:22,875 DEBUG   SenderThread:62836 [sender.py:send():379] send: history
+2024-06-05 17:19:22,876 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: summary_record
+2024-06-05 17:19:22,880 INFO    SenderThread:62836 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-06-05 17:19:23,428 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\wandb-summary.json
+2024-06-05 17:19:24,439 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\output.log
+2024-06-05 17:19:25,882 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: status_report
+2024-06-05 17:19:26,123 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: internal_messages
+2024-06-05 17:19:26,136 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: stop_status
+2024-06-05 17:19:26,136 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: stop_status
+2024-06-05 17:19:28,777 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: partial_history
+2024-06-05 17:19:28,778 DEBUG   SenderThread:62836 [sender.py:send():379] send: history
+2024-06-05 17:19:28,778 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: summary_record
+2024-06-05 17:19:28,782 INFO    SenderThread:62836 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-06-05 17:19:29,475 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\wandb-summary.json
+2024-06-05 17:19:30,488 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\output.log
+2024-06-05 17:19:31,785 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: status_report
+2024-06-05 17:19:34,784 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: partial_history
+2024-06-05 17:19:34,785 DEBUG   SenderThread:62836 [sender.py:send():379] send: history
+2024-06-05 17:19:34,785 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: summary_record
+2024-06-05 17:19:34,790 INFO    SenderThread:62836 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-06-05 17:19:35,522 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\wandb-summary.json
+2024-06-05 17:19:36,535 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\output.log
+2024-06-05 17:19:36,792 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: status_report
+2024-06-05 17:19:40,693 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: partial_history
+2024-06-05 17:19:40,694 DEBUG   SenderThread:62836 [sender.py:send():379] send: history
+2024-06-05 17:19:40,694 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: summary_record
+2024-06-05 17:19:40,699 INFO    SenderThread:62836 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-06-05 17:19:40,772 DEBUG   SenderThread:62836 [sender.py:send():379] send: stats
+2024-06-05 17:19:41,125 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: internal_messages
+2024-06-05 17:19:41,134 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: stop_status
+2024-06-05 17:19:41,134 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: stop_status
+2024-06-05 17:19:41,575 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\wandb-summary.json
+2024-06-05 17:19:41,576 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\output.log
+2024-06-05 17:19:42,331 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: status_report
+2024-06-05 17:19:46,745 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: partial_history
+2024-06-05 17:19:46,745 DEBUG   SenderThread:62836 [sender.py:send():379] send: history
+2024-06-05 17:19:46,745 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: summary_record
+2024-06-05 17:19:46,750 INFO    SenderThread:62836 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-06-05 17:19:47,631 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\wandb-summary.json
+2024-06-05 17:19:47,632 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\output.log
+2024-06-05 17:19:47,751 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: status_report
+2024-06-05 17:19:52,671 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: partial_history
+2024-06-05 17:19:52,672 DEBUG   SenderThread:62836 [sender.py:send():379] send: history
+2024-06-05 17:19:52,672 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: summary_record
+2024-06-05 17:19:52,678 INFO    SenderThread:62836 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-06-05 17:19:53,678 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\wandb-summary.json
+2024-06-05 17:19:53,678 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\output.log
+2024-06-05 17:19:53,680 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: status_report
+2024-06-05 17:19:56,126 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: internal_messages
+2024-06-05 17:19:56,131 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: stop_status
+2024-06-05 17:19:56,131 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: stop_status
+2024-06-05 17:19:58,570 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: partial_history
+2024-06-05 17:19:58,571 DEBUG   SenderThread:62836 [sender.py:send():379] send: history
+2024-06-05 17:19:58,571 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: summary_record
+2024-06-05 17:19:58,575 INFO    SenderThread:62836 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-06-05 17:19:58,719 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\wandb-summary.json
+2024-06-05 17:19:59,577 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: status_report
+2024-06-05 17:19:59,722 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\output.log
+2024-06-05 17:20:04,579 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: status_report
+2024-06-05 17:20:04,933 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: partial_history
+2024-06-05 17:20:04,934 DEBUG   SenderThread:62836 [sender.py:send():379] send: history
+2024-06-05 17:20:04,934 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: summary_record
+2024-06-05 17:20:04,938 INFO    SenderThread:62836 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-06-05 17:20:05,766 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\wandb-summary.json
+2024-06-05 17:20:05,767 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\output.log
+2024-06-05 17:20:09,674 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: status_report
+2024-06-05 17:20:10,347 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: partial_history
+2024-06-05 17:20:10,348 DEBUG   SenderThread:62836 [sender.py:send():379] send: history
+2024-06-05 17:20:10,348 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: summary_record
+2024-06-05 17:20:10,352 INFO    SenderThread:62836 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-06-05 17:20:10,775 DEBUG   SenderThread:62836 [sender.py:send():379] send: stats
+2024-06-05 17:20:10,811 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\wandb-summary.json
+2024-06-05 17:20:11,037 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: partial_history
+2024-06-05 17:20:11,037 DEBUG   SenderThread:62836 [sender.py:send():379] send: history
+2024-06-05 17:20:11,037 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: summary_record
+2024-06-05 17:20:11,042 INFO    SenderThread:62836 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-06-05 17:20:11,128 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: internal_messages
+2024-06-05 17:20:11,135 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: stop_status
+2024-06-05 17:20:11,135 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: stop_status
+2024-06-05 17:20:11,705 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: partial_history
+2024-06-05 17:20:11,705 DEBUG   SenderThread:62836 [sender.py:send():379] send: history
+2024-06-05 17:20:11,706 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: summary_record
+2024-06-05 17:20:11,710 INFO    SenderThread:62836 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-06-05 17:20:11,815 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\wandb-summary.json
+2024-06-05 17:20:11,815 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\output.log
+2024-06-05 17:20:12,391 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: partial_history
+2024-06-05 17:20:12,391 DEBUG   SenderThread:62836 [sender.py:send():379] send: history
+2024-06-05 17:20:12,391 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: summary_record
+2024-06-05 17:20:12,395 INFO    SenderThread:62836 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-06-05 17:20:12,842 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\wandb-summary.json
+2024-06-05 17:20:13,069 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: partial_history
+2024-06-05 17:20:13,070 DEBUG   SenderThread:62836 [sender.py:send():379] send: history
+2024-06-05 17:20:13,070 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: summary_record
+2024-06-05 17:20:13,074 INFO    SenderThread:62836 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-06-05 17:20:13,749 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: partial_history
+2024-06-05 17:20:13,750 DEBUG   SenderThread:62836 [sender.py:send():379] send: history
+2024-06-05 17:20:13,750 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: summary_record
+2024-06-05 17:20:13,754 INFO    SenderThread:62836 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-06-05 17:20:13,846 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\wandb-summary.json
+2024-06-05 17:20:13,846 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\output.log
+2024-06-05 17:20:14,455 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: partial_history
+2024-06-05 17:20:14,455 DEBUG   SenderThread:62836 [sender.py:send():379] send: history
+2024-06-05 17:20:14,455 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: summary_record
+2024-06-05 17:20:14,459 INFO    SenderThread:62836 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-06-05 17:20:14,849 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\wandb-summary.json
+2024-06-05 17:20:15,179 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: status_report
+2024-06-05 17:20:15,180 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: partial_history
+2024-06-05 17:20:15,180 DEBUG   SenderThread:62836 [sender.py:send():379] send: history
+2024-06-05 17:20:15,180 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: summary_record
+2024-06-05 17:20:15,184 INFO    SenderThread:62836 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-06-05 17:20:15,852 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\wandb-summary.json
+2024-06-05 17:20:15,853 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\output.log
+2024-06-05 17:20:15,860 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: partial_history
+2024-06-05 17:20:15,860 DEBUG   SenderThread:62836 [sender.py:send():379] send: history
+2024-06-05 17:20:15,860 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: summary_record
+2024-06-05 17:20:15,865 INFO    SenderThread:62836 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-06-05 17:20:16,531 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: partial_history
+2024-06-05 17:20:16,531 DEBUG   SenderThread:62836 [sender.py:send():379] send: history
+2024-06-05 17:20:16,531 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: summary_record
+2024-06-05 17:20:16,535 INFO    SenderThread:62836 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-06-05 17:20:16,864 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\wandb-summary.json
+2024-06-05 17:20:17,201 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: partial_history
+2024-06-05 17:20:17,201 DEBUG   SenderThread:62836 [sender.py:send():379] send: history
+2024-06-05 17:20:17,202 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: summary_record
+2024-06-05 17:20:17,206 INFO    SenderThread:62836 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-06-05 17:20:17,868 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\wandb-summary.json
+2024-06-05 17:20:17,869 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\output.log
+2024-06-05 17:20:17,881 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: partial_history
+2024-06-05 17:20:17,881 DEBUG   SenderThread:62836 [sender.py:send():379] send: history
+2024-06-05 17:20:17,882 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: summary_record
+2024-06-05 17:20:17,886 INFO    SenderThread:62836 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-06-05 17:20:18,561 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: partial_history
+2024-06-05 17:20:18,562 DEBUG   SenderThread:62836 [sender.py:send():379] send: history
+2024-06-05 17:20:18,562 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: summary_record
+2024-06-05 17:20:18,566 INFO    SenderThread:62836 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-06-05 17:20:18,884 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\wandb-summary.json
+2024-06-05 17:20:19,228 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: partial_history
+2024-06-05 17:20:19,228 DEBUG   SenderThread:62836 [sender.py:send():379] send: history
+2024-06-05 17:20:19,228 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: summary_record
+2024-06-05 17:20:19,232 INFO    SenderThread:62836 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-06-05 17:20:19,887 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\wandb-summary.json
+2024-06-05 17:20:19,888 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\output.log
+2024-06-05 17:20:19,900 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: partial_history
+2024-06-05 17:20:19,900 DEBUG   SenderThread:62836 [sender.py:send():379] send: history
+2024-06-05 17:20:19,900 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: summary_record
+2024-06-05 17:20:19,918 INFO    SenderThread:62836 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-06-05 17:20:20,531 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: status_report
+2024-06-05 17:20:20,532 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: partial_history
+2024-06-05 17:20:20,532 DEBUG   SenderThread:62836 [sender.py:send():379] send: history
+2024-06-05 17:20:20,532 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: summary_record
+2024-06-05 17:20:20,537 INFO    SenderThread:62836 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-06-05 17:20:20,900 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\wandb-summary.json
+2024-06-05 17:20:21,904 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\output.log
+2024-06-05 17:20:25,551 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: status_report
+2024-06-05 17:20:26,129 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: internal_messages
+2024-06-05 17:20:26,136 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: stop_status
+2024-06-05 17:20:26,136 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: stop_status
+2024-06-05 17:20:26,459 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: partial_history
+2024-06-05 17:20:26,460 DEBUG   SenderThread:62836 [sender.py:send():379] send: history
+2024-06-05 17:20:26,460 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: summary_record
+2024-06-05 17:20:26,465 INFO    SenderThread:62836 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-06-05 17:20:26,945 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\wandb-summary.json
+2024-06-05 17:20:27,949 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\output.log
+2024-06-05 17:20:31,468 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: status_report
+2024-06-05 17:20:32,339 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: partial_history
+2024-06-05 17:20:32,339 DEBUG   SenderThread:62836 [sender.py:send():379] send: history
+2024-06-05 17:20:32,339 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: summary_record
+2024-06-05 17:20:32,343 INFO    SenderThread:62836 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-06-05 17:20:32,997 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\wandb-summary.json
+2024-06-05 17:20:34,000 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\output.log
+2024-06-05 17:20:37,348 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: status_report
+2024-06-05 17:20:38,571 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: partial_history
+2024-06-05 17:20:38,571 DEBUG   SenderThread:62836 [sender.py:send():379] send: history
+2024-06-05 17:20:38,572 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: summary_record
+2024-06-05 17:20:38,576 INFO    SenderThread:62836 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-06-05 17:20:39,043 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\wandb-summary.json
+2024-06-05 17:20:40,046 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\output.log
+2024-06-05 17:20:40,777 DEBUG   SenderThread:62836 [sender.py:send():379] send: stats
+2024-06-05 17:20:41,116 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: internal_messages
+2024-06-05 17:20:41,138 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: stop_status
+2024-06-05 17:20:41,138 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: stop_status
+2024-06-05 17:20:43,309 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: status_report
+2024-06-05 17:20:44,459 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: partial_history
+2024-06-05 17:20:44,460 DEBUG   SenderThread:62836 [sender.py:send():379] send: history
+2024-06-05 17:20:44,460 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: summary_record
+2024-06-05 17:20:44,464 INFO    SenderThread:62836 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-06-05 17:20:45,098 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\wandb-summary.json
+2024-06-05 17:20:46,101 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\output.log
+2024-06-05 17:20:48,467 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: status_report
+2024-06-05 17:20:50,309 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: partial_history
+2024-06-05 17:20:50,309 DEBUG   SenderThread:62836 [sender.py:send():379] send: history
+2024-06-05 17:20:50,310 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: summary_record
+2024-06-05 17:20:50,314 INFO    SenderThread:62836 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-06-05 17:20:51,145 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\wandb-summary.json
+2024-06-05 17:20:52,148 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\output.log
+2024-06-05 17:20:54,316 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: status_report
+2024-06-05 17:20:56,118 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: internal_messages
+2024-06-05 17:20:56,138 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: stop_status
+2024-06-05 17:20:56,139 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: stop_status
+2024-06-05 17:20:56,283 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: partial_history
+2024-06-05 17:20:56,357 DEBUG   SenderThread:62836 [sender.py:send():379] send: history
+2024-06-05 17:20:56,358 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: summary_record
+2024-06-05 17:20:56,362 INFO    SenderThread:62836 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-06-05 17:20:57,193 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\wandb-summary.json
+2024-06-05 17:20:58,197 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\output.log
+2024-06-05 17:20:59,365 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: status_report
+2024-06-05 17:21:02,563 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: partial_history
+2024-06-05 17:21:02,563 DEBUG   SenderThread:62836 [sender.py:send():379] send: history
+2024-06-05 17:21:02,563 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: summary_record
+2024-06-05 17:21:02,568 INFO    SenderThread:62836 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-06-05 17:21:03,238 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\wandb-summary.json
+2024-06-05 17:21:04,242 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\output.log
+2024-06-05 17:21:04,569 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: status_report
+2024-06-05 17:21:08,656 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: partial_history
+2024-06-05 17:21:08,656 DEBUG   SenderThread:62836 [sender.py:send():379] send: history
+2024-06-05 17:21:08,656 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: summary_record
+2024-06-05 17:21:08,661 INFO    SenderThread:62836 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-06-05 17:21:09,289 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\wandb-summary.json
+2024-06-05 17:21:09,663 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: status_report
+2024-06-05 17:21:10,292 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\output.log
+2024-06-05 17:21:10,779 DEBUG   SenderThread:62836 [sender.py:send():379] send: stats
+2024-06-05 17:21:11,120 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: internal_messages
+2024-06-05 17:21:11,140 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: stop_status
+2024-06-05 17:21:11,141 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: stop_status
+2024-06-05 17:21:14,690 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: status_report
+2024-06-05 17:21:14,690 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: partial_history
+2024-06-05 17:21:14,690 DEBUG   SenderThread:62836 [sender.py:send():379] send: history
+2024-06-05 17:21:14,691 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: summary_record
+2024-06-05 17:21:14,695 INFO    SenderThread:62836 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-06-05 17:21:15,342 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\wandb-summary.json
+2024-06-05 17:21:16,345 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\output.log
+2024-06-05 17:21:19,698 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: status_report
+2024-06-05 17:21:20,687 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: partial_history
+2024-06-05 17:21:20,687 DEBUG   SenderThread:62836 [sender.py:send():379] send: history
+2024-06-05 17:21:20,687 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: summary_record
+2024-06-05 17:21:20,691 INFO    SenderThread:62836 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-06-05 17:21:21,390 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\wandb-summary.json
+2024-06-05 17:21:22,393 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\output.log
+2024-06-05 17:21:25,693 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: status_report
+2024-06-05 17:21:26,121 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: internal_messages
+2024-06-05 17:21:26,134 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: stop_status
+2024-06-05 17:21:26,135 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: stop_status
+2024-06-05 17:21:26,712 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: partial_history
+2024-06-05 17:21:26,712 DEBUG   SenderThread:62836 [sender.py:send():379] send: history
+2024-06-05 17:21:26,713 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: summary_record
+2024-06-05 17:21:26,717 INFO    SenderThread:62836 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-06-05 17:21:27,434 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\wandb-summary.json
+2024-06-05 17:21:28,437 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\output.log
+2024-06-05 17:21:30,720 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: status_report
+2024-06-05 17:21:32,611 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: partial_history
+2024-06-05 17:21:32,611 DEBUG   SenderThread:62836 [sender.py:send():379] send: history
+2024-06-05 17:21:32,612 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: summary_record
+2024-06-05 17:21:32,624 INFO    SenderThread:62836 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-06-05 17:21:33,490 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\wandb-summary.json
+2024-06-05 17:21:34,493 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\output.log
+2024-06-05 17:21:36,627 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: status_report
+2024-06-05 17:21:38,599 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: partial_history
+2024-06-05 17:21:38,599 DEBUG   SenderThread:62836 [sender.py:send():379] send: history
+2024-06-05 17:21:38,599 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: summary_record
+2024-06-05 17:21:38,603 INFO    SenderThread:62836 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-06-05 17:21:39,539 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\wandb-summary.json
+2024-06-05 17:21:40,541 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\output.log
+2024-06-05 17:21:40,781 DEBUG   SenderThread:62836 [sender.py:send():379] send: stats
+2024-06-05 17:21:41,123 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: internal_messages
+2024-06-05 17:21:41,145 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: stop_status
+2024-06-05 17:21:41,146 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: stop_status
+2024-06-05 17:21:42,289 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: status_report
+2024-06-05 17:21:44,585 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: partial_history
+2024-06-05 17:21:44,586 DEBUG   SenderThread:62836 [sender.py:send():379] send: history
+2024-06-05 17:21:44,586 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: summary_record
+2024-06-05 17:21:44,591 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\wandb-summary.json
+2024-06-05 17:21:44,593 INFO    SenderThread:62836 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-06-05 17:21:45,595 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\wandb-summary.json
+2024-06-05 17:21:45,596 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\output.log
+2024-06-05 17:21:47,605 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: status_report
+2024-06-05 17:21:50,449 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: partial_history
+2024-06-05 17:21:50,449 DEBUG   SenderThread:62836 [sender.py:send():379] send: history
+2024-06-05 17:21:50,449 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: summary_record
+2024-06-05 17:21:50,453 INFO    SenderThread:62836 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-06-05 17:21:50,626 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\wandb-summary.json
+2024-06-05 17:21:51,643 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\output.log
+2024-06-05 17:21:53,456 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: status_report
+2024-06-05 17:21:56,125 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: internal_messages
+2024-06-05 17:21:56,154 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: stop_status
+2024-06-05 17:21:56,154 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: stop_status
+2024-06-05 17:21:56,527 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: partial_history
+2024-06-05 17:21:56,528 DEBUG   SenderThread:62836 [sender.py:send():379] send: history
+2024-06-05 17:21:56,528 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: summary_record
+2024-06-05 17:21:56,532 INFO    SenderThread:62836 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-06-05 17:21:56,676 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\wandb-summary.json
+2024-06-05 17:21:57,691 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\output.log
+2024-06-05 17:21:58,535 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: status_report
+2024-06-05 17:22:02,712 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: partial_history
+2024-06-05 17:22:02,713 DEBUG   SenderThread:62836 [sender.py:send():379] send: history
+2024-06-05 17:22:02,713 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: summary_record
+2024-06-05 17:22:02,718 INFO    SenderThread:62836 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-06-05 17:22:02,742 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\wandb-summary.json
+2024-06-05 17:22:03,719 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: status_report
+2024-06-05 17:22:03,750 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\output.log
+2024-06-05 17:22:08,674 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: partial_history
+2024-06-05 17:22:08,674 DEBUG   SenderThread:62836 [sender.py:send():379] send: history
+2024-06-05 17:22:08,675 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: summary_record
+2024-06-05 17:22:08,679 INFO    SenderThread:62836 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-06-05 17:22:08,789 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\wandb-summary.json
+2024-06-05 17:22:09,680 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: status_report
+2024-06-05 17:22:09,812 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\output.log
+2024-06-05 17:22:10,783 DEBUG   SenderThread:62836 [sender.py:send():379] send: stats
+2024-06-05 17:22:11,127 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: internal_messages
+2024-06-05 17:22:11,153 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: stop_status
+2024-06-05 17:22:11,154 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: stop_status
+2024-06-05 17:22:14,214 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: partial_history
+2024-06-05 17:22:14,214 DEBUG   SenderThread:62836 [sender.py:send():379] send: history
+2024-06-05 17:22:14,215 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: summary_record
+2024-06-05 17:22:14,224 INFO    SenderThread:62836 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-06-05 17:22:14,866 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\wandb-summary.json
+2024-06-05 17:22:14,898 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: status_report
+2024-06-05 17:22:14,898 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: partial_history
+2024-06-05 17:22:14,899 DEBUG   SenderThread:62836 [sender.py:send():379] send: history
+2024-06-05 17:22:14,899 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: summary_record
+2024-06-05 17:22:14,903 INFO    SenderThread:62836 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-06-05 17:22:15,565 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: partial_history
+2024-06-05 17:22:15,565 DEBUG   SenderThread:62836 [sender.py:send():379] send: history
+2024-06-05 17:22:15,565 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: summary_record
+2024-06-05 17:22:15,569 INFO    SenderThread:62836 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-06-05 17:22:15,869 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\wandb-summary.json
+2024-06-05 17:22:15,870 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\output.log
+2024-06-05 17:22:16,230 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: partial_history
+2024-06-05 17:22:16,231 DEBUG   SenderThread:62836 [sender.py:send():379] send: history
+2024-06-05 17:22:16,231 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: summary_record
+2024-06-05 17:22:16,236 INFO    SenderThread:62836 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-06-05 17:22:16,872 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\wandb-summary.json
+2024-06-05 17:22:16,912 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: partial_history
+2024-06-05 17:22:16,912 DEBUG   SenderThread:62836 [sender.py:send():379] send: history
+2024-06-05 17:22:16,913 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: summary_record
+2024-06-05 17:22:16,917 INFO    SenderThread:62836 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-06-05 17:22:17,580 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: partial_history
+2024-06-05 17:22:17,581 DEBUG   SenderThread:62836 [sender.py:send():379] send: history
+2024-06-05 17:22:17,581 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: summary_record
+2024-06-05 17:22:17,585 INFO    SenderThread:62836 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-06-05 17:22:17,888 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\wandb-summary.json
+2024-06-05 17:22:17,889 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\output.log
+2024-06-05 17:22:18,257 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: partial_history
+2024-06-05 17:22:18,258 DEBUG   SenderThread:62836 [sender.py:send():379] send: history
+2024-06-05 17:22:18,258 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: summary_record
+2024-06-05 17:22:18,263 INFO    SenderThread:62836 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-06-05 17:22:18,890 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\wandb-summary.json
+2024-06-05 17:22:18,931 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: partial_history
+2024-06-05 17:22:18,931 DEBUG   SenderThread:62836 [sender.py:send():379] send: history
+2024-06-05 17:22:18,931 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: summary_record
+2024-06-05 17:22:18,936 INFO    SenderThread:62836 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-06-05 17:22:19,611 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: partial_history
+2024-06-05 17:22:19,612 DEBUG   SenderThread:62836 [sender.py:send():379] send: history
+2024-06-05 17:22:19,612 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: summary_record
+2024-06-05 17:22:19,616 INFO    SenderThread:62836 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-06-05 17:22:19,907 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\wandb-summary.json
+2024-06-05 17:22:19,907 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\output.log
+2024-06-05 17:22:20,292 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: status_report
+2024-06-05 17:22:20,292 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: partial_history
+2024-06-05 17:22:20,293 DEBUG   SenderThread:62836 [sender.py:send():379] send: history
+2024-06-05 17:22:20,293 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: summary_record
+2024-06-05 17:22:20,297 INFO    SenderThread:62836 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-06-05 17:22:20,911 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\wandb-summary.json
+2024-06-05 17:22:20,984 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: partial_history
+2024-06-05 17:22:20,985 DEBUG   SenderThread:62836 [sender.py:send():379] send: history
+2024-06-05 17:22:20,985 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: summary_record
+2024-06-05 17:22:20,989 INFO    SenderThread:62836 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-06-05 17:22:21,665 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: partial_history
+2024-06-05 17:22:21,665 DEBUG   SenderThread:62836 [sender.py:send():379] send: history
+2024-06-05 17:22:21,665 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: summary_record
+2024-06-05 17:22:21,670 INFO    SenderThread:62836 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-06-05 17:22:21,926 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\wandb-summary.json
+2024-06-05 17:22:21,926 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\output.log
+2024-06-05 17:22:22,358 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: partial_history
+2024-06-05 17:22:22,359 DEBUG   SenderThread:62836 [sender.py:send():379] send: history
+2024-06-05 17:22:22,359 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: summary_record
+2024-06-05 17:22:22,363 INFO    SenderThread:62836 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-06-05 17:22:22,929 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\wandb-summary.json
+2024-06-05 17:22:23,046 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: partial_history
+2024-06-05 17:22:23,046 DEBUG   SenderThread:62836 [sender.py:send():379] send: history
+2024-06-05 17:22:23,047 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: summary_record
+2024-06-05 17:22:23,051 INFO    SenderThread:62836 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-06-05 17:22:23,725 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: partial_history
+2024-06-05 17:22:23,725 DEBUG   SenderThread:62836 [sender.py:send():379] send: history
+2024-06-05 17:22:23,725 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: summary_record
+2024-06-05 17:22:23,730 INFO    SenderThread:62836 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-06-05 17:22:23,941 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\wandb-summary.json
+2024-06-05 17:22:23,942 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\output.log
+2024-06-05 17:22:24,346 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: partial_history
+2024-06-05 17:22:24,347 DEBUG   SenderThread:62836 [sender.py:send():379] send: history
+2024-06-05 17:22:24,347 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: summary_record
+2024-06-05 17:22:24,351 INFO    SenderThread:62836 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-06-05 17:22:24,944 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\wandb-summary.json
+2024-06-05 17:22:25,353 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: status_report
+2024-06-05 17:22:25,954 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\output.log
+2024-06-05 17:22:26,128 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: internal_messages
+2024-06-05 17:22:26,155 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: stop_status
+2024-06-05 17:22:26,156 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: stop_status
+2024-06-05 17:22:27,970 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\output.log
+2024-06-05 17:22:29,989 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\output.log
+2024-06-05 17:22:31,035 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: status_report
+2024-06-05 17:22:32,006 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\output.log
+2024-06-05 17:22:34,024 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\output.log
+2024-06-05 17:22:36,038 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\output.log
+2024-06-05 17:22:36,528 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: status_report
+2024-06-05 17:22:38,057 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\output.log
+2024-06-05 17:22:40,076 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\output.log
+2024-06-05 17:22:40,784 DEBUG   SenderThread:62836 [sender.py:send():379] send: stats
+2024-06-05 17:22:41,131 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: internal_messages
+2024-06-05 17:22:41,159 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: stop_status
+2024-06-05 17:22:41,159 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: stop_status
+2024-06-05 17:22:42,092 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\output.log
+2024-06-05 17:22:42,377 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: status_report
+2024-06-05 17:22:44,564 DEBUG   SenderThread:62836 [sender.py:send():379] send: files
+2024-06-05 17:22:44,564 INFO    SenderThread:62836 [sender.py:_save_file():1390] saving file media\videos\Spike Animation_102_446ed7eeba11f43f3a4d.gif with policy now
+2024-06-05 17:22:44,565 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: partial_history
+2024-06-05 17:22:45,119 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_created():271] file/dir created: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\media\videos\Spike Animation_102_446ed7eeba11f43f3a4d.gif
+2024-06-05 17:22:45,120 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_created():271] file/dir created: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\media
+2024-06-05 17:22:45,121 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_created():271] file/dir created: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\media\videos
+2024-06-05 17:22:45,547 INFO    wandb-upload_0:62836 [upload_job.py:push():131] Uploaded file C:\Users\lukea\AppData\Local\Temp\tmpkepwcdl_wandb\v5ldfwee-media/videos/Spike Animation_102_446ed7eeba11f43f3a4d.gif
+2024-06-05 17:22:46,151 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\output.log
+2024-06-05 17:22:46,259 INFO    wandb-upload_0:62836 [upload_job.py:push():131] Uploaded file C:\Users\lukea\AppData\Local\Temp\tmpkepwcdl_wandb\m8v83snn-media/videos/Spike Animation_102_446ed7eeba11f43f3a4d.gif
+2024-06-05 17:22:47,575 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: status_report
+2024-06-05 17:22:49,147 DEBUG   SenderThread:62836 [sender.py:send():379] send: files
+2024-06-05 17:22:49,147 INFO    SenderThread:62836 [sender.py:_save_file():1390] saving file media\images\Results Grid_102_59df2e21b0f91be03dad.png with policy now
+2024-06-05 17:22:49,159 DEBUG   SenderThread:62836 [sender.py:send():379] send: files
+2024-06-05 17:22:49,160 INFO    SenderThread:62836 [sender.py:_save_file():1390] saving file media\images\t-SNE_102_08d7c5f5a2057fcbab0a.png with policy now
+2024-06-05 17:22:49,171 DEBUG   SenderThread:62836 [sender.py:send():379] send: files
+2024-06-05 17:22:49,171 INFO    SenderThread:62836 [sender.py:_save_file():1390] saving file media\videos\Spike Animation_102_b6f416daf52adaa9bf74.gif with policy now
+2024-06-05 17:22:49,177 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_created():271] file/dir created: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\media\images\t-SNE_102_08d7c5f5a2057fcbab0a.png
+2024-06-05 17:22:49,182 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_created():271] file/dir created: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\media\images\Results Grid_102_59df2e21b0f91be03dad.png
+2024-06-05 17:22:49,185 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_created():271] file/dir created: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\media\videos\Spike Animation_102_b6f416daf52adaa9bf74.gif
+2024-06-05 17:22:49,189 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\media
+2024-06-05 17:22:49,190 DEBUG   SenderThread:62836 [sender.py:send():379] send: files
+2024-06-05 17:22:49,190 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\media\videos
+2024-06-05 17:22:49,191 INFO    SenderThread:62836 [sender.py:_save_file():1390] saving file media\images\Input Raster_102_e9591e5ff10574c99f6c.png with policy now
+2024-06-05 17:22:49,191 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_created():271] file/dir created: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\media\images
+2024-06-05 17:22:49,207 DEBUG   SenderThread:62836 [sender.py:send():379] send: files
+2024-06-05 17:22:49,207 INFO    SenderThread:62836 [sender.py:_save_file():1390] saving file media\images\Output Raster_102_61f38b8c652652d7367d.png with policy now
+2024-06-05 17:22:49,208 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: partial_history
+2024-06-05 17:22:49,211 DEBUG   SenderThread:62836 [sender.py:send():379] send: history
+2024-06-05 17:22:49,212 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: summary_record
+2024-06-05 17:22:49,222 INFO    SenderThread:62836 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-06-05 17:22:49,387 DEBUG   SenderThread:62836 [sender.py:send():379] send: telemetry
+2024-06-05 17:22:49,390 DEBUG   SenderThread:62836 [sender.py:send():379] send: exit
+2024-06-05 17:22:49,391 INFO    SenderThread:62836 [sender.py:send_exit():586] handling exit code: 0
+2024-06-05 17:22:49,391 INFO    SenderThread:62836 [sender.py:send_exit():588] handling runtime: 398
+2024-06-05 17:22:49,396 INFO    SenderThread:62836 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-06-05 17:22:49,397 INFO    SenderThread:62836 [sender.py:send_exit():594] send defer
+2024-06-05 17:22:49,397 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: defer
+2024-06-05 17:22:49,398 INFO    HandlerThread:62836 [handler.py:handle_request_defer():172] handle defer: 0
+2024-06-05 17:22:49,398 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: defer
+2024-06-05 17:22:49,398 INFO    SenderThread:62836 [sender.py:send_request_defer():610] handle sender defer: 0
+2024-06-05 17:22:49,398 INFO    SenderThread:62836 [sender.py:transition_state():614] send defer: 1
+2024-06-05 17:22:49,398 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: defer
+2024-06-05 17:22:49,399 INFO    HandlerThread:62836 [handler.py:handle_request_defer():172] handle defer: 1
+2024-06-05 17:22:49,399 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: defer
+2024-06-05 17:22:49,399 INFO    SenderThread:62836 [sender.py:send_request_defer():610] handle sender defer: 1
+2024-06-05 17:22:49,399 INFO    SenderThread:62836 [sender.py:transition_state():614] send defer: 2
+2024-06-05 17:22:49,399 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: defer
+2024-06-05 17:22:49,400 INFO    HandlerThread:62836 [handler.py:handle_request_defer():172] handle defer: 2
+2024-06-05 17:22:49,400 INFO    HandlerThread:62836 [system_monitor.py:finish():203] Stopping system monitor
+2024-06-05 17:22:49,400 DEBUG   SystemMonitor:62836 [system_monitor.py:_start():179] Finished system metrics aggregation loop
+2024-06-05 17:22:49,409 DEBUG   SystemMonitor:62836 [system_monitor.py:_start():183] Publishing last batch of metrics
+2024-06-05 17:22:49,409 INFO    HandlerThread:62836 [interfaces.py:finish():202] Joined cpu monitor
+2024-06-05 17:22:49,410 INFO    HandlerThread:62836 [interfaces.py:finish():202] Joined disk monitor
+2024-06-05 17:22:49,480 INFO    HandlerThread:62836 [interfaces.py:finish():202] Joined gpu monitor
+2024-06-05 17:22:49,480 INFO    HandlerThread:62836 [interfaces.py:finish():202] Joined memory monitor
+2024-06-05 17:22:49,481 INFO    HandlerThread:62836 [interfaces.py:finish():202] Joined network monitor
+2024-06-05 17:22:49,481 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: defer
+2024-06-05 17:22:49,482 INFO    SenderThread:62836 [sender.py:send_request_defer():610] handle sender defer: 2
+2024-06-05 17:22:49,482 INFO    SenderThread:62836 [sender.py:transition_state():614] send defer: 3
+2024-06-05 17:22:49,482 DEBUG   SenderThread:62836 [sender.py:send():379] send: stats
+2024-06-05 17:22:49,482 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: defer
+2024-06-05 17:22:49,482 INFO    HandlerThread:62836 [handler.py:handle_request_defer():172] handle defer: 3
+2024-06-05 17:22:49,483 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: defer
+2024-06-05 17:22:49,483 INFO    SenderThread:62836 [sender.py:send_request_defer():610] handle sender defer: 3
+2024-06-05 17:22:49,483 INFO    SenderThread:62836 [sender.py:transition_state():614] send defer: 4
+2024-06-05 17:22:49,483 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: defer
+2024-06-05 17:22:49,483 INFO    HandlerThread:62836 [handler.py:handle_request_defer():172] handle defer: 4
+2024-06-05 17:22:49,484 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: defer
+2024-06-05 17:22:49,484 INFO    SenderThread:62836 [sender.py:send_request_defer():610] handle sender defer: 4
+2024-06-05 17:22:49,484 INFO    SenderThread:62836 [sender.py:transition_state():614] send defer: 5
+2024-06-05 17:22:49,484 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: defer
+2024-06-05 17:22:49,484 INFO    HandlerThread:62836 [handler.py:handle_request_defer():172] handle defer: 5
+2024-06-05 17:22:49,484 DEBUG   SenderThread:62836 [sender.py:send():379] send: summary
+2024-06-05 17:22:49,489 INFO    SenderThread:62836 [sender.py:_save_file():1390] saving file wandb-summary.json with policy end
+2024-06-05 17:22:49,491 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: defer
+2024-06-05 17:22:49,491 INFO    SenderThread:62836 [sender.py:send_request_defer():610] handle sender defer: 5
+2024-06-05 17:22:49,491 INFO    SenderThread:62836 [sender.py:transition_state():614] send defer: 6
+2024-06-05 17:22:49,491 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: defer
+2024-06-05 17:22:49,491 INFO    HandlerThread:62836 [handler.py:handle_request_defer():172] handle defer: 6
+2024-06-05 17:22:49,492 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: defer
+2024-06-05 17:22:49,492 INFO    SenderThread:62836 [sender.py:send_request_defer():610] handle sender defer: 6
+2024-06-05 17:22:49,494 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: status_report
+2024-06-05 17:22:49,636 INFO    wandb-upload_0:62836 [upload_job.py:push():131] Uploaded file C:\Users\lukea\AppData\Local\Temp\tmpkepwcdl_wandb\vnm74q4d-media/images/Results Grid_102_59df2e21b0f91be03dad.png
+2024-06-05 17:22:49,641 INFO    SenderThread:62836 [sender.py:transition_state():614] send defer: 7
+2024-06-05 17:22:49,641 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: defer
+2024-06-05 17:22:49,641 INFO    HandlerThread:62836 [handler.py:handle_request_defer():172] handle defer: 7
+2024-06-05 17:22:49,642 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: defer
+2024-06-05 17:22:49,642 INFO    SenderThread:62836 [sender.py:send_request_defer():610] handle sender defer: 7
+2024-06-05 17:22:50,150 INFO    wandb-upload_1:62836 [upload_job.py:push():131] Uploaded file C:\Users\lukea\AppData\Local\Temp\tmpkepwcdl_wandb\73ofjmo1-media/images/t-SNE_102_08d7c5f5a2057fcbab0a.png
+2024-06-05 17:22:50,185 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\wandb-summary.json
+2024-06-05 17:22:50,186 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\config.yaml
+2024-06-05 17:22:50,186 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_created():271] file/dir created: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\media\images\Output Raster_102_61f38b8c652652d7367d.png
+2024-06-05 17:22:50,188 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_created():271] file/dir created: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\media\images\Input Raster_102_e9591e5ff10574c99f6c.png
+2024-06-05 17:22:50,190 INFO    Thread-16 :62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\media\images
+2024-06-05 17:22:50,390 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: poll_exit
+2024-06-05 17:22:50,618 INFO    wandb-upload_0:62836 [upload_job.py:push():131] Uploaded file C:\Users\lukea\AppData\Local\Temp\tmpkepwcdl_wandb\rc71wy6z-media/images/Results Grid_102_59df2e21b0f91be03dad.png
+2024-06-05 17:22:50,627 INFO    wandb-upload_4:62836 [upload_job.py:push():131] Uploaded file C:\Users\lukea\AppData\Local\Temp\tmpkepwcdl_wandb\8pd3yg7r-media/images/Output Raster_102_61f38b8c652652d7367d.png
+2024-06-05 17:22:50,728 INFO    wandb-upload_3:62836 [upload_job.py:push():131] Uploaded file C:\Users\lukea\AppData\Local\Temp\tmpkepwcdl_wandb\y59gd0a4-media/images/Input Raster_102_e9591e5ff10574c99f6c.png
+2024-06-05 17:22:50,848 INFO    wandb-upload_2:62836 [upload_job.py:push():131] Uploaded file C:\Users\lukea\AppData\Local\Temp\tmpkepwcdl_wandb\xp89bmo6-media/videos/Spike Animation_102_b6f416daf52adaa9bf74.gif
+2024-06-05 17:22:51,203 INFO    wandb-upload_1:62836 [upload_job.py:push():131] Uploaded file C:\Users\lukea\AppData\Local\Temp\tmpkepwcdl_wandb\vtztjaca-media/images/t-SNE_102_08d7c5f5a2057fcbab0a.png
+2024-06-05 17:22:51,270 INFO    wandb-upload_4:62836 [upload_job.py:push():131] Uploaded file C:\Users\lukea\AppData\Local\Temp\tmpkepwcdl_wandb\iyxcm513-media/images/Output Raster_102_61f38b8c652652d7367d.png
+2024-06-05 17:22:51,476 INFO    wandb-upload_3:62836 [upload_job.py:push():131] Uploaded file C:\Users\lukea\AppData\Local\Temp\tmpkepwcdl_wandb\kanyx5j6-media/images/Input Raster_102_e9591e5ff10574c99f6c.png
+2024-06-05 17:22:51,614 INFO    SenderThread:62836 [sender.py:transition_state():614] send defer: 8
+2024-06-05 17:22:51,614 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: poll_exit
+2024-06-05 17:22:51,614 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: defer
+2024-06-05 17:22:51,614 INFO    HandlerThread:62836 [handler.py:handle_request_defer():172] handle defer: 8
+2024-06-05 17:22:51,615 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: defer
+2024-06-05 17:22:51,615 INFO    SenderThread:62836 [sender.py:send_request_defer():610] handle sender defer: 8
+2024-06-05 17:22:51,615 INFO    SenderThread:62836 [sender.py:transition_state():614] send defer: 9
+2024-06-05 17:22:51,615 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: defer
+2024-06-05 17:22:51,615 INFO    HandlerThread:62836 [handler.py:handle_request_defer():172] handle defer: 9
+2024-06-05 17:22:51,616 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: defer
+2024-06-05 17:22:51,616 INFO    SenderThread:62836 [sender.py:send_request_defer():610] handle sender defer: 9
+2024-06-05 17:22:51,616 INFO    SenderThread:62836 [dir_watcher.py:finish():358] shutting down directory watcher
+2024-06-05 17:22:51,933 INFO    wandb-upload_2:62836 [upload_job.py:push():131] Uploaded file C:\Users\lukea\AppData\Local\Temp\tmpkepwcdl_wandb\8lptvmxt-media/videos/Spike Animation_102_b6f416daf52adaa9bf74.gif
+2024-06-05 17:22:52,199 INFO    SenderThread:62836 [dir_watcher.py:_on_file_modified():288] file/dir modified: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\output.log
+2024-06-05 17:22:52,199 INFO    SenderThread:62836 [dir_watcher.py:finish():388] scan: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files
+2024-06-05 17:22:52,200 INFO    SenderThread:62836 [dir_watcher.py:finish():402] scan save: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\config.yaml config.yaml
+2024-06-05 17:22:52,201 INFO    SenderThread:62836 [dir_watcher.py:finish():402] scan save: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\conda-environment.yaml conda-environment.yaml
+2024-06-05 17:22:52,203 INFO    SenderThread:62836 [dir_watcher.py:finish():402] scan save: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\wandb-metadata.json wandb-metadata.json
+2024-06-05 17:22:52,203 INFO    SenderThread:62836 [dir_watcher.py:finish():402] scan save: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\requirements.txt requirements.txt
+2024-06-05 17:22:52,204 INFO    SenderThread:62836 [dir_watcher.py:finish():402] scan save: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\output.log output.log
+2024-06-05 17:22:52,206 INFO    SenderThread:62836 [dir_watcher.py:finish():402] scan save: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\wandb-summary.json wandb-summary.json
+2024-06-05 17:22:52,211 INFO    SenderThread:62836 [dir_watcher.py:finish():402] scan save: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\media\videos\Spike Animation_102_446ed7eeba11f43f3a4d.gif media/videos/Spike Animation_102_446ed7eeba11f43f3a4d.gif
+2024-06-05 17:22:52,211 INFO    SenderThread:62836 [dir_watcher.py:finish():402] scan save: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\media\videos\Spike Animation_102_b6f416daf52adaa9bf74.gif media/videos/Spike Animation_102_b6f416daf52adaa9bf74.gif
+2024-06-05 17:22:52,211 INFO    SenderThread:62836 [dir_watcher.py:finish():402] scan save: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\media\images\Results Grid_102_59df2e21b0f91be03dad.png media/images/Results Grid_102_59df2e21b0f91be03dad.png
+2024-06-05 17:22:52,212 INFO    SenderThread:62836 [dir_watcher.py:finish():402] scan save: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\media\images\t-SNE_102_08d7c5f5a2057fcbab0a.png media/images/t-SNE_102_08d7c5f5a2057fcbab0a.png
+2024-06-05 17:22:52,212 INFO    SenderThread:62836 [dir_watcher.py:finish():402] scan save: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\media\images\Input Raster_102_e9591e5ff10574c99f6c.png media/images/Input Raster_102_e9591e5ff10574c99f6c.png
+2024-06-05 17:22:52,212 INFO    SenderThread:62836 [dir_watcher.py:finish():402] scan save: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\media\images\Output Raster_102_61f38b8c652652d7367d.png media/images/Output Raster_102_61f38b8c652652d7367d.png
+2024-06-05 17:22:52,212 INFO    SenderThread:62836 [sender.py:transition_state():614] send defer: 10
+2024-06-05 17:22:52,212 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: defer
+2024-06-05 17:22:52,212 INFO    HandlerThread:62836 [handler.py:handle_request_defer():172] handle defer: 10
+2024-06-05 17:22:52,213 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: defer
+2024-06-05 17:22:52,213 INFO    SenderThread:62836 [sender.py:send_request_defer():610] handle sender defer: 10
+2024-06-05 17:22:52,213 INFO    SenderThread:62836 [file_pusher.py:finish():172] shutting down file pusher
+2024-06-05 17:22:52,392 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: poll_exit
+2024-06-05 17:22:52,392 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: poll_exit
+2024-06-05 17:22:52,559 INFO    wandb-upload_1:62836 [upload_job.py:push():131] Uploaded file G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\config.yaml
+2024-06-05 17:22:52,560 INFO    wandb-upload_4:62836 [upload_job.py:push():131] Uploaded file G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\requirements.txt
+2024-06-05 17:22:52,566 INFO    wandb-upload_2:62836 [upload_job.py:push():131] Uploaded file G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\output.log
+2024-06-05 17:22:52,593 INFO    wandb-upload_3:62836 [upload_job.py:push():131] Uploaded file G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\files\wandb-summary.json
+2024-06-05 17:22:52,795 INFO    Thread-15 (_thread_body):62836 [sender.py:transition_state():614] send defer: 11
+2024-06-05 17:22:52,795 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: defer
+2024-06-05 17:22:52,795 INFO    HandlerThread:62836 [handler.py:handle_request_defer():172] handle defer: 11
+2024-06-05 17:22:52,795 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: defer
+2024-06-05 17:22:52,796 INFO    SenderThread:62836 [sender.py:send_request_defer():610] handle sender defer: 11
+2024-06-05 17:22:52,796 INFO    SenderThread:62836 [file_pusher.py:join():178] waiting for file pusher
+2024-06-05 17:22:52,799 INFO    SenderThread:62836 [sender.py:transition_state():614] send defer: 12
+2024-06-05 17:22:52,799 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: defer
+2024-06-05 17:22:52,799 INFO    HandlerThread:62836 [handler.py:handle_request_defer():172] handle defer: 12
+2024-06-05 17:22:52,800 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: defer
+2024-06-05 17:22:52,800 INFO    SenderThread:62836 [sender.py:send_request_defer():610] handle sender defer: 12
+2024-06-05 17:22:52,800 INFO    SenderThread:62836 [file_stream.py:finish():614] file stream finish called
+2024-06-05 17:22:53,237 INFO    SenderThread:62836 [file_stream.py:finish():618] file stream finish is done
+2024-06-05 17:22:53,238 INFO    SenderThread:62836 [sender.py:transition_state():614] send defer: 13
+2024-06-05 17:22:53,238 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: defer
+2024-06-05 17:22:53,239 INFO    HandlerThread:62836 [handler.py:handle_request_defer():172] handle defer: 13
+2024-06-05 17:22:53,239 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: defer
+2024-06-05 17:22:53,239 INFO    SenderThread:62836 [sender.py:send_request_defer():610] handle sender defer: 13
+2024-06-05 17:22:53,240 INFO    SenderThread:62836 [sender.py:transition_state():614] send defer: 14
+2024-06-05 17:22:53,240 DEBUG   SenderThread:62836 [sender.py:send():379] send: final
+2024-06-05 17:22:53,240 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: defer
+2024-06-05 17:22:53,240 DEBUG   SenderThread:62836 [sender.py:send():379] send: footer
+2024-06-05 17:22:53,241 INFO    HandlerThread:62836 [handler.py:handle_request_defer():172] handle defer: 14
+2024-06-05 17:22:53,241 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: defer
+2024-06-05 17:22:53,242 INFO    SenderThread:62836 [sender.py:send_request_defer():610] handle sender defer: 14
+2024-06-05 17:22:53,244 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: poll_exit
+2024-06-05 17:22:53,245 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: poll_exit
+2024-06-05 17:22:53,248 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: internal_messages
+2024-06-05 17:22:53,249 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: server_info
+2024-06-05 17:22:53,250 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: get_summary
+2024-06-05 17:22:53,250 DEBUG   SenderThread:62836 [sender.py:send_request():406] send_request: server_info
+2024-06-05 17:22:53,250 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: sampled_history
+2024-06-05 17:22:53,382 DEBUG   HandlerThread:62836 [handler.py:handle_request():146] handle_request: shutdown
+2024-06-05 17:22:53,382 INFO    HandlerThread:62836 [handler.py:finish():866] shutting down handler
+2024-06-05 17:22:54,251 INFO    WriterThread:62836 [datastore.py:close():296] close: G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_171609-3fqm9wjd\run-3fqm9wjd.wandb
+2024-06-05 17:22:54,382 INFO    SenderThread:62836 [sender.py:finish():1546] shutting down sender
+2024-06-05 17:22:54,382 INFO    SenderThread:62836 [file_pusher.py:finish():172] shutting down file pusher
+2024-06-05 17:22:54,383 INFO    SenderThread:62836 [file_pusher.py:join():178] waiting for file pusher

@@ -42,18 +42,9 @@ class SAE(nn.Module):
         self.net_rec = snn.Leaky(beta=beta, spike_grad=spike_grad, reset_mechanism="zero", threshold = threshold)
         
         self.ff_out = nn.Linear(num_rec, num_conv2)
-        # reshape the input to convTranspose to be 
-        
 
-        '''
-        # latent - remove this
-        self.ff_latent = nn.Linear(num_rec, num_latent) # 100 -> 8
-        self.lif_latent = snn.Leaky(beta=beta, spike_grad=spike_grad)
-        # latent output size: [8, 8]  
-        '''
-        
+
         # needs to be [8, 64, 24, 24] format for convTrans
-        
         # convolution (decoder)
         
         self.deconv2 = nn.ConvTranspose2d(cp["channels_2"], cp["channels_1"], (cp["filter_2"], cp["filter_2"])) 
@@ -123,17 +114,19 @@ class SAE(nn.Module):
             # convolution (encoder) - layer 1
             curr_conv1 = self.conv1(x[timestep])
             spk_conv1, mem_conv1 = self.lif_conv1(curr_conv1, mem_conv1)
+            #mem_conv1 += noise_amp*torch.randn(mem_conv1.shape).to(self.device)
             
             # convolution (encoder) - layer 2
             curr_conv2 = self.conv2(spk_conv1)
             spk_conv2, mem_conv2 = self.lif_conv2(curr_conv2, mem_conv2)
-            
+            #mem_conv2 += noise_amp*torch.randn(mem_conv2.shape).to(self.device)
             
             #recurrent layer (encoder)
             curr_in = self.ff_in(spk_conv2.view(batch_size, -1))
             curr_rec = self.ff_rec(spk_rec)
             curr_total = curr_in + curr_rec
-            spk_rec, mem_rec = self.net_rec(curr_total, mem_rec)
+            spk_rec, mem_rec = self.net_rec(curr_total, mem_rec) #can set curr_total to curr_in, param in front
+            #mem_rec += noise_amp*torch.randn(mem_rec.shape).to(self.device)
             '''
             print(f'\nInput Size: {x[timestep].size()}\
                     \nConv1 Size: {curr_conv1.size()}\
@@ -148,20 +141,17 @@ class SAE(nn.Module):
             # convolution (decoder) - undo layer 2
             curr_deconv2 = self.deconv2(curr_out.view(curr_out.size(0), channels_2, conv2_size, conv2_size))
             spk_deconv2, mem_deconv2 = self.lif_conv2(curr_deconv2, mem_deconv2)
+            #mem_deconv2 += noise_amp*torch.randn(mem_deconv2.shape).to(self.device)
             #print(f'\n{spk_deconv2.size()}\n{curr_deconv2.size()}')
             
             # convolution (decoder) - undo layer 1
             curr_reconstruction = self.reconstruction(spk_deconv2)
             spk_reconstruction, mem_reconstruction = self.lif_reconstruction(curr_reconstruction, mem_reconstruction)
+            #mem_reconstruction += noise_amp*torch.randn(mem_reconstruction.shape).to(self.device)
             #print(f'\n{spk_reconstruction.size()}\n{curr_reconstruction.size()}')
             
             ''' Noise if needed
-            #mem_conv1 += noise_amp*torch.randn(mem_conv1.shape).to(self.device)
-            #mem_conv2 += noise_amp*torch.randn(mem_conv2.shape).to(self.device)
-            #mem_rec += noise_amp*torch.randn(mem_rec.shape).to(self.device)
             #mem_latent += noise_amp*torch.randn(mem_latent.shape).to(self.device)
-            #mem_deconv2 += noise_amp*torch.randn(mem_deconv2.shape).to(self.device)
-            #mem_reconstruction += noise_amp*torch.randn(mem_reconstruction.shape).to(self.device)
             '''
             
             #spk_latents.append(spk_latent)

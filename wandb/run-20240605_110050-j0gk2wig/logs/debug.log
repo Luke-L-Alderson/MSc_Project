@@ -1,0 +1,36 @@
+2024-06-05 11:00:50,092 INFO    Thread-6 (_run_job):56116 [wandb_setup.py:_flush():76] Current SDK version is 0.16.6
+2024-06-05 11:00:50,094 INFO    Thread-6 (_run_job):56116 [wandb_setup.py:_flush():76] Configure stats pid to 56116
+2024-06-05 11:00:50,094 INFO    Thread-6 (_run_job):56116 [wandb_setup.py:_flush():76] Loading settings from C:\Users\lukea\.config\wandb\settings
+2024-06-05 11:00:50,094 INFO    Thread-6 (_run_job):56116 [wandb_setup.py:_flush():76] Loading settings from G:\My Drive\MSc\0_Project\MSc_Project\wandb\settings
+2024-06-05 11:00:50,094 INFO    Thread-6 (_run_job):56116 [wandb_setup.py:_flush():76] Loading settings from environment variables: {'root_dir': 'G:\\My Drive\\MSc\\0_Project\\MSc_Project', 'entity': 'llalderson', 'project': 'MSc Project', 'run_id': 'j0gk2wig', 'sweep_id': 'j9bltnxx', 'sweep_param_path': 'G:\\My Drive\\MSc\\0_Project\\MSc_Project\\wandb\\sweep-j9bltnxx\\config-j0gk2wig.yaml'}
+2024-06-05 11:00:50,094 INFO    Thread-6 (_run_job):56116 [wandb_setup.py:_flush():76] Applying setup settings: {'_disable_service': False}
+2024-06-05 11:00:50,094 INFO    Thread-6 (_run_job):56116 [wandb_setup.py:_flush():76] Inferring run settings from compute environment: {'program': '<python with no main file>'}
+2024-06-05 11:00:50,094 INFO    Thread-6 (_run_job):56116 [wandb_setup.py:_flush():76] Applying login settings: {}
+2024-06-05 11:00:50,095 INFO    Thread-6 (_run_job):56116 [wandb_init.py:_log_setup():521] Logging user logs to G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_110050-j0gk2wig\logs\debug.log
+2024-06-05 11:00:50,095 INFO    Thread-6 (_run_job):56116 [wandb_init.py:_log_setup():522] Logging internal logs to G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_110050-j0gk2wig\logs\debug-internal.log
+2024-06-05 11:00:50,096 INFO    Thread-6 (_run_job):56116 [wandb_init.py:init():561] calling init triggers
+2024-06-05 11:00:50,096 INFO    Thread-6 (_run_job):56116 [wandb_init.py:init():568] wandb.init called with sweep_config: {'bs': 64, 'epochs': 1, 'lr': 0.0001, 'subset_size': 0.05}
+config: {}
+2024-06-05 11:00:50,096 INFO    Thread-6 (_run_job):56116 [wandb_init.py:init():611] starting backend
+2024-06-05 11:00:50,096 INFO    Thread-6 (_run_job):56116 [wandb_init.py:init():615] setting up manager
+2024-06-05 11:00:50,110 INFO    Thread-6 (_run_job):56116 [backend.py:_multiprocessing_setup():105] multiprocessing start_methods=spawn, using: spawn
+2024-06-05 11:00:50,113 INFO    Thread-6 (_run_job):56116 [wandb_init.py:init():623] backend started and connected
+2024-06-05 11:00:50,149 INFO    Thread-6 (_run_job):56116 [wandb_run.py:_config_callback():1347] config_cb None None {'bs': 64, 'epochs': 1, 'lr': 0.0001, 'subset_size': 0.05}
+2024-06-05 11:00:50,150 INFO    Thread-6 (_run_job):56116 [wandb_init.py:init():715] updated telemetry
+2024-06-05 11:00:50,280 INFO    Thread-6 (_run_job):56116 [wandb_init.py:init():748] communicating run to backend with 90.0 second timeout
+2024-06-05 11:00:51,147 INFO    Thread-6 (_run_job):56116 [wandb_run.py:_on_init():2357] communicating current version
+2024-06-05 11:00:51,757 INFO    Thread-6 (_run_job):56116 [wandb_run.py:_on_init():2366] got version response upgrade_message: "wandb version 0.17.0 is available!  To upgrade, please run:\n $ pip install wandb --upgrade"
+
+2024-06-05 11:00:51,758 INFO    Thread-6 (_run_job):56116 [wandb_init.py:init():799] starting run threads in backend
+2024-06-05 11:00:52,312 INFO    Thread-6 (_run_job):56116 [wandb_run.py:_console_start():2335] atexit reg
+2024-06-05 11:00:52,313 INFO    Thread-6 (_run_job):56116 [wandb_run.py:_redirect():2190] redirect: wrap_raw
+2024-06-05 11:00:52,315 INFO    Thread-6 (_run_job):56116 [wandb_run.py:_redirect():2255] Wrapping output streams.
+2024-06-05 11:00:52,315 INFO    Thread-6 (_run_job):56116 [wandb_run.py:_redirect():2280] Redirects installed.
+2024-06-05 11:00:52,317 INFO    Thread-6 (_run_job):56116 [wandb_init.py:init():842] run started, returning control to user process
+2024-06-05 11:00:52,870 INFO    Thread-6 (_run_job):56116 [wandb_run.py:_finish():2064] finishing run llalderson/MSc Project/j0gk2wig
+2024-06-05 11:00:52,870 INFO    Thread-6 (_run_job):56116 [wandb_run.py:_atexit_cleanup():2304] got exitcode: 1
+2024-06-05 11:00:52,871 INFO    Thread-6 (_run_job):56116 [wandb_run.py:_restore():2287] restore
+2024-06-05 11:00:52,871 INFO    Thread-6 (_run_job):56116 [wandb_run.py:_restore():2293] restore done
+2024-06-05 11:00:58,911 INFO    Thread-6 (_run_job):56116 [wandb_run.py:_footer_history_summary_info():3936] rendering history
+2024-06-05 11:00:58,911 INFO    Thread-6 (_run_job):56116 [wandb_run.py:_footer_history_summary_info():3968] rendering summary
+2024-06-05 11:00:58,921 INFO    Thread-6 (_run_job):56116 [wandb_run.py:_footer_sync_info():3895] logging synced files

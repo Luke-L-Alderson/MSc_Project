@@ -1,0 +1,32 @@
+2024-06-05 12:49:11,759 INFO    Thread-16 (_run_job):64584 [wandb_setup.py:_flush():76] Current SDK version is 0.16.6
+2024-06-05 12:49:11,761 INFO    Thread-16 (_run_job):64584 [wandb_setup.py:_flush():76] Configure stats pid to 64584
+2024-06-05 12:49:11,761 INFO    Thread-16 (_run_job):64584 [wandb_setup.py:_flush():76] Loading settings from C:\Users\lukea\.config\wandb\settings
+2024-06-05 12:49:11,761 INFO    Thread-16 (_run_job):64584 [wandb_setup.py:_flush():76] Loading settings from G:\My Drive\MSc\0_Project\MSc_Project\wandb\settings
+2024-06-05 12:49:11,762 INFO    Thread-16 (_run_job):64584 [wandb_setup.py:_flush():76] Loading settings from environment variables: {'project': 'MSc Project', 'entity': 'llalderson', 'root_dir': 'G:\\My Drive\\MSc\\0_Project\\MSc_Project', 'sweep_id': 's051432q', 'run_id': '9b9d3a7u', 'sweep_param_path': 'G:\\My Drive\\MSc\\0_Project\\MSc_Project\\wandb\\sweep-s051432q\\config-9b9d3a7u.yaml'}
+2024-06-05 12:49:11,762 INFO    Thread-16 (_run_job):64584 [wandb_setup.py:_flush():76] Applying setup settings: {'_disable_service': False}
+2024-06-05 12:49:11,762 INFO    Thread-16 (_run_job):64584 [wandb_setup.py:_flush():76] Inferring run settings from compute environment: {'program_relpath': 'main.py', 'program_abspath': 'g:\\my drive\\msc\\0_project\\msc_project\\main.py', 'program': 'g:\\my drive\\msc\\0_project\\msc_project\\main.py'}
+2024-06-05 12:49:11,762 INFO    Thread-16 (_run_job):64584 [wandb_setup.py:_flush():76] Applying login settings: {}
+2024-06-05 12:49:11,763 INFO    Thread-16 (_run_job):64584 [wandb_init.py:_log_setup():521] Logging user logs to G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_124911-9b9d3a7u\logs\debug.log
+2024-06-05 12:49:11,764 INFO    Thread-16 (_run_job):64584 [wandb_init.py:_log_setup():522] Logging internal logs to G:\My Drive\MSc\0_Project\MSc_Project\wandb\run-20240605_124911-9b9d3a7u\logs\debug-internal.log
+2024-06-05 12:49:11,764 INFO    Thread-16 (_run_job):64584 [wandb_init.py:init():561] calling init triggers
+2024-06-05 12:49:11,765 INFO    Thread-16 (_run_job):64584 [wandb_init.py:init():568] wandb.init called with sweep_config: {'bs': 64, 'epochs': 3, 'lr': 0.0001, 'num_workers': 4, 'subset_size': 1}
+config: {}
+2024-06-05 12:49:11,765 INFO    Thread-16 (_run_job):64584 [wandb_init.py:init():611] starting backend
+2024-06-05 12:49:11,765 INFO    Thread-16 (_run_job):64584 [wandb_init.py:init():615] setting up manager
+2024-06-05 12:49:11,784 INFO    Thread-16 (_run_job):64584 [backend.py:_multiprocessing_setup():105] multiprocessing start_methods=spawn, using: spawn
+2024-06-05 12:49:11,787 INFO    Thread-16 (_run_job):64584 [wandb_init.py:init():623] backend started and connected
+2024-06-05 12:49:11,825 INFO    Thread-16 (_run_job):64584 [wandb_run.py:_config_callback():1347] config_cb None None {'bs': 64, 'epochs': 3, 'lr': 0.0001, 'num_workers': 4, 'subset_size': 1}
+2024-06-05 12:49:11,827 INFO    Thread-16 (_run_job):64584 [wandb_init.py:init():715] updated telemetry
+2024-06-05 12:49:11,925 INFO    Thread-16 (_run_job):64584 [wandb_init.py:init():748] communicating run to backend with 90.0 second timeout
+2024-06-05 12:49:13,275 INFO    Thread-16 (_run_job):64584 [wandb_run.py:_on_init():2357] communicating current version
+2024-06-05 12:49:13,676 INFO    Thread-16 (_run_job):64584 [wandb_run.py:_on_init():2366] got version response upgrade_message: "wandb version 0.17.0 is available!  To upgrade, please run:\n $ pip install wandb --upgrade"
+
+2024-06-05 12:49:13,676 INFO    Thread-16 (_run_job):64584 [wandb_init.py:init():799] starting run threads in backend
+2024-06-05 12:49:14,073 INFO    Thread-16 (_run_job):64584 [wandb_run.py:_console_start():2335] atexit reg
+2024-06-05 12:49:14,074 INFO    Thread-16 (_run_job):64584 [wandb_run.py:_redirect():2190] redirect: wrap_raw
+2024-06-05 12:49:14,075 INFO    Thread-16 (_run_job):64584 [wandb_run.py:_redirect():2255] Wrapping output streams.
+2024-06-05 12:49:14,075 INFO    Thread-16 (_run_job):64584 [wandb_run.py:_redirect():2280] Redirects installed.
+2024-06-05 12:49:14,076 INFO    Thread-16 (_run_job):64584 [wandb_init.py:init():842] run started, returning control to user process
+2024-06-05 13:09:04,080 WARNING MsgRouterThr:64584 [router.py:message_loop():77] message_loop has been closed
+2024-06-05 13:12:18,845 ERROR   Thread-15 (_heartbeat):64584 [internal_api.py:execute():373] 404 response executing GraphQL.
+2024-06-05 13:12:18,846 ERROR   Thread-15 (_heartbeat):64584 [internal_api.py:execute():374] {"errors":[{"message":"could not find agent w9szgpg0 during agentHeartbeat","path":["agentHeartbeat"]}],"data":{"agentHeartbeat":null}}
