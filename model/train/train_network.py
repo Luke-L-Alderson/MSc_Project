@@ -1,9 +1,7 @@
-from ..aux.functions import get_poisson_inputs, process_labels, mse_count_loss
-
+from helpers import get_poisson_inputs, mse_count_loss
 import torch
-import numpy as np
 import wandb
-from math import floor, ceil
+from math import ceil
 from datetime import datetime
 
 def train_network(network, train_loader, test_loader, input_specs, train_specs):
@@ -12,7 +10,6 @@ def train_network(network, train_loader, test_loader, input_specs, train_specs):
     device = train_specs["device"]
     num_epochs = train_specs["num_epochs"]
     early_stop = train_specs["early_stop"]
-    batch_size = train_specs["batch_size"]
     train_logging_freq = ceil(0.1*len(train_loader))
     test_logging_freq = ceil(0.1*len(test_loader))
     
@@ -67,7 +64,7 @@ def train_network(network, train_loader, test_loader, input_specs, train_specs):
                 test_running_loss += test_loss.item()
                 
                 if j % test_logging_freq == 0:
-                    print(f'[{epoch}/{num_epochs}, {j+1}/{len(test_loader)}]')
+                    print(f'[{epoch}/{num_epochs}, {j}/{len(test_loader)}]')
                     epoch_testing_loss.append(test_running_loss/test_logging_freq)
                     wandb.log({"Testing Loss": epoch_testing_loss[-1]})
                     test_running_loss = 0

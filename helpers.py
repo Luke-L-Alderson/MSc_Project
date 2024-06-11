@@ -1,38 +1,27 @@
-import sys
-sys.path.append('snn-project')
-import random
 import numpy as np
-import wandb
 from sklearn.manifold import TSNE
 import os
-import torch
-import torch.nn as nn
-import torch.nn.functional as F
+
 import pandas as pd
 from torchvision import datasets, transforms
 from torch.utils.data import DataLoader
-from torchvision import utils as utls
 from torch.utils.data import Subset
 
-import snntorch as snn
-import snntorch.spikeplot as splt
-from snntorch import utils
-from snntorch import surrogate
-
-from IPython.display import HTML
 from brian2 import *
-import seaborn as sns
 
-from model.train.train_network import train_network
 from model.image_to_image import SAE
-from model.aux.functions import get_poisson_inputs, process_labels, mse_count_loss
+#from model.aux.functions import get_poisson_inputs, process_labels, mse_count_loss
 
 from math import floor, ceil
 from datetime import datetime
+import torch
+import torch.nn as nn
+import snntorch as snn
+from snntorch import spikegen
 
 __all__ = ["build_datasets", "build_network", "to_np", "plot_input", \
            "curr_to_pA", "transfer", "get_fr", "print_network_architecure", \
-           "set_seed", "tsne_plt"]
+           "set_seed", "tsne_plt", "get_poisson_inputs", "process_labels", "mse_count_loss"]
 
 def build_datasets(train_specs): # add subsampling parameeter
         """## Make or access existing datasets"""
@@ -200,3 +189,62 @@ def tsne_plt(file):
     plt.colorbar(label='Digit Class')
     plt.savefig("tsne.png")
     plt.show()
+    
+def get_poisson_inputs(inputs, total_time, bin_size, rate_on, rate_off):
+    num_steps = int(total_time/bin_size)
+    bin_prob_on = rate_on*bin_size # 75 Hz * 1ms = 0.075
+    bin_prob_off = rate_off*bin_size # 10 Hz * 1ms - 0.010
+    poisson_input = snn.spikegen.rate((bin_prob_on - bin_prob_off)*inputs + bin_prob_off*torch.ones(inputs.shape) , num_steps=num_steps) # default: inputs = data
+    return poisson_input
+
+
+def process_labels(labels, total_time, code, rate=None):
+    if code == 'rate':
+        labels = labels*(rate*total_time)
+    return labels
+
+
+class mse_count_loss():
+    def __init__(
+        self, lambda_rate, lambda_weights
+    ):  
+        self.lambda_r = lambda_rate
+        self.lambda_w = lambda_weights
+        self.__name__ = "mse_count_loss"
+        
+    def __call__(self, spk_recs, spk_outs, targets):
+        spike_count = torch.sum(spk_outs, 0)
+        target_spike_count = torch.sum(targets, 0)
+        loss_fn = nn.MSELoss()
+        max_count = torch.max(target_spike_count)
+        #print(f'{spike_count}\n{target_spike_count}')
+        loss = loss_fn(spike_count, target_spike_count) + self.lambda_r*torch.sum(spk_recs)
+        return loss/max_count
+    
+# class mse_t_loss():
+#     def __init__(
+#         self, lambda_rate, lambda_weights
+#     ):  
+#         self.lambda_r = lambda_rate
+#         self.lambda_w = lambda_weights
+#         self.__name__ = "mse_count_loss"
+        
+#     def __call__(self, spk_recs, spk_outs, targets):
+#         spike_count = torch.sum(spk_outs, 0)
+#         target_spike_count = torch.sum(targets, 0)
+#         loss_fn = nn.MSELoss()
+#         max_count = torch.max(target_spike_count)
+#         #print(f'{spike_count}\n{target_spike_count}')
+#         loss = loss_fn(spike_count, target_spike_count) + self.lambda_r*torch.sum(spk_recs)
+#         return loss/max_count    
+
+# def get_poisson_inputs(inputs, total_time, bin_size, rate_on, rate_off): # think on making this a probability
+#     num_steps = int(total_time/bin_size)
+#     bin_prob_on = rate_on*bin_size # 75 Hz * 1ms = 0.075
+#     bin_prob_off = rate_off*bin_size # 10 Hz * 1ms - 0.010
+#     boff_locs = inputs < bin_prob_off/bin_prob_on
+#     bon_locs = inputs >= bin_prob_off/bin_prob_on
+#     inputs[boff_locs] = bin_prob_off
+#     inputs[bon_locs] = inputs[bon_locs]*bin_prob_on
+#     poisson_input = snn.spikegen.rate(inputs, num_steps=num_steps) # default: inputs = data
+#     return poisson_input

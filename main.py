@@ -2,14 +2,12 @@
 print("\nImporting modules and defining functions")
 
 #importing module
-import sys
-sys.path.append('snn-project')
 from datetime import datetime
 date = datetime.now().strftime("%d/%m - %H:%M")
 
 import numpy as np
 import wandb
-from helpers import *
+from helpers import get_poisson_inputs, build_datasets, build_network, to_np, set_seed
 
 import torch
 # import torch.nn as nn
@@ -20,23 +18,18 @@ import torch
 # from torchvision import utils as utls
 # from torch.utils.data import Subset
 
-#import snntorch as snn
 import snntorch.spikeplot as splt
-#from snntorch import utils
-#from snntorch import surrogate
 
 from IPython.display import HTML
 from brian2 import *
-#from brian2.devices import reinit_devices
 
 import pandas as pd
-from model.aux.functions import get_poisson_inputs
+
 from model.train.train_network import train_network
 
 import gc
     
 def main():
-    dtype = torch.float
     device = torch.device("cuda") if torch.cuda.is_available() else torch.device("cpu")
     print("Using CUDA") if torch.cuda.is_available() else print("Using CPU")
     set_seed()
@@ -46,11 +39,10 @@ def main():
     run.name = f"{wandb.config.lr}_{wandb.config.bs}_{wandb.config.subset_size}"
     
     """## Define network architecutre and parameters"""
-    time_params, network_params, oscillation_params, frame_params, \
-    convolution_params, input_specs, train_specs = {}, {}, {}, {}, {}, {}, {}
+    network_params, input_specs, train_specs = {}, {}, {}
     
     # Parameters for use in training
-    label_specs["code"] = 'rate'
+    train_specs["code"] = 'rate'
     
     train_specs["early_stop"] = -1
     train_specs["loss_fn"] = "spike_count"
@@ -239,7 +231,7 @@ def main():
     
 if __name__ == '__main__':
     
-    test = 0
+    test = 1
     
     if test == 1:
         sweep_config = {
@@ -251,7 +243,7 @@ if __name__ == '__main__':
             'parameters': {'bs': {'values': [64]},
                             'lr': {'values': [1e-4]},
                             'epochs': {'values': [1]},
-                            "subset_size": {'values': [0.01]},
+                            "subset_size": {'values': [0.01, 0.1]},
                             "recurrence": {'values': [True]},
                             "rate_on": {'values': [75]},
                             "rate_off": {'values': [10]},

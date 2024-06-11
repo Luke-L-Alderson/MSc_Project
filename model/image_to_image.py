@@ -1,18 +1,10 @@
 import torch
 import torch.nn as nn
-import torch.nn.functional as F
-import wandb
-
-from torchvision import datasets, transforms
-from torch.utils.data import DataLoader
-from torchvision import utils as utls
-
+import numpy as np
 import snntorch as snn
-import snntorch.spikeplot as splt
-from snntorch import utils
 from snntorch import surrogate
 
-from brian2 import *
+#from brian2 import *
 
 class SAE(nn.Module):
     def __init__(self, tp, netp, fp, cp, device, recurrence):
