@@ -8,7 +8,7 @@ import os
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-
+import pandas as pd
 from torchvision import datasets, transforms
 from torch.utils.data import DataLoader
 from torchvision import utils as utls
@@ -24,22 +24,24 @@ from brian2 import *
 import seaborn as sns
 
 from model.train.train_network import train_network
-from model.image_to_latent import Net
 from model.image_to_image import SAE
 from model.aux.functions import get_poisson_inputs, process_labels, mse_count_loss
-from data.aux.dataset import H5Dataset
-from data_generator.ds_generator import make_dataset, make_exam_tests
-from testing.exam import get_exam_per_constant
 
-from model.train.trainMNIST import train
-from model.train.trainMNIST import test
+from math import floor, ceil
+from datetime import datetime
 
 __all__ = ["build_datasets", "build_network", "to_np", "plot_input", \
            "curr_to_pA", "transfer", "get_fr", "print_network_architecure", \
-           "set_seed"]
+           "set_seed", "tsne_plt"]
 
-def build_datasets(batch_size, subset_size, num_workers=0): # add subsampling parameeter
+def build_datasets(train_specs): # add subsampling parameeter
         """## Make or access existing datasets"""
+        
+        batch_size = train_specs["batch_size"]
+        subset_size = train_specs["subset_size"]
+        num_workers = train_specs["num_workers"]
+        
+        persist = True if num_workers > 0 else False
         
         if subset_size > 1 or subset_size < 0:
             raise Exception("Subset must be a floating number between 0 and 1.")
@@ -48,7 +50,6 @@ def build_datasets(batch_size, subset_size, num_workers=0): # add subsampling pa
                     transforms.Grayscale(),
                     transforms.ToTensor(),
                     transforms.Normalize((0,), (1,))])
-        
         
         # create dataset in /content
         print("\nMaking datasets and defining subsets")
@@ -68,12 +69,14 @@ def build_datasets(batch_size, subset_size, num_workers=0): # add subsampling pa
             test_dataset = Subset(test_dataset, subset_test_indices)
             print(f"Training: {len(train_dataset)}\nTesting: {len(test_dataset)}")
         print("\nMaking Dataloaders")
-        train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True, pin_memory=True, num_workers=num_workers)
-        test_loader = DataLoader(test_dataset, batch_size=batch_size, shuffle=True, pin_memory=True, num_workers=num_workers)
+        # snn.utils.data_subset(train_dataset, subset_size)
+        # snn.utils.data_subset(test_dataset, subset_size)
+        train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True, pin_memory=True, num_workers=num_workers, persistent_workers=persist)
+        test_loader = DataLoader(test_dataset, batch_size=batch_size, shuffle=True, pin_memory=True, num_workers=num_workers, persistent_workers=persist)
     
         return train_dataset, train_loader, test_dataset, test_loader
     
-def build_network(device, noise = 0):
+def build_network(device, noise = 0, recurrence = True):
     print("Defining network")
     time_params, network_params, oscillation_params, frame_params, \
     convolution_params, input_specs, label_specs, train_specs = {}, {}, {}, {}, {}, {}, {}, {}
@@ -97,7 +100,7 @@ def build_network(device, noise = 0):
     convolution_params["channels_2"] = 64
     convolution_params["filter_2"] = 3
 
-    network = SAE(time_params, network_params, frame_params, convolution_params, device).to(device)
+    network = SAE(time_params, network_params, frame_params, convolution_params, device, recurrence).to(device)
     
     return network, network_params
     
@@ -184,3 +187,16 @@ def set_seed(value = 42):
     # Set a fixed value for the hash seed
     os.environ["PYTHONHASHSEED"] = str(value)
     print(f"\nSetting Seed to {value}")
+    
+def tsne_plt(file):
+    features = pd.read_csv(file)
+    features = features.iloc[:, 1:-1]
+    print("Applying t-SNE")
+    tsne = TSNE().fit_transform(features)
+    plt.figure(figsize=(10, 6))
+    plt.scatter(tsne[:, 0], tsne[:, 1], c=all_labs, cmap='viridis')
+    plt.xlabel('t-SNE 1')
+    plt.ylabel('t-SNE 2')
+    plt.colorbar(label='Digit Class')
+    plt.savefig("tsne.png")
+    plt.show()

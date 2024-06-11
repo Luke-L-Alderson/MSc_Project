@@ -6,88 +6,78 @@ import sys
 sys.path.append('snn-project')
 from datetime import datetime
 date = datetime.now().strftime("%d/%m - %H:%M")
-import random as rand
+
 import numpy as np
 import wandb
 from helpers import *
-from sklearn.manifold import TSNE
-
 
 import torch
-import torch.nn as nn
-import torch.nn.functional as F
+# import torch.nn as nn
+# import torch.nn.functional as F
 
-from torchvision import datasets, transforms
-from torch.utils.data import DataLoader
-from torchvision import utils as utls
-from torch.utils.data import Subset
+# from torchvision import datasets, transforms
+# from torch.utils.data import DataLoader
+# from torchvision import utils as utls
+# from torch.utils.data import Subset
 
-import snntorch as snn
+#import snntorch as snn
 import snntorch.spikeplot as splt
-from snntorch import utils
-from snntorch import surrogate
+#from snntorch import utils
+#from snntorch import surrogate
 
 from IPython.display import HTML
 from brian2 import *
-from brian2.devices import reinit_devices
+#from brian2.devices import reinit_devices
 
+import pandas as pd
 from model.aux.functions import get_poisson_inputs
 from model.train.train_network import train_network
 
 import gc
-
-dtype = torch.float
-device = torch.device("cuda") if torch.cuda.is_available() else torch.device("cpu")
-
-print("Using CUDA") if torch.cuda.is_available() else print("Using CPU")
-
-set_seed()
-torch.backends.cudnn.benchmark = True #TURN OFF WHEN CHANGING ARCHITECTURE    
     
 def main():
+    dtype = torch.float
+    device = torch.device("cuda") if torch.cuda.is_available() else torch.device("cpu")
+    print("Using CUDA") if torch.cuda.is_available() else print("Using CPU")
+    set_seed()
+    torch.backends.cudnn.benchmark = True #TURN OFF WHEN CHANGING ARCHITECTURE    
 
     run = wandb.init()
     run.name = f"{wandb.config.lr}_{wandb.config.bs}_{wandb.config.subset_size}"
     
     """## Define network architecutre and parameters"""
-    # get MNIST in, get correct targets, try and vary some biophys params with plots
     time_params, network_params, oscillation_params, frame_params, \
-    convolution_params, input_specs, label_specs, train_specs = {}, {}, {}, {}, {}, {}, {}, {}
-    
+    convolution_params, input_specs, train_specs = {}, {}, {}, {}, {}, {}, {}
     
     # Parameters for use in training
-    input_specs["total_time"] = 200*ms
-    input_specs["bin_size"] = 1*ms
-    input_specs["rate_on"] = 75*Hz
-    input_specs["rate_off"] = 10*Hz
-    
-    label_specs["total_time"] = 200*ms
     label_specs["code"] = 'rate'
-    label_specs["rate"] = 75*Hz
     
-    train_specs["num_epochs"] = wandb.config.epochs#3
     train_specs["early_stop"] = -1
-    train_specs["device"] = device
-    train_specs["lr"] = wandb.config.lr #1e-4
     train_specs["loss_fn"] = "spike_count"
     train_specs["lambda_rate"] = 0.0
     train_specs["lambda_weights"] = None
-    train_specs["batch_size"] = wandb.config.bs #64
+    train_specs["num_epochs"] = wandb.config.epochs    
+    train_specs["device"] = device
+    train_specs["lr"] = wandb.config.lr    
+    train_specs["batch_size"] = wandb.config.bs
     train_specs["subset_size"] = wandb.config.subset_size
+    train_specs["num_workers"] = wandb.config.num_workers
+    
+    input_specs["rate_on"] = wandb.config.rate_on*Hz
+    input_specs["rate_off"] = wandb.config.rate_off*Hz    
+    input_specs["total_time"] = 200*ms
+    input_specs["bin_size"] = 1*ms
     
     print(f'Starting Sweep: Batch Size: {train_specs["batch_size"]}, Learning Rate: {train_specs["lr"]}')
     
-    #build dataset and loaders
-    train_dataset, train_loader, test_dataset, test_loader = build_datasets(train_specs["batch_size"], train_specs["subset_size"])
+    # build dataset and loaders
+    train_dataset, train_loader, test_dataset, test_loader = build_datasets(train_specs)
     
-    #build network
+    # build network
     network, network_params = build_network(device)
     
-
-    """## Training the network"""
-    network, train_loss, test_loss, final_train_loss, final_test_loss = train_network(network, train_loader, test_loader, input_specs, label_specs, train_specs)
-    
-    
+    # train network
+    network, train_loss, test_loss, final_train_loss, final_test_loss = train_network(network, train_loader, test_loader, input_specs, train_specs)
 
     # Plot examples from MNIST
     unique_images = []
@@ -111,11 +101,7 @@ def main():
         ax.axis('off')
     
     plt.tight_layout()
-    plt.show()
-    
-    input_specs["rate_on"] = 500*Hz
-    input_specs["rate_off"] = 10*Hz
-    
+       
     # Plot originally input as image and as spiking representation - save gif.
     inputs, labels = next(iter(test_loader))
     poisson_inputs = get_poisson_inputs(inputs, **input_specs)
@@ -126,39 +112,24 @@ def main():
     ###
     with torch.no_grad():
        features, all_labs, all_decs, all_orig_ims = [], [], [], []
-       for i,(data, labs) in enumerate(test_loader):
+       for i,(data, labs) in enumerate(test_loader, 1):
            data = get_poisson_inputs(data, **input_specs)
            code_layer, decoded = network(data)
            code_layer = code_layer.mean(0)
-           print(f'-- {i+1}/{len(test_loader)} --')
            features.append(to_np(code_layer.view(-1, code_layer.shape[1])))
            all_labs.append(labs)
            all_decs.append(decoded.mean(0).squeeze().cpu())
            all_orig_ims.append(data.mean(0).squeeze())
+           if i % 10 == 0:
+               print(f'-- {i}/{len(test_loader)} --')
     
        features = np.concatenate(features, axis = 0)
-       #print(features)
        all_labs = np.concatenate(all_labs, axis = 0)
        all_orig_ims = np.concatenate(all_orig_ims, axis = 0)
        all_decs = np.concatenate(all_decs, axis = 0)
   
-    
-    try:
-        print("Applying t-SNE")
-        # Apply TSNE for dimensionality reduction
-        tsne = TSNE().fit_transform(features)
-        
-        # Plot the TSNE results with label
-        plt.figure(figsize=(10, 6))
-        plt.scatter(tsne[:, 0], tsne[:, 1], c=all_labs, cmap='viridis')
-        plt.xlabel('t-SNE 1')
-        plt.ylabel('t-SNE 2')
-        plt.colorbar(label='Digit Class')
-        plt.savefig("tsne.png")
-        plt.show()
-    except Exception:
-        print("t-SNE Experienced an Error")
-        pass
+    tsne = pd.DataFrame(data = features)
+    tsne.insert(0, "Labels", all_labs) 
     
     print("Plotting Results Grid")
     seen_labels = set()
@@ -167,7 +138,6 @@ def main():
     for i, label in enumerate(all_labs):
         if label not in seen_labels:
             seen_labels.add(label)
-            #print(f'{label} added')
             unique_ims.append((all_decs[i], label))
             orig_ims.append((all_orig_ims[i], label))
     
@@ -208,8 +178,8 @@ def main():
         axs[i+10].axis('off')
     
     plt.tight_layout()
-    plt.show()
-    fig.savefig("result_summary.png")
+    
+    fig.savefig("figures/result_summary.png")
     
     print("Plotting Spiking Input MNIST")
     # img
@@ -218,8 +188,6 @@ def main():
     img_spk_outs = img_spk_outs.squeeze().detach().cpu()
     
     plt.imshow(to_np(inputs[input_index, 0]), cmap = 'grey')
-    plt.show()
-    
     plt.imshow(poisson_inputs[:, input_index].mean(axis=0), cmap='grey')
     
     print("Plotting Spiking Input MNIST Animation")
@@ -227,20 +195,8 @@ def main():
     anim = splt.animator(poisson_inputs[:, input_index], fig, ax)
     HTML(anim.to_html5_video())
     anim.save("spike_mnist.gif")
-    plt.show()
     
     wandb.log({"Spike Animation": wandb.Video("spike_mnist.gif", fps=4, format="gif")}, commit = False)
-    
-    '''
-    # Training Loss
-    fig, axs = plt.subplots()
-    axs.plot(np.array(train_loss), 'k')
-    axs.grid(True)
-    axs.set_ylabel("MSE of Spike Count")
-    axs.set_xlabel("Epochs")
-    wandb.log({"Training Loss Plot": wandb.Image(fig)}, commit = False)
-    fig.savefig("train_loss.png")
-    '''
     
     print("Plotting Spiking Output MNIST")
     fig, axs = plt.subplots()
@@ -251,30 +207,30 @@ def main():
     animrec = splt.animator(img_spk_outs[:, input_index], fig1, ax1)
     HTML(animrec.to_html5_video())
     animrec.save("spike_mnistrec.gif")
-    plt.show()
+    
     
     fig = plt.figure(facecolor="w", figsize=(10, 5))
     ax = fig.add_subplot(111)
     splt.raster(poisson_inputs[:, input_index].reshape(200, -1), ax, s=1.5, c="black")
-    fig.savefig("input_raster.png")
+    fig.savefig("figures/input_raster.png")
     
     fig = plt.figure(facecolor="w", figsize=(10, 5))
     ax = fig.add_subplot(111)
     splt.raster(img_spk_outs[:, input_index].reshape(200, -1), ax, s=1.5, c="black")
     ax.set_xlim([0, 200])
     
-    fig.savefig("output_raster.png")
+    fig.savefig("figures/output_raster.png")
     
     wandb.log({"Test Loss": final_test_loss,
                "Results Grid": wandb.Image("result_summary.png"),
-               "t-SNE": wandb.Image("tsne.png"),
+               #"t-SNE": wandb.Table(tsne),
                "Spike Animation": wandb.Video("spike_mnistrec.gif", fps=4, format="gif"),
                "Input Raster": wandb.Image("input_raster.png"),
                "Output Raster": wandb.Image("output_raster.png")})
     
-    del network, train_loss, test_loss, final_train_loss, \
+    del network, train_loss, test_loss, final_train_loss, final_test_loss, \
         features, all_labs, all_decs, all_orig_ims, \
-        train_dataset, train_loader, test_dataset, test_loader
+        train_dataset, train_loader, test_dataset, test_loader, tsne
         
     gc.collect()
     torch.cuda.empty_cache()
@@ -293,26 +249,34 @@ if __name__ == '__main__':
                         'goal': 'minimize'   
                         },
             'parameters': {'bs': {'values': [64]},
-                            'lr': {'values': [1e-2]},
+                            'lr': {'values': [1e-4]},
                             'epochs': {'values': [1]},
-                            "subset_size": {'values': [0.1]}
+                            "subset_size": {'values': [0.01]},
+                            "recurrence": {'values': [True]},
+                            "rate_on": {'values': [75]},
+                            "rate_off": {'values': [10]},
+                            "num_workers": {'values': [0]}
                             }
             }
     else:
         sweep_config = {
             'name': f'Base Performance Tuning {date}',
-            'method': 'bayes',
+            'method': 'grid',
             'metric': {'name': 'Test Loss',
                         'goal': 'minimize'   
                         },
-            'parameters': {'bs': {'values': [64, 32]},
-                            'lr': {'values': [1e-1, 1e-2, 1e-3, 1e-4, 1e-5]},
-                            'epochs': {'values': [3, 6, 9]},
-                            "subset_size": {'values': [0.1, 0.05]}
+            'parameters': {'bs': {'values': [64]},
+                            'lr': {'values': [1e-4]},
+                            'epochs': {'values': [3]},
+                            "subset_size": {'values': [0.1, 0.7, 1]},
+                            "recurrence": {'values': [True]},
+                            "rate_on": {'values': [75]},
+                            "rate_off": {'values': [10]},
+                            "num_workers": {'values': [0]}
                             }
             }
     
     
-    sweep_id = wandb.sweep(sweep = sweep_config, project = "MSc Project")
+    sweep_id = wandb.sweep(sweep = sweep_config, project = "MSc Project", entity="lukelalderson")
         
-    wandb.agent(sweep_id, function=main, count = 8)
+    wandb.agent(sweep_id, function=main)
