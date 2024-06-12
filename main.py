@@ -60,13 +60,16 @@ def main():
     input_specs["total_time"] = 200*ms
     input_specs["bin_size"] = 1*ms
     
+    noise = wandb.config.noise
+    recurrence = wandb.config.recurrence
+    
     print(f'Starting Sweep: Batch Size: {train_specs["batch_size"]}, Learning Rate: {train_specs["lr"]}')
     
     # build dataset and loaders
     train_dataset, train_loader, test_dataset, test_loader = build_datasets(train_specs)
     
     # build network
-    network, network_params = build_network(device)
+    network, network_params = build_network(device, noise=noise, recurrence=recurrence)
     
     # train network
     network, train_loss, test_loss, final_train_loss, final_test_loss = train_network(network, train_loader, test_loader, input_specs, train_specs)
@@ -184,11 +187,11 @@ def main():
     fig, ax = plt.subplots()
     plt.imshow(poisson_inputs[:, input_index].mean(axis=0), cmap='grey')
     
-    print("Plotting Spiking Input MNIST Animation")
+    print(f"Plotting Spiking Input MNIST Animation - {labels[input_index]}")
     fig, ax = plt.subplots()
     anim = splt.animator(poisson_inputs[:, input_index], fig, ax)
     HTML(anim.to_html5_video())
-    anim.save("figures/spike_mnist.gif")
+    anim.save(f"figures/spike_mnist_{labels[input_index]}.gif")
     
     wandb.log({"Spike Animation": wandb.Video("spike_mnist.gif", fps=4, format="gif")}, commit = False)
     
@@ -196,11 +199,11 @@ def main():
     fig, axs = plt.subplots()
     axs.imshow(img_spk_outs[:, input_index].mean(axis=0), cmap='grey')
     
-    print("Plotting Spiking Output MNIST Animation")
+    print("Plotting Spiking Output MNIST Animation - {labels[input_index]}")
     fig1, ax1 = plt.subplots()
     animrec = splt.animator(img_spk_outs[:, input_index], fig1, ax1)
     HTML(animrec.to_html5_video())
-    animrec.save("figures/spike_mnistrec.gif")
+    animrec.save("figures/spike_mnistrec_{labels[input_index]}.gif")
     
     
     fig = plt.figure(facecolor="w", figsize=(10, 5))
@@ -232,7 +235,6 @@ def main():
         
 if __name__ == '__main__':  
   
-  
   test = 0
   
   if test == 1:
@@ -245,7 +247,7 @@ if __name__ == '__main__':
           'parameters': {'bs': {'values': [64]},
                           'lr': {'values': [1e-4]},
                           'epochs': {'values': [1]},
-                          "subset_size": {'values': [0.01]},
+                          "subset_size": {'values': [100]},
                           "recurrence": {'values': [True]},
                           "rate_on": {'values': [75]},
                           "rate_off": {'values': [10]},
@@ -254,17 +256,18 @@ if __name__ == '__main__':
           }
   else:
       sweep_config = {
-          'name': f'Rate Evaluation {date}',
+          'name': f'Rate Evaluation - Refine Epochs Needed {date}',
           'method': 'grid',
           'metric': {'name': 'Test Loss',
                       'goal': 'minimize'   
                       },
           'parameters': {'bs': {'values': [64]},
                           'lr': {'values': [1e-4]},
-                          'epochs': {'values': [9]},
-                          "subset_size": {'values': [0.1, 0.7]},
+                          'epochs': {'values': [3, 6, 9]}, #9
+                          "subset_size": {'values': [10]}, #0.1, 0.7
                           "recurrence": {'values': [True]},
-                          "rate_on": {'values': [200]}, # 75, 100, 125, 150, 175, 200
+                          "noise": {'values': [0]},
+                          "rate_on": {'values': [75, 200]}, # 75, 100, 125, 150, 175, 200
                           "rate_off": {'values': [1]},
                           "num_workers": {'values': [0]}
                           }

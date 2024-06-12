@@ -5,7 +5,7 @@ import os
 import pandas as pd
 from torchvision import datasets, transforms
 from torch.utils.data import DataLoader
-from torch.utils.data import Subset
+#from torch.utils.data import Subset
 
 from brian2 import *
 
@@ -16,11 +16,54 @@ import torch
 import torch.nn as nn
 import snntorch as snn
 from snntorch import spikegen
+from snntorch import utils
 from random import random
 
 __all__ = ["build_datasets", "build_network", "to_np", "plot_input", \
            "curr_to_pA", "transfer", "get_fr", "print_network_architecure", \
            "set_seed", "tsne_plt", "get_poisson_inputs", "process_labels", "mse_count_loss"]
+
+# def build_datasets(train_specs): # add subsampling parameeter
+#         """## Make or access existing datasets"""
+        
+#         batch_size = train_specs["batch_size"]
+#         subset_size = train_specs["subset_size"]
+#         num_workers = train_specs["num_workers"]
+        
+#         persist = True if num_workers > 0 else False
+        
+#         if subset_size > 1 or subset_size < 0:
+#             raise Exception("Subset must be a floating number between 0 and 1.")
+               
+#         transform = transforms.Compose([
+#                     transforms.Grayscale(),
+#                     transforms.ToTensor(),
+#                     transforms.Normalize((0,), (1,))])
+        
+#         # create dataset in /content
+#         print("\nMaking datasets and defining subsets")
+#         train_dataset = datasets.MNIST(root='dataset/', train=True, transform=transform, download=True)
+#         test_dataset = datasets.MNIST(root='dataset/', train=False, transform=transform, download=True)
+        
+
+#         train_subset_size = round(subset_size*len(train_dataset))
+#         test_subset_size = round(subset_size*len(test_dataset))
+#         print(f"Training: {len(train_dataset)} -> {train_subset_size}\nTesting: {len(test_dataset)} -> {test_subset_size}")
+       
+#         if subset_size != 1:     
+#             print("\nMaking Subsets")
+#             subset_train_indices = torch.randperm(len(train_dataset))[:train_subset_size]
+#             subset_test_indices = torch.randperm(len(test_dataset))[:test_subset_size]
+#             train_dataset = Subset(train_dataset, subset_train_indices)
+#             test_dataset = Subset(test_dataset, subset_test_indices)
+#             print(f"Training: {len(train_dataset)}\nTesting: {len(test_dataset)}")
+#         print("\nMaking Dataloaders")
+#         # snn.utils.data_subset(train_dataset, subset_size)
+#         # snn.utils.data_subset(test_dataset, subset_size)
+#         train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True, pin_memory=True, num_workers=num_workers, persistent_workers=persist)
+#         test_loader = DataLoader(test_dataset, batch_size=batch_size, shuffle=True, pin_memory=True, num_workers=num_workers, persistent_workers=persist)
+    
+#         return train_dataset, train_loader, test_dataset, test_loader
 
 def build_datasets(train_specs): # add subsampling parameeter
         """## Make or access existing datasets"""
@@ -30,9 +73,6 @@ def build_datasets(train_specs): # add subsampling parameeter
         num_workers = train_specs["num_workers"]
         
         persist = True if num_workers > 0 else False
-        
-        if subset_size > 1 or subset_size < 0:
-            raise Exception("Subset must be a floating number between 0 and 1.")
                
         transform = transforms.Compose([
                     transforms.Grayscale(),
@@ -44,21 +84,15 @@ def build_datasets(train_specs): # add subsampling parameeter
         train_dataset = datasets.MNIST(root='dataset/', train=True, transform=transform, download=True)
         test_dataset = datasets.MNIST(root='dataset/', train=False, transform=transform, download=True)
         
-
-        train_subset_size = round(subset_size*len(train_dataset))
-        test_subset_size = round(subset_size*len(test_dataset))
-        print(f"Training: {len(train_dataset)} -> {train_subset_size}\nTesting: {len(test_dataset)} -> {test_subset_size}")
-       
-        if subset_size != 1:     
-            print("\nMaking Subsets")
-            subset_train_indices = torch.randperm(len(train_dataset))[:train_subset_size]
-            subset_test_indices = torch.randperm(len(test_dataset))[:test_subset_size]
-            train_dataset = Subset(train_dataset, subset_train_indices)
-            test_dataset = Subset(test_dataset, subset_test_indices)
-            print(f"Training: {len(train_dataset)}\nTesting: {len(test_dataset)}")
+        trainlen1 = len(train_dataset)
+        testlen1 = len(test_dataset)
+        snn.utils.data_subset(train_dataset, subset_size)
+        snn.utils.data_subset(test_dataset, subset_size)
+        trainlen2 = len(train_dataset)
+        testlen2 = len(test_dataset)
+        
+        print(f"Training: {trainlen1} -> {trainlen2}\nTesting: {testlen1} -> {testlen2}")
         print("\nMaking Dataloaders")
-        # snn.utils.data_subset(train_dataset, subset_size)
-        # snn.utils.data_subset(test_dataset, subset_size)
         train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True, pin_memory=True, num_workers=num_workers, persistent_workers=persist)
         test_loader = DataLoader(test_dataset, batch_size=batch_size, shuffle=True, pin_memory=True, num_workers=num_workers, persistent_workers=persist)
     
@@ -204,6 +238,7 @@ def process_labels(labels, total_time, code, rate=None):
 
 
 class mse_count_loss():
+    # to revert: take out SQRT and add max back
     def __init__(
         self, lambda_rate, lambda_weights
     ):  
@@ -212,13 +247,14 @@ class mse_count_loss():
         self.__name__ = "mse_count_loss"
         
     def __call__(self, spk_recs, spk_outs, targets):
+        print(f"Outs: {spk_outs.shape}\nTargets: {targets.shape}")
         spike_count = torch.sum(spk_outs, 0)
         target_spike_count = torch.sum(targets, 0)
+        print(f"Outs: {spk_count.shape}\nTargets: {target_spike_count.shape}")
         loss_fn = nn.MSELoss()
-        max_count = torch.max(target_spike_count)
-        #print(f'{spike_count}\n{target_spike_count}')
-        loss = loss_fn(spike_count, target_spike_count) + self.lambda_r*torch.sum(spk_recs)
-        return loss/max_count
+        #max_count = torch.max(target_spike_count)
+        loss = torch.sqrt(loss_fn(spike_count, target_spike_count) + self.lambda_r*torch.sum(spk_recs))
+        return loss#/max_count
     
 # class mse_t_loss():
 #     def __init__(

@@ -1,0 +1,198 @@
+Starting Sweep: Batch Size: 64, Learning Rate: 0.0001
+Making datasets and defining subsets
+Training: 60000 -> 6000
+Testing: 10000 -> 1000
+Making Dataloaders
+Defining network
+2024-06-12 14:33:38.307028
+Training - 2024-06-12 14:33:38.307525
+[1/9, 10/94] Training Loss: 8.44 - Iteration Time: 0:00:01.271795
+[1/9, 20/94] Training Loss: 8.25 - Iteration Time: 0:00:01.282723
+[1/9, 30/94] Training Loss: 8.27 - Iteration Time: 0:00:01.249430
+[1/9, 40/94] Training Loss: 8.26 - Iteration Time: 0:00:01.222926
+[1/9, 50/94] Training Loss: 8.19 - Iteration Time: 0:00:01.300759
+[1/9, 60/94] Training Loss: 8.09 - Iteration Time: 0:00:01.266202
+[1/9, 70/94] Training Loss: 7.97 - Iteration Time: 0:00:01.297402
+[1/9, 80/94] Training Loss: 7.98 - Iteration Time: 0:00:01.276877
+[1/9, 90/94] Training Loss: 7.85 - Iteration Time: 0:00:01.288214
+Testing - 2024-06-12 14:35:41.566973
+[1/9, 2/16]
+[1/9, 4/16]
+[1/9, 6/16]
+[1/9, 8/16]
+[1/9, 10/16]
+[1/9, 12/16]
+[1/9, 14/16]
+[1/9, 16/16]
+Testing Loss: 7.49 - Epoch Time: 0:02:15.108531
+Training - 2024-06-12 14:35:53.416056
+[2/9, 10/94] Training Loss: 7.86 - Iteration Time: 0:00:01.507099
+[2/9, 20/94] Training Loss: 7.58 - Iteration Time: 0:00:01.321886
+[2/9, 30/94] Training Loss: 7.54 - Iteration Time: 0:00:01.236700
+[2/9, 40/94] Training Loss: 7.47 - Iteration Time: 0:00:01.250531
+[2/9, 50/94] Training Loss: 7.36 - Iteration Time: 0:00:01.246131
+[2/9, 60/94] Training Loss: 7.37 - Iteration Time: 0:00:01.704233
+[2/9, 70/94] Training Loss: 7.24 - Iteration Time: 0:00:01.432556
+[2/9, 80/94] Training Loss: 7.09 - Iteration Time: 0:00:01.373792
+[2/9, 90/94] Training Loss: 7.11 - Iteration Time: 0:00:01.392524
+Testing - 2024-06-12 14:38:00.381034
+[2/9, 2/16]
+[2/9, 4/16]
+[2/9, 6/16]
+[2/9, 8/16]
+[2/9, 10/16]
+[2/9, 12/16]
+[2/9, 14/16]
+[2/9, 16/16]
+Testing Loss: 6.89 - Epoch Time: 0:02:19.773975
+Training - 2024-06-12 14:38:13.190031
+[3/9, 10/94] Training Loss: 6.97 - Iteration Time: 0:00:01.334094
+[3/9, 20/94] Training Loss: 6.96 - Iteration Time: 0:00:01.575503
+[3/9, 30/94] Training Loss: 6.80 - Iteration Time: 0:00:01.264899
+[3/9, 40/94] Training Loss: 6.77 - Iteration Time: 0:00:01.509633
+[3/9, 50/94] Training Loss: 6.75 - Iteration Time: 0:00:01.370483
+[3/9, 60/94] Training Loss: 6.65 - Iteration Time: 0:00:01.382968
+[3/9, 70/94] Training Loss: 6.52 - Iteration Time: 0:00:01.274111
+[3/9, 80/94] Training Loss: 6.52 - Iteration Time: 0:00:01.351110
+[3/9, 90/94] Training Loss: 6.47 - Iteration Time: 0:00:01.233489
+Testing - 2024-06-12 14:40:20.187724
+[3/9, 2/16]
+[3/9, 4/16]
+[3/9, 6/16]
+[3/9, 8/16]
+[3/9, 10/16]
+[3/9, 12/16]
+[3/9, 14/16]
+[3/9, 16/16]
+Testing Loss: 6.21 - Epoch Time: 0:02:18.903177
+Training - 2024-06-12 14:40:32.093208
+[4/9, 10/94] Training Loss: 6.31 - Iteration Time: 0:00:01.383071
+[4/9, 20/94] Training Loss: 6.39 - Iteration Time: 0:00:01.214124
+[4/9, 30/94] Training Loss: 6.27 - Iteration Time: 0:00:01.285035
+[4/9, 40/94] Training Loss: 6.20 - Iteration Time: 0:00:01.232910
+[4/9, 50/94] Training Loss: 6.20 - Iteration Time: 0:00:01.310013
+[4/9, 60/94] Training Loss: 6.12 - Iteration Time: 0:00:01.242889
+[4/9, 70/94] Training Loss: 6.19 - Iteration Time: 0:00:01.390845
+[4/9, 80/94] Training Loss: 6.13 - Iteration Time: 0:00:01.221552
+[4/9, 90/94] Training Loss: 6.04 - Iteration Time: 0:00:01.243160
+Testing - 2024-06-12 14:42:33.853932
+[4/9, 2/16]
+[4/9, 4/16]
+[4/9, 6/16]
+[4/9, 8/16]
+[4/9, 10/16]
+[4/9, 12/16]
+[4/9, 14/16]
+[4/9, 16/16]
+Testing Loss: 5.89 - Epoch Time: 0:02:12.953516
+Training - 2024-06-12 14:42:45.047221
+[5/9, 10/94] Training Loss: 5.98 - Iteration Time: 0:00:01.254024
+[5/9, 20/94] Training Loss: 5.98 - Iteration Time: 0:00:01.295500
+[5/9, 30/94] Training Loss: 5.83 - Iteration Time: 0:00:01.305051
+[5/9, 40/94] Training Loss: 5.81 - Iteration Time: 0:00:01.178334
+[5/9, 50/94] Training Loss: 5.81 - Iteration Time: 0:00:01.203083
+[5/9, 60/94] Training Loss: 5.74 - Iteration Time: 0:00:01.309167
+[5/9, 70/94] Training Loss: 5.69 - Iteration Time: 0:00:01.223636
+[5/9, 80/94] Training Loss: 5.57 - Iteration Time: 0:00:01.199235
+[5/9, 90/94] Training Loss: 5.55 - Iteration Time: 0:00:01.223151
+Testing - 2024-06-12 14:44:43.903489
+[5/9, 2/16]
+[5/9, 4/16]
+[5/9, 6/16]
+[5/9, 8/16]
+[5/9, 10/16]
+[5/9, 12/16]
+[5/9, 14/16]
+[5/9, 16/16]
+Testing Loss: 5.36 - Epoch Time: 0:02:09.981982
+Training - 2024-06-12 14:44:55.029203
+[6/9, 10/94] Training Loss: 5.50 - Iteration Time: 0:00:01.196778
+[6/9, 20/94] Training Loss: 5.41 - Iteration Time: 0:00:01.202984
+[6/9, 30/94] Training Loss: 5.41 - Iteration Time: 0:00:01.211045
+[6/9, 40/94] Training Loss: 5.36 - Iteration Time: 0:00:01.258583
+[6/9, 50/94] Training Loss: 5.33 - Iteration Time: 0:00:01.241094
+[6/9, 60/94] Training Loss: 5.29 - Iteration Time: 0:00:01.378906
+[6/9, 70/94] Training Loss: 5.27 - Iteration Time: 0:00:01.200632
+[6/9, 80/94] Training Loss: 5.25 - Iteration Time: 0:00:01.287097
+[6/9, 90/94] Training Loss: 5.23 - Iteration Time: 0:00:01.191735
+Testing - 2024-06-12 14:46:53.227830
+[6/9, 2/16]
+[6/9, 4/16]
+[6/9, 6/16]
+[6/9, 8/16]
+[6/9, 10/16]
+[6/9, 12/16]
+[6/9, 14/16]
+[6/9, 16/16]
+Testing Loss: 4.91 - Epoch Time: 0:02:09.746924
+Training - 2024-06-12 14:47:04.776127
+[7/9, 10/94] Training Loss: 5.12 - Iteration Time: 0:00:01.200345
+[7/9, 20/94] Training Loss: 5.10 - Iteration Time: 0:00:01.241510
+[7/9, 30/94] Training Loss: 5.10 - Iteration Time: 0:00:01.334662
+[7/9, 40/94] Training Loss: 5.02 - Iteration Time: 0:00:01.238400
+[7/9, 50/94] Training Loss: 4.95 - Iteration Time: 0:00:01.277529
+[7/9, 60/94] Training Loss: 4.82 - Iteration Time: 0:00:01.234884
+[7/9, 70/94] Training Loss: 4.88 - Iteration Time: 0:00:01.226519
+[7/9, 80/94] Training Loss: 4.84 - Iteration Time: 0:00:01.301046
+[7/9, 90/94] Training Loss: 4.82 - Iteration Time: 0:00:01.231549
+Testing - 2024-06-12 14:49:03.850918
+[7/9, 2/16]
+[7/9, 4/16]
+[7/9, 6/16]
+[7/9, 8/16]
+[7/9, 10/16]
+[7/9, 12/16]
+[7/9, 14/16]
+[7/9, 16/16]
+Testing Loss: 4.62 - Epoch Time: 0:02:10.397541
+Training - 2024-06-12 14:49:15.174164
+[8/9, 10/94] Training Loss: 4.81 - Iteration Time: 0:00:01.233379
+[8/9, 20/94] Training Loss: 4.71 - Iteration Time: 0:00:01.211081
+[8/9, 30/94] Training Loss: 4.67 - Iteration Time: 0:00:01.252557
+[8/9, 40/94] Training Loss: 4.58 - Iteration Time: 0:00:01.285242
+[8/9, 50/94] Training Loss: 4.59 - Iteration Time: 0:00:01.253277
+[8/9, 60/94] Training Loss: 4.58 - Iteration Time: 0:00:01.272142
+[8/9, 70/94] Training Loss: 4.52 - Iteration Time: 0:00:01.270693
+[8/9, 80/94] Training Loss: 4.51 - Iteration Time: 0:00:01.214371
+[8/9, 90/94] Training Loss: 4.46 - Iteration Time: 0:00:01.291562
+Testing - 2024-06-12 14:51:13.383482
+[8/9, 2/16]
+[8/9, 4/16]
+[8/9, 6/16]
+[8/9, 8/16]
+[8/9, 10/16]
+[8/9, 12/16]
+[8/9, 14/16]
+[8/9, 16/16]
+Testing Loss: 4.29 - Epoch Time: 0:02:09.450500
+Training - 2024-06-12 14:51:24.625669
+[9/9, 10/94] Training Loss: 4.41 - Iteration Time: 0:00:01.253342
+[9/9, 20/94] Training Loss: 4.42 - Iteration Time: 0:00:01.304958
+[9/9, 30/94] Training Loss: 4.41 - Iteration Time: 0:00:01.818591
+[9/9, 40/94] Training Loss: 4.36 - Iteration Time: 0:00:02.040100
+[9/9, 50/94] Training Loss: 4.34 - Iteration Time: 0:00:01.640047
+[9/9, 60/94] Training Loss: 4.39 - Iteration Time: 0:00:01.352966
+[9/9, 70/94] Training Loss: 4.35 - Iteration Time: 0:00:01.296183
+[9/9, 80/94] Training Loss: 4.32 - Iteration Time: 0:00:01.345190
+[9/9, 90/94] Training Loss: 4.41 - Iteration Time: 0:00:01.316998
+Testing - 2024-06-12 14:53:37.459217
+[9/9, 2/16]
+[9/9, 4/16]
+[9/9, 6/16]
+[9/9, 8/16]
+[9/9, 10/16]
+[9/9, 12/16]
+[9/9, 14/16]
+[9/9, 16/16]
+Testing Loss: 4.12 - Epoch Time: 0:02:25.087374
+Training and Testing Finished - Time: 0:20:11.406015
+Assembling test data for t-sne projection
+-- 10/16 --
+Plotting Results Grid
+WARNING    c:\users\lukea\documents\masters project code\msc_project\main.py:181: RuntimeWarning: More than 20 figures have been opened. Figures created through the pyplot interface (`matplotlib.pyplot.figure`) are retained until explicitly closed and may consume too much memory. (To control this warning, see the rcParam `figure.max_open_warning`). Consider using `matplotlib.pyplot.close()`.
+  fig, ax = plt.subplots()
+ [py.warnings]
+Plotting Spiking Input MNIST
+Plotting Spiking Input MNIST Animation
+Plotting Spiking Output MNIST
+Plotting Spiking Output MNIST Animation

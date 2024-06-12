@@ -3,6 +3,7 @@ import torch
 import wandb
 from math import ceil
 from datetime import datetime
+import torch.nn.functional as F
 
 def train_network(network, train_loader, test_loader, input_specs, train_specs):
     startTime = datetime.now()
@@ -14,6 +15,7 @@ def train_network(network, train_loader, test_loader, input_specs, train_specs):
     test_logging_freq = ceil(0.1*len(test_loader))
     
     loss_fn = mse_count_loss(lambda_rate=train_specs["lambda_rate"],lambda_weights=None)
+    
     optimizer = torch.optim.Adam(network.parameters(), lr=train_specs["lr"], betas=(0.9, 0.999))
     
     epoch_training_loss = [];
@@ -37,8 +39,9 @@ def train_network(network, train_loader, test_loader, input_specs, train_specs):
 
             train_spk_recs, train_spk_outs  = network(train_inputs)
 
-            train_loss = loss_fn(train_spk_recs, train_spk_outs, train_inputs)
-      
+            #train_loss = loss_fn(train_spk_recs, train_spk_outs, train_inputs)
+            train_loss = F.mse_loss(torch.sum(train_spk_outs, 0), torch.sum(train_inputs, 0))
+            
             train_loss.backward()
 
             optimizer.step()
@@ -60,16 +63,18 @@ def train_network(network, train_loader, test_loader, input_specs, train_specs):
                 
                 test_inputs = get_poisson_inputs(test_inputs, **input_specs).to(device)
                 test_spk_recs, test_spk_outs  = network(test_inputs)
-                test_loss = loss_fn(test_spk_recs, test_spk_outs, test_inputs)
+                test_loss = F.mse_loss(torch.sum(train_spk_outs, 0), torch.sum(train_inputs, 0))
+                #test_loss = loss_fn(test_spk_recs, test_spk_outs, test_inputs)
                 test_running_loss += test_loss.item()
                 
                 if j % test_logging_freq == 0:
                     print(f'[{epoch}/{num_epochs}, {j}/{len(test_loader)}]')
                     epoch_testing_loss.append(test_running_loss/test_logging_freq)
-                    wandb.log({"Testing Loss": epoch_testing_loss[-1]})
+                    
                     test_running_loss = 0
   
-            print(f'Testing Loss: {epoch_testing_loss[-1]:.2f} - Epoch Time: {datetime.now()-epochTime}')
+        print(f'Testing Loss: {epoch_testing_loss[-1]:.2f} - Epoch Time: {datetime.now()-epochTime}')
+        wandb.log({"Testing Loss": epoch_testing_loss[-1]})
 
     print(f'\nTraining and Testing Finished - Time: {datetime.now() - startTime}')
     return network, epoch_training_loss, epoch_testing_loss, epoch_training_loss[-1], epoch_testing_loss[-1]#, \
