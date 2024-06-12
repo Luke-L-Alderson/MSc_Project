@@ -1,0 +1,95 @@
+Starting Sweep: Batch Size: 64, Learning Rate: 0.0001
+Making datasets and defining subsets
+Training: 60000 -> 48000
+Testing: 10000 -> 8000
+Making Subsets
+Training: 48000
+Testing: 8000
+Making Dataloaders
+Defining network
+2024-06-12 01:05:53.292310
+Training - 2024-06-12 01:05:53.292806
+[1/3, 75/750] Training Loss: 2.73 - Iteration Time: 0:00:01.235872
+[1/3, 150/750] Training Loss: 1.87 - Iteration Time: 0:00:01.250259
+[1/3, 225/750] Training Loss: 1.81 - Iteration Time: 0:00:01.202717
+[1/3, 300/750] Training Loss: 1.70 - Iteration Time: 0:00:01.246269
+[1/3, 375/750] Training Loss: 1.60 - Iteration Time: 0:00:01.187778
+[1/3, 450/750] Training Loss: 1.48 - Iteration Time: 0:00:01.236356
+[1/3, 525/750] Training Loss: 1.39 - Iteration Time: 0:00:01.188860
+[1/3, 600/750] Training Loss: 1.28 - Iteration Time: 0:00:01.216037
+[1/3, 675/750] Training Loss: 1.16 - Iteration Time: 0:00:01.238011
+[1/3, 750/750] Training Loss: 1.06 - Iteration Time: 0:00:01.192223
+Testing - 2024-06-12 01:21:18.856590
+[1/3, 13/125]
+[1/3, 26/125]
+[1/3, 39/125]
+[1/3, 52/125]
+[1/3, 65/125]
+[1/3, 78/125]
+[1/3, 91/125]
+[1/3, 104/125]
+[1/3, 117/125]
+Testing Loss: 0.99 - Epoch Time: 0:16:59.979484
+Training - 2024-06-12 01:22:53.272786
+[2/3, 75/750] Training Loss: 0.95 - Iteration Time: 0:00:01.248255
+[2/3, 150/750] Training Loss: 0.84 - Iteration Time: 0:00:01.245809
+[2/3, 225/750] Training Loss: 0.75 - Iteration Time: 0:00:01.225979
+[2/3, 300/750] Training Loss: 0.67 - Iteration Time: 0:00:01.236896
+[2/3, 375/750] Training Loss: 0.61 - Iteration Time: 0:00:01.242822
+[2/3, 450/750] Training Loss: 0.56 - Iteration Time: 0:00:01.224423
+[2/3, 525/750] Training Loss: 0.51 - Iteration Time: 0:00:01.223468
+[2/3, 600/750] Training Loss: 0.47 - Iteration Time: 0:00:01.190232
+[2/3, 675/750] Training Loss: 0.45 - Iteration Time: 0:00:01.215520
+[2/3, 750/750] Training Loss: 0.41 - Iteration Time: 0:00:01.230919
+Testing - 2024-06-12 01:38:18.640918
+[2/3, 13/125]
+[2/3, 26/125]
+[2/3, 39/125]
+[2/3, 52/125]
+[2/3, 65/125]
+[2/3, 78/125]
+[2/3, 91/125]
+[2/3, 104/125]
+[2/3, 117/125]
+Testing Loss: 0.39 - Epoch Time: 0:16:52.638269
+Training - 2024-06-12 01:39:45.911552
+[3/3, 75/750] Training Loss: 0.39 - Iteration Time: 0:00:01.228484
+[3/3, 150/750] Training Loss: 0.37 - Iteration Time: 0:00:01.274556
+[3/3, 225/750] Training Loss: 0.35 - Iteration Time: 0:00:01.185802
+[3/3, 300/750] Training Loss: 0.34 - Iteration Time: 0:00:01.246822
+[3/3, 375/750] Training Loss: 0.32 - Iteration Time: 0:00:01.176311
+[3/3, 450/750] Training Loss: 0.28 - Iteration Time: 0:00:01.197266
+[3/3, 525/750] Training Loss: 0.27 - Iteration Time: 0:00:01.219416
+[3/3, 600/750] Training Loss: 0.26 - Iteration Time: 0:00:01.261682
+[3/3, 675/750] Training Loss: 0.25 - Iteration Time: 0:00:01.184215
+[3/3, 750/750] Training Loss: 0.23 - Iteration Time: 0:00:01.213102
+Testing - 2024-06-12 01:55:05.199314
+[3/3, 13/125]
+[3/3, 26/125]
+[3/3, 39/125]
+[3/3, 52/125]
+[3/3, 65/125]
+[3/3, 78/125]
+[3/3, 91/125]
+[3/3, 104/125]
+[3/3, 117/125]
+Testing Loss: 0.23 - Epoch Time: 0:16:46.539144
+Training and Testing Finished - Time: 0:50:39.158882
+Assembling test data for t-sne projection
+-- 10/125 --
+-- 20/125 --
+-- 30/125 --
+-- 40/125 --
+-- 50/125 --
+-- 60/125 --
+-- 70/125 --
+-- 80/125 --
+-- 90/125 --
+-- 100/125 --
+-- 110/125 --
+-- 120/125 --
+Plotting Results Grid
+Plotting Spiking Input MNIST
+Plotting Spiking Input MNIST Animation
+Plotting Spiking Output MNIST
+Plotting Spiking Output MNIST Animation

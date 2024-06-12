@@ -1,0 +1,122 @@
+Starting Sweep: Batch Size: 64, Learning Rate: 0.0001
+Making datasets and defining subsets
+Training: 60000 -> 6000
+Testing: 10000 -> 1000
+Making Subsets
+Training: 6000
+Testing: 1000
+Making Dataloaders
+Defining network
+2024-06-11 14:12:31.341566
+Training!
+[1/3, 5/94] Training Loss: 12.07 - Time: 0:00:01.343014
+[1/3, 10/94] Training Loss: 5.39 - Time: 0:00:01.457616
+[1/3, 15/94] Training Loss: 2.72 - Time: 0:00:01.305310
+[1/3, 20/94] Training Loss: 1.79 - Time: 0:00:01.301858
+[1/3, 25/94] Training Loss: 1.35 - Time: 0:00:01.243280
+[1/3, 30/94] Training Loss: 1.14 - Time: 0:00:01.252234
+[1/3, 35/94] Training Loss: 1.10 - Time: 0:00:01.341109
+[1/3, 40/94] Training Loss: 1.10 - Time: 0:00:01.384732
+[1/3, 45/94] Training Loss: 0.98 - Time: 0:00:01.292936
+[1/3, 50/94] Training Loss: 1.03 - Time: 0:00:01.210566
+[1/3, 55/94] Training Loss: 1.00 - Time: 0:00:01.327116
+[1/3, 60/94] Training Loss: 1.03 - Time: 0:00:01.302333
+[1/3, 65/94] Training Loss: 0.99 - Time: 0:00:01.232355
+[1/3, 70/94] Training Loss: 1.00 - Time: 0:00:01.286434
+[1/3, 75/94] Training Loss: 0.98 - Time: 0:00:01.288477
+[1/3, 80/94] Training Loss: 0.93 - Time: 0:00:01.258197
+[1/3, 85/94] Training Loss: 0.94 - Time: 0:00:01.272173
+[1/3, 90/94] Training Loss: 0.98 - Time: 0:00:01.256730
+Testing!
+[1/3, 1/16]
+[1/3, 2/16]
+[1/3, 3/16]
+[1/3, 4/16]
+[1/3, 5/16]
+[1/3, 6/16]
+[1/3, 7/16]
+[1/3, 8/16]
+[1/3, 9/16]
+[1/3, 10/16]
+[1/3, 11/16]
+[1/3, 12/16]
+[1/3, 13/16]
+[1/3, 14/16]
+[1/3, 15/16]
+[1/3, 16/16]
+Testing Loss: 0.99 - Time: 0:02:16.701899
+Training!
+[2/3, 5/94] Training Loss: 0.97 - Time: 0:00:01.194155
+[2/3, 10/94] Training Loss: 1.00 - Time: 0:00:01.264608
+[2/3, 15/94] Training Loss: 0.93 - Time: 0:00:01.260147
+[2/3, 20/94] Training Loss: 0.93 - Time: 0:00:01.214548
+[2/3, 25/94] Training Loss: 0.96 - Time: 0:00:01.347035
+[2/3, 30/94] Training Loss: 0.95 - Time: 0:00:01.424469
+[2/3, 35/94] Training Loss: 0.93 - Time: 0:00:01.245796
+[2/3, 40/94] Training Loss: 0.98 - Time: 0:00:01.210016
+[2/3, 45/94] Training Loss: 1.00 - Time: 0:00:01.270571
+[2/3, 50/94] Training Loss: 0.95 - Time: 0:00:01.228871
+[2/3, 55/94] Training Loss: 0.95 - Time: 0:00:01.277557
+[2/3, 60/94] Training Loss: 0.98 - Time: 0:00:01.475443
+[2/3, 65/94] Training Loss: 0.95 - Time: 0:00:01.434799
+[2/3, 70/94] Training Loss: 0.97 - Time: 0:00:01.328616
+[2/3, 75/94] Training Loss: 0.96 - Time: 0:00:01.229405
+[2/3, 80/94] Training Loss: 0.92 - Time: 0:00:01.267061
+[2/3, 85/94] Training Loss: 0.94 - Time: 0:00:01.233905
+[2/3, 90/94] Training Loss: 0.96 - Time: 0:00:01.321968
+Testing!
+[2/3, 1/16]
+[2/3, 2/16]
+[2/3, 3/16]
+[2/3, 4/16]
+[2/3, 5/16]
+[2/3, 6/16]
+[2/3, 7/16]
+[2/3, 8/16]
+[2/3, 9/16]
+[2/3, 10/16]
+[2/3, 11/16]
+[2/3, 12/16]
+[2/3, 13/16]
+[2/3, 14/16]
+[2/3, 15/16]
+[2/3, 16/16]
+Testing Loss: 1.09 - Time: 0:02:12.945791
+Training!
+[3/3, 5/94] Training Loss: 0.94 - Time: 0:00:01.348982
+[3/3, 10/94] Training Loss: 0.95 - Time: 0:00:01.208081
+[3/3, 15/94] Training Loss: 0.87 - Time: 0:00:01.243800
+[3/3, 20/94] Training Loss: 0.93 - Time: 0:00:01.265083
+[3/3, 25/94] Training Loss: 0.93 - Time: 0:00:01.366828
+[3/3, 30/94] Training Loss: 0.92 - Time: 0:00:01.252737
+[3/3, 35/94] Training Loss: 0.94 - Time: 0:00:01.350981
+[3/3, 40/94] Training Loss: 0.95 - Time: 0:00:01.343512
+[3/3, 45/94] Training Loss: 0.88 - Time: 0:00:01.300844
+[3/3, 50/94] Training Loss: 0.92 - Time: 0:00:01.195176
+[3/3, 55/94] Training Loss: 0.95 - Time: 0:00:01.332089
+[3/3, 60/94] Training Loss: 0.90 - Time: 0:00:01.201619
+[3/3, 65/94] Training Loss: 0.92 - Time: 0:00:01.302850
+[3/3, 70/94] Training Loss: 0.91 - Time: 0:00:01.269592
+[3/3, 75/94] Training Loss: 0.89 - Time: 0:00:01.225564
+[3/3, 80/94] Training Loss: 1.00 - Time: 0:00:01.259150
+[3/3, 85/94] Training Loss: 0.90 - Time: 0:00:01.263684
+[3/3, 90/94] Training Loss: 0.97 - Time: 0:00:01.288452
+Testing!
+[3/3, 1/16]
+[3/3, 2/16]
+[3/3, 3/16]
+[3/3, 4/16]
+[3/3, 5/16]
+[3/3, 6/16]
+[3/3, 7/16]
+[3/3, 8/16]
+[3/3, 9/16]
+[3/3, 10/16]
+[3/3, 11/16]
+[3/3, 12/16]
+[3/3, 13/16]
+[3/3, 14/16]
+[3/3, 15/16]
+[3/3, 16/16]
+Testing Loss: 0.98 - Time: 0:02:14.731701
+Training and Testing Finished - Time: {datetime.now() - startTime}

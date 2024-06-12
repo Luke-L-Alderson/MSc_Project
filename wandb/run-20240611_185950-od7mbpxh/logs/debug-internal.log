@@ -1,0 +1,125 @@
+2024-06-11 18:59:50,485 INFO    StreamThr :8372 [internal.py:wandb_internal():85] W&B internal server running at pid: 8372, started at: 2024-06-11 18:59:50.484539
+2024-06-11 18:59:50,486 DEBUG   HandlerThread:8372 [handler.py:handle_request():158] handle_request: status
+2024-06-11 18:59:50,494 INFO    WriterThread:8372 [datastore.py:open_for_write():87] open: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240611_185950-od7mbpxh\run-od7mbpxh.wandb
+2024-06-11 18:59:50,495 DEBUG   SenderThread:8372 [sender.py:send():378] send: header
+2024-06-11 18:59:50,527 DEBUG   SenderThread:8372 [sender.py:send():378] send: run
+2024-06-11 18:59:50,822 INFO    SenderThread:8372 [dir_watcher.py:__init__():211] watching files in: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240611_185950-od7mbpxh\files
+2024-06-11 18:59:50,822 INFO    SenderThread:8372 [sender.py:_start_run_threads():1123] run started: od7mbpxh with start time 1718128790.483547
+2024-06-11 18:59:50,833 DEBUG   HandlerThread:8372 [handler.py:handle_request():158] handle_request: check_version
+2024-06-11 18:59:50,833 DEBUG   SenderThread:8372 [sender.py:send_request():405] send_request: check_version
+2024-06-11 18:59:50,905 DEBUG   HandlerThread:8372 [handler.py:handle_request():158] handle_request: run_start
+2024-06-11 18:59:50,935 DEBUG   HandlerThread:8372 [system_info.py:__init__():26] System info init
+2024-06-11 18:59:50,935 DEBUG   HandlerThread:8372 [system_info.py:__init__():41] System info init done
+2024-06-11 18:59:50,935 INFO    HandlerThread:8372 [system_monitor.py:start():194] Starting system monitor
+2024-06-11 18:59:50,936 INFO    SystemMonitor:8372 [system_monitor.py:_start():158] Starting system asset monitoring threads
+2024-06-11 18:59:50,936 INFO    HandlerThread:8372 [system_monitor.py:probe():214] Collecting system info
+2024-06-11 18:59:50,943 INFO    SystemMonitor:8372 [interfaces.py:start():188] Started cpu monitoring
+2024-06-11 18:59:50,944 INFO    SystemMonitor:8372 [interfaces.py:start():188] Started disk monitoring
+2024-06-11 18:59:50,944 INFO    SystemMonitor:8372 [interfaces.py:start():188] Started gpu monitoring
+2024-06-11 18:59:50,945 INFO    SystemMonitor:8372 [interfaces.py:start():188] Started memory monitoring
+2024-06-11 18:59:50,962 INFO    SystemMonitor:8372 [interfaces.py:start():188] Started network monitoring
+2024-06-11 18:59:50,979 DEBUG   HandlerThread:8372 [system_info.py:probe():150] Probing system
+2024-06-11 18:59:50,981 DEBUG   HandlerThread:8372 [system_info.py:_probe_git():135] Probing git
+2024-06-11 18:59:51,068 DEBUG   HandlerThread:8372 [system_info.py:_probe_git():143] Probing git done
+2024-06-11 18:59:51,068 DEBUG   HandlerThread:8372 [system_info.py:probe():198] Probing system done
+2024-06-11 18:59:51,068 DEBUG   HandlerThread:8372 [system_monitor.py:probe():223] {'os': 'Windows-11-10.0.22631-SP0', 'python': '3.12.3', 'heartbeatAt': '2024-06-11T17:59:50.979797', 'startedAt': '2024-06-11T17:59:50.473599', 'docker': None, 'cuda': None, 'args': (), 'state': 'running', 'program': 'c:\\users\\lukea\\documents\\masters project code\\msc_project\\main.py', 'codePathLocal': 'main.py', 'codePath': 'main.py', 'git': {'remote': 'https://github.com/Luke-L-Alderson/MSc_Project.git', 'commit': '2fa7dfdb3f4577e643da26d6f8349fe9bc1590cd'}, 'email': 'lukelalderson@gmail.com', 'root': 'C:/Users/lukea/Documents/Masters Project Code/MSc_Project', 'host': 'L-Alderson-Desktop', 'username': 'lukea', 'executable': 'C:\\Users\\lukea\\anaconda3\\envs\\diss\\python.exe', 'cpu_count': 6, 'cpu_count_logical': 12, 'cpu_freq': {'current': 4101.0, 'min': 0.0, 'max': 4101.0}, 'cpu_freq_per_core': [{'current': 4101.0, 'min': 0.0, 'max': 4101.0}], 'disk': {}, 'gpu': 'NVIDIA GeForce RTX 4070', 'gpu_count': 1, 'gpu_devices': [{'name': 'NVIDIA GeForce RTX 4070', 'memory_total': 12878610432}], 'memory': {'total': 15.92232894897461}}
+2024-06-11 18:59:51,068 INFO    HandlerThread:8372 [system_monitor.py:probe():224] Finished collecting system info
+2024-06-11 18:59:51,068 INFO    HandlerThread:8372 [system_monitor.py:probe():227] Publishing system info
+2024-06-11 18:59:51,068 DEBUG   HandlerThread:8372 [system_info.py:_save_conda():207] Saving list of conda packages installed into the current environment
+2024-06-11 18:59:51,070 ERROR   HandlerThread:8372 [system_info.py:_save_conda():221] Error saving conda packages: [WinError 2] The system cannot find the file specified
+Traceback (most recent call last):
+  File "C:\Users\lukea\anaconda3\envs\diss\Lib\site-packages\wandb\sdk\internal\system\system_info.py", line 214, in _save_conda
+    subprocess.call(
+  File "C:\Users\lukea\anaconda3\envs\diss\Lib\subprocess.py", line 389, in call
+    with Popen(*popenargs, **kwargs) as p:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lukea\anaconda3\envs\diss\Lib\subprocess.py", line 1026, in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+  File "C:\Users\lukea\anaconda3\envs\diss\Lib\subprocess.py", line 1538, in _execute_child
+    hp, ht, pid, tid = _winapi.CreateProcess(executable, args,
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [WinError 2] The system cannot find the file specified
+2024-06-11 18:59:51,072 DEBUG   HandlerThread:8372 [system_info.py:_save_conda():222] Saving conda packages done
+2024-06-11 18:59:51,073 INFO    HandlerThread:8372 [system_monitor.py:probe():229] Finished publishing system info
+2024-06-11 18:59:51,078 DEBUG   SenderThread:8372 [sender.py:send():378] send: files
+2024-06-11 18:59:51,078 INFO    SenderThread:8372 [sender.py:_save_file():1389] saving file wandb-metadata.json with policy now
+2024-06-11 18:59:51,308 DEBUG   HandlerThread:8372 [handler.py:handle_request():158] handle_request: python_packages
+2024-06-11 18:59:51,308 DEBUG   SenderThread:8372 [sender.py:send_request():405] send_request: python_packages
+2024-06-11 18:59:51,308 DEBUG   HandlerThread:8372 [handler.py:handle_request():158] handle_request: stop_status
+2024-06-11 18:59:51,309 DEBUG   SenderThread:8372 [sender.py:send_request():405] send_request: stop_status
+2024-06-11 18:59:51,511 DEBUG   SenderThread:8372 [sender.py:send():378] send: telemetry
+2024-06-11 18:59:51,511 DEBUG   SenderThread:8372 [sender.py:send():378] send: telemetry
+2024-06-11 18:59:51,511 DEBUG   SenderThread:8372 [sender.py:send():378] send: run
+2024-06-11 18:59:51,588 INFO    wandb-upload_0:8372 [upload_job.py:push():130] Uploaded file C:\Users\lukea\AppData\Local\Temp\tmp3vdsthytwandb\w7rgfivx-wandb-metadata.json
+2024-06-11 18:59:51,650 INFO    SenderThread:8372 [sender.py:send_run():996] updated run: od7mbpxh
+2024-06-11 18:59:51,824 INFO    Thread-16 :8372 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240611_185950-od7mbpxh\files\config.yaml
+2024-06-11 18:59:51,824 INFO    Thread-16 :8372 [dir_watcher.py:_on_file_created():271] file/dir created: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240611_185950-od7mbpxh\files\conda-environment.yaml
+2024-06-11 18:59:51,824 INFO    Thread-16 :8372 [dir_watcher.py:_on_file_created():271] file/dir created: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240611_185950-od7mbpxh\files\requirements.txt
+2024-06-11 18:59:51,824 INFO    Thread-16 :8372 [dir_watcher.py:_on_file_created():271] file/dir created: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240611_185950-od7mbpxh\files\output.log
+2024-06-11 18:59:51,824 INFO    Thread-16 :8372 [dir_watcher.py:_on_file_created():271] file/dir created: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240611_185950-od7mbpxh\files\wandb-metadata.json
+2024-06-11 18:59:53,825 INFO    Thread-16 :8372 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240611_185950-od7mbpxh\files\output.log
+2024-06-11 18:59:55,653 DEBUG   HandlerThread:8372 [handler.py:handle_request():158] handle_request: status_report
+2024-06-11 18:59:59,832 INFO    Thread-16 :8372 [dir_watcher.py:_on_file_created():271] file/dir created: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240611_185950-od7mbpxh\files\conda-environment.yaml
+2024-06-11 19:00:00,656 DEBUG   HandlerThread:8372 [handler.py:handle_request():158] handle_request: status_report
+2024-06-11 19:00:05,658 DEBUG   HandlerThread:8372 [handler.py:handle_request():158] handle_request: status_report
+2024-06-11 19:00:06,309 DEBUG   HandlerThread:8372 [handler.py:handle_request():158] handle_request: stop_status
+2024-06-11 19:00:06,310 DEBUG   SenderThread:8372 [sender.py:send_request():405] send_request: stop_status
+2024-06-11 19:00:11,521 DEBUG   HandlerThread:8372 [handler.py:handle_request():158] handle_request: status_report
+2024-06-11 19:00:13,848 INFO    Thread-16 :8372 [dir_watcher.py:_on_file_created():271] file/dir created: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240611_185950-od7mbpxh\files\conda-environment.yaml
+2024-06-11 19:00:16,524 DEBUG   HandlerThread:8372 [handler.py:handle_request():158] handle_request: status_report
+2024-06-11 19:00:21,329 DEBUG   HandlerThread:8372 [handler.py:handle_request():158] handle_request: stop_status
+2024-06-11 19:00:21,329 DEBUG   SenderThread:8372 [sender.py:send_request():405] send_request: stop_status
+2024-06-11 19:00:22,522 DEBUG   HandlerThread:8372 [handler.py:handle_request():158] handle_request: status_report
+2024-06-11 19:00:22,857 INFO    Thread-16 :8372 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240611_185950-od7mbpxh\files\config.yaml
+2024-06-11 19:00:27,658 DEBUG   HandlerThread:8372 [handler.py:handle_request():158] handle_request: status_report
+2024-06-11 19:00:32,659 DEBUG   HandlerThread:8372 [handler.py:handle_request():158] handle_request: status_report
+2024-06-11 19:00:36,318 DEBUG   HandlerThread:8372 [handler.py:handle_request():158] handle_request: stop_status
+2024-06-11 19:00:36,318 DEBUG   SenderThread:8372 [sender.py:send_request():405] send_request: stop_status
+2024-06-11 19:00:38,460 DEBUG   HandlerThread:8372 [handler.py:handle_request():158] handle_request: status_report
+2024-06-11 19:00:43,463 DEBUG   HandlerThread:8372 [handler.py:handle_request():158] handle_request: status_report
+2024-06-11 19:00:48,477 DEBUG   HandlerThread:8372 [handler.py:handle_request():158] handle_request: status_report
+2024-06-11 19:00:50,980 DEBUG   SystemMonitor:8372 [system_monitor.py:_start():172] Starting system metrics aggregation loop
+2024-06-11 19:00:50,981 DEBUG   SenderThread:8372 [sender.py:send():378] send: stats
+2024-06-11 19:00:51,321 DEBUG   HandlerThread:8372 [handler.py:handle_request():158] handle_request: stop_status
+2024-06-11 19:00:51,322 DEBUG   SenderThread:8372 [sender.py:send_request():405] send_request: stop_status
+2024-06-11 19:00:53,521 DEBUG   HandlerThread:8372 [handler.py:handle_request():158] handle_request: status_report
+2024-06-11 19:00:58,511 DEBUG   HandlerThread:8372 [handler.py:handle_request():158] handle_request: status_report
+2024-06-11 19:01:03,514 DEBUG   HandlerThread:8372 [handler.py:handle_request():158] handle_request: status_report
+2024-06-11 19:01:06,324 DEBUG   HandlerThread:8372 [handler.py:handle_request():158] handle_request: stop_status
+2024-06-11 19:01:06,324 DEBUG   SenderThread:8372 [sender.py:send_request():405] send_request: stop_status
+2024-06-11 19:01:08,547 DEBUG   HandlerThread:8372 [handler.py:handle_request():158] handle_request: status_report
+2024-06-11 19:01:13,550 DEBUG   HandlerThread:8372 [handler.py:handle_request():158] handle_request: status_report
+2024-06-11 19:01:14,278 DEBUG   HandlerThread:8372 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-11 19:01:14,278 DEBUG   SenderThread:8372 [sender.py:send():378] send: history
+2024-06-11 19:01:14,279 DEBUG   SenderThread:8372 [sender.py:send_request():405] send_request: summary_record
+2024-06-11 19:01:14,280 INFO    SenderThread:8372 [sender.py:_save_file():1389] saving file wandb-summary.json with policy end
+2024-06-11 19:01:14,912 INFO    Thread-16 :8372 [dir_watcher.py:_on_file_created():271] file/dir created: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240611_185950-od7mbpxh\files\wandb-summary.json
+2024-06-11 19:01:15,914 INFO    Thread-16 :8372 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240611_185950-od7mbpxh\files\output.log
+2024-06-11 19:01:19,282 DEBUG   HandlerThread:8372 [handler.py:handle_request():158] handle_request: status_report
+2024-06-11 19:01:20,983 DEBUG   SenderThread:8372 [sender.py:send():378] send: stats
+2024-06-11 19:01:21,329 DEBUG   HandlerThread:8372 [handler.py:handle_request():158] handle_request: stop_status
+2024-06-11 19:01:21,329 DEBUG   SenderThread:8372 [sender.py:send_request():405] send_request: stop_status
+2024-06-11 19:01:24,548 DEBUG   HandlerThread:8372 [handler.py:handle_request():158] handle_request: status_report
+2024-06-11 19:01:29,550 DEBUG   HandlerThread:8372 [handler.py:handle_request():158] handle_request: status_report
+2024-06-11 19:01:34,552 DEBUG   HandlerThread:8372 [handler.py:handle_request():158] handle_request: status_report
+2024-06-11 19:01:36,329 DEBUG   HandlerThread:8372 [handler.py:handle_request():158] handle_request: stop_status
+2024-06-11 19:01:36,329 DEBUG   SenderThread:8372 [sender.py:send_request():405] send_request: stop_status
+2024-06-11 19:01:40,530 DEBUG   HandlerThread:8372 [handler.py:handle_request():158] handle_request: status_report
+2024-06-11 19:01:45,532 DEBUG   HandlerThread:8372 [handler.py:handle_request():158] handle_request: status_report
+2024-06-11 19:01:50,535 DEBUG   HandlerThread:8372 [handler.py:handle_request():158] handle_request: status_report
+2024-06-11 19:01:50,984 DEBUG   SenderThread:8372 [sender.py:send():378] send: stats
+2024-06-11 19:01:51,328 DEBUG   HandlerThread:8372 [handler.py:handle_request():158] handle_request: stop_status
+2024-06-11 19:01:51,328 DEBUG   SenderThread:8372 [sender.py:send_request():405] send_request: stop_status
+2024-06-11 19:01:56,492 DEBUG   HandlerThread:8372 [handler.py:handle_request():158] handle_request: status_report
+2024-06-11 19:02:01,495 DEBUG   HandlerThread:8372 [handler.py:handle_request():158] handle_request: status_report
+2024-06-11 19:02:06,336 DEBUG   HandlerThread:8372 [handler.py:handle_request():158] handle_request: stop_status
+2024-06-11 19:02:06,336 DEBUG   SenderThread:8372 [sender.py:send_request():405] send_request: stop_status
+2024-06-11 19:02:06,547 DEBUG   HandlerThread:8372 [handler.py:handle_request():158] handle_request: status_report
+2024-06-11 19:02:11,550 DEBUG   HandlerThread:8372 [handler.py:handle_request():158] handle_request: status_report
+2024-06-11 19:02:16,552 DEBUG   HandlerThread:8372 [handler.py:handle_request():158] handle_request: status_report
+2024-06-11 19:02:20,986 DEBUG   SenderThread:8372 [sender.py:send():378] send: stats
+2024-06-11 19:02:21,331 DEBUG   HandlerThread:8372 [handler.py:handle_request():158] handle_request: stop_status
+2024-06-11 19:02:21,331 DEBUG   SenderThread:8372 [sender.py:send_request():405] send_request: stop_status
+2024-06-11 19:02:22,462 DEBUG   HandlerThread:8372 [handler.py:handle_request():158] handle_request: status_report
+2024-06-11 19:02:27,466 DEBUG   HandlerThread:8372 [handler.py:handle_request():158] handle_request: status_report
+2024-06-11 19:02:32,468 DEBUG   HandlerThread:8372 [handler.py:handle_request():158] handle_request: status_report

@@ -22,10 +22,10 @@ import snntorch.spikeplot as splt
 
 from IPython.display import HTML
 from brian2 import *
-
+from matplotlib import pyplot as plt
 import pandas as pd
 
-from model.train.train_network import train_network
+from train_network import train_network
 
 import gc
     
@@ -36,7 +36,7 @@ def main():
     torch.backends.cudnn.benchmark = True #TURN OFF WHEN CHANGING ARCHITECTURE    
 
     run = wandb.init()
-    run.name = f"{wandb.config.lr}_{wandb.config.bs}_{wandb.config.subset_size}"
+    run.name = f"{wandb.config.rate_on} Hz_{wandb.config.rate_off} Hz_{wandb.config.subset_size}"
     
     """## Define network architecutre and parameters"""
     network_params, input_specs, train_specs = {}, {}, {}
@@ -97,7 +97,6 @@ def main():
     # Plot originally input as image and as spiking representation - save gif.
     inputs, labels = next(iter(test_loader))
     poisson_inputs = get_poisson_inputs(inputs, **input_specs)
-    
     img_spk_recs, img_spk_outs = network(poisson_inputs)
     
     print("Assembling test data for t-sne projection")
@@ -179,14 +178,17 @@ def main():
     poisson_inputs = poisson_inputs.squeeze().cpu()
     img_spk_outs = img_spk_outs.squeeze().detach().cpu()
     
+    fig, ax = plt.subplots()
     plt.imshow(to_np(inputs[input_index, 0]), cmap = 'grey')
+    
+    fig, ax = plt.subplots()
     plt.imshow(poisson_inputs[:, input_index].mean(axis=0), cmap='grey')
     
     print("Plotting Spiking Input MNIST Animation")
     fig, ax = plt.subplots()
     anim = splt.animator(poisson_inputs[:, input_index], fig, ax)
     HTML(anim.to_html5_video())
-    anim.save("spike_mnist.gif")
+    anim.save("figures/spike_mnist.gif")
     
     wandb.log({"Spike Animation": wandb.Video("spike_mnist.gif", fps=4, format="gif")}, commit = False)
     
@@ -198,7 +200,7 @@ def main():
     fig1, ax1 = plt.subplots()
     animrec = splt.animator(img_spk_outs[:, input_index], fig1, ax1)
     HTML(animrec.to_html5_video())
-    animrec.save("spike_mnistrec.gif")
+    animrec.save("figures/spike_mnistrec.gif")
     
     
     fig = plt.figure(facecolor="w", figsize=(10, 5))
@@ -214,11 +216,11 @@ def main():
     fig.savefig("figures/output_raster.png")
     
     wandb.log({"Test Loss": final_test_loss,
-               "Results Grid": wandb.Image("result_summary.png"),
+               "Results Grid": wandb.Image("figures/result_summary.png"),
                #"t-SNE": wandb.Table(tsne),
-               "Spike Animation": wandb.Video("spike_mnistrec.gif", fps=4, format="gif"),
-               "Input Raster": wandb.Image("input_raster.png"),
-               "Output Raster": wandb.Image("output_raster.png")})
+               "Spike Animation": wandb.Video("figures/spike_mnistrec.gif", fps=4, format="gif"),
+               "Input Raster": wandb.Image("figures/input_raster.png"),
+               "Output Raster": wandb.Image("figures/output_raster.png")})
     
     del network, train_loss, test_loss, final_train_loss, final_test_loss, \
         features, all_labs, all_decs, all_orig_ims, \
@@ -226,49 +228,49 @@ def main():
         
     gc.collect()
     torch.cuda.empty_cache()
-    
-    
-    
-if __name__ == '__main__':
-    
-    test = 1
-    
-    if test == 1:
-        sweep_config = {
-            'name': f'Test Sweep {date}',
-            'method': 'grid',
-            'metric': {'name': 'Test Loss',
-                        'goal': 'minimize'   
-                        },
-            'parameters': {'bs': {'values': [64]},
-                            'lr': {'values': [1e-4]},
-                            'epochs': {'values': [1]},
-                            "subset_size": {'values': [0.01, 0.1]},
-                            "recurrence": {'values': [True]},
-                            "rate_on": {'values': [75]},
-                            "rate_off": {'values': [10]},
-                            "num_workers": {'values': [0]}
-                            }
-            }
-    else:
-        sweep_config = {
-            'name': f'Base Performance Tuning {date}',
-            'method': 'grid',
-            'metric': {'name': 'Test Loss',
-                        'goal': 'minimize'   
-                        },
-            'parameters': {'bs': {'values': [64]},
-                            'lr': {'values': [1e-4]},
-                            'epochs': {'values': [3]},
-                            "subset_size": {'values': [0.1, 0.7, 1]},
-                            "recurrence": {'values': [True]},
-                            "rate_on": {'values': [75]},
-                            "rate_off": {'values': [10]},
-                            "num_workers": {'values': [0]}
-                            }
-            }
-    
-    
-    sweep_id = wandb.sweep(sweep = sweep_config, project = "MSc Project", entity="lukelalderson")
         
-    wandb.agent(sweep_id, function=main)
+        
+if __name__ == '__main__':  
+  
+  
+  test = 0
+  
+  if test == 1:
+      sweep_config = {
+          'name': f'Test Sweep {date}',
+          'method': 'grid',
+          'metric': {'name': 'Test Loss',
+                      'goal': 'minimize'   
+                      },
+          'parameters': {'bs': {'values': [64]},
+                          'lr': {'values': [1e-4]},
+                          'epochs': {'values': [1]},
+                          "subset_size": {'values': [0.01]},
+                          "recurrence": {'values': [True]},
+                          "rate_on": {'values': [75]},
+                          "rate_off": {'values': [10]},
+                          "num_workers": {'values': [0]}
+                          }
+          }
+  else:
+      sweep_config = {
+          'name': f'Rate Evaluation {date}',
+          'method': 'grid',
+          'metric': {'name': 'Test Loss',
+                      'goal': 'minimize'   
+                      },
+          'parameters': {'bs': {'values': [64]},
+                          'lr': {'values': [1e-4]},
+                          'epochs': {'values': [9]},
+                          "subset_size": {'values': [0.1, 0.7]},
+                          "recurrence": {'values': [True]},
+                          "rate_on": {'values': [200]}, # 75, 100, 125, 150, 175, 200
+                          "rate_off": {'values': [1]},
+                          "num_workers": {'values': [0]}
+                          }
+          }
+  
+  
+  sweep_id = wandb.sweep(sweep = sweep_config, project = "MSc Project", entity="lukelalderson")
+      
+  wandb.agent(sweep_id, function=main)

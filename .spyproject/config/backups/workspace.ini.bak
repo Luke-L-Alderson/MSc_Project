@@ -4,7 +4,7 @@ save_data_on_exit = True
 save_history = True
 save_non_project_files = False
 project_type = 'empty-project-type'
-recent_files = ['model\\image_to_image.py', 'model\\aux\\functions.py', 'helpers.py', 'model\\train\\train_network.py', 'main.py']
+recent_files = ['helpers.py', 'main.py', 'train_network.py', 'image_to_image.py']
 
 [main]
 version = 0.2.0

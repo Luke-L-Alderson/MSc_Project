@@ -1,0 +1,18 @@
+wandb_version: 1
+
+bs:
+  value: 64
+epochs:
+  value: 1
+lr:
+  value: 0.0001
+num_workers:
+  value: 0
+rate_off:
+  value: 10
+rate_on:
+  value: 75
+recurrence:
+  value: true
+subset_size:
+  value: 0.01

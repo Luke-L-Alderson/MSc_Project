@@ -9,15 +9,14 @@ from torch.utils.data import Subset
 
 from brian2 import *
 
-from model.image_to_image import SAE
+from image_to_image import SAE
 #from model.aux.functions import get_poisson_inputs, process_labels, mse_count_loss
 
-from math import floor, ceil
-from datetime import datetime
 import torch
 import torch.nn as nn
 import snntorch as snn
 from snntorch import spikegen
+from random import random
 
 __all__ = ["build_datasets", "build_network", "to_np", "plot_input", \
            "curr_to_pA", "transfer", "get_fr", "print_network_architecure", \
@@ -172,7 +171,7 @@ def set_seed(value = 42):
     #random.seed(value)
     # When running on the CuDNN backend, two further options must be set
     torch.backends.cudnn.deterministic = True
-    torch.backends.cudnn.benchmark = False
+    #torch.backends.cudnn.benchmark = False
     # Set a fixed value for the hash seed
     os.environ["PYTHONHASHSEED"] = str(value)
     print(f"\nSetting Seed to {value}")

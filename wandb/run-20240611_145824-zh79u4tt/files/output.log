@@ -1,0 +1,34 @@
+Starting Sweep: Batch Size: 64, Learning Rate: 0.0001
+Making datasets and defining subsets
+Training: 60000 -> 600
+Testing: 10000 -> 100
+Making Subsets
+Training: 600
+Testing: 100
+Making Dataloaders
+Defining network
+2024-06-11 14:58:25.603931
+Training!
+[1/1, 1/10] Training Loss: 17.45 - Iteration Time: 0:00:02.579449
+[1/1, 2/10] Training Loss: 14.54 - Iteration Time: 0:00:01.419478
+[1/1, 3/10] Training Loss: 10.87 - Iteration Time: 0:00:01.317204
+[1/1, 4/10] Training Loss: 10.08 - Iteration Time: 0:00:01.365693
+[1/1, 5/10] Training Loss: 7.53 - Iteration Time: 0:00:01.407520
+[1/1, 6/10] Training Loss: 7.30 - Iteration Time: 0:00:01.428812
+[1/1, 7/10] Training Loss: 6.22 - Iteration Time: 0:00:01.438775
+[1/1, 8/10] Training Loss: 4.98 - Iteration Time: 0:00:01.468812
+[1/1, 9/10] Training Loss: 4.36 - Iteration Time: 0:00:01.320711
+[1/1, 10/10] Training Loss: 3.74 - Iteration Time: 0:00:01.467579
+Testing!
+[1/1, 1/2]
+[1/1, 2/2]
+Testing Loss: 3.48 - Epoch Time: 0:00:16.936315
+Training and Testing Finished - Time: {datetime.now() - startTime}
+Assembling test data for t-sne projection
+-- 1/2 --
+-- 2/2 --
+Plotting Results Grid
+Plotting Spiking Input MNIST
+Plotting Spiking Input MNIST Animation
+Plotting Spiking Output MNIST
+Plotting Spiking Output MNIST Animation

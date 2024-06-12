@@ -1,0 +1,60 @@
+wandb_version: 1
+
+_wandb:
+  desc: null
+  value:
+    python_version: 3.12.3
+    cli_version: 0.17.0
+    framework: torch
+    is_jupyter_run: false
+    is_kaggle_kernel: false
+    start_time: 1718114304
+    t:
+      1:
+      - 1
+      - 5
+      - 41
+      - 53
+      - 55
+      2:
+      - 1
+      - 5
+      - 41
+      - 53
+      - 55
+      3:
+      - 2
+      - 17
+      - 23
+      - 37
+      4: 3.12.3
+      5: 0.17.0
+      8:
+      - 3
+      - 5
+      - 13
+      13: windows-amd64
+bs:
+  desc: null
+  value: 64
+epochs:
+  desc: null
+  value: 1
+lr:
+  desc: null
+  value: 0.0001
+num_workers:
+  desc: null
+  value: 0
+rate_off:
+  desc: null
+  value: 10
+rate_on:
+  desc: null
+  value: 75
+recurrence:
+  desc: null
+  value: true
+subset_size:
+  desc: null
+  value: 0.01
