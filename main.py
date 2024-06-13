@@ -42,6 +42,11 @@ def main():
     network_params, input_specs, train_specs = {}, {}, {}
     
     # Parameters for use in training
+    input_specs["rate_on"] = wandb.config.rate_on*Hz
+    input_specs["rate_off"] = wandb.config.rate_off*Hz    
+    input_specs["total_time"] = 200*ms
+    input_specs["bin_size"] = 1*ms
+    
     train_specs["code"] = 'rate'
     
     train_specs["early_stop"] = -1
@@ -55,10 +60,9 @@ def main():
     train_specs["subset_size"] = wandb.config.subset_size
     train_specs["num_workers"] = wandb.config.num_workers
     
-    input_specs["rate_on"] = wandb.config.rate_on*Hz
-    input_specs["rate_off"] = wandb.config.rate_off*Hz    
-    input_specs["total_time"] = 200*ms
-    input_specs["bin_size"] = 1*ms
+    
+    train_specs["scaler"] = abs(1/(wandb.config.rate_on-wandb.config.rate_off)) if wandb.config.rate_on != wandb.config.rate_off else 1000
+    
     
     noise = wandb.config.noise
     recurrence = wandb.config.recurrence
@@ -122,9 +126,9 @@ def main():
        all_orig_ims = np.concatenate(all_orig_ims, axis = 0)
        all_decs = np.concatenate(all_decs, axis = 0)
   
-    tsne = pd.DataFrame(data = features)
-    tsne.insert(0, "Labels", all_labs) 
-    tsne.to_csv(run.name)
+    # tsne = pd.DataFrame(data = features)
+    # tsne.insert(0, "Labels", all_labs) 
+    # tsne.to_csv(run.name)
     
     print("Plotting Results Grid")
     seen_labels = set()
@@ -222,7 +226,7 @@ def main():
     wandb.log({"Test Loss": final_test_loss,
                "Results Grid": wandb.Image("figures/result_summary.png"),
                #"t-SNE": wandb.Table(tsne),
-               "Spike Animation": wandb.Video("figures/spike_mnistrec.gif", fps=4, format="gif"),
+               "Spike Animation": wandb.Video("figures/spike_mnistrec_{labels[input_index]}.gif", fps=4, format="gif"),
                "Input Raster": wandb.Image("figures/input_raster.png"),
                "Output Raster": wandb.Image("figures/output_raster.png")})
     
@@ -258,7 +262,7 @@ if __name__ == '__main__':
           }
   else:
       sweep_config = {
-          'name': f'Recurrence Sweep (0 - 1) {date}',
+          'name': f'Error Heat Map (5x5) {date}',
           'method': 'grid',
           'metric': {'name': 'Test Loss',
                       'goal': 'minimize'   
@@ -267,10 +271,10 @@ if __name__ == '__main__':
                           'lr': {'values': [1e-4]},
                           'epochs': {'values': [9]}, # no less than 6
                           "subset_size": {'values': [10]}, #0.1, 0.7
-                          "recurrence": {'values': [1, 0.75, 0.5, 0.25, 0]},
+                          "recurrence": {'values': [1]},
                           "noise": {'values': [0]},
-                          "rate_on": {'values': [75]}, # 25, 50, 75, 100, 125, 150, 175, 200
-                          "rate_off": {'values': [1]},
+                          "rate_on": {'values': [1, 50, 100, 150, 200]}, # 25, 50, 75, 100, 125
+                          "rate_off": {'values': [1, 50, 100, 150, 200]},
                           "num_workers": {'values': [0]}
                           }
           }

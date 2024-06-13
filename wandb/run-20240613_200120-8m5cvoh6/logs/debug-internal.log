@@ -1,0 +1,1225 @@
+2024-06-13 20:01:20,917 INFO    StreamThr :1332 [internal.py:wandb_internal():85] W&B internal server running at pid: 1332, started at: 2024-06-13 20:01:20.916674
+2024-06-13 20:01:20,918 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status
+2024-06-13 20:01:20,933 INFO    WriterThread:1332 [datastore.py:open_for_write():87] open: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\run-8m5cvoh6.wandb
+2024-06-13 20:01:20,934 DEBUG   SenderThread:1332 [sender.py:send():378] send: header
+2024-06-13 20:01:20,979 DEBUG   SenderThread:1332 [sender.py:send():378] send: run
+2024-06-13 20:01:21,355 INFO    SenderThread:1332 [dir_watcher.py:__init__():211] watching files in: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files
+2024-06-13 20:01:21,355 INFO    SenderThread:1332 [sender.py:_start_run_threads():1123] run started: 8m5cvoh6 with start time 1718305280.914192
+2024-06-13 20:01:21,365 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: check_version
+2024-06-13 20:01:21,366 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: check_version
+2024-06-13 20:01:21,576 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: run_start
+2024-06-13 20:01:21,621 DEBUG   HandlerThread:1332 [system_info.py:__init__():26] System info init
+2024-06-13 20:01:21,621 DEBUG   HandlerThread:1332 [system_info.py:__init__():41] System info init done
+2024-06-13 20:01:21,621 INFO    HandlerThread:1332 [system_monitor.py:start():194] Starting system monitor
+2024-06-13 20:01:21,621 INFO    SystemMonitor:1332 [system_monitor.py:_start():158] Starting system asset monitoring threads
+2024-06-13 20:01:21,622 INFO    HandlerThread:1332 [system_monitor.py:probe():214] Collecting system info
+2024-06-13 20:01:21,628 INFO    SystemMonitor:1332 [interfaces.py:start():188] Started cpu monitoring
+2024-06-13 20:01:21,629 INFO    SystemMonitor:1332 [interfaces.py:start():188] Started disk monitoring
+2024-06-13 20:01:21,629 DEBUG   HandlerThread:1332 [system_info.py:probe():150] Probing system
+2024-06-13 20:01:21,629 INFO    SystemMonitor:1332 [interfaces.py:start():188] Started gpu monitoring
+2024-06-13 20:01:21,630 INFO    SystemMonitor:1332 [interfaces.py:start():188] Started memory monitoring
+2024-06-13 20:01:21,642 INFO    SystemMonitor:1332 [interfaces.py:start():188] Started network monitoring
+2024-06-13 20:01:21,661 DEBUG   HandlerThread:1332 [system_info.py:_probe_git():135] Probing git
+2024-06-13 20:01:21,783 DEBUG   HandlerThread:1332 [system_info.py:_probe_git():143] Probing git done
+2024-06-13 20:01:21,783 DEBUG   HandlerThread:1332 [system_info.py:probe():198] Probing system done
+2024-06-13 20:01:21,783 DEBUG   HandlerThread:1332 [system_monitor.py:probe():223] {'os': 'Windows-11-10.0.22631-SP0', 'python': '3.12.3', 'heartbeatAt': '2024-06-13T19:01:21.629591', 'startedAt': '2024-06-13T19:01:20.890384', 'docker': None, 'cuda': None, 'args': (), 'state': 'running', 'program': 'c:\\users\\lukea\\documents\\masters project code\\msc_project\\main.py', 'codePathLocal': 'main.py', 'codePath': 'main.py', 'git': {'remote': 'https://github.com/Luke-L-Alderson/MSc_Project.git', 'commit': '28666be5a8d56dd2c8f3f22624f9846ec31d0ec5'}, 'email': 'lukelalderson@gmail.com', 'root': 'C:/Users/lukea/Documents/Masters Project Code/MSc_Project', 'host': 'L-Alderson-Desktop', 'username': 'lukea', 'executable': 'C:\\Users\\lukea\\anaconda3\\envs\\diss\\python.exe', 'cpu_count': 6, 'cpu_count_logical': 12, 'cpu_freq': {'current': 3200.0, 'min': 0.0, 'max': 4101.0}, 'cpu_freq_per_core': [{'current': 3200.0, 'min': 0.0, 'max': 4101.0}], 'disk': {}, 'gpu': 'NVIDIA GeForce RTX 4070', 'gpu_count': 1, 'gpu_devices': [{'name': 'NVIDIA GeForce RTX 4070', 'memory_total': 12878610432}], 'memory': {'total': 15.92232894897461}}
+2024-06-13 20:01:21,783 INFO    HandlerThread:1332 [system_monitor.py:probe():224] Finished collecting system info
+2024-06-13 20:01:21,783 INFO    HandlerThread:1332 [system_monitor.py:probe():227] Publishing system info
+2024-06-13 20:01:21,784 DEBUG   HandlerThread:1332 [system_info.py:_save_conda():207] Saving list of conda packages installed into the current environment
+2024-06-13 20:01:21,790 ERROR   HandlerThread:1332 [system_info.py:_save_conda():221] Error saving conda packages: [WinError 2] The system cannot find the file specified
+Traceback (most recent call last):
+  File "C:\Users\lukea\anaconda3\envs\diss\Lib\site-packages\wandb\sdk\internal\system\system_info.py", line 214, in _save_conda
+    subprocess.call(
+  File "C:\Users\lukea\anaconda3\envs\diss\Lib\subprocess.py", line 389, in call
+    with Popen(*popenargs, **kwargs) as p:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lukea\anaconda3\envs\diss\Lib\subprocess.py", line 1026, in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+  File "C:\Users\lukea\anaconda3\envs\diss\Lib\subprocess.py", line 1538, in _execute_child
+    hp, ht, pid, tid = _winapi.CreateProcess(executable, args,
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [WinError 2] The system cannot find the file specified
+2024-06-13 20:01:21,795 DEBUG   HandlerThread:1332 [system_info.py:_save_conda():222] Saving conda packages done
+2024-06-13 20:01:21,796 INFO    HandlerThread:1332 [system_monitor.py:probe():229] Finished publishing system info
+2024-06-13 20:01:21,807 DEBUG   SenderThread:1332 [sender.py:send():378] send: files
+2024-06-13 20:01:21,807 INFO    SenderThread:1332 [sender.py:_save_file():1389] saving file wandb-metadata.json with policy now
+2024-06-13 20:01:22,174 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: python_packages
+2024-06-13 20:01:22,174 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: python_packages
+2024-06-13 20:01:22,174 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: stop_status
+2024-06-13 20:01:22,175 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: stop_status
+2024-06-13 20:01:22,357 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_created():271] file/dir created: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\wandb-metadata.json
+2024-06-13 20:01:22,357 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_created():271] file/dir created: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\requirements.txt
+2024-06-13 20:01:22,358 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_created():271] file/dir created: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\conda-environment.yaml
+2024-06-13 20:01:22,369 DEBUG   SenderThread:1332 [sender.py:send():378] send: telemetry
+2024-06-13 20:01:22,369 DEBUG   SenderThread:1332 [sender.py:send():378] send: telemetry
+2024-06-13 20:01:22,369 DEBUG   SenderThread:1332 [sender.py:send():378] send: run
+2024-06-13 20:01:22,383 INFO    wandb-upload_0:1332 [upload_job.py:push():130] Uploaded file C:\Users\lukea\AppData\Local\Temp\tmp_f3crj24wandb\irbljep0-wandb-metadata.json
+2024-06-13 20:01:22,541 INFO    SenderThread:1332 [sender.py:send_run():996] updated run: 8m5cvoh6
+2024-06-13 20:01:23,357 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\config.yaml
+2024-06-13 20:01:23,357 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_created():271] file/dir created: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\output.log
+2024-06-13 20:01:25,359 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\output.log
+2024-06-13 20:01:26,546 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:01:31,549 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:01:35,525 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-13 20:01:35,526 DEBUG   SenderThread:1332 [sender.py:send():378] send: history
+2024-06-13 20:01:35,526 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: summary_record
+2024-06-13 20:01:35,527 INFO    SenderThread:1332 [sender.py:_save_file():1389] saving file wandb-summary.json with policy end
+2024-06-13 20:01:36,369 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_created():271] file/dir created: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\wandb-summary.json
+2024-06-13 20:01:37,188 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: stop_status
+2024-06-13 20:01:37,188 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:01:37,188 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: stop_status
+2024-06-13 20:01:37,371 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\output.log
+2024-06-13 20:01:42,396 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:01:47,397 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:01:48,410 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-13 20:01:48,410 DEBUG   SenderThread:1332 [sender.py:send():378] send: history
+2024-06-13 20:01:48,411 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: summary_record
+2024-06-13 20:01:48,412 INFO    SenderThread:1332 [sender.py:_save_file():1389] saving file wandb-summary.json with policy end
+2024-06-13 20:01:49,386 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\wandb-summary.json
+2024-06-13 20:01:51,388 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\output.log
+2024-06-13 20:01:52,192 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: stop_status
+2024-06-13 20:01:52,192 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: stop_status
+2024-06-13 20:01:52,466 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:01:53,390 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\config.yaml
+2024-06-13 20:01:57,618 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:02:01,253 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-13 20:02:01,253 DEBUG   SenderThread:1332 [sender.py:send():378] send: history
+2024-06-13 20:02:01,253 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: summary_record
+2024-06-13 20:02:01,254 INFO    SenderThread:1332 [sender.py:_save_file():1389] saving file wandb-summary.json with policy end
+2024-06-13 20:02:01,399 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\wandb-summary.json
+2024-06-13 20:02:03,255 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:02:03,401 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\output.log
+2024-06-13 20:02:07,187 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: stop_status
+2024-06-13 20:02:07,188 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: stop_status
+2024-06-13 20:02:08,375 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:02:13,378 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:02:14,407 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-13 20:02:14,407 DEBUG   SenderThread:1332 [sender.py:send():378] send: history
+2024-06-13 20:02:14,407 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: summary_record
+2024-06-13 20:02:14,409 INFO    SenderThread:1332 [sender.py:_save_file():1389] saving file wandb-summary.json with policy end
+2024-06-13 20:02:14,414 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\wandb-summary.json
+2024-06-13 20:02:17,418 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\output.log
+2024-06-13 20:02:18,411 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:02:21,650 DEBUG   SystemMonitor:1332 [system_monitor.py:_start():172] Starting system metrics aggregation loop
+2024-06-13 20:02:21,651 DEBUG   SenderThread:1332 [sender.py:send():378] send: stats
+2024-06-13 20:02:22,190 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: stop_status
+2024-06-13 20:02:22,190 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: stop_status
+2024-06-13 20:02:24,381 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:02:27,158 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-13 20:02:27,158 DEBUG   SenderThread:1332 [sender.py:send():378] send: history
+2024-06-13 20:02:27,158 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: summary_record
+2024-06-13 20:02:27,160 INFO    SenderThread:1332 [sender.py:_save_file():1389] saving file wandb-summary.json with policy end
+2024-06-13 20:02:27,430 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\wandb-summary.json
+2024-06-13 20:02:29,431 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\output.log
+2024-06-13 20:02:30,162 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:02:35,163 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:02:37,195 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: stop_status
+2024-06-13 20:02:37,196 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: stop_status
+2024-06-13 20:02:39,959 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-13 20:02:39,959 DEBUG   SenderThread:1332 [sender.py:send():378] send: history
+2024-06-13 20:02:39,960 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: summary_record
+2024-06-13 20:02:39,960 INFO    SenderThread:1332 [sender.py:_save_file():1389] saving file wandb-summary.json with policy end
+2024-06-13 20:02:40,445 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\wandb-summary.json
+2024-06-13 20:02:40,961 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:02:41,445 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\output.log
+2024-06-13 20:02:45,963 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:02:50,965 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:02:51,655 DEBUG   SenderThread:1332 [sender.py:send():378] send: stats
+2024-06-13 20:02:52,189 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: stop_status
+2024-06-13 20:02:52,189 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: stop_status
+2024-06-13 20:02:52,785 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-13 20:02:52,786 DEBUG   SenderThread:1332 [sender.py:send():378] send: history
+2024-06-13 20:02:52,786 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: summary_record
+2024-06-13 20:02:52,786 INFO    SenderThread:1332 [sender.py:_save_file():1389] saving file wandb-summary.json with policy end
+2024-06-13 20:02:53,486 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\wandb-summary.json
+2024-06-13 20:02:55,503 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\output.log
+2024-06-13 20:02:56,789 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:03:01,801 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:03:05,843 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-13 20:03:05,843 DEBUG   SenderThread:1332 [sender.py:send():378] send: history
+2024-06-13 20:03:05,843 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: summary_record
+2024-06-13 20:03:05,844 INFO    SenderThread:1332 [sender.py:_save_file():1389] saving file wandb-summary.json with policy end
+2024-06-13 20:03:06,600 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\wandb-summary.json
+2024-06-13 20:03:06,600 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\output.log
+2024-06-13 20:03:06,844 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:03:07,200 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: stop_status
+2024-06-13 20:03:07,200 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: stop_status
+2024-06-13 20:03:12,417 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:03:17,421 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:03:19,001 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-13 20:03:19,001 DEBUG   SenderThread:1332 [sender.py:send():378] send: history
+2024-06-13 20:03:19,002 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: summary_record
+2024-06-13 20:03:19,002 INFO    SenderThread:1332 [sender.py:_save_file():1389] saving file wandb-summary.json with policy end
+2024-06-13 20:03:19,705 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\wandb-summary.json
+2024-06-13 20:03:20,720 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\output.log
+2024-06-13 20:03:21,660 DEBUG   SenderThread:1332 [sender.py:send():378] send: stats
+2024-06-13 20:03:22,199 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: stop_status
+2024-06-13 20:03:22,200 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: stop_status
+2024-06-13 20:03:23,393 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:03:26,782 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\output.log
+2024-06-13 20:03:29,241 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:03:32,858 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\output.log
+2024-06-13 20:03:34,497 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:03:35,820 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-13 20:03:35,820 DEBUG   SenderThread:1332 [sender.py:send():378] send: history
+2024-06-13 20:03:35,820 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: summary_record
+2024-06-13 20:03:35,821 INFO    SenderThread:1332 [sender.py:_save_file():1389] saving file wandb-summary.json with policy end
+2024-06-13 20:03:35,875 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\wandb-summary.json
+2024-06-13 20:03:36,889 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\output.log
+2024-06-13 20:03:37,192 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: stop_status
+2024-06-13 20:03:37,192 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: stop_status
+2024-06-13 20:03:40,374 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:03:45,376 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:03:48,819 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-13 20:03:48,819 DEBUG   SenderThread:1332 [sender.py:send():378] send: history
+2024-06-13 20:03:48,819 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: summary_record
+2024-06-13 20:03:48,820 INFO    SenderThread:1332 [sender.py:_save_file():1389] saving file wandb-summary.json with policy end
+2024-06-13 20:03:48,992 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\wandb-summary.json
+2024-06-13 20:03:50,821 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:03:51,010 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\output.log
+2024-06-13 20:03:51,664 DEBUG   SenderThread:1332 [sender.py:send():378] send: stats
+2024-06-13 20:03:52,204 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: stop_status
+2024-06-13 20:03:52,205 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: stop_status
+2024-06-13 20:03:56,433 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:04:01,435 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:04:01,812 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-13 20:04:01,812 DEBUG   SenderThread:1332 [sender.py:send():378] send: history
+2024-06-13 20:04:01,812 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: summary_record
+2024-06-13 20:04:01,813 INFO    SenderThread:1332 [sender.py:_save_file():1389] saving file wandb-summary.json with policy end
+2024-06-13 20:04:02,101 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\wandb-summary.json
+2024-06-13 20:04:03,120 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\output.log
+2024-06-13 20:04:06,816 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:04:07,200 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: stop_status
+2024-06-13 20:04:07,200 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: stop_status
+2024-06-13 20:04:12,417 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:04:14,640 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-13 20:04:14,641 DEBUG   SenderThread:1332 [sender.py:send():378] send: history
+2024-06-13 20:04:14,641 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: summary_record
+2024-06-13 20:04:14,641 INFO    SenderThread:1332 [sender.py:_save_file():1389] saving file wandb-summary.json with policy end
+2024-06-13 20:04:15,227 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\wandb-summary.json
+2024-06-13 20:04:17,246 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\output.log
+2024-06-13 20:04:17,644 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:04:21,668 DEBUG   SenderThread:1332 [sender.py:send():378] send: stats
+2024-06-13 20:04:22,199 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: stop_status
+2024-06-13 20:04:22,200 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: stop_status
+2024-06-13 20:04:23,416 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:04:27,365 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-13 20:04:27,365 DEBUG   SenderThread:1332 [sender.py:send():378] send: history
+2024-06-13 20:04:27,366 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: summary_record
+2024-06-13 20:04:27,367 INFO    SenderThread:1332 [sender.py:_save_file():1389] saving file wandb-summary.json with policy end
+2024-06-13 20:04:28,336 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\wandb-summary.json
+2024-06-13 20:04:29,351 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\output.log
+2024-06-13 20:04:29,369 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:04:34,375 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:04:37,199 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: stop_status
+2024-06-13 20:04:37,199 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: stop_status
+2024-06-13 20:04:40,047 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-13 20:04:40,047 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:04:40,047 DEBUG   SenderThread:1332 [sender.py:send():378] send: history
+2024-06-13 20:04:40,047 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: summary_record
+2024-06-13 20:04:40,048 INFO    SenderThread:1332 [sender.py:_save_file():1389] saving file wandb-summary.json with policy end
+2024-06-13 20:04:40,437 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\wandb-summary.json
+2024-06-13 20:04:41,454 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\output.log
+2024-06-13 20:04:45,051 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:04:50,053 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:04:51,672 DEBUG   SenderThread:1332 [sender.py:send():378] send: stats
+2024-06-13 20:04:52,211 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: stop_status
+2024-06-13 20:04:52,211 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: stop_status
+2024-06-13 20:04:52,969 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-13 20:04:52,969 DEBUG   SenderThread:1332 [sender.py:send():378] send: history
+2024-06-13 20:04:52,969 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: summary_record
+2024-06-13 20:04:52,970 INFO    SenderThread:1332 [sender.py:_save_file():1389] saving file wandb-summary.json with policy end
+2024-06-13 20:04:53,561 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\wandb-summary.json
+2024-06-13 20:04:55,577 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\output.log
+2024-06-13 20:04:55,972 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:05:00,974 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:05:05,977 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:05:06,146 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-13 20:05:06,147 DEBUG   SenderThread:1332 [sender.py:send():378] send: history
+2024-06-13 20:05:06,147 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: summary_record
+2024-06-13 20:05:06,147 INFO    SenderThread:1332 [sender.py:_save_file():1389] saving file wandb-summary.json with policy end
+2024-06-13 20:05:06,664 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\wandb-summary.json
+2024-06-13 20:05:06,665 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\output.log
+2024-06-13 20:05:07,207 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: stop_status
+2024-06-13 20:05:07,207 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: stop_status
+2024-06-13 20:05:11,383 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:05:16,384 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:05:19,275 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-13 20:05:19,275 DEBUG   SenderThread:1332 [sender.py:send():378] send: history
+2024-06-13 20:05:19,275 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: summary_record
+2024-06-13 20:05:19,276 INFO    SenderThread:1332 [sender.py:_save_file():1389] saving file wandb-summary.json with policy end
+2024-06-13 20:05:19,780 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\wandb-summary.json
+2024-06-13 20:05:20,781 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\output.log
+2024-06-13 20:05:21,677 DEBUG   SenderThread:1332 [sender.py:send():378] send: stats
+2024-06-13 20:05:21,677 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:05:22,208 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: stop_status
+2024-06-13 20:05:22,209 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: stop_status
+2024-06-13 20:05:27,445 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:05:32,093 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-13 20:05:32,094 DEBUG   SenderThread:1332 [sender.py:send():378] send: history
+2024-06-13 20:05:32,094 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: summary_record
+2024-06-13 20:05:32,095 INFO    SenderThread:1332 [sender.py:_save_file():1389] saving file wandb-summary.json with policy end
+2024-06-13 20:05:32,896 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\wandb-summary.json
+2024-06-13 20:05:32,896 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\output.log
+2024-06-13 20:05:33,096 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:05:37,211 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: stop_status
+2024-06-13 20:05:37,211 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: stop_status
+2024-06-13 20:05:38,381 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:05:38,951 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\output.log
+2024-06-13 20:05:43,384 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:05:47,018 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\output.log
+2024-06-13 20:05:48,841 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:05:49,125 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-13 20:05:49,125 DEBUG   SenderThread:1332 [sender.py:send():378] send: history
+2024-06-13 20:05:49,125 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: summary_record
+2024-06-13 20:05:49,126 INFO    SenderThread:1332 [sender.py:_save_file():1389] saving file wandb-summary.json with policy end
+2024-06-13 20:05:50,051 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\wandb-summary.json
+2024-06-13 20:05:51,053 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\output.log
+2024-06-13 20:05:51,681 DEBUG   SenderThread:1332 [sender.py:send():378] send: stats
+2024-06-13 20:05:52,211 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: stop_status
+2024-06-13 20:05:52,212 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: stop_status
+2024-06-13 20:05:54,383 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:05:59,386 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:06:02,185 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-13 20:06:02,186 DEBUG   SenderThread:1332 [sender.py:send():378] send: history
+2024-06-13 20:06:02,186 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: summary_record
+2024-06-13 20:06:02,186 INFO    SenderThread:1332 [sender.py:_save_file():1389] saving file wandb-summary.json with policy end
+2024-06-13 20:06:03,151 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\wandb-summary.json
+2024-06-13 20:06:03,152 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\output.log
+2024-06-13 20:06:05,189 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:06:07,213 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: stop_status
+2024-06-13 20:06:07,214 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: stop_status
+2024-06-13 20:06:10,409 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:06:14,998 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-13 20:06:14,999 DEBUG   SenderThread:1332 [sender.py:send():378] send: history
+2024-06-13 20:06:14,999 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: summary_record
+2024-06-13 20:06:14,999 INFO    SenderThread:1332 [sender.py:_save_file():1389] saving file wandb-summary.json with policy end
+2024-06-13 20:06:15,254 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\wandb-summary.json
+2024-06-13 20:06:16,000 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:06:17,270 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\output.log
+2024-06-13 20:06:21,003 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:06:21,686 DEBUG   SenderThread:1332 [sender.py:send():378] send: stats
+2024-06-13 20:06:22,222 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: stop_status
+2024-06-13 20:06:22,222 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: stop_status
+2024-06-13 20:06:26,439 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:06:27,826 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-13 20:06:27,827 DEBUG   SenderThread:1332 [sender.py:send():378] send: history
+2024-06-13 20:06:27,827 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: summary_record
+2024-06-13 20:06:27,828 INFO    SenderThread:1332 [sender.py:_save_file():1389] saving file wandb-summary.json with policy end
+2024-06-13 20:06:28,384 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\wandb-summary.json
+2024-06-13 20:06:29,386 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\output.log
+2024-06-13 20:06:31,830 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:06:36,832 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:06:37,221 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: stop_status
+2024-06-13 20:06:37,221 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: stop_status
+2024-06-13 20:06:40,577 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-13 20:06:40,577 DEBUG   SenderThread:1332 [sender.py:send():378] send: history
+2024-06-13 20:06:40,577 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: summary_record
+2024-06-13 20:06:40,578 INFO    SenderThread:1332 [sender.py:_save_file():1389] saving file wandb-summary.json with policy end
+2024-06-13 20:06:41,489 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\wandb-summary.json
+2024-06-13 20:06:42,579 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:06:43,505 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\output.log
+2024-06-13 20:06:47,581 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:06:51,691 DEBUG   SenderThread:1332 [sender.py:send():378] send: stats
+2024-06-13 20:06:52,216 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: stop_status
+2024-06-13 20:06:52,216 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: stop_status
+2024-06-13 20:06:53,389 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:06:53,418 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-13 20:06:53,418 DEBUG   SenderThread:1332 [sender.py:send():378] send: history
+2024-06-13 20:06:53,418 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: summary_record
+2024-06-13 20:06:53,419 INFO    SenderThread:1332 [sender.py:_save_file():1389] saving file wandb-summary.json with policy end
+2024-06-13 20:06:53,588 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\wandb-summary.json
+2024-06-13 20:06:55,613 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\output.log
+2024-06-13 20:06:58,424 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:07:03,426 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:07:06,593 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-13 20:07:06,594 DEBUG   SenderThread:1332 [sender.py:send():378] send: history
+2024-06-13 20:07:06,594 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: summary_record
+2024-06-13 20:07:06,594 INFO    SenderThread:1332 [sender.py:_save_file():1389] saving file wandb-summary.json with policy end
+2024-06-13 20:07:06,709 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\wandb-summary.json
+2024-06-13 20:07:07,219 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: stop_status
+2024-06-13 20:07:07,219 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: stop_status
+2024-06-13 20:07:08,461 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:07:08,725 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\output.log
+2024-06-13 20:07:13,464 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:07:18,465 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:07:19,602 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-13 20:07:19,602 DEBUG   SenderThread:1332 [sender.py:send():378] send: history
+2024-06-13 20:07:19,602 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: summary_record
+2024-06-13 20:07:19,603 INFO    SenderThread:1332 [sender.py:_save_file():1389] saving file wandb-summary.json with policy end
+2024-06-13 20:07:19,814 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\wandb-summary.json
+2024-06-13 20:07:20,828 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\output.log
+2024-06-13 20:07:21,696 DEBUG   SenderThread:1332 [sender.py:send():378] send: stats
+2024-06-13 20:07:22,230 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: stop_status
+2024-06-13 20:07:22,230 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: stop_status
+2024-06-13 20:07:24,373 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:07:29,376 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:07:32,476 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-13 20:07:32,476 DEBUG   SenderThread:1332 [sender.py:send():378] send: history
+2024-06-13 20:07:32,476 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: summary_record
+2024-06-13 20:07:32,477 INFO    SenderThread:1332 [sender.py:_save_file():1389] saving file wandb-summary.json with policy end
+2024-06-13 20:07:32,941 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\wandb-summary.json
+2024-06-13 20:07:34,478 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:07:34,956 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\output.log
+2024-06-13 20:07:37,233 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: stop_status
+2024-06-13 20:07:37,233 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: stop_status
+2024-06-13 20:07:40,449 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:07:45,328 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-13 20:07:45,329 DEBUG   SenderThread:1332 [sender.py:send():378] send: history
+2024-06-13 20:07:45,329 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: summary_record
+2024-06-13 20:07:45,329 INFO    SenderThread:1332 [sender.py:_save_file():1389] saving file wandb-summary.json with policy end
+2024-06-13 20:07:46,037 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\wandb-summary.json
+2024-06-13 20:07:46,330 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:07:47,052 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\output.log
+2024-06-13 20:07:51,386 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:07:51,700 DEBUG   SenderThread:1332 [sender.py:send():378] send: stats
+2024-06-13 20:07:52,231 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: stop_status
+2024-06-13 20:07:52,231 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: stop_status
+2024-06-13 20:07:53,100 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\output.log
+2024-06-13 20:07:56,437 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:07:59,156 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\output.log
+2024-06-13 20:08:01,619 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:08:02,247 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-13 20:08:02,247 DEBUG   SenderThread:1332 [sender.py:send():378] send: history
+2024-06-13 20:08:02,247 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: summary_record
+2024-06-13 20:08:02,248 INFO    SenderThread:1332 [sender.py:_save_file():1389] saving file wandb-summary.json with policy end
+2024-06-13 20:08:03,191 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\wandb-summary.json
+2024-06-13 20:08:03,191 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\output.log
+2024-06-13 20:08:07,236 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: stop_status
+2024-06-13 20:08:07,236 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: stop_status
+2024-06-13 20:08:07,459 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:08:12,461 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:08:15,054 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-13 20:08:15,054 DEBUG   SenderThread:1332 [sender.py:send():378] send: history
+2024-06-13 20:08:15,054 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: summary_record
+2024-06-13 20:08:15,055 INFO    SenderThread:1332 [sender.py:_save_file():1389] saving file wandb-summary.json with policy end
+2024-06-13 20:08:15,302 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\wandb-summary.json
+2024-06-13 20:08:17,318 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\output.log
+2024-06-13 20:08:18,056 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:08:21,704 DEBUG   SenderThread:1332 [sender.py:send():378] send: stats
+2024-06-13 20:08:22,228 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: stop_status
+2024-06-13 20:08:22,228 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: stop_status
+2024-06-13 20:08:23,374 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:08:27,827 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-13 20:08:27,827 DEBUG   SenderThread:1332 [sender.py:send():378] send: history
+2024-06-13 20:08:27,827 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: summary_record
+2024-06-13 20:08:27,828 INFO    SenderThread:1332 [sender.py:_save_file():1389] saving file wandb-summary.json with policy end
+2024-06-13 20:08:28,414 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\wandb-summary.json
+2024-06-13 20:08:28,828 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:08:29,431 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\output.log
+2024-06-13 20:08:33,830 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:08:37,235 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: stop_status
+2024-06-13 20:08:37,235 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: stop_status
+2024-06-13 20:08:39,462 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:08:40,901 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-13 20:08:40,901 DEBUG   SenderThread:1332 [sender.py:send():378] send: history
+2024-06-13 20:08:40,902 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: summary_record
+2024-06-13 20:08:40,902 INFO    SenderThread:1332 [sender.py:_save_file():1389] saving file wandb-summary.json with policy end
+2024-06-13 20:08:41,529 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\wandb-summary.json
+2024-06-13 20:08:43,545 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\output.log
+2024-06-13 20:08:44,904 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:08:49,906 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:08:51,709 DEBUG   SenderThread:1332 [sender.py:send():378] send: stats
+2024-06-13 20:08:52,230 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: stop_status
+2024-06-13 20:08:52,231 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: stop_status
+2024-06-13 20:08:53,876 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-13 20:08:53,877 DEBUG   SenderThread:1332 [sender.py:send():378] send: history
+2024-06-13 20:08:53,877 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: summary_record
+2024-06-13 20:08:53,877 INFO    SenderThread:1332 [sender.py:_save_file():1389] saving file wandb-summary.json with policy end
+2024-06-13 20:08:54,635 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\wandb-summary.json
+2024-06-13 20:08:55,658 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\output.log
+2024-06-13 20:08:55,878 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:09:00,881 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:09:05,946 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:09:07,153 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-13 20:09:07,154 DEBUG   SenderThread:1332 [sender.py:send():378] send: history
+2024-06-13 20:09:07,154 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: summary_record
+2024-06-13 20:09:07,154 INFO    SenderThread:1332 [sender.py:_save_file():1389] saving file wandb-summary.json with policy end
+2024-06-13 20:09:07,244 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: stop_status
+2024-06-13 20:09:07,244 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: stop_status
+2024-06-13 20:09:07,753 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\wandb-summary.json
+2024-06-13 20:09:09,771 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\output.log
+2024-06-13 20:09:11,437 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:09:16,438 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:09:19,842 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-13 20:09:19,858 DEBUG   SenderThread:1332 [sender.py:send():378] send: history
+2024-06-13 20:09:19,858 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: summary_record
+2024-06-13 20:09:19,859 INFO    SenderThread:1332 [sender.py:_save_file():1389] saving file wandb-summary.json with policy end
+2024-06-13 20:09:19,859 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\wandb-summary.json
+2024-06-13 20:09:20,860 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\output.log
+2024-06-13 20:09:21,715 DEBUG   SenderThread:1332 [sender.py:send():378] send: stats
+2024-06-13 20:09:21,715 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:09:22,234 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: stop_status
+2024-06-13 20:09:22,235 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: stop_status
+2024-06-13 20:09:27,472 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:09:32,475 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:09:32,923 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-13 20:09:32,924 DEBUG   SenderThread:1332 [sender.py:send():378] send: history
+2024-06-13 20:09:32,924 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: summary_record
+2024-06-13 20:09:32,924 INFO    SenderThread:1332 [sender.py:_save_file():1389] saving file wandb-summary.json with policy end
+2024-06-13 20:09:32,966 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\wandb-summary.json
+2024-06-13 20:09:34,981 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\output.log
+2024-06-13 20:09:37,239 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: stop_status
+2024-06-13 20:09:37,239 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: stop_status
+2024-06-13 20:09:38,397 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:09:43,399 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:09:46,350 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-13 20:09:46,350 DEBUG   SenderThread:1332 [sender.py:send():378] send: history
+2024-06-13 20:09:46,350 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: summary_record
+2024-06-13 20:09:46,351 INFO    SenderThread:1332 [sender.py:_save_file():1389] saving file wandb-summary.json with policy end
+2024-06-13 20:09:47,088 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\wandb-summary.json
+2024-06-13 20:09:47,089 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\output.log
+2024-06-13 20:09:49,353 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:09:51,718 DEBUG   SenderThread:1332 [sender.py:send():378] send: stats
+2024-06-13 20:09:52,242 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: stop_status
+2024-06-13 20:09:52,243 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: stop_status
+2024-06-13 20:09:54,472 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:09:59,161 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-13 20:09:59,162 DEBUG   SenderThread:1332 [sender.py:send():378] send: history
+2024-06-13 20:09:59,162 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: summary_record
+2024-06-13 20:09:59,162 INFO    SenderThread:1332 [sender.py:_save_file():1389] saving file wandb-summary.json with policy end
+2024-06-13 20:09:59,199 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\wandb-summary.json
+2024-06-13 20:10:00,163 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:10:01,217 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\output.log
+2024-06-13 20:10:05,484 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:10:07,239 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: stop_status
+2024-06-13 20:10:07,240 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: stop_status
+2024-06-13 20:10:07,268 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\output.log
+2024-06-13 20:10:11,476 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:10:13,319 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\output.log
+2024-06-13 20:10:16,101 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-13 20:10:16,101 DEBUG   SenderThread:1332 [sender.py:send():378] send: history
+2024-06-13 20:10:16,101 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: summary_record
+2024-06-13 20:10:16,101 INFO    SenderThread:1332 [sender.py:_save_file():1389] saving file wandb-summary.json with policy end
+2024-06-13 20:10:16,352 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\wandb-summary.json
+2024-06-13 20:10:17,103 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:10:17,353 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\output.log
+2024-06-13 20:10:21,723 DEBUG   SenderThread:1332 [sender.py:send():378] send: stats
+2024-06-13 20:10:22,242 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: stop_status
+2024-06-13 20:10:22,242 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: stop_status
+2024-06-13 20:10:22,502 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:10:27,507 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:10:31,047 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-13 20:10:31,048 DEBUG   SenderThread:1332 [sender.py:send():378] send: history
+2024-06-13 20:10:31,048 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: summary_record
+2024-06-13 20:10:31,048 INFO    SenderThread:1332 [sender.py:_save_file():1389] saving file wandb-summary.json with policy end
+2024-06-13 20:10:31,491 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\wandb-summary.json
+2024-06-13 20:10:33,050 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:10:33,511 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\output.log
+2024-06-13 20:10:37,254 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: stop_status
+2024-06-13 20:10:37,254 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: stop_status
+2024-06-13 20:10:38,527 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:10:43,529 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:10:44,150 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-13 20:10:44,151 DEBUG   SenderThread:1332 [sender.py:send():378] send: history
+2024-06-13 20:10:44,151 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: summary_record
+2024-06-13 20:10:44,152 INFO    SenderThread:1332 [sender.py:_save_file():1389] saving file wandb-summary.json with policy end
+2024-06-13 20:10:44,616 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\wandb-summary.json
+2024-06-13 20:10:45,617 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\output.log
+2024-06-13 20:10:49,154 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:10:51,726 DEBUG   SenderThread:1332 [sender.py:send():378] send: stats
+2024-06-13 20:10:52,247 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: stop_status
+2024-06-13 20:10:52,248 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: stop_status
+2024-06-13 20:10:54,489 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:10:57,021 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-13 20:10:57,022 DEBUG   SenderThread:1332 [sender.py:send():378] send: history
+2024-06-13 20:10:57,022 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: summary_record
+2024-06-13 20:10:57,022 INFO    SenderThread:1332 [sender.py:_save_file():1389] saving file wandb-summary.json with policy end
+2024-06-13 20:10:57,728 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\wandb-summary.json
+2024-06-13 20:10:59,735 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\output.log
+2024-06-13 20:11:00,024 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:11:05,025 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:11:07,256 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: stop_status
+2024-06-13 20:11:07,257 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: stop_status
+2024-06-13 20:11:09,732 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-13 20:11:09,732 DEBUG   SenderThread:1332 [sender.py:send():378] send: history
+2024-06-13 20:11:09,733 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: summary_record
+2024-06-13 20:11:09,733 INFO    SenderThread:1332 [sender.py:_save_file():1389] saving file wandb-summary.json with policy end
+2024-06-13 20:11:09,823 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\wandb-summary.json
+2024-06-13 20:11:10,734 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:11:10,837 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\output.log
+2024-06-13 20:11:15,735 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:11:20,737 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:11:21,729 DEBUG   SenderThread:1332 [sender.py:send():378] send: stats
+2024-06-13 20:11:22,251 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: stop_status
+2024-06-13 20:11:22,251 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: stop_status
+2024-06-13 20:11:22,326 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-13 20:11:22,480 DEBUG   SenderThread:1332 [sender.py:send():378] send: history
+2024-06-13 20:11:22,480 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: summary_record
+2024-06-13 20:11:22,481 INFO    SenderThread:1332 [sender.py:_save_file():1389] saving file wandb-summary.json with policy end
+2024-06-13 20:11:22,933 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\wandb-summary.json
+2024-06-13 20:11:24,950 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\output.log
+2024-06-13 20:11:26,482 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:11:31,485 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:11:35,042 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-13 20:11:35,042 DEBUG   SenderThread:1332 [sender.py:send():378] send: history
+2024-06-13 20:11:35,042 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: summary_record
+2024-06-13 20:11:35,043 INFO    SenderThread:1332 [sender.py:_save_file():1389] saving file wandb-summary.json with policy end
+2024-06-13 20:11:36,035 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\wandb-summary.json
+2024-06-13 20:11:37,049 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:11:37,050 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\output.log
+2024-06-13 20:11:37,248 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: stop_status
+2024-06-13 20:11:37,248 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: stop_status
+2024-06-13 20:11:42,451 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:11:47,453 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:11:47,571 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-13 20:11:47,571 DEBUG   SenderThread:1332 [sender.py:send():378] send: history
+2024-06-13 20:11:47,571 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: summary_record
+2024-06-13 20:11:47,572 INFO    SenderThread:1332 [sender.py:_save_file():1389] saving file wandb-summary.json with policy end
+2024-06-13 20:11:48,126 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\wandb-summary.json
+2024-06-13 20:11:49,141 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\output.log
+2024-06-13 20:11:51,732 DEBUG   SenderThread:1332 [sender.py:send():378] send: stats
+2024-06-13 20:11:52,248 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: stop_status
+2024-06-13 20:11:52,248 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: stop_status
+2024-06-13 20:11:53,393 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:11:58,394 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:12:00,043 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-13 20:12:00,043 DEBUG   SenderThread:1332 [sender.py:send():378] send: history
+2024-06-13 20:12:00,044 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: summary_record
+2024-06-13 20:12:00,044 INFO    SenderThread:1332 [sender.py:_save_file():1389] saving file wandb-summary.json with policy end
+2024-06-13 20:12:00,234 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\wandb-summary.json
+2024-06-13 20:12:01,251 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\output.log
+2024-06-13 20:12:04,046 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:12:07,253 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: stop_status
+2024-06-13 20:12:07,254 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: stop_status
+2024-06-13 20:12:09,488 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:12:12,803 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-13 20:12:12,804 DEBUG   SenderThread:1332 [sender.py:send():378] send: history
+2024-06-13 20:12:12,804 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: summary_record
+2024-06-13 20:12:12,805 INFO    SenderThread:1332 [sender.py:_save_file():1389] saving file wandb-summary.json with policy end
+2024-06-13 20:12:13,351 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\wandb-summary.json
+2024-06-13 20:12:14,805 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:12:15,368 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\output.log
+2024-06-13 20:12:19,402 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\output.log
+2024-06-13 20:12:20,784 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:12:21,735 DEBUG   SenderThread:1332 [sender.py:send():378] send: stats
+2024-06-13 20:12:22,256 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: stop_status
+2024-06-13 20:12:22,256 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: stop_status
+2024-06-13 20:12:25,976 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:12:27,473 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\output.log
+2024-06-13 20:12:29,196 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-13 20:12:29,197 DEBUG   SenderThread:1332 [sender.py:send():378] send: history
+2024-06-13 20:12:29,197 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: summary_record
+2024-06-13 20:12:29,197 INFO    SenderThread:1332 [sender.py:_save_file():1389] saving file wandb-summary.json with policy end
+2024-06-13 20:12:29,489 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\wandb-summary.json
+2024-06-13 20:12:31,199 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:12:31,505 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\output.log
+2024-06-13 20:12:36,201 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:12:37,252 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: stop_status
+2024-06-13 20:12:37,252 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: stop_status
+2024-06-13 20:12:41,467 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:12:41,604 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-13 20:12:41,605 DEBUG   SenderThread:1332 [sender.py:send():378] send: history
+2024-06-13 20:12:41,605 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: summary_record
+2024-06-13 20:12:41,605 INFO    SenderThread:1332 [sender.py:_save_file():1389] saving file wandb-summary.json with policy end
+2024-06-13 20:12:42,584 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\wandb-summary.json
+2024-06-13 20:12:43,599 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\output.log
+2024-06-13 20:12:46,608 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:12:51,609 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:12:51,739 DEBUG   SenderThread:1332 [sender.py:send():378] send: stats
+2024-06-13 20:12:52,266 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: stop_status
+2024-06-13 20:12:52,266 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: stop_status
+2024-06-13 20:12:54,243 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-13 20:12:54,243 DEBUG   SenderThread:1332 [sender.py:send():378] send: history
+2024-06-13 20:12:54,243 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: summary_record
+2024-06-13 20:12:54,244 INFO    SenderThread:1332 [sender.py:_save_file():1389] saving file wandb-summary.json with policy end
+2024-06-13 20:12:54,678 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\wandb-summary.json
+2024-06-13 20:12:55,695 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\output.log
+2024-06-13 20:12:57,244 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:13:02,246 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:13:06,780 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-13 20:13:06,780 DEBUG   SenderThread:1332 [sender.py:send():378] send: history
+2024-06-13 20:13:06,780 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: summary_record
+2024-06-13 20:13:06,781 INFO    SenderThread:1332 [sender.py:_save_file():1389] saving file wandb-summary.json with policy end
+2024-06-13 20:13:06,783 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\wandb-summary.json
+2024-06-13 20:13:07,268 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:13:07,268 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: stop_status
+2024-06-13 20:13:07,269 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: stop_status
+2024-06-13 20:13:09,815 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\output.log
+2024-06-13 20:13:12,461 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:13:17,462 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:13:19,240 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-13 20:13:19,240 DEBUG   SenderThread:1332 [sender.py:send():378] send: history
+2024-06-13 20:13:19,240 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: summary_record
+2024-06-13 20:13:19,241 INFO    SenderThread:1332 [sender.py:_save_file():1389] saving file wandb-summary.json with policy end
+2024-06-13 20:13:19,904 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\wandb-summary.json
+2024-06-13 20:13:20,905 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\output.log
+2024-06-13 20:13:21,742 DEBUG   SenderThread:1332 [sender.py:send():378] send: stats
+2024-06-13 20:13:22,257 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: stop_status
+2024-06-13 20:13:22,258 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: stop_status
+2024-06-13 20:13:22,498 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:13:27,501 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:13:31,908 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-13 20:13:31,909 DEBUG   SenderThread:1332 [sender.py:send():378] send: history
+2024-06-13 20:13:31,909 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: summary_record
+2024-06-13 20:13:31,909 INFO    SenderThread:1332 [sender.py:_save_file():1389] saving file wandb-summary.json with policy end
+2024-06-13 20:13:32,022 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\wandb-summary.json
+2024-06-13 20:13:32,910 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:13:33,023 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\output.log
+2024-06-13 20:13:37,266 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: stop_status
+2024-06-13 20:13:37,266 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: stop_status
+2024-06-13 20:13:38,510 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:13:43,512 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:13:44,636 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-13 20:13:44,637 DEBUG   SenderThread:1332 [sender.py:send():378] send: history
+2024-06-13 20:13:44,637 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: summary_record
+2024-06-13 20:13:44,637 INFO    SenderThread:1332 [sender.py:_save_file():1389] saving file wandb-summary.json with policy end
+2024-06-13 20:13:45,126 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\wandb-summary.json
+2024-06-13 20:13:47,141 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\output.log
+2024-06-13 20:13:48,640 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:13:51,746 DEBUG   SenderThread:1332 [sender.py:send():378] send: stats
+2024-06-13 20:13:52,262 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: stop_status
+2024-06-13 20:13:52,262 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: stop_status
+2024-06-13 20:13:54,499 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:13:57,245 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-13 20:13:57,245 DEBUG   SenderThread:1332 [sender.py:send():378] send: history
+2024-06-13 20:13:57,245 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: summary_record
+2024-06-13 20:13:57,246 INFO    SenderThread:1332 [sender.py:_save_file():1389] saving file wandb-summary.json with policy end
+2024-06-13 20:13:58,246 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\wandb-summary.json
+2024-06-13 20:13:59,247 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\output.log
+2024-06-13 20:14:00,254 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:14:05,257 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:14:07,266 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: stop_status
+2024-06-13 20:14:07,266 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: stop_status
+2024-06-13 20:14:09,925 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-13 20:14:09,926 DEBUG   SenderThread:1332 [sender.py:send():378] send: history
+2024-06-13 20:14:09,926 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: summary_record
+2024-06-13 20:14:09,926 INFO    SenderThread:1332 [sender.py:_save_file():1389] saving file wandb-summary.json with policy end
+2024-06-13 20:14:10,348 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\wandb-summary.json
+2024-06-13 20:14:10,927 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:14:11,348 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\output.log
+2024-06-13 20:14:15,929 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:14:20,932 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:14:21,749 DEBUG   SenderThread:1332 [sender.py:send():378] send: stats
+2024-06-13 20:14:22,272 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: stop_status
+2024-06-13 20:14:22,272 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: stop_status
+2024-06-13 20:14:22,420 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-13 20:14:22,509 DEBUG   SenderThread:1332 [sender.py:send():378] send: history
+2024-06-13 20:14:22,509 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: summary_record
+2024-06-13 20:14:22,510 INFO    SenderThread:1332 [sender.py:_save_file():1389] saving file wandb-summary.json with policy end
+2024-06-13 20:14:23,453 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\wandb-summary.json
+2024-06-13 20:14:23,454 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\output.log
+2024-06-13 20:14:26,513 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:14:29,512 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\output.log
+2024-06-13 20:14:32,399 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:14:35,564 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\output.log
+2024-06-13 20:14:37,277 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: stop_status
+2024-06-13 20:14:37,277 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: stop_status
+2024-06-13 20:14:37,530 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:14:38,710 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-13 20:14:38,711 DEBUG   SenderThread:1332 [sender.py:send():378] send: history
+2024-06-13 20:14:38,711 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: summary_record
+2024-06-13 20:14:38,711 INFO    SenderThread:1332 [sender.py:_save_file():1389] saving file wandb-summary.json with policy end
+2024-06-13 20:14:39,594 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\wandb-summary.json
+2024-06-13 20:14:41,615 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\output.log
+2024-06-13 20:14:42,714 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:14:47,715 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:14:51,548 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-13 20:14:51,548 DEBUG   SenderThread:1332 [sender.py:send():378] send: history
+2024-06-13 20:14:51,549 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: summary_record
+2024-06-13 20:14:51,549 INFO    SenderThread:1332 [sender.py:_save_file():1389] saving file wandb-summary.json with policy end
+2024-06-13 20:14:51,705 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\wandb-summary.json
+2024-06-13 20:14:51,752 DEBUG   SenderThread:1332 [sender.py:send():378] send: stats
+2024-06-13 20:14:52,283 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: stop_status
+2024-06-13 20:14:52,283 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: stop_status
+2024-06-13 20:14:53,502 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:14:53,722 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\output.log
+2024-06-13 20:14:58,503 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:15:03,504 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:15:04,248 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-13 20:15:04,249 DEBUG   SenderThread:1332 [sender.py:send():378] send: history
+2024-06-13 20:15:04,249 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: summary_record
+2024-06-13 20:15:04,250 INFO    SenderThread:1332 [sender.py:_save_file():1389] saving file wandb-summary.json with policy end
+2024-06-13 20:15:04,825 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\wandb-summary.json
+2024-06-13 20:15:05,826 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\output.log
+2024-06-13 20:15:07,285 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: stop_status
+2024-06-13 20:15:07,285 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: stop_status
+2024-06-13 20:15:09,423 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:15:14,426 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:15:16,729 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-13 20:15:16,729 DEBUG   SenderThread:1332 [sender.py:send():378] send: history
+2024-06-13 20:15:16,729 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: summary_record
+2024-06-13 20:15:16,730 INFO    SenderThread:1332 [sender.py:_save_file():1389] saving file wandb-summary.json with policy end
+2024-06-13 20:15:16,925 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\wandb-summary.json
+2024-06-13 20:15:18,941 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\output.log
+2024-06-13 20:15:19,732 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:15:21,755 DEBUG   SenderThread:1332 [sender.py:send():378] send: stats
+2024-06-13 20:15:22,285 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: stop_status
+2024-06-13 20:15:22,285 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: stop_status
+2024-06-13 20:15:25,493 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:15:29,343 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-13 20:15:29,343 DEBUG   SenderThread:1332 [sender.py:send():378] send: history
+2024-06-13 20:15:29,344 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: summary_record
+2024-06-13 20:15:29,344 INFO    SenderThread:1332 [sender.py:_save_file():1389] saving file wandb-summary.json with policy end
+2024-06-13 20:15:30,032 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\wandb-summary.json
+2024-06-13 20:15:31,051 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\output.log
+2024-06-13 20:15:31,346 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:15:36,347 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:15:37,292 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: stop_status
+2024-06-13 20:15:37,292 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: stop_status
+2024-06-13 20:15:41,486 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:15:42,104 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-13 20:15:42,104 DEBUG   SenderThread:1332 [sender.py:send():378] send: history
+2024-06-13 20:15:42,104 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: summary_record
+2024-06-13 20:15:42,105 INFO    SenderThread:1332 [sender.py:_save_file():1389] saving file wandb-summary.json with policy end
+2024-06-13 20:15:42,130 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\wandb-summary.json
+2024-06-13 20:15:43,144 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\output.log
+2024-06-13 20:15:47,107 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:15:51,759 DEBUG   SenderThread:1332 [sender.py:send():378] send: stats
+2024-06-13 20:15:52,280 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:15:52,284 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: stop_status
+2024-06-13 20:15:52,284 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: stop_status
+2024-06-13 20:15:54,740 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-13 20:15:54,740 DEBUG   SenderThread:1332 [sender.py:send():378] send: history
+2024-06-13 20:15:54,740 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: summary_record
+2024-06-13 20:15:54,741 INFO    SenderThread:1332 [sender.py:_save_file():1389] saving file wandb-summary.json with policy end
+2024-06-13 20:15:55,240 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\wandb-summary.json
+2024-06-13 20:15:57,255 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\output.log
+2024-06-13 20:15:57,742 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:16:02,744 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:16:07,302 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: stop_status
+2024-06-13 20:16:07,303 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: stop_status
+2024-06-13 20:16:07,639 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-13 20:16:07,640 DEBUG   SenderThread:1332 [sender.py:send():378] send: history
+2024-06-13 20:16:07,640 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: summary_record
+2024-06-13 20:16:07,640 INFO    SenderThread:1332 [sender.py:_save_file():1389] saving file wandb-summary.json with policy end
+2024-06-13 20:16:08,345 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\wandb-summary.json
+2024-06-13 20:16:08,640 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:16:09,360 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\output.log
+2024-06-13 20:16:13,643 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:16:18,646 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:16:20,117 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-13 20:16:20,118 DEBUG   SenderThread:1332 [sender.py:send():378] send: history
+2024-06-13 20:16:20,118 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: summary_record
+2024-06-13 20:16:20,118 INFO    SenderThread:1332 [sender.py:_save_file():1389] saving file wandb-summary.json with policy end
+2024-06-13 20:16:20,446 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\wandb-summary.json
+2024-06-13 20:16:21,460 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\output.log
+2024-06-13 20:16:21,762 DEBUG   SenderThread:1332 [sender.py:send():378] send: stats
+2024-06-13 20:16:22,302 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: stop_status
+2024-06-13 20:16:22,302 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: stop_status
+2024-06-13 20:16:24,553 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:16:29,555 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:16:32,636 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-13 20:16:32,636 DEBUG   SenderThread:1332 [sender.py:send():378] send: history
+2024-06-13 20:16:32,637 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: summary_record
+2024-06-13 20:16:32,637 INFO    SenderThread:1332 [sender.py:_save_file():1389] saving file wandb-summary.json with policy end
+2024-06-13 20:16:33,554 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\wandb-summary.json
+2024-06-13 20:16:34,638 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:16:35,574 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\output.log
+2024-06-13 20:16:37,291 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: stop_status
+2024-06-13 20:16:37,291 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: stop_status
+2024-06-13 20:16:39,604 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\output.log
+2024-06-13 20:16:39,679 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:16:44,681 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:16:47,671 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\output.log
+2024-06-13 20:16:49,045 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-13 20:16:49,045 DEBUG   SenderThread:1332 [sender.py:send():378] send: history
+2024-06-13 20:16:49,045 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: summary_record
+2024-06-13 20:16:49,046 INFO    SenderThread:1332 [sender.py:_save_file():1389] saving file wandb-summary.json with policy end
+2024-06-13 20:16:49,686 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\wandb-summary.json
+2024-06-13 20:16:50,046 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:16:51,705 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\output.log
+2024-06-13 20:16:51,765 DEBUG   SenderThread:1332 [sender.py:send():378] send: stats
+2024-06-13 20:16:52,295 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: stop_status
+2024-06-13 20:16:52,295 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: stop_status
+2024-06-13 20:16:55,529 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:17:00,531 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:17:01,744 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-13 20:17:01,744 DEBUG   SenderThread:1332 [sender.py:send():378] send: history
+2024-06-13 20:17:01,744 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: summary_record
+2024-06-13 20:17:01,745 INFO    SenderThread:1332 [sender.py:_save_file():1389] saving file wandb-summary.json with policy end
+2024-06-13 20:17:01,801 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\wandb-summary.json
+2024-06-13 20:17:03,818 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\output.log
+2024-06-13 20:17:05,747 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:17:07,297 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: stop_status
+2024-06-13 20:17:07,297 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: stop_status
+2024-06-13 20:17:11,546 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:17:14,358 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-13 20:17:14,359 DEBUG   SenderThread:1332 [sender.py:send():378] send: history
+2024-06-13 20:17:14,359 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: summary_record
+2024-06-13 20:17:14,359 INFO    SenderThread:1332 [sender.py:_save_file():1389] saving file wandb-summary.json with policy end
+2024-06-13 20:17:14,895 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\wandb-summary.json
+2024-06-13 20:17:15,910 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\output.log
+2024-06-13 20:17:17,361 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:17:21,771 DEBUG   SenderThread:1332 [sender.py:send():378] send: stats
+2024-06-13 20:17:22,296 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: stop_status
+2024-06-13 20:17:22,296 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: stop_status
+2024-06-13 20:17:22,447 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:17:27,257 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-13 20:17:27,258 DEBUG   SenderThread:1332 [sender.py:send():378] send: history
+2024-06-13 20:17:27,258 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: summary_record
+2024-06-13 20:17:27,258 INFO    SenderThread:1332 [sender.py:_save_file():1389] saving file wandb-summary.json with policy end
+2024-06-13 20:17:28,005 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\wandb-summary.json
+2024-06-13 20:17:28,259 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:17:29,007 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\output.log
+2024-06-13 20:17:33,261 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:17:37,310 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: stop_status
+2024-06-13 20:17:37,311 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: stop_status
+2024-06-13 20:17:38,547 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:17:39,827 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-13 20:17:39,827 DEBUG   SenderThread:1332 [sender.py:send():378] send: history
+2024-06-13 20:17:39,827 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: summary_record
+2024-06-13 20:17:39,828 INFO    SenderThread:1332 [sender.py:_save_file():1389] saving file wandb-summary.json with policy end
+2024-06-13 20:17:40,117 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\wandb-summary.json
+2024-06-13 20:17:41,120 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\output.log
+2024-06-13 20:17:43,829 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:17:48,832 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:17:51,773 DEBUG   SenderThread:1332 [sender.py:send():378] send: stats
+2024-06-13 20:17:52,314 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: stop_status
+2024-06-13 20:17:52,314 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: stop_status
+2024-06-13 20:17:52,577 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-13 20:17:52,577 DEBUG   SenderThread:1332 [sender.py:send():378] send: history
+2024-06-13 20:17:52,577 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: summary_record
+2024-06-13 20:17:52,578 INFO    SenderThread:1332 [sender.py:_save_file():1389] saving file wandb-summary.json with policy end
+2024-06-13 20:17:53,225 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\wandb-summary.json
+2024-06-13 20:17:53,226 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\output.log
+2024-06-13 20:17:54,579 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:17:59,581 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:18:04,583 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:18:05,369 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-13 20:18:05,370 DEBUG   SenderThread:1332 [sender.py:send():378] send: history
+2024-06-13 20:18:05,370 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: summary_record
+2024-06-13 20:18:05,370 INFO    SenderThread:1332 [sender.py:_save_file():1389] saving file wandb-summary.json with policy end
+2024-06-13 20:18:06,351 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\wandb-summary.json
+2024-06-13 20:18:07,323 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: stop_status
+2024-06-13 20:18:07,324 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: stop_status
+2024-06-13 20:18:07,352 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\output.log
+2024-06-13 20:18:10,478 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:18:15,479 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:18:18,044 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-13 20:18:18,044 DEBUG   SenderThread:1332 [sender.py:send():378] send: history
+2024-06-13 20:18:18,044 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: summary_record
+2024-06-13 20:18:18,045 INFO    SenderThread:1332 [sender.py:_save_file():1389] saving file wandb-summary.json with policy end
+2024-06-13 20:18:18,455 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\wandb-summary.json
+2024-06-13 20:18:19,456 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\output.log
+2024-06-13 20:18:21,047 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:18:21,776 DEBUG   SenderThread:1332 [sender.py:send():378] send: stats
+2024-06-13 20:18:22,323 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: stop_status
+2024-06-13 20:18:22,324 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: stop_status
+2024-06-13 20:18:26,558 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:18:30,498 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-13 20:18:30,498 DEBUG   SenderThread:1332 [sender.py:send():378] send: history
+2024-06-13 20:18:30,498 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: summary_record
+2024-06-13 20:18:30,499 INFO    SenderThread:1332 [sender.py:_save_file():1389] saving file wandb-summary.json with policy end
+2024-06-13 20:18:30,562 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\wandb-summary.json
+2024-06-13 20:18:31,564 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\output.log
+2024-06-13 20:18:32,500 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:18:37,323 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: stop_status
+2024-06-13 20:18:37,324 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: stop_status
+2024-06-13 20:18:37,555 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:18:42,557 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:18:42,999 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-13 20:18:43,000 DEBUG   SenderThread:1332 [sender.py:send():378] send: history
+2024-06-13 20:18:43,000 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: summary_record
+2024-06-13 20:18:43,000 INFO    SenderThread:1332 [sender.py:_save_file():1389] saving file wandb-summary.json with policy end
+2024-06-13 20:18:43,665 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\wandb-summary.json
+2024-06-13 20:18:45,685 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\output.log
+2024-06-13 20:18:48,003 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:18:49,717 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\output.log
+2024-06-13 20:18:51,779 DEBUG   SenderThread:1332 [sender.py:send():378] send: stats
+2024-06-13 20:18:52,321 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: stop_status
+2024-06-13 20:18:52,322 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: stop_status
+2024-06-13 20:18:53,525 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:18:57,786 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\output.log
+2024-06-13 20:18:59,231 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:18:59,421 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-13 20:18:59,422 DEBUG   SenderThread:1332 [sender.py:send():378] send: history
+2024-06-13 20:18:59,422 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: summary_record
+2024-06-13 20:18:59,423 INFO    SenderThread:1332 [sender.py:_save_file():1389] saving file wandb-summary.json with policy end
+2024-06-13 20:18:59,807 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\wandb-summary.json
+2024-06-13 20:19:01,831 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\output.log
+2024-06-13 20:19:04,424 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:19:07,324 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: stop_status
+2024-06-13 20:19:07,324 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: stop_status
+2024-06-13 20:19:09,514 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:19:12,162 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-13 20:19:12,162 DEBUG   SenderThread:1332 [sender.py:send():378] send: history
+2024-06-13 20:19:12,163 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: summary_record
+2024-06-13 20:19:12,163 INFO    SenderThread:1332 [sender.py:_save_file():1389] saving file wandb-summary.json with policy end
+2024-06-13 20:19:12,929 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\wandb-summary.json
+2024-06-13 20:19:13,930 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\output.log
+2024-06-13 20:19:15,164 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:19:20,166 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:19:21,783 DEBUG   SenderThread:1332 [sender.py:send():378] send: stats
+2024-06-13 20:19:22,327 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: stop_status
+2024-06-13 20:19:22,327 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: stop_status
+2024-06-13 20:19:24,807 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-13 20:19:24,808 DEBUG   SenderThread:1332 [sender.py:send():378] send: history
+2024-06-13 20:19:24,808 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: summary_record
+2024-06-13 20:19:24,808 INFO    SenderThread:1332 [sender.py:_save_file():1389] saving file wandb-summary.json with policy end
+2024-06-13 20:19:25,029 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\wandb-summary.json
+2024-06-13 20:19:25,809 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:19:27,043 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\output.log
+2024-06-13 20:19:30,811 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:19:35,812 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:19:37,319 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: stop_status
+2024-06-13 20:19:37,319 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: stop_status
+2024-06-13 20:19:37,560 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-13 20:19:37,561 DEBUG   SenderThread:1332 [sender.py:send():378] send: history
+2024-06-13 20:19:37,561 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: summary_record
+2024-06-13 20:19:37,561 INFO    SenderThread:1332 [sender.py:_save_file():1389] saving file wandb-summary.json with policy end
+2024-06-13 20:19:38,144 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\wandb-summary.json
+2024-06-13 20:19:39,162 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\output.log
+2024-06-13 20:19:41,565 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:19:46,567 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:19:50,359 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-13 20:19:50,359 DEBUG   SenderThread:1332 [sender.py:send():378] send: history
+2024-06-13 20:19:50,359 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: summary_record
+2024-06-13 20:19:50,360 INFO    SenderThread:1332 [sender.py:_save_file():1389] saving file wandb-summary.json with policy end
+2024-06-13 20:19:51,260 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\wandb-summary.json
+2024-06-13 20:19:51,261 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\output.log
+2024-06-13 20:19:51,786 DEBUG   SenderThread:1332 [sender.py:send():378] send: stats
+2024-06-13 20:19:51,786 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:19:52,337 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: stop_status
+2024-06-13 20:19:52,337 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: stop_status
+2024-06-13 20:19:57,584 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:20:02,585 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:20:03,011 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-13 20:20:03,012 DEBUG   SenderThread:1332 [sender.py:send():378] send: history
+2024-06-13 20:20:03,012 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: summary_record
+2024-06-13 20:20:03,012 INFO    SenderThread:1332 [sender.py:_save_file():1389] saving file wandb-summary.json with policy end
+2024-06-13 20:20:03,366 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\wandb-summary.json
+2024-06-13 20:20:05,384 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\output.log
+2024-06-13 20:20:07,351 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: stop_status
+2024-06-13 20:20:07,351 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: stop_status
+2024-06-13 20:20:08,577 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:20:13,580 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:20:15,470 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-13 20:20:15,470 DEBUG   SenderThread:1332 [sender.py:send():378] send: history
+2024-06-13 20:20:15,471 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: summary_record
+2024-06-13 20:20:15,471 INFO    SenderThread:1332 [sender.py:_save_file():1389] saving file wandb-summary.json with policy end
+2024-06-13 20:20:15,471 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\wandb-summary.json
+2024-06-13 20:20:17,486 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\output.log
+2024-06-13 20:20:19,478 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:20:21,789 DEBUG   SenderThread:1332 [sender.py:send():378] send: stats
+2024-06-13 20:20:22,346 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: stop_status
+2024-06-13 20:20:22,347 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: stop_status
+2024-06-13 20:20:24,570 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:20:28,085 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-13 20:20:28,085 DEBUG   SenderThread:1332 [sender.py:send():378] send: history
+2024-06-13 20:20:28,085 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: summary_record
+2024-06-13 20:20:28,086 INFO    SenderThread:1332 [sender.py:_save_file():1389] saving file wandb-summary.json with policy end
+2024-06-13 20:20:28,564 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\wandb-summary.json
+2024-06-13 20:20:29,582 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\output.log
+2024-06-13 20:20:30,087 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:20:35,089 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:20:37,353 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: stop_status
+2024-06-13 20:20:37,354 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: stop_status
+2024-06-13 20:20:40,507 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:20:40,639 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-13 20:20:40,639 DEBUG   SenderThread:1332 [sender.py:send():378] send: history
+2024-06-13 20:20:40,639 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: summary_record
+2024-06-13 20:20:40,640 INFO    SenderThread:1332 [sender.py:_save_file():1389] saving file wandb-summary.json with policy end
+2024-06-13 20:20:40,678 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\wandb-summary.json
+2024-06-13 20:20:41,691 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\output.log
+2024-06-13 20:20:45,642 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:20:50,644 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:20:51,793 DEBUG   SenderThread:1332 [sender.py:send():378] send: stats
+2024-06-13 20:20:52,353 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: stop_status
+2024-06-13 20:20:52,353 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: stop_status
+2024-06-13 20:20:53,246 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-13 20:20:53,246 DEBUG   SenderThread:1332 [sender.py:send():378] send: history
+2024-06-13 20:20:53,246 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: summary_record
+2024-06-13 20:20:53,247 INFO    SenderThread:1332 [sender.py:_save_file():1389] saving file wandb-summary.json with policy end
+2024-06-13 20:20:53,794 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\wandb-summary.json
+2024-06-13 20:20:55,810 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\output.log
+2024-06-13 20:20:56,249 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:20:59,851 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\output.log
+2024-06-13 20:21:02,217 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:21:07,331 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:21:07,351 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: stop_status
+2024-06-13 20:21:07,352 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: stop_status
+2024-06-13 20:21:07,926 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\output.log
+2024-06-13 20:21:09,649 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-13 20:21:09,649 DEBUG   SenderThread:1332 [sender.py:send():378] send: history
+2024-06-13 20:21:09,649 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: summary_record
+2024-06-13 20:21:09,650 INFO    SenderThread:1332 [sender.py:_save_file():1389] saving file wandb-summary.json with policy end
+2024-06-13 20:21:09,959 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\wandb-summary.json
+2024-06-13 20:21:11,978 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\output.log
+2024-06-13 20:21:12,512 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:21:13,996 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\output.log
+2024-06-13 20:21:16,011 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\output.log
+2024-06-13 20:21:18,026 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\output.log
+2024-06-13 20:21:18,160 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:21:20,042 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\output.log
+2024-06-13 20:21:21,796 DEBUG   SenderThread:1332 [sender.py:send():378] send: stats
+2024-06-13 20:21:22,057 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\output.log
+2024-06-13 20:21:22,352 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: stop_status
+2024-06-13 20:21:22,353 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: stop_status
+2024-06-13 20:21:23,681 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:21:24,076 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\output.log
+2024-06-13 20:21:25,077 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\output.log
+2024-06-13 20:21:27,496 DEBUG   SenderThread:1332 [sender.py:send():378] send: files
+2024-06-13 20:21:27,496 INFO    SenderThread:1332 [sender.py:_save_file():1389] saving file media\videos\Spike Animation_90_515715a00bf611542469.gif with policy now
+2024-06-13 20:21:27,497 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-13 20:21:28,106 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_created():271] file/dir created: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\media\videos\Spike Animation_90_515715a00bf611542469.gif
+2024-06-13 20:21:28,107 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_created():271] file/dir created: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\media
+2024-06-13 20:21:28,107 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_created():271] file/dir created: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\media\videos
+2024-06-13 20:21:28,707 INFO    wandb-upload_0:1332 [upload_job.py:push():130] Uploaded file C:\Users\lukea\AppData\Local\Temp\tmp_f3crj24wandb\ti9fu9g9-media/videos/Spike Animation_90_515715a00bf611542469.gif
+2024-06-13 20:21:29,107 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\output.log
+2024-06-13 20:21:29,507 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:21:29,973 INFO    wandb-upload_0:1332 [upload_job.py:push():130] Uploaded file C:\Users\lukea\AppData\Local\Temp\tmp_f3crj24wandb\g3ub9qyb-media/videos/Spike Animation_90_515715a00bf611542469.gif
+2024-06-13 20:21:32,475 DEBUG   SenderThread:1332 [sender.py:send():378] send: files
+2024-06-13 20:21:32,475 INFO    SenderThread:1332 [sender.py:_save_file():1389] saving file media\images\Results Grid_90_1098652f43a29f9cb010.png with policy now
+2024-06-13 20:21:32,476 DEBUG   SenderThread:1332 [sender.py:send():378] send: files
+2024-06-13 20:21:32,476 INFO    SenderThread:1332 [sender.py:_save_file():1389] saving file media\videos\Spike Animation_90_d356af9bdb7ce42999df.gif with policy now
+2024-06-13 20:21:32,479 DEBUG   SenderThread:1332 [sender.py:send():378] send: files
+2024-06-13 20:21:32,480 INFO    SenderThread:1332 [sender.py:_save_file():1389] saving file media\images\Input Raster_90_32cfcd0d0b93754b130e.png with policy now
+2024-06-13 20:21:32,483 DEBUG   SenderThread:1332 [sender.py:send():378] send: files
+2024-06-13 20:21:32,483 INFO    SenderThread:1332 [sender.py:_save_file():1389] saving file media\images\Output Raster_90_eab9f939409817ed1fa3.png with policy now
+2024-06-13 20:21:32,483 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: partial_history
+2024-06-13 20:21:32,484 DEBUG   SenderThread:1332 [sender.py:send():378] send: history
+2024-06-13 20:21:32,484 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: summary_record
+2024-06-13 20:21:32,485 INFO    SenderThread:1332 [sender.py:_save_file():1389] saving file wandb-summary.json with policy end
+2024-06-13 20:21:32,743 DEBUG   SenderThread:1332 [sender.py:send():378] send: telemetry
+2024-06-13 20:21:32,744 DEBUG   SenderThread:1332 [sender.py:send():378] send: exit
+2024-06-13 20:21:32,744 INFO    SenderThread:1332 [sender.py:send_exit():585] handling exit code: 0
+2024-06-13 20:21:32,744 INFO    SenderThread:1332 [sender.py:send_exit():587] handling runtime: 1211
+2024-06-13 20:21:32,745 INFO    SenderThread:1332 [sender.py:_save_file():1389] saving file wandb-summary.json with policy end
+2024-06-13 20:21:32,745 INFO    SenderThread:1332 [sender.py:send_exit():593] send defer
+2024-06-13 20:21:32,745 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: defer
+2024-06-13 20:21:32,745 INFO    HandlerThread:1332 [handler.py:handle_request_defer():184] handle defer: 0
+2024-06-13 20:21:32,745 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: defer
+2024-06-13 20:21:32,745 INFO    SenderThread:1332 [sender.py:send_request_defer():609] handle sender defer: 0
+2024-06-13 20:21:32,746 INFO    SenderThread:1332 [sender.py:transition_state():613] send defer: 1
+2024-06-13 20:21:32,746 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: defer
+2024-06-13 20:21:32,746 INFO    HandlerThread:1332 [handler.py:handle_request_defer():184] handle defer: 1
+2024-06-13 20:21:32,746 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: defer
+2024-06-13 20:21:32,746 INFO    SenderThread:1332 [sender.py:send_request_defer():609] handle sender defer: 1
+2024-06-13 20:21:32,746 INFO    SenderThread:1332 [sender.py:transition_state():613] send defer: 2
+2024-06-13 20:21:32,746 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: defer
+2024-06-13 20:21:32,746 INFO    HandlerThread:1332 [handler.py:handle_request_defer():184] handle defer: 2
+2024-06-13 20:21:32,746 INFO    HandlerThread:1332 [system_monitor.py:finish():203] Stopping system monitor
+2024-06-13 20:21:32,753 INFO    HandlerThread:1332 [interfaces.py:finish():200] Joined cpu monitor
+2024-06-13 20:21:32,753 DEBUG   SystemMonitor:1332 [system_monitor.py:_start():179] Finished system metrics aggregation loop
+2024-06-13 20:21:32,753 INFO    HandlerThread:1332 [interfaces.py:finish():200] Joined disk monitor
+2024-06-13 20:21:32,753 DEBUG   SystemMonitor:1332 [system_monitor.py:_start():183] Publishing last batch of metrics
+2024-06-13 20:21:32,806 INFO    HandlerThread:1332 [interfaces.py:finish():200] Joined gpu monitor
+2024-06-13 20:21:32,806 INFO    HandlerThread:1332 [interfaces.py:finish():200] Joined memory monitor
+2024-06-13 20:21:32,806 INFO    HandlerThread:1332 [interfaces.py:finish():200] Joined network monitor
+2024-06-13 20:21:32,806 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: defer
+2024-06-13 20:21:32,807 INFO    SenderThread:1332 [sender.py:send_request_defer():609] handle sender defer: 2
+2024-06-13 20:21:32,807 INFO    SenderThread:1332 [sender.py:transition_state():613] send defer: 3
+2024-06-13 20:21:32,807 DEBUG   SenderThread:1332 [sender.py:send():378] send: stats
+2024-06-13 20:21:32,807 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: defer
+2024-06-13 20:21:32,807 INFO    HandlerThread:1332 [handler.py:handle_request_defer():184] handle defer: 3
+2024-06-13 20:21:32,807 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: defer
+2024-06-13 20:21:32,807 INFO    SenderThread:1332 [sender.py:send_request_defer():609] handle sender defer: 3
+2024-06-13 20:21:32,807 INFO    SenderThread:1332 [sender.py:transition_state():613] send defer: 4
+2024-06-13 20:21:32,807 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: defer
+2024-06-13 20:21:32,808 INFO    HandlerThread:1332 [handler.py:handle_request_defer():184] handle defer: 4
+2024-06-13 20:21:32,808 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: defer
+2024-06-13 20:21:32,808 INFO    SenderThread:1332 [sender.py:send_request_defer():609] handle sender defer: 4
+2024-06-13 20:21:32,808 INFO    SenderThread:1332 [sender.py:transition_state():613] send defer: 5
+2024-06-13 20:21:32,808 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: defer
+2024-06-13 20:21:32,808 INFO    HandlerThread:1332 [handler.py:handle_request_defer():184] handle defer: 5
+2024-06-13 20:21:32,808 DEBUG   SenderThread:1332 [sender.py:send():378] send: summary
+2024-06-13 20:21:32,809 INFO    SenderThread:1332 [sender.py:_save_file():1389] saving file wandb-summary.json with policy end
+2024-06-13 20:21:32,809 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: defer
+2024-06-13 20:21:32,809 INFO    SenderThread:1332 [sender.py:send_request_defer():609] handle sender defer: 5
+2024-06-13 20:21:32,809 INFO    SenderThread:1332 [sender.py:transition_state():613] send defer: 6
+2024-06-13 20:21:32,810 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: defer
+2024-06-13 20:21:32,810 INFO    HandlerThread:1332 [handler.py:handle_request_defer():184] handle defer: 6
+2024-06-13 20:21:32,810 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: defer
+2024-06-13 20:21:32,810 INFO    SenderThread:1332 [sender.py:send_request_defer():609] handle sender defer: 6
+2024-06-13 20:21:32,812 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: status_report
+2024-06-13 20:21:33,001 INFO    SenderThread:1332 [sender.py:transition_state():613] send defer: 7
+2024-06-13 20:21:33,001 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: defer
+2024-06-13 20:21:33,001 INFO    HandlerThread:1332 [handler.py:handle_request_defer():184] handle defer: 7
+2024-06-13 20:21:33,001 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: defer
+2024-06-13 20:21:33,002 INFO    SenderThread:1332 [sender.py:send_request_defer():609] handle sender defer: 7
+2024-06-13 20:21:33,079 INFO    wandb-upload_0:1332 [upload_job.py:push():130] Uploaded file C:\Users\lukea\AppData\Local\Temp\tmp_f3crj24wandb\d1j9gir5-media/images/Results Grid_90_1098652f43a29f9cb010.png
+2024-06-13 20:21:33,148 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\wandb-summary.json
+2024-06-13 20:21:33,148 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\config.yaml
+2024-06-13 20:21:33,148 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_created():271] file/dir created: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\media\images\Input Raster_90_32cfcd0d0b93754b130e.png
+2024-06-13 20:21:33,148 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_created():271] file/dir created: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\media\images\Output Raster_90_eab9f939409817ed1fa3.png
+2024-06-13 20:21:33,149 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_created():271] file/dir created: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\media\images\Results Grid_90_1098652f43a29f9cb010.png
+2024-06-13 20:21:33,149 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_created():271] file/dir created: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\media\videos\Spike Animation_90_d356af9bdb7ce42999df.gif
+2024-06-13 20:21:33,150 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\media
+2024-06-13 20:21:33,150 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\media\videos
+2024-06-13 20:21:33,150 INFO    Thread-16 :1332 [dir_watcher.py:_on_file_created():271] file/dir created: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\media\images
+2024-06-13 20:21:33,263 INFO    SenderThread:1332 [sender.py:transition_state():613] send defer: 8
+2024-06-13 20:21:33,263 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: defer
+2024-06-13 20:21:33,263 INFO    HandlerThread:1332 [handler.py:handle_request_defer():184] handle defer: 8
+2024-06-13 20:21:33,264 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: defer
+2024-06-13 20:21:33,264 INFO    SenderThread:1332 [sender.py:send_request_defer():609] handle sender defer: 8
+2024-06-13 20:21:33,264 INFO    SenderThread:1332 [sender.py:transition_state():613] send defer: 9
+2024-06-13 20:21:33,264 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: defer
+2024-06-13 20:21:33,264 INFO    HandlerThread:1332 [handler.py:handle_request_defer():184] handle defer: 9
+2024-06-13 20:21:33,264 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: defer
+2024-06-13 20:21:33,264 INFO    SenderThread:1332 [sender.py:send_request_defer():609] handle sender defer: 9
+2024-06-13 20:21:33,264 INFO    SenderThread:1332 [dir_watcher.py:finish():358] shutting down directory watcher
+2024-06-13 20:21:33,364 INFO    wandb-upload_3:1332 [upload_job.py:push():130] Uploaded file C:\Users\lukea\AppData\Local\Temp\tmp_f3crj24wandb\fgbx07mk-media/images/Output Raster_90_eab9f939409817ed1fa3.png
+2024-06-13 20:21:33,474 INFO    wandb-upload_2:1332 [upload_job.py:push():130] Uploaded file C:\Users\lukea\AppData\Local\Temp\tmp_f3crj24wandb\j3q9z63q-media/images/Input Raster_90_32cfcd0d0b93754b130e.png
+2024-06-13 20:21:33,745 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: poll_exit
+2024-06-13 20:21:33,855 INFO    wandb-upload_0:1332 [upload_job.py:push():130] Uploaded file C:\Users\lukea\AppData\Local\Temp\tmp_f3crj24wandb\xg1g2omf-media/images/Results Grid_90_1098652f43a29f9cb010.png
+2024-06-13 20:21:33,858 INFO    wandb-upload_1:1332 [upload_job.py:push():130] Uploaded file C:\Users\lukea\AppData\Local\Temp\tmp_f3crj24wandb\l2vk7cmr-media/videos/Spike Animation_90_d356af9bdb7ce42999df.gif
+2024-06-13 20:21:34,156 INFO    SenderThread:1332 [dir_watcher.py:_on_file_modified():288] file/dir modified: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\output.log
+2024-06-13 20:21:34,157 INFO    SenderThread:1332 [dir_watcher.py:finish():388] scan: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files
+2024-06-13 20:21:34,158 INFO    SenderThread:1332 [dir_watcher.py:finish():402] scan save: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\conda-environment.yaml conda-environment.yaml
+2024-06-13 20:21:34,159 INFO    SenderThread:1332 [dir_watcher.py:finish():402] scan save: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\config.yaml config.yaml
+2024-06-13 20:21:34,160 INFO    SenderThread:1332 [dir_watcher.py:finish():402] scan save: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\output.log output.log
+2024-06-13 20:21:34,164 INFO    SenderThread:1332 [dir_watcher.py:finish():402] scan save: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\requirements.txt requirements.txt
+2024-06-13 20:21:34,168 INFO    SenderThread:1332 [dir_watcher.py:finish():402] scan save: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\wandb-metadata.json wandb-metadata.json
+2024-06-13 20:21:34,169 INFO    SenderThread:1332 [dir_watcher.py:finish():402] scan save: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\wandb-summary.json wandb-summary.json
+2024-06-13 20:21:34,182 INFO    SenderThread:1332 [dir_watcher.py:finish():402] scan save: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\media\images\Input Raster_90_32cfcd0d0b93754b130e.png media/images/Input Raster_90_32cfcd0d0b93754b130e.png
+2024-06-13 20:21:34,182 INFO    SenderThread:1332 [dir_watcher.py:finish():402] scan save: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\media\images\Output Raster_90_eab9f939409817ed1fa3.png media/images/Output Raster_90_eab9f939409817ed1fa3.png
+2024-06-13 20:21:34,183 INFO    SenderThread:1332 [dir_watcher.py:finish():402] scan save: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\media\images\Results Grid_90_1098652f43a29f9cb010.png media/images/Results Grid_90_1098652f43a29f9cb010.png
+2024-06-13 20:21:34,183 INFO    SenderThread:1332 [dir_watcher.py:finish():402] scan save: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\media\videos\Spike Animation_90_515715a00bf611542469.gif media/videos/Spike Animation_90_515715a00bf611542469.gif
+2024-06-13 20:21:34,184 INFO    SenderThread:1332 [dir_watcher.py:finish():402] scan save: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\media\videos\Spike Animation_90_d356af9bdb7ce42999df.gif media/videos/Spike Animation_90_d356af9bdb7ce42999df.gif
+2024-06-13 20:21:34,184 INFO    SenderThread:1332 [sender.py:transition_state():613] send defer: 10
+2024-06-13 20:21:34,184 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: poll_exit
+2024-06-13 20:21:34,184 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: defer
+2024-06-13 20:21:34,185 INFO    HandlerThread:1332 [handler.py:handle_request_defer():184] handle defer: 10
+2024-06-13 20:21:34,186 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: defer
+2024-06-13 20:21:34,186 INFO    SenderThread:1332 [sender.py:send_request_defer():609] handle sender defer: 10
+2024-06-13 20:21:34,186 INFO    SenderThread:1332 [file_pusher.py:finish():169] shutting down file pusher
+2024-06-13 20:21:34,188 INFO    wandb-upload_3:1332 [upload_job.py:push():130] Uploaded file C:\Users\lukea\AppData\Local\Temp\tmp_f3crj24wandb\kxxc218o-media/images/Output Raster_90_eab9f939409817ed1fa3.png
+2024-06-13 20:21:34,540 INFO    wandb-upload_1:1332 [upload_job.py:push():130] Uploaded file C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\config.yaml
+2024-06-13 20:21:34,558 INFO    wandb-upload_0:1332 [upload_job.py:push():130] Uploaded file C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\output.log
+2024-06-13 20:21:34,564 INFO    wandb-upload_4:1332 [upload_job.py:push():130] Uploaded file C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\requirements.txt
+2024-06-13 20:21:34,610 INFO    wandb-upload_5:1332 [upload_job.py:push():130] Uploaded file C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\files\wandb-summary.json
+2024-06-13 20:21:34,674 INFO    wandb-upload_2:1332 [upload_job.py:push():130] Uploaded file C:\Users\lukea\AppData\Local\Temp\tmp_f3crj24wandb\n6tm205a-media/images/Input Raster_90_32cfcd0d0b93754b130e.png
+2024-06-13 20:21:34,746 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: poll_exit
+2024-06-13 20:21:34,746 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: poll_exit
+2024-06-13 20:21:35,524 INFO    wandb-upload_3:1332 [upload_job.py:push():130] Uploaded file C:\Users\lukea\AppData\Local\Temp\tmp_f3crj24wandb\ebmhkxrd-media/videos/Spike Animation_90_d356af9bdb7ce42999df.gif
+2024-06-13 20:21:35,725 INFO    Thread-15 (_thread_body):1332 [sender.py:transition_state():613] send defer: 11
+2024-06-13 20:21:35,725 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: defer
+2024-06-13 20:21:35,725 INFO    HandlerThread:1332 [handler.py:handle_request_defer():184] handle defer: 11
+2024-06-13 20:21:35,726 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: defer
+2024-06-13 20:21:35,726 INFO    SenderThread:1332 [sender.py:send_request_defer():609] handle sender defer: 11
+2024-06-13 20:21:35,726 INFO    SenderThread:1332 [file_pusher.py:join():175] waiting for file pusher
+2024-06-13 20:21:35,731 INFO    SenderThread:1332 [sender.py:transition_state():613] send defer: 12
+2024-06-13 20:21:35,732 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: defer
+2024-06-13 20:21:35,732 INFO    HandlerThread:1332 [handler.py:handle_request_defer():184] handle defer: 12
+2024-06-13 20:21:35,732 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: defer
+2024-06-13 20:21:35,732 INFO    SenderThread:1332 [sender.py:send_request_defer():609] handle sender defer: 12
+2024-06-13 20:21:35,732 INFO    SenderThread:1332 [file_stream.py:finish():601] file stream finish called
+2024-06-13 20:21:35,748 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: poll_exit
+2024-06-13 20:21:36,231 INFO    SenderThread:1332 [file_stream.py:finish():605] file stream finish is done
+2024-06-13 20:21:36,231 INFO    SenderThread:1332 [sender.py:transition_state():613] send defer: 13
+2024-06-13 20:21:36,232 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: poll_exit
+2024-06-13 20:21:36,232 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: defer
+2024-06-13 20:21:36,233 INFO    HandlerThread:1332 [handler.py:handle_request_defer():184] handle defer: 13
+2024-06-13 20:21:36,234 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: defer
+2024-06-13 20:21:36,234 INFO    SenderThread:1332 [sender.py:send_request_defer():609] handle sender defer: 13
+2024-06-13 20:21:36,235 INFO    SenderThread:1332 [sender.py:transition_state():613] send defer: 14
+2024-06-13 20:21:36,236 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: defer
+2024-06-13 20:21:36,237 DEBUG   SenderThread:1332 [sender.py:send():378] send: final
+2024-06-13 20:21:36,237 INFO    HandlerThread:1332 [handler.py:handle_request_defer():184] handle defer: 14
+2024-06-13 20:21:36,238 DEBUG   SenderThread:1332 [sender.py:send():378] send: footer
+2024-06-13 20:21:36,239 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: defer
+2024-06-13 20:21:36,239 INFO    SenderThread:1332 [sender.py:send_request_defer():609] handle sender defer: 14
+2024-06-13 20:21:36,243 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: poll_exit
+2024-06-13 20:21:36,244 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: poll_exit
+2024-06-13 20:21:36,252 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: internal_messages
+2024-06-13 20:21:36,255 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: server_info
+2024-06-13 20:21:36,255 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: get_summary
+2024-06-13 20:21:36,257 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: sampled_history
+2024-06-13 20:21:36,257 DEBUG   SenderThread:1332 [sender.py:send_request():405] send_request: server_info
+2024-06-13 20:21:36,396 DEBUG   HandlerThread:1332 [handler.py:handle_request():158] handle_request: shutdown
+2024-06-13 20:21:36,396 INFO    HandlerThread:1332 [handler.py:finish():882] shutting down handler
+2024-06-13 20:21:37,257 INFO    WriterThread:1332 [datastore.py:close():296] close: C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240613_200120-8m5cvoh6\run-8m5cvoh6.wandb
+2024-06-13 20:21:37,395 INFO    SenderThread:1332 [sender.py:finish():1545] shutting down sender
+2024-06-13 20:21:37,395 INFO    SenderThread:1332 [file_pusher.py:finish():169] shutting down file pusher
+2024-06-13 20:21:37,395 INFO    SenderThread:1332 [file_pusher.py:join():175] waiting for file pusher
