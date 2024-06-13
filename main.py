@@ -236,7 +236,7 @@ def main():
         
 if __name__ == '__main__':  
   
-  test = 1
+  test = 0
   
   if test == 1:
       sweep_config = {
@@ -258,7 +258,7 @@ if __name__ == '__main__':
           }
   else:
       sweep_config = {
-          'name': f'Refine Epochs, Rates, Subsets {date}',
+          'name': f'Try with RMSE/Freq loss {date}',
           'method': 'grid',
           'metric': {'name': 'Test Loss',
                       'goal': 'minimize'   
@@ -267,7 +267,7 @@ if __name__ == '__main__':
                           'lr': {'values': [1e-4]},
                           'epochs': {'values': [9]}, # no less than 6
                           "subset_size": {'values': [10]}, #0.1, 0.7
-                          "recurrence": {'values': [True, False]},
+                          "recurrence": {'values': [True]},
                           "noise": {'values': [0]},
                           "rate_on": {'values': [75]}, # 25, 50, 75, 100, 125, 150, 175, 200
                           "rate_off": {'values': [1]},
