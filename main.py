@@ -126,9 +126,9 @@ def main():
        all_orig_ims = np.concatenate(all_orig_ims, axis = 0)
        all_decs = np.concatenate(all_decs, axis = 0)
   
-    # tsne = pd.DataFrame(data = features)
-    # tsne.insert(0, "Labels", all_labs) 
-    # tsne.to_csv(run.name)
+    tsne = pd.DataFrame(data = features)
+    tsne.insert(0, "Labels", all_labs) 
+    tsne.to_csv(run.name)
     
     print("Plotting Results Grid")
     seen_labels = set()
