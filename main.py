@@ -249,7 +249,7 @@ if __name__ == '__main__':
                           'lr': {'values': [1e-4]},
                           'epochs': {'values': [1]},
                           "subset_size": {'values': [10, 100]},
-                          "recurrence": {'values': [True]},
+                          "recurrence": {'values': [1]},
                           "noise": {'values': [0]},
                           "rate_on": {'values': [75]},
                           "rate_off": {'values': [10]},
@@ -258,7 +258,7 @@ if __name__ == '__main__':
           }
   else:
       sweep_config = {
-          'name': f'Try with RMSE/Freq loss {date}',
+          'name': f'Recurrence Sweep (0 - 1) {date}',
           'method': 'grid',
           'metric': {'name': 'Test Loss',
                       'goal': 'minimize'   
@@ -267,7 +267,7 @@ if __name__ == '__main__':
                           'lr': {'values': [1e-4]},
                           'epochs': {'values': [9]}, # no less than 6
                           "subset_size": {'values': [10]}, #0.1, 0.7
-                          "recurrence": {'values': [True]},
+                          "recurrence": {'values': [1, 0.75, 0.5, 0.25, 0]},
                           "noise": {'values': [0]},
                           "rate_on": {'values': [75]}, # 25, 50, 75, 100, 125, 150, 175, 200
                           "rate_off": {'values': [1]},

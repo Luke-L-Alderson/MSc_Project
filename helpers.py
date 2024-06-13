@@ -98,8 +98,10 @@ def build_datasets(train_specs): # add subsampling parameeter
     
         return train_dataset, train_loader, test_dataset, test_loader
     
-def build_network(device, noise = 0, recurrence = True):
+def build_network(device, noise = 0, recurrence = 1):
     print("Defining network")
+    if recurrence < 0 or recurrence > 1:
+        raise Exception("Must be between 0 and 1.") 
     time_params, network_params, oscillation_params, frame_params, \
     convolution_params, input_specs, label_specs, train_specs = {}, {}, {}, {}, {}, {}, {}, {}
     # Parameters for use in network definition

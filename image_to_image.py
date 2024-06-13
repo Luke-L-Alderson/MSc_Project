@@ -89,7 +89,7 @@ class SAE(nn.Module):
             #recurrent layer (encoder)
             curr_in = self.ff_in(spk_conv2.view(batch_size, -1))
             curr_rec = self.ff_rec(spk_rec)
-            curr_total = curr_in + curr_rec if self.recurrence else curr_in
+            curr_total = curr_in + self.recurrence*curr_rec
             spk_rec, mem_rec = self.net_rec(curr_total, mem_rec) #can set curr_total to curr_in, param in front
             #mem_rec += noise_amp*torch.randn(mem_rec.shape).to(self.device)
             

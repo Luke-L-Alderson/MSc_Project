@@ -38,7 +38,7 @@ def train_network(network, train_loader, test_loader, input_specs, train_specs):
 
             train_spk_recs, train_spk_outs  = network(train_inputs)
 
-            train_loss = loss_fn(train_spk_recs, train_spk_outs, train_inputs)/(input_specs["rate_on"]/Hz)
+            train_loss = loss_fn(train_spk_recs, train_spk_outs, train_inputs)#/(input_specs["rate_on"]/Hz)
             #train_loss = F.mse_loss(torch.sum(train_spk_outs, 0), torch.sum(train_inputs, 0))
             
             train_loss.backward()
@@ -63,7 +63,7 @@ def train_network(network, train_loader, test_loader, input_specs, train_specs):
                 test_inputs = get_poisson_inputs(test_inputs, **input_specs).to(device)
                 test_spk_recs, test_spk_outs  = network(test_inputs)
                 #test_loss = F.mse_loss(torch.sum(train_spk_outs, 0), torch.sum(train_inputs, 0))
-                test_loss = loss_fn(test_spk_recs, test_spk_outs, test_inputs)/(input_specs["rate_on"]/Hz)
+                test_loss = loss_fn(test_spk_recs, test_spk_outs, test_inputs)#/(input_specs["rate_on"]/Hz)
                 test_running_loss += test_loss.item()
                 
                 if j % logging_freq == 0:
