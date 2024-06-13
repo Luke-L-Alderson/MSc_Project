@@ -1,7 +1,7 @@
 import numpy as np
 from sklearn.manifold import TSNE
 import os
-
+from matplotlib import pyplot as plt
 import pandas as pd
 from torchvision import datasets, transforms
 from torch.utils.data import DataLoader
@@ -213,6 +213,7 @@ def set_seed(value = 42):
 def tsne_plt(file):
     features = pd.read_csv(file)
     features = features.iloc[:, 1:-1]
+    all_labs = features.iloc[:, 0]
     print("Applying t-SNE")
     tsne = TSNE().fit_transform(features)
     plt.figure(figsize=(10, 6))
@@ -237,7 +238,7 @@ def process_labels(labels, total_time, code, rate=None):
     return labels
 
 
-class mse_count_loss():
+class rmse_count_loss():
     # to revert: take out SQRT and add max back
     def __init__(
         self, lambda_rate, lambda_weights
@@ -247,13 +248,13 @@ class mse_count_loss():
         self.__name__ = "mse_count_loss"
         
     def __call__(self, spk_recs, spk_outs, targets):
-        print(f"Outs: {spk_outs.shape}\nTargets: {targets.shape}")
+        #print(f"Outs: {spk_outs.shape}\nTargets: {targets.shape}")
         spike_count = torch.sum(spk_outs, 0)
         target_spike_count = torch.sum(targets, 0)
-        print(f"Outs: {spk_count.shape}\nTargets: {target_spike_count.shape}")
+        #print(f"Outs: {spk_count.shape}\nTargets: {target_spike_count.shape}")
         loss_fn = nn.MSELoss()
         #max_count = torch.max(target_spike_count)
-        loss = torch.sqrt(loss_fn(spike_count, target_spike_count) + self.lambda_r*torch.sum(spk_recs))
+        loss = torch.sqrt(loss_fn(spike_count, target_spike_count)) + self.lambda_r*torch.sum(spk_recs)
         return loss#/max_count
     
 # class mse_t_loss():

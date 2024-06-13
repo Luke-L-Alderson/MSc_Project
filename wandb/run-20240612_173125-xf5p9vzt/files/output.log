@@ -153,3 +153,43 @@ Training - 2024-06-12 17:49:48.823374
 [8/9, 50/94] Training Loss: 37.88 - Iteration Time: 0:00:01.340492
 [8/9, 60/94] Training Loss: 38.26 - Iteration Time: 0:00:01.505795
 [8/9, 70/94] Training Loss: 37.67 - Iteration Time: 0:00:01.341516
+[8/9, 80/94] Training Loss: 37.97 - Iteration Time: 0:00:01.233923
+[8/9, 90/94] Training Loss: 37.05 - Iteration Time: 0:00:02.907409
+Testing - 2024-06-12 17:52:05.509856
+[8/9, 2/16]
+[8/9, 4/16]
+[8/9, 6/16]
+[8/9, 8/16]
+[8/9, 10/16]
+[8/9, 12/16]
+[8/9, 14/16]
+[8/9, 16/16]
+Testing Loss: 37.16 - Epoch Time: 0:02:30.623480
+Training - 2024-06-12 17:52:19.447349
+[9/9, 10/94] Training Loss: 36.18 - Iteration Time: 0:00:01.428390
+[9/9, 20/94] Training Loss: 36.27 - Iteration Time: 0:00:01.293898
+[9/9, 30/94] Training Loss: 35.88 - Iteration Time: 0:00:01.533524
+[9/9, 40/94] Training Loss: 34.68 - Iteration Time: 0:00:01.500928
+[9/9, 50/94] Training Loss: 34.23 - Iteration Time: 0:00:01.538510
+[9/9, 60/94] Training Loss: 34.81 - Iteration Time: 0:00:01.463634
+[9/9, 70/94] Training Loss: 34.14 - Iteration Time: 0:00:01.265680
+[9/9, 80/94] Training Loss: 33.45 - Iteration Time: 0:00:01.265618
+[9/9, 90/94] Training Loss: 34.31 - Iteration Time: 0:00:01.279484
+Testing - 2024-06-12 17:54:37.652682
+[9/9, 2/16]
+[9/9, 4/16]
+[9/9, 6/16]
+[9/9, 8/16]
+[9/9, 10/16]
+[9/9, 12/16]
+[9/9, 14/16]
+[9/9, 16/16]
+Testing Loss: 33.12 - Epoch Time: 0:02:30.146116
+Training and Testing Finished - Time: 0:23:23.084772
+Assembling test data for t-sne projection
+-- 10/16 --
+Plotting Results Grid
+Plotting Spiking Input MNIST
+Plotting Spiking Input MNIST Animation - 2
+Plotting Spiking Output MNIST
+Plotting Spiking Output MNIST Animation - {labels[input_index]}

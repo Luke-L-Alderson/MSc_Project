@@ -36,7 +36,7 @@ def main():
     torch.backends.cudnn.benchmark = True #TURN OFF WHEN CHANGING ARCHITECTURE    
 
     run = wandb.init()
-    run.name = f"{wandb.config.rate_on} Hz_{wandb.config.rate_off} Hz_{wandb.config.subset_size}"
+    run.name = f"{wandb.config.rate_on} Hz_{wandb.config.rate_off} Hz_{wandb.config.recurrence}"
     
     """## Define network architecutre and parameters"""
     network_params, input_specs, train_specs = {}, {}, {}
@@ -114,7 +114,7 @@ def main():
            all_labs.append(labs)
            all_decs.append(decoded.mean(0).squeeze().cpu())
            all_orig_ims.append(data.mean(0).squeeze())
-           if i % 10 == 0:
+           if i % 1 == 0:
                print(f'-- {i}/{len(test_loader)} --')
     
        features = np.concatenate(features, axis = 0)
@@ -124,6 +124,7 @@ def main():
   
     tsne = pd.DataFrame(data = features)
     tsne.insert(0, "Labels", all_labs) 
+    tsne.to_csv(run.name)
     
     print("Plotting Results Grid")
     seen_labels = set()
@@ -199,11 +200,11 @@ def main():
     fig, axs = plt.subplots()
     axs.imshow(img_spk_outs[:, input_index].mean(axis=0), cmap='grey')
     
-    print("Plotting Spiking Output MNIST Animation - {labels[input_index]}")
+    print(f"Plotting Spiking Output MNIST Animation - {labels[input_index]}")
     fig1, ax1 = plt.subplots()
     animrec = splt.animator(img_spk_outs[:, input_index], fig1, ax1)
     HTML(animrec.to_html5_video())
-    animrec.save("figures/spike_mnistrec_{labels[input_index]}.gif")
+    animrec.save(f"figures/spike_mnistrec_{labels[input_index]}.gif")
     
     
     fig = plt.figure(facecolor="w", figsize=(10, 5))
@@ -235,7 +236,7 @@ def main():
         
 if __name__ == '__main__':  
   
-  test = 0
+  test = 1
   
   if test == 1:
       sweep_config = {
@@ -247,8 +248,9 @@ if __name__ == '__main__':
           'parameters': {'bs': {'values': [64]},
                           'lr': {'values': [1e-4]},
                           'epochs': {'values': [1]},
-                          "subset_size": {'values': [100]},
+                          "subset_size": {'values': [10, 100]},
                           "recurrence": {'values': [True]},
+                          "noise": {'values': [0]},
                           "rate_on": {'values': [75]},
                           "rate_off": {'values': [10]},
                           "num_workers": {'values': [0]}
@@ -256,18 +258,18 @@ if __name__ == '__main__':
           }
   else:
       sweep_config = {
-          'name': f'Rate Evaluation - Refine Epochs Needed {date}',
+          'name': f'Refine Epochs, Rates, Subsets {date}',
           'method': 'grid',
           'metric': {'name': 'Test Loss',
                       'goal': 'minimize'   
                       },
           'parameters': {'bs': {'values': [64]},
                           'lr': {'values': [1e-4]},
-                          'epochs': {'values': [3, 6, 9]}, #9
+                          'epochs': {'values': [9]}, # no less than 6
                           "subset_size": {'values': [10]}, #0.1, 0.7
-                          "recurrence": {'values': [True]},
+                          "recurrence": {'values': [True, False]},
                           "noise": {'values': [0]},
-                          "rate_on": {'values': [75, 200]}, # 75, 100, 125, 150, 175, 200
+                          "rate_on": {'values': [75]}, # 25, 50, 75, 100, 125, 150, 175, 200
                           "rate_off": {'values': [1]},
                           "num_workers": {'values': [0]}
                           }
