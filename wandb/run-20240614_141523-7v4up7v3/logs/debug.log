@@ -1,0 +1,36 @@
+2024-06-14 14:15:23,252 INFO    Thread-27 (_run_job):52708 [wandb_setup.py:_flush():76] Current SDK version is 0.17.0
+2024-06-14 14:15:23,252 INFO    Thread-27 (_run_job):52708 [wandb_setup.py:_flush():76] Configure stats pid to 52708
+2024-06-14 14:15:23,252 INFO    Thread-27 (_run_job):52708 [wandb_setup.py:_flush():76] Loading settings from C:\Users\lukea\.config\wandb\settings
+2024-06-14 14:15:23,252 INFO    Thread-27 (_run_job):52708 [wandb_setup.py:_flush():76] Loading settings from C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\settings
+2024-06-14 14:15:23,252 INFO    Thread-27 (_run_job):52708 [wandb_setup.py:_flush():76] Loading settings from environment variables: {'entity': 'lukelalderson', 'project': 'MSc Project', 'root_dir': 'C:\\Users\\lukea\\Documents\\Masters Project Code\\MSc_Project', 'sweep_id': 'jglh3inp', 'run_id': '7v4up7v3', 'sweep_param_path': 'C:\\Users\\lukea\\Documents\\Masters Project Code\\MSc_Project\\wandb\\sweep-jglh3inp\\config-7v4up7v3.yaml'}
+2024-06-14 14:15:23,252 INFO    Thread-27 (_run_job):52708 [wandb_setup.py:_flush():76] Applying setup settings: {'_disable_service': False}
+2024-06-14 14:15:23,252 INFO    Thread-27 (_run_job):52708 [wandb_setup.py:_flush():76] Inferring run settings from compute environment: {'program_relpath': 'main.py', 'program_abspath': 'c:\\users\\lukea\\documents\\masters project code\\msc_project\\main.py', 'program': 'c:\\users\\lukea\\documents\\masters project code\\msc_project\\main.py'}
+2024-06-14 14:15:23,253 INFO    Thread-27 (_run_job):52708 [wandb_setup.py:_flush():76] Applying login settings: {}
+2024-06-14 14:15:23,253 INFO    Thread-27 (_run_job):52708 [wandb_init.py:_log_setup():520] Logging user logs to C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240614_141523-7v4up7v3\logs\debug.log
+2024-06-14 14:15:23,253 INFO    Thread-27 (_run_job):52708 [wandb_init.py:_log_setup():521] Logging internal logs to C:\Users\lukea\Documents\Masters Project Code\MSc_Project\wandb\run-20240614_141523-7v4up7v3\logs\debug-internal.log
+2024-06-14 14:15:23,253 INFO    Thread-27 (_run_job):52708 [wandb_init.py:init():560] calling init triggers
+2024-06-14 14:15:23,253 INFO    Thread-27 (_run_job):52708 [wandb_init.py:init():567] wandb.init called with sweep_config: {'bs': 64, 'epochs': 1, 'lr': 0.0001, 'noise': 0, 'num_workers': 6, 'rate_off': 1, 'rate_on': 75, 'recurrence': 1, 'subset_size': 100}
+config: {}
+2024-06-14 14:15:23,253 INFO    Thread-27 (_run_job):52708 [wandb_init.py:init():610] starting backend
+2024-06-14 14:15:23,253 INFO    Thread-27 (_run_job):52708 [wandb_init.py:init():614] setting up manager
+2024-06-14 14:15:23,259 INFO    Thread-27 (_run_job):52708 [backend.py:_multiprocessing_setup():105] multiprocessing start_methods=spawn, using: spawn
+2024-06-14 14:15:23,259 INFO    Thread-27 (_run_job):52708 [wandb_init.py:init():622] backend started and connected
+2024-06-14 14:15:23,270 INFO    Thread-27 (_run_job):52708 [wandb_run.py:_config_callback():1376] config_cb None None {'bs': 64, 'epochs': 1, 'lr': 0.0001, 'noise': 0, 'num_workers': 6, 'rate_off': 1, 'rate_on': 75, 'recurrence': 1, 'subset_size': 100}
+2024-06-14 14:15:23,271 INFO    Thread-27 (_run_job):52708 [wandb_init.py:init():711] updated telemetry
+2024-06-14 14:15:23,303 INFO    Thread-27 (_run_job):52708 [wandb_init.py:init():744] communicating run to backend with 90.0 second timeout
+2024-06-14 14:15:23,724 INFO    Thread-27 (_run_job):52708 [wandb_run.py:_on_init():2396] communicating current version
+2024-06-14 14:15:23,865 INFO    Thread-27 (_run_job):52708 [wandb_run.py:_on_init():2405] got version response upgrade_message: "wandb version 0.17.1 is available!  To upgrade, please run:\n $ pip install wandb --upgrade"
+
+2024-06-14 14:15:23,866 INFO    Thread-27 (_run_job):52708 [wandb_init.py:init():795] starting run threads in backend
+2024-06-14 14:15:24,344 INFO    Thread-27 (_run_job):52708 [wandb_run.py:_console_start():2374] atexit reg
+2024-06-14 14:15:24,344 INFO    Thread-27 (_run_job):52708 [wandb_run.py:_redirect():2229] redirect: wrap_raw
+2024-06-14 14:15:24,345 INFO    Thread-27 (_run_job):52708 [wandb_run.py:_redirect():2294] Wrapping output streams.
+2024-06-14 14:15:24,345 INFO    Thread-27 (_run_job):52708 [wandb_run.py:_redirect():2319] Redirects installed.
+2024-06-14 14:15:24,345 INFO    Thread-27 (_run_job):52708 [wandb_init.py:init():838] run started, returning control to user process
+2024-06-14 14:17:03,507 INFO    Thread-27 (_run_job):52708 [wandb_run.py:_finish():2103] finishing run lukelalderson/MSc Project/7v4up7v3
+2024-06-14 14:17:03,507 INFO    Thread-27 (_run_job):52708 [wandb_run.py:_atexit_cleanup():2343] got exitcode: 0
+2024-06-14 14:17:03,508 INFO    Thread-27 (_run_job):52708 [wandb_run.py:_restore():2326] restore
+2024-06-14 14:17:03,508 INFO    Thread-27 (_run_job):52708 [wandb_run.py:_restore():2332] restore done
+2024-06-14 14:17:08,299 INFO    Thread-27 (_run_job):52708 [wandb_run.py:_footer_history_summary_info():3994] rendering history
+2024-06-14 14:17:08,299 INFO    Thread-27 (_run_job):52708 [wandb_run.py:_footer_history_summary_info():4026] rendering summary
+2024-06-14 14:17:08,311 INFO    Thread-27 (_run_job):52708 [wandb_run.py:_footer_sync_info():3953] logging synced files

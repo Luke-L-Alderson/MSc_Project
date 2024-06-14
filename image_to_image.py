@@ -18,7 +18,7 @@ class SAE(nn.Module):
         #define gradient
         spike_grad = surrogate.fast_sigmoid(slope=25)
           
-        #convolution (encoder) - Input size: [8, 3, 28, 28]
+        #convolution (encoder) - Input size: [8, 1, 28, 28]
         self.conv1 = nn.Conv2d(depth, cp["channels_1"], (cp["filter_1"], cp["filter_1"]))
         self.lif_conv1 = snn.Leaky(beta=beta, spike_grad=spike_grad, threshold = threshold)
         # conv1 output size: [8, 12, 26, 26]
@@ -27,7 +27,7 @@ class SAE(nn.Module):
         # conv2 output size: [8, 64, 24, 24]  
 
         # recurrent (latent)
-        self.ff_in = nn.Linear(num_conv2, num_rec) # 8x24x64 (12288) -> 100
+        self.ff_in = nn.Linear(num_conv2, num_rec) # 64x24x24 (12288) -> 100
         self.ff_rec = nn.Linear(num_rec, num_rec)  # 100 -> 100 (same nodes)
         self.net_rec = snn.Leaky(beta=beta, spike_grad=spike_grad, reset_mechanism="zero", threshold = threshold)
         

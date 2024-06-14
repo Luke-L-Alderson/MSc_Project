@@ -1,0 +1,164 @@
+Starting Sweep: Batch Size: 64, Learning Rate: 0.0001
+Making datasets and defining subsets
+Training: 60000 -> 6000
+Testing: 10000 -> 1000
+Making Dataloaders
+Defining network
+2024-06-14 10:09:22.643199
+Scaler Value: 0.015384615384615385
+Training - 2024-06-14 10:09:22.644192
+[1/9, 10/94] Training Loss: 0.09 - Iteration Time: 0:00:01.326681
+[1/9, 20/94] Training Loss: 0.09 - Iteration Time: 0:00:01.299885
+[1/9, 30/94] Training Loss: 0.09 - Iteration Time: 0:00:01.380744
+[1/9, 40/94] Training Loss: 0.09 - Iteration Time: 0:00:01.268616
+[1/9, 50/94] Training Loss: 0.08 - Iteration Time: 0:00:01.284957
+[1/9, 60/94] Training Loss: 0.08 - Iteration Time: 0:00:01.263224
+[1/9, 70/94] Training Loss: 0.08 - Iteration Time: 0:00:01.313759
+[1/9, 80/94] Training Loss: 0.08 - Iteration Time: 0:00:01.269579
+[1/9, 90/94] Training Loss: 0.08 - Iteration Time: 0:00:01.330607
+Testing - 2024-06-14 10:11:28.167869
+[1/9, 10/16]
+Testing Loss: 0.08 - Epoch Time: 0:02:17.435277
+Training - 2024-06-14 10:11:40.080462
+[2/9, 10/94] Training Loss: 0.08 - Iteration Time: 0:00:01.285961
+[2/9, 20/94] Training Loss: 0.08 - Iteration Time: 0:00:01.318692
+[2/9, 30/94] Training Loss: 0.08 - Iteration Time: 0:00:01.275511
+[2/9, 40/94] Training Loss: 0.08 - Iteration Time: 0:00:01.295907
+[2/9, 50/94] Training Loss: 0.08 - Iteration Time: 0:00:01.307295
+[2/9, 60/94] Training Loss: 0.08 - Iteration Time: 0:00:01.285475
+[2/9, 70/94] Training Loss: 0.08 - Iteration Time: 0:00:01.322687
+[2/9, 80/94] Training Loss: 0.08 - Iteration Time: 0:00:01.460053
+[2/9, 90/94] Training Loss: 0.08 - Iteration Time: 0:00:01.385245
+Testing - 2024-06-14 10:13:46.536593
+[2/9, 10/16]
+Testing Loss: 0.07 - Epoch Time: 0:02:19.214787
+Training - 2024-06-14 10:13:59.296241
+[3/9, 10/94] Training Loss: 0.08 - Iteration Time: 0:00:01.311737
+[3/9, 20/94] Training Loss: 0.08 - Iteration Time: 0:00:01.459063
+[3/9, 30/94] Training Loss: 0.08 - Iteration Time: 0:00:01.432361
+[3/9, 40/94] Training Loss: 0.08 - Iteration Time: 0:00:01.350913
+[3/9, 50/94] Training Loss: 0.07 - Iteration Time: 0:00:01.418889
+[3/9, 60/94] Training Loss: 0.07 - Iteration Time: 0:00:01.280033
+[3/9, 70/94] Training Loss: 0.07 - Iteration Time: 0:00:01.315946
+[3/9, 80/94] Training Loss: 0.07 - Iteration Time: 0:00:01.288430
+[3/9, 90/94] Training Loss: 0.07 - Iteration Time: 0:00:01.348935
+Testing - 2024-06-14 10:16:12.250026
+[3/9, 10/16]
+Testing Loss: 0.07 - Epoch Time: 0:02:25.004116
+Training - 2024-06-14 10:16:24.300853
+[4/9, 10/94] Training Loss: 0.07 - Iteration Time: 0:00:01.385798
+[4/9, 20/94] Training Loss: 0.07 - Iteration Time: 0:00:01.338554
+[4/9, 30/94] Training Loss: 0.07 - Iteration Time: 0:00:01.393976
+[4/9, 40/94] Training Loss: 0.07 - Iteration Time: 0:00:01.424855
+[4/9, 50/94] Training Loss: 0.07 - Iteration Time: 0:00:01.447226
+[4/9, 60/94] Training Loss: 0.07 - Iteration Time: 0:00:01.368743
+[4/9, 70/94] Training Loss: 0.07 - Iteration Time: 0:00:01.863051
+[4/9, 80/94] Training Loss: 0.07 - Iteration Time: 0:00:01.354960
+[4/9, 90/94] Training Loss: 0.07 - Iteration Time: 0:00:01.392126
+Testing - 2024-06-14 10:18:39.591861
+[4/9, 10/16]
+Testing Loss: 0.07 - Epoch Time: 0:02:27.794324
+Training - 2024-06-14 10:18:52.095672
+[5/9, 10/94] Training Loss: 0.07 - Iteration Time: 0:00:01.360882
+[5/9, 20/94] Training Loss: 0.07 - Iteration Time: 0:00:01.442243
+[5/9, 30/94] Training Loss: 0.07 - Iteration Time: 0:00:01.332588
+[5/9, 40/94] Training Loss: 0.07 - Iteration Time: 0:00:01.320178
+[5/9, 50/94] Training Loss: 0.07 - Iteration Time: 0:00:01.307307
+[5/9, 60/94] Training Loss: 0.07 - Iteration Time: 0:00:01.302382
+[5/9, 70/94] Training Loss: 0.07 - Iteration Time: 0:00:01.272554
+[5/9, 80/94] Training Loss: 0.07 - Iteration Time: 0:00:01.283472
+[5/9, 90/94] Training Loss: 0.07 - Iteration Time: 0:00:01.339523
+Testing - 2024-06-14 10:20:57.805527
+[5/9, 10/16]
+Testing Loss: 0.06 - Epoch Time: 0:02:18.517054
+Training - 2024-06-14 10:21:10.613222
+[6/9, 10/94] Training Loss: 0.06 - Iteration Time: 0:00:01.268571
+[6/9, 20/94] Training Loss: 0.06 - Iteration Time: 0:00:01.262642
+[6/9, 30/94] Training Loss: 0.06 - Iteration Time: 0:00:01.290916
+[6/9, 40/94] Training Loss: 0.06 - Iteration Time: 0:00:01.328698
+[6/9, 50/94] Training Loss: 0.06 - Iteration Time: 0:00:01.337575
+[6/9, 60/94] Training Loss: 0.06 - Iteration Time: 0:00:01.333145
+[6/9, 70/94] Training Loss: 0.06 - Iteration Time: 0:00:01.257681
+[6/9, 80/94] Training Loss: 0.06 - Iteration Time: 0:00:01.307378
+[6/9, 90/94] Training Loss: 0.06 - Iteration Time: 0:00:01.320711
+Testing - 2024-06-14 10:23:16.895451
+[6/9, 10/16]
+Testing Loss: 0.06 - Epoch Time: 0:02:18.269181
+Training - 2024-06-14 10:23:28.882899
+[7/9, 10/94] Training Loss: 0.06 - Iteration Time: 0:00:01.314216
+[7/9, 20/94] Training Loss: 0.06 - Iteration Time: 0:00:01.295886
+[7/9, 30/94] Training Loss: 0.06 - Iteration Time: 0:00:01.359871
+[7/9, 40/94] Training Loss: 0.06 - Iteration Time: 0:00:01.287448
+[7/9, 50/94] Training Loss: 0.06 - Iteration Time: 0:00:01.315745
+[7/9, 60/94] Training Loss: 0.06 - Iteration Time: 0:00:01.339063
+[7/9, 70/94] Training Loss: 0.06 - Iteration Time: 0:00:01.355915
+[7/9, 80/94] Training Loss: 0.06 - Iteration Time: 0:00:01.358460
+[7/9, 90/94] Training Loss: 0.06 - Iteration Time: 0:00:01.324644
+Testing - 2024-06-14 10:25:36.691712
+[7/9, 10/16]
+Testing Loss: 0.06 - Epoch Time: 0:02:20.168474
+Training - 2024-06-14 10:25:49.051869
+[8/9, 10/94] Training Loss: 0.06 - Iteration Time: 0:00:01.362929
+[8/9, 20/94] Training Loss: 0.06 - Iteration Time: 0:00:01.328153
+[8/9, 30/94] Training Loss: 0.06 - Iteration Time: 0:00:01.303790
+[8/9, 40/94] Training Loss: 0.06 - Iteration Time: 0:00:01.443208
+[8/9, 50/94] Training Loss: 0.06 - Iteration Time: 0:00:01.301825
+[8/9, 60/94] Training Loss: 0.06 - Iteration Time: 0:00:01.361396
+[8/9, 70/94] Training Loss: 0.06 - Iteration Time: 0:00:01.551937
+[8/9, 80/94] Training Loss: 0.06 - Iteration Time: 0:00:01.306795
+[8/9, 90/94] Training Loss: 0.06 - Iteration Time: 0:00:01.433778
+Testing - 2024-06-14 10:27:59.629399
+[8/9, 10/16]
+Testing Loss: 0.06 - Epoch Time: 0:02:23.565447
+Training - 2024-06-14 10:28:12.618309
+[9/9, 10/94] Training Loss: 0.06 - Iteration Time: 0:00:01.376351
+[9/9, 20/94] Training Loss: 0.06 - Iteration Time: 0:00:01.440259
+[9/9, 30/94] Training Loss: 0.06 - Iteration Time: 0:00:01.345487
+[9/9, 40/94] Training Loss: 0.06 - Iteration Time: 0:00:01.349917
+[9/9, 50/94] Training Loss: 0.06 - Iteration Time: 0:00:01.371309
+[9/9, 60/94] Training Loss: 0.06 - Iteration Time: 0:00:01.519613
+[9/9, 70/94] Training Loss: 0.06 - Iteration Time: 0:00:01.348454
+[9/9, 80/94] Training Loss: 0.05 - Iteration Time: 0:00:01.298431
+[9/9, 90/94] Training Loss: 0.06 - Iteration Time: 0:00:01.300921
+Testing - 2024-06-14 10:30:23.073071
+[9/9, 10/16]
+Testing Loss: 0.05 - Epoch Time: 0:02:22.422546
+Training and Testing Finished - Time: 0:21:12.398152
+Assembling test data for t-sne projection
+{'rate_on': 75. * hertz, 'rate_off': 10. * hertz, 'total_time': 200. * msecond, 'bin_size': 1. * msecond}
+-- 1/16 --
+{'rate_on': 75. * hertz, 'rate_off': 10. * hertz, 'total_time': 200. * msecond, 'bin_size': 1. * msecond}
+-- 2/16 --
+{'rate_on': 75. * hertz, 'rate_off': 10. * hertz, 'total_time': 200. * msecond, 'bin_size': 1. * msecond}
+-- 3/16 --
+{'rate_on': 75. * hertz, 'rate_off': 10. * hertz, 'total_time': 200. * msecond, 'bin_size': 1. * msecond}
+-- 4/16 --
+{'rate_on': 75. * hertz, 'rate_off': 10. * hertz, 'total_time': 200. * msecond, 'bin_size': 1. * msecond}
+-- 5/16 --
+{'rate_on': 75. * hertz, 'rate_off': 10. * hertz, 'total_time': 200. * msecond, 'bin_size': 1. * msecond}
+-- 6/16 --
+{'rate_on': 75. * hertz, 'rate_off': 10. * hertz, 'total_time': 200. * msecond, 'bin_size': 1. * msecond}
+-- 7/16 --
+{'rate_on': 75. * hertz, 'rate_off': 10. * hertz, 'total_time': 200. * msecond, 'bin_size': 1. * msecond}
+-- 8/16 --
+{'rate_on': 75. * hertz, 'rate_off': 10. * hertz, 'total_time': 200. * msecond, 'bin_size': 1. * msecond}
+-- 9/16 --
+{'rate_on': 75. * hertz, 'rate_off': 10. * hertz, 'total_time': 200. * msecond, 'bin_size': 1. * msecond}
+-- 10/16 --
+{'rate_on': 75. * hertz, 'rate_off': 10. * hertz, 'total_time': 200. * msecond, 'bin_size': 1. * msecond}
+-- 11/16 --
+{'rate_on': 75. * hertz, 'rate_off': 10. * hertz, 'total_time': 200. * msecond, 'bin_size': 1. * msecond}
+-- 12/16 --
+{'rate_on': 75. * hertz, 'rate_off': 10. * hertz, 'total_time': 200. * msecond, 'bin_size': 1. * msecond}
+-- 13/16 --
+{'rate_on': 75. * hertz, 'rate_off': 10. * hertz, 'total_time': 200. * msecond, 'bin_size': 1. * msecond}
+-- 14/16 --
+{'rate_on': 75. * hertz, 'rate_off': 10. * hertz, 'total_time': 200. * msecond, 'bin_size': 1. * msecond}
+-- 15/16 --
+{'rate_on': 75. * hertz, 'rate_off': 10. * hertz, 'total_time': 200. * msecond, 'bin_size': 1. * msecond}
+-- 16/16 --
+Plotting Results Grid
+Plotting Spiking Input MNIST
+Plotting Spiking Input MNIST Animation - 2
+Plotting Spiking Output MNIST
+Plotting Spiking Output MNIST Animation - 2

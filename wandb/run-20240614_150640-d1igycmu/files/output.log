@@ -1,0 +1,1081 @@
+Starting Sweep: Batch Size: 64, Learning Rate: 0.0001
+Making datasets and defining subsets
+Training: 60000 -> 6000
+Testing: 10000 -> 1000
+Making Dataloaders
+Defining network
+2024-06-14 15:06:42.256837
+Scaler Value: 0.013513513513513514
+Training - 2024-06-14 15:06:42.257830
+[1/9, 1/94] Training Loss: 0.0694 - Iteration Time: 0:00:01.801175
+[1/9, 2/94] Training Loss: 0.0699 - Iteration Time: 0:00:01.316241
+[1/9, 3/94] Training Loss: 0.0716 - Iteration Time: 0:00:01.341051
+[1/9, 4/94] Training Loss: 0.0716 - Iteration Time: 0:00:01.310819
+[1/9, 5/94] Training Loss: 0.0704 - Iteration Time: 0:00:01.280063
+[1/9, 6/94] Training Loss: 0.0691 - Iteration Time: 0:00:01.282024
+[1/9, 7/94] Training Loss: 0.0687 - Iteration Time: 0:00:01.369365
+[1/9, 8/94] Training Loss: 0.0688 - Iteration Time: 0:00:01.329652
+[1/9, 9/94] Training Loss: 0.0686 - Iteration Time: 0:00:01.426397
+[1/9, 10/94] Training Loss: 0.0707 - Iteration Time: 0:00:01.295484
+[1/9, 11/94] Training Loss: 0.0685 - Iteration Time: 0:00:01.388240
+[1/9, 12/94] Training Loss: 0.0671 - Iteration Time: 0:00:01.282515
+[1/9, 13/94] Training Loss: 0.0660 - Iteration Time: 0:00:01.287067
+[1/9, 14/94] Training Loss: 0.0698 - Iteration Time: 0:00:01.280584
+[1/9, 15/94] Training Loss: 0.0674 - Iteration Time: 0:00:01.275058
+[1/9, 16/94] Training Loss: 0.0671 - Iteration Time: 0:00:01.301368
+[1/9, 17/94] Training Loss: 0.0717 - Iteration Time: 0:00:01.261704
+[1/9, 18/94] Training Loss: 0.0680 - Iteration Time: 0:00:01.275084
+[1/9, 19/94] Training Loss: 0.0672 - Iteration Time: 0:00:01.251710
+[1/9, 20/94] Training Loss: 0.0692 - Iteration Time: 0:00:01.271120
+[1/9, 21/94] Training Loss: 0.0684 - Iteration Time: 0:00:01.392231
+[1/9, 22/94] Training Loss: 0.0671 - Iteration Time: 0:00:01.278489
+[1/9, 23/94] Training Loss: 0.0682 - Iteration Time: 0:00:01.296389
+[1/9, 24/94] Training Loss: 0.0683 - Iteration Time: 0:00:01.274065
+[1/9, 25/94] Training Loss: 0.0708 - Iteration Time: 0:00:01.329246
+[1/9, 26/94] Training Loss: 0.0687 - Iteration Time: 0:00:01.397308
+[1/9, 27/94] Training Loss: 0.0684 - Iteration Time: 0:00:01.407912
+[1/9, 28/94] Training Loss: 0.0682 - Iteration Time: 0:00:01.296899
+[1/9, 29/94] Training Loss: 0.0688 - Iteration Time: 0:00:01.264161
+[1/9, 30/94] Training Loss: 0.0683 - Iteration Time: 0:00:01.260167
+[1/9, 31/94] Training Loss: 0.0691 - Iteration Time: 0:00:01.307286
+[1/9, 32/94] Training Loss: 0.0691 - Iteration Time: 0:00:01.271568
+[1/9, 33/94] Training Loss: 0.0713 - Iteration Time: 0:00:01.266654
+[1/9, 34/94] Training Loss: 0.0681 - Iteration Time: 0:00:01.262628
+[1/9, 35/94] Training Loss: 0.0682 - Iteration Time: 0:00:01.297375
+[1/9, 36/94] Training Loss: 0.0686 - Iteration Time: 0:00:01.389664
+[1/9, 37/94] Training Loss: 0.0683 - Iteration Time: 0:00:01.269109
+[1/9, 38/94] Training Loss: 0.0684 - Iteration Time: 0:00:01.266622
+[1/9, 39/94] Training Loss: 0.0670 - Iteration Time: 0:00:01.277491
+[1/9, 40/94] Training Loss: 0.0687 - Iteration Time: 0:00:01.269103
+[1/9, 41/94] Training Loss: 0.0682 - Iteration Time: 0:00:01.249762
+[1/9, 42/94] Training Loss: 0.0690 - Iteration Time: 0:00:01.322677
+[1/9, 43/94] Training Loss: 0.0669 - Iteration Time: 0:00:01.427850
+[1/9, 44/94] Training Loss: 0.0691 - Iteration Time: 0:00:01.256691
+[1/9, 45/94] Training Loss: 0.0667 - Iteration Time: 0:00:01.281566
+[1/9, 46/94] Training Loss: 0.0690 - Iteration Time: 0:00:01.261695
+[1/9, 47/94] Training Loss: 0.0674 - Iteration Time: 0:00:01.284490
+[1/9, 48/94] Training Loss: 0.0673 - Iteration Time: 0:00:01.304828
+[1/9, 49/94] Training Loss: 0.0698 - Iteration Time: 0:00:01.250745
+[1/9, 50/94] Training Loss: 0.0673 - Iteration Time: 0:00:01.310848
+[1/9, 51/94] Training Loss: 0.0670 - Iteration Time: 0:00:01.283019
+[1/9, 52/94] Training Loss: 0.0685 - Iteration Time: 0:00:01.331665
+[1/9, 53/94] Training Loss: 0.0674 - Iteration Time: 0:00:01.368852
+[1/9, 54/94] Training Loss: 0.0678 - Iteration Time: 0:00:01.435359
+[1/9, 55/94] Training Loss: 0.0662 - Iteration Time: 0:00:01.315253
+[1/9, 56/94] Training Loss: 0.0697 - Iteration Time: 0:00:01.332705
+[1/9, 57/94] Training Loss: 0.0661 - Iteration Time: 0:00:01.346035
+[1/9, 58/94] Training Loss: 0.0641 - Iteration Time: 0:00:01.268142
+[1/9, 59/94] Training Loss: 0.0690 - Iteration Time: 0:00:01.347069
+[1/9, 60/94] Training Loss: 0.0664 - Iteration Time: 0:00:01.268107
+[1/9, 61/94] Training Loss: 0.0665 - Iteration Time: 0:00:01.272605
+[1/9, 62/94] Training Loss: 0.0650 - Iteration Time: 0:00:01.306344
+[1/9, 63/94] Training Loss: 0.0694 - Iteration Time: 0:00:01.269080
+[1/9, 64/94] Training Loss: 0.0661 - Iteration Time: 0:00:01.267138
+[1/9, 65/94] Training Loss: 0.0674 - Iteration Time: 0:00:01.286004
+[1/9, 66/94] Training Loss: 0.0655 - Iteration Time: 0:00:01.271116
+[1/9, 67/94] Training Loss: 0.0657 - Iteration Time: 0:00:01.269113
+[1/9, 68/94] Training Loss: 0.0669 - Iteration Time: 0:00:01.298872
+[1/9, 69/94] Training Loss: 0.0666 - Iteration Time: 0:00:01.281045
+[1/9, 70/94] Training Loss: 0.0661 - Iteration Time: 0:00:01.280396
+[1/9, 71/94] Training Loss: 0.0660 - Iteration Time: 0:00:01.304347
+[1/9, 72/94] Training Loss: 0.0681 - Iteration Time: 0:00:01.258178
+[1/9, 73/94] Training Loss: 0.0670 - Iteration Time: 0:00:01.388264
+[1/9, 74/94] Training Loss: 0.0658 - Iteration Time: 0:00:01.387853
+[1/9, 75/94] Training Loss: 0.0668 - Iteration Time: 0:00:01.283998
+[1/9, 76/94] Training Loss: 0.0662 - Iteration Time: 0:00:01.319313
+[1/9, 77/94] Training Loss: 0.0654 - Iteration Time: 0:00:01.359049
+[1/9, 78/94] Training Loss: 0.0662 - Iteration Time: 0:00:01.271632
+[1/9, 79/94] Training Loss: 0.0668 - Iteration Time: 0:00:01.269128
+[1/9, 80/94] Training Loss: 0.0700 - Iteration Time: 0:00:01.362382
+[1/9, 81/94] Training Loss: 0.0658 - Iteration Time: 0:00:01.278034
+[1/9, 82/94] Training Loss: 0.0665 - Iteration Time: 0:00:01.271573
+[1/9, 83/94] Training Loss: 0.0671 - Iteration Time: 0:00:01.295398
+[1/9, 84/94] Training Loss: 0.0676 - Iteration Time: 0:00:01.293929
+[1/9, 85/94] Training Loss: 0.0663 - Iteration Time: 0:00:01.417428
+[1/9, 86/94] Training Loss: 0.0651 - Iteration Time: 0:00:01.289440
+[1/9, 87/94] Training Loss: 0.0659 - Iteration Time: 0:00:01.317222
+[1/9, 88/94] Training Loss: 0.0641 - Iteration Time: 0:00:01.352982
+[1/9, 89/94] Training Loss: 0.0645 - Iteration Time: 0:00:01.322712
+[1/9, 90/94] Training Loss: 0.0662 - Iteration Time: 0:00:01.299902
+[1/9, 91/94] Training Loss: 0.0644 - Iteration Time: 0:00:01.281486
+[1/9, 92/94] Training Loss: 0.0653 - Iteration Time: 0:00:01.329652
+[1/9, 93/94] Training Loss: 0.0664 - Iteration Time: 0:00:01.328715
+[1/9, 94/94] Training Loss: 0.0644 - Iteration Time: 0:00:01.398631
+Testing - 2024-06-14 15:08:54.599339
+[1/9, 1/16]
+[1/9, 2/16]
+[1/9, 3/16]
+[1/9, 4/16]
+[1/9, 5/16]
+[1/9, 6/16]
+[1/9, 7/16]
+[1/9, 8/16]
+[1/9, 9/16]
+[1/9, 10/16]
+[1/9, 11/16]
+[1/9, 12/16]
+[1/9, 13/16]
+[1/9, 14/16]
+[1/9, 15/16]
+[1/9, 16/16]
+Testing Loss: 0.0618 - Epoch Time: 0:02:33.528076
+Training - 2024-06-14 15:09:15.786403
+[2/9, 1/94] Training Loss: 0.0655 - Iteration Time: 0:00:01.996983
+[2/9, 2/94] Training Loss: 0.0658 - Iteration Time: 0:00:01.437304
+[2/9, 3/94] Training Loss: 0.0667 - Iteration Time: 0:00:01.334550
+[2/9, 4/94] Training Loss: 0.0657 - Iteration Time: 0:00:01.350466
+[2/9, 5/94] Training Loss: 0.0643 - Iteration Time: 0:00:01.357952
+[2/9, 6/94] Training Loss: 0.0669 - Iteration Time: 0:00:01.304292
+[2/9, 7/94] Training Loss: 0.0663 - Iteration Time: 0:00:01.313763
+[2/9, 8/94] Training Loss: 0.0663 - Iteration Time: 0:00:01.266112
+[2/9, 9/94] Training Loss: 0.0680 - Iteration Time: 0:00:01.298884
+[2/9, 10/94] Training Loss: 0.0654 - Iteration Time: 0:00:01.313247
+[2/9, 11/94] Training Loss: 0.0663 - Iteration Time: 0:00:01.261671
+[2/9, 12/94] Training Loss: 0.0638 - Iteration Time: 0:00:01.285459
+[2/9, 13/94] Training Loss: 0.0674 - Iteration Time: 0:00:01.310278
+[2/9, 14/94] Training Loss: 0.0674 - Iteration Time: 0:00:01.351476
+[2/9, 15/94] Training Loss: 0.0621 - Iteration Time: 0:00:01.384699
+[2/9, 16/94] Training Loss: 0.0652 - Iteration Time: 0:00:01.280503
+[2/9, 17/94] Training Loss: 0.0658 - Iteration Time: 0:00:01.254233
+[2/9, 18/94] Training Loss: 0.0668 - Iteration Time: 0:00:01.289434
+[2/9, 19/94] Training Loss: 0.0621 - Iteration Time: 0:00:01.281045
+[2/9, 20/94] Training Loss: 0.0626 - Iteration Time: 0:00:01.308805
+[2/9, 21/94] Training Loss: 0.0644 - Iteration Time: 0:00:01.287494
+[2/9, 22/94] Training Loss: 0.0626 - Iteration Time: 0:00:01.279526
+[2/9, 23/94] Training Loss: 0.0635 - Iteration Time: 0:00:01.309282
+[2/9, 24/94] Training Loss: 0.0641 - Iteration Time: 0:00:01.288945
+[2/9, 25/94] Training Loss: 0.0598 - Iteration Time: 0:00:01.264141
+[2/9, 26/94] Training Loss: 0.0628 - Iteration Time: 0:00:01.318716
+[2/9, 27/94] Training Loss: 0.0648 - Iteration Time: 0:00:01.366879
+[2/9, 28/94] Training Loss: 0.0637 - Iteration Time: 0:00:01.246842
+[2/9, 29/94] Training Loss: 0.0632 - Iteration Time: 0:00:01.311758
+[2/9, 30/94] Training Loss: 0.0656 - Iteration Time: 0:00:01.270085
+[2/9, 31/94] Training Loss: 0.0635 - Iteration Time: 0:00:01.293481
+[2/9, 32/94] Training Loss: 0.0634 - Iteration Time: 0:00:01.252073
+[2/9, 33/94] Training Loss: 0.0651 - Iteration Time: 0:00:01.270618
+[2/9, 34/94] Training Loss: 0.0624 - Iteration Time: 0:00:01.424482
+[2/9, 35/94] Training Loss: 0.0610 - Iteration Time: 0:00:01.436787
+[2/9, 36/94] Training Loss: 0.0632 - Iteration Time: 0:00:01.264176
+[2/9, 37/94] Training Loss: 0.0631 - Iteration Time: 0:00:01.325210
+[2/9, 38/94] Training Loss: 0.0648 - Iteration Time: 0:00:01.378728
+[2/9, 39/94] Training Loss: 0.0646 - Iteration Time: 0:00:01.278039
+[2/9, 40/94] Training Loss: 0.0618 - Iteration Time: 0:00:01.318787
+[2/9, 41/94] Training Loss: 0.0647 - Iteration Time: 0:00:01.277519
+[2/9, 42/94] Training Loss: 0.0620 - Iteration Time: 0:00:01.401607
+[2/9, 43/94] Training Loss: 0.0613 - Iteration Time: 0:00:01.274620
+[2/9, 44/94] Training Loss: 0.0637 - Iteration Time: 0:00:01.259189
+[2/9, 45/94] Training Loss: 0.0610 - Iteration Time: 0:00:01.279522
+[2/9, 46/94] Training Loss: 0.0660 - Iteration Time: 0:00:01.271077
+[2/9, 47/94] Training Loss: 0.0617 - Iteration Time: 0:00:01.268113
+[2/9, 48/94] Training Loss: 0.0623 - Iteration Time: 0:00:01.267623
+[2/9, 49/94] Training Loss: 0.0631 - Iteration Time: 0:00:01.249734
+[2/9, 50/94] Training Loss: 0.0626 - Iteration Time: 0:00:01.263646
+[2/9, 51/94] Training Loss: 0.0655 - Iteration Time: 0:00:01.272580
+[2/9, 52/94] Training Loss: 0.0633 - Iteration Time: 0:00:01.262173
+[2/9, 53/94] Training Loss: 0.0631 - Iteration Time: 0:00:01.308278
+[2/9, 54/94] Training Loss: 0.0619 - Iteration Time: 0:00:01.292454
+[2/9, 55/94] Training Loss: 0.0643 - Iteration Time: 0:00:01.308278
+[2/9, 56/94] Training Loss: 0.0624 - Iteration Time: 0:00:01.294422
+[2/9, 57/94] Training Loss: 0.0609 - Iteration Time: 0:00:01.252235
+[2/9, 58/94] Training Loss: 0.0638 - Iteration Time: 0:00:01.262674
+[2/9, 59/94] Training Loss: 0.0627 - Iteration Time: 0:00:01.337578
+[2/9, 60/94] Training Loss: 0.0643 - Iteration Time: 0:00:01.326174
+[2/9, 61/94] Training Loss: 0.0616 - Iteration Time: 0:00:01.259218
+[2/9, 62/94] Training Loss: 0.0657 - Iteration Time: 0:00:01.274053
+[2/9, 63/94] Training Loss: 0.0625 - Iteration Time: 0:00:01.276007
+[2/9, 64/94] Training Loss: 0.0636 - Iteration Time: 0:00:01.276585
+[2/9, 65/94] Training Loss: 0.0617 - Iteration Time: 0:00:01.316262
+[2/9, 66/94] Training Loss: 0.0627 - Iteration Time: 0:00:01.317240
+[2/9, 67/94] Training Loss: 0.0648 - Iteration Time: 0:00:01.275531
+[2/9, 68/94] Training Loss: 0.0600 - Iteration Time: 0:00:01.287566
+[2/9, 69/94] Training Loss: 0.0622 - Iteration Time: 0:00:01.331140
+[2/9, 70/94] Training Loss: 0.0648 - Iteration Time: 0:00:01.308275
+[2/9, 71/94] Training Loss: 0.0633 - Iteration Time: 0:00:01.334134
+[2/9, 72/94] Training Loss: 0.0616 - Iteration Time: 0:00:01.273047
+[2/9, 73/94] Training Loss: 0.0614 - Iteration Time: 0:00:01.279522
+[2/9, 74/94] Training Loss: 0.0615 - Iteration Time: 0:00:01.285482
+[2/9, 75/94] Training Loss: 0.0635 - Iteration Time: 0:00:01.389662
+[2/9, 76/94] Training Loss: 0.0597 - Iteration Time: 0:00:01.319240
+[2/9, 77/94] Training Loss: 0.0606 - Iteration Time: 0:00:01.319212
+[2/9, 78/94] Training Loss: 0.0618 - Iteration Time: 0:00:01.317709
+[2/9, 79/94] Training Loss: 0.0607 - Iteration Time: 0:00:01.256244
+[2/9, 80/94] Training Loss: 0.0636 - Iteration Time: 0:00:01.309785
+[2/9, 81/94] Training Loss: 0.0610 - Iteration Time: 0:00:01.353448
+[2/9, 82/94] Training Loss: 0.0621 - Iteration Time: 0:00:01.433328
+[2/9, 83/94] Training Loss: 0.0608 - Iteration Time: 0:00:01.332617
+[2/9, 84/94] Training Loss: 0.0655 - Iteration Time: 0:00:01.367864
+[2/9, 85/94] Training Loss: 0.0635 - Iteration Time: 0:00:01.294483
+[2/9, 86/94] Training Loss: 0.0630 - Iteration Time: 0:00:01.262670
+[2/9, 87/94] Training Loss: 0.0636 - Iteration Time: 0:00:01.264170
+[2/9, 88/94] Training Loss: 0.0617 - Iteration Time: 0:00:01.382297
+[2/9, 89/94] Training Loss: 0.0611 - Iteration Time: 0:00:01.310829
+[2/9, 90/94] Training Loss: 0.0628 - Iteration Time: 0:00:01.319739
+[2/9, 91/94] Training Loss: 0.0610 - Iteration Time: 0:00:01.296952
+[2/9, 92/94] Training Loss: 0.0608 - Iteration Time: 0:00:01.321194
+[2/9, 93/94] Training Loss: 0.0615 - Iteration Time: 0:00:01.341121
+[2/9, 94/94] Training Loss: 0.0616 - Iteration Time: 0:00:01.229419
+Testing - 2024-06-14 15:11:19.287973
+[2/9, 1/16]
+[2/9, 2/16]
+[2/9, 3/16]
+[2/9, 4/16]
+[2/9, 5/16]
+[2/9, 6/16]
+[2/9, 7/16]
+[2/9, 8/16]
+[2/9, 9/16]
+[2/9, 10/16]
+[2/9, 11/16]
+[2/9, 12/16]
+[2/9, 13/16]
+[2/9, 14/16]
+[2/9, 15/16]
+[2/9, 16/16]
+Testing Loss: 0.0616 - Epoch Time: 0:02:15.018069
+Training - 2024-06-14 15:11:30.804968
+[3/9, 1/94] Training Loss: 0.0627 - Iteration Time: 0:00:01.269669
+[3/9, 2/94] Training Loss: 0.0635 - Iteration Time: 0:00:01.276053
+[3/9, 3/94] Training Loss: 0.0619 - Iteration Time: 0:00:01.274530
+[3/9, 4/94] Training Loss: 0.0625 - Iteration Time: 0:00:01.266141
+[3/9, 5/94] Training Loss: 0.0600 - Iteration Time: 0:00:01.296919
+[3/9, 6/94] Training Loss: 0.0613 - Iteration Time: 0:00:01.300351
+[3/9, 7/94] Training Loss: 0.0611 - Iteration Time: 0:00:01.260650
+[3/9, 8/94] Training Loss: 0.0640 - Iteration Time: 0:00:01.283519
+[3/9, 9/94] Training Loss: 0.0604 - Iteration Time: 0:00:01.305819
+[3/9, 10/94] Training Loss: 0.0617 - Iteration Time: 0:00:01.346500
+[3/9, 11/94] Training Loss: 0.0620 - Iteration Time: 0:00:01.315761
+[3/9, 12/94] Training Loss: 0.0586 - Iteration Time: 0:00:01.332087
+[3/9, 13/94] Training Loss: 0.0598 - Iteration Time: 0:00:01.275136
+[3/9, 14/94] Training Loss: 0.0612 - Iteration Time: 0:00:01.335580
+[3/9, 15/94] Training Loss: 0.0604 - Iteration Time: 0:00:01.259666
+[3/9, 16/94] Training Loss: 0.0604 - Iteration Time: 0:00:01.307799
+[3/9, 17/94] Training Loss: 0.0603 - Iteration Time: 0:00:01.267613
+[3/9, 18/94] Training Loss: 0.0627 - Iteration Time: 0:00:01.262657
+[3/9, 19/94] Training Loss: 0.0603 - Iteration Time: 0:00:01.261151
+[3/9, 20/94] Training Loss: 0.0614 - Iteration Time: 0:00:01.275024
+[3/9, 21/94] Training Loss: 0.0623 - Iteration Time: 0:00:01.357954
+[3/9, 22/94] Training Loss: 0.0596 - Iteration Time: 0:00:01.285472
+[3/9, 23/94] Training Loss: 0.0616 - Iteration Time: 0:00:01.316708
+[3/9, 24/94] Training Loss: 0.0616 - Iteration Time: 0:00:01.439307
+[3/9, 25/94] Training Loss: 0.0616 - Iteration Time: 0:00:01.259177
+[3/9, 26/94] Training Loss: 0.0607 - Iteration Time: 0:00:01.309270
+[3/9, 27/94] Training Loss: 0.0601 - Iteration Time: 0:00:01.372837
+[3/9, 28/94] Training Loss: 0.0606 - Iteration Time: 0:00:01.287970
+[3/9, 29/94] Training Loss: 0.0608 - Iteration Time: 0:00:01.243796
+[3/9, 30/94] Training Loss: 0.0608 - Iteration Time: 0:00:01.323658
+[3/9, 31/94] Training Loss: 0.0628 - Iteration Time: 0:00:01.306324
+[3/9, 32/94] Training Loss: 0.0620 - Iteration Time: 0:00:01.292927
+[3/9, 33/94] Training Loss: 0.0599 - Iteration Time: 0:00:01.257185
+[3/9, 34/94] Training Loss: 0.0606 - Iteration Time: 0:00:01.264166
+[3/9, 35/94] Training Loss: 0.0585 - Iteration Time: 0:00:01.264665
+[3/9, 36/94] Training Loss: 0.0622 - Iteration Time: 0:00:01.299974
+[3/9, 37/94] Training Loss: 0.0600 - Iteration Time: 0:00:01.332111
+[3/9, 38/94] Training Loss: 0.0607 - Iteration Time: 0:00:01.469630
+[3/9, 39/94] Training Loss: 0.0585 - Iteration Time: 0:00:01.281080
+[3/9, 40/94] Training Loss: 0.0582 - Iteration Time: 0:00:01.270098
+[3/9, 41/94] Training Loss: 0.0623 - Iteration Time: 0:00:01.268629
+[3/9, 42/94] Training Loss: 0.0598 - Iteration Time: 0:00:01.283530
+[3/9, 43/94] Training Loss: 0.0592 - Iteration Time: 0:00:01.334575
+[3/9, 44/94] Training Loss: 0.0598 - Iteration Time: 0:00:01.290493
+[3/9, 45/94] Training Loss: 0.0594 - Iteration Time: 0:00:01.291953
+[3/9, 46/94] Training Loss: 0.0597 - Iteration Time: 0:00:01.282504
+[3/9, 47/94] Training Loss: 0.0622 - Iteration Time: 0:00:01.287997
+[3/9, 48/94] Training Loss: 0.0603 - Iteration Time: 0:00:01.285016
+[3/9, 49/94] Training Loss: 0.0630 - Iteration Time: 0:00:01.283024
+[3/9, 50/94] Training Loss: 0.0606 - Iteration Time: 0:00:01.324207
+[3/9, 51/94] Training Loss: 0.0596 - Iteration Time: 0:00:01.287525
+[3/9, 52/94] Training Loss: 0.0606 - Iteration Time: 0:00:01.349022
+[3/9, 53/94] Training Loss: 0.0610 - Iteration Time: 0:00:01.282983
+[3/9, 54/94] Training Loss: 0.0589 - Iteration Time: 0:00:01.262709
+[3/9, 55/94] Training Loss: 0.0594 - Iteration Time: 0:00:01.288444
+[3/9, 56/94] Training Loss: 0.0608 - Iteration Time: 0:00:01.260732
+[3/9, 57/94] Training Loss: 0.0580 - Iteration Time: 0:00:01.257167
+[3/9, 58/94] Training Loss: 0.0600 - Iteration Time: 0:00:01.298427
+[3/9, 59/94] Training Loss: 0.0609 - Iteration Time: 0:00:01.321705
+[3/9, 60/94] Training Loss: 0.0585 - Iteration Time: 0:00:01.265693
+[3/9, 61/94] Training Loss: 0.0567 - Iteration Time: 0:00:01.361423
+[3/9, 62/94] Training Loss: 0.0577 - Iteration Time: 0:00:01.348480
+[3/9, 63/94] Training Loss: 0.0623 - Iteration Time: 0:00:01.260654
+[3/9, 64/94] Training Loss: 0.0583 - Iteration Time: 0:00:01.293516
+[3/9, 65/94] Training Loss: 0.0609 - Iteration Time: 0:00:01.265197
+[3/9, 66/94] Training Loss: 0.0587 - Iteration Time: 0:00:01.272081
+[3/9, 67/94] Training Loss: 0.0612 - Iteration Time: 0:00:01.330649
+[3/9, 68/94] Training Loss: 0.0579 - Iteration Time: 0:00:01.270633
+[3/9, 69/94] Training Loss: 0.0579 - Iteration Time: 0:00:01.306275
+[3/9, 70/94] Training Loss: 0.0582 - Iteration Time: 0:00:01.447253
+[3/9, 71/94] Training Loss: 0.0578 - Iteration Time: 0:00:01.373317
+[3/9, 72/94] Training Loss: 0.0590 - Iteration Time: 0:00:01.293414
+[3/9, 73/94] Training Loss: 0.0588 - Iteration Time: 0:00:01.386180
+[3/9, 74/94] Training Loss: 0.0604 - Iteration Time: 0:00:01.317265
+[3/9, 75/94] Training Loss: 0.0583 - Iteration Time: 0:00:01.327127
+[3/9, 76/94] Training Loss: 0.0575 - Iteration Time: 0:00:01.273084
+[3/9, 77/94] Training Loss: 0.0608 - Iteration Time: 0:00:01.309805
+[3/9, 78/94] Training Loss: 0.0575 - Iteration Time: 0:00:01.283957
+[3/9, 79/94] Training Loss: 0.0582 - Iteration Time: 0:00:01.294448
+[3/9, 80/94] Training Loss: 0.0586 - Iteration Time: 0:00:01.277057
+[3/9, 81/94] Training Loss: 0.0576 - Iteration Time: 0:00:01.328639
+[3/9, 82/94] Training Loss: 0.0568 - Iteration Time: 0:00:01.258211
+[3/9, 83/94] Training Loss: 0.0582 - Iteration Time: 0:00:01.281482
+[3/9, 84/94] Training Loss: 0.0587 - Iteration Time: 0:00:01.255295
+[3/9, 85/94] Training Loss: 0.0598 - Iteration Time: 0:00:01.312817
+[3/9, 86/94] Training Loss: 0.0584 - Iteration Time: 0:00:01.455612
+[3/9, 87/94] Training Loss: 0.0593 - Iteration Time: 0:00:01.300963
+[3/9, 88/94] Training Loss: 0.0582 - Iteration Time: 0:00:01.373800
+[3/9, 89/94] Training Loss: 0.0573 - Iteration Time: 0:00:01.280493
+[3/9, 90/94] Training Loss: 0.0597 - Iteration Time: 0:00:01.282528
+[3/9, 91/94] Training Loss: 0.0576 - Iteration Time: 0:00:01.306342
+[3/9, 92/94] Training Loss: 0.0587 - Iteration Time: 0:00:01.254716
+[3/9, 93/94] Training Loss: 0.0584 - Iteration Time: 0:00:01.284012
+[3/9, 94/94] Training Loss: 0.0552 - Iteration Time: 0:00:01.269147
+Testing - 2024-06-14 15:13:33.243435
+[3/9, 1/16]
+[3/9, 2/16]
+[3/9, 3/16]
+[3/9, 4/16]
+[3/9, 5/16]
+[3/9, 6/16]
+[3/9, 7/16]
+[3/9, 8/16]
+[3/9, 9/16]
+[3/9, 10/16]
+[3/9, 11/16]
+[3/9, 12/16]
+[3/9, 13/16]
+[3/9, 14/16]
+[3/9, 15/16]
+[3/9, 16/16]
+Testing Loss: 0.0573 - Epoch Time: 0:02:14.310305
+Training - 2024-06-14 15:13:45.115769
+[4/9, 1/94] Training Loss: 0.0605 - Iteration Time: 0:00:01.283956
+[4/9, 2/94] Training Loss: 0.0587 - Iteration Time: 0:00:01.279038
+[4/9, 3/94] Training Loss: 0.0582 - Iteration Time: 0:00:01.260618
+[4/9, 4/94] Training Loss: 0.0580 - Iteration Time: 0:00:01.269186
+[4/9, 5/94] Training Loss: 0.0586 - Iteration Time: 0:00:01.274068
+[4/9, 6/94] Training Loss: 0.0566 - Iteration Time: 0:00:01.301314
+[4/9, 7/94] Training Loss: 0.0562 - Iteration Time: 0:00:01.374295
+[4/9, 8/94] Training Loss: 0.0576 - Iteration Time: 0:00:01.344060
+[4/9, 9/94] Training Loss: 0.0574 - Iteration Time: 0:00:01.294378
+[4/9, 10/94] Training Loss: 0.0584 - Iteration Time: 0:00:01.264195
+[4/9, 11/94] Training Loss: 0.0569 - Iteration Time: 0:00:01.276554
+[4/9, 12/94] Training Loss: 0.0593 - Iteration Time: 0:00:01.308359
+[4/9, 13/94] Training Loss: 0.0583 - Iteration Time: 0:00:01.457729
+[4/9, 14/94] Training Loss: 0.0568 - Iteration Time: 0:00:01.292918
+[4/9, 15/94] Training Loss: 0.0579 - Iteration Time: 0:00:01.310821
+[4/9, 16/94] Training Loss: 0.0572 - Iteration Time: 0:00:01.390689
+[4/9, 17/94] Training Loss: 0.0583 - Iteration Time: 0:00:01.299845
+[4/9, 18/94] Training Loss: 0.0577 - Iteration Time: 0:00:01.298387
+[4/9, 19/94] Training Loss: 0.0568 - Iteration Time: 0:00:01.272072
+[4/9, 20/94] Training Loss: 0.0581 - Iteration Time: 0:00:01.258806
+[4/9, 21/94] Training Loss: 0.0572 - Iteration Time: 0:00:01.291957
+[4/9, 22/94] Training Loss: 0.0564 - Iteration Time: 0:00:01.310335
+[4/9, 23/94] Training Loss: 0.0568 - Iteration Time: 0:00:01.250799
+[4/9, 24/94] Training Loss: 0.0585 - Iteration Time: 0:00:01.320019
+[4/9, 25/94] Training Loss: 0.0586 - Iteration Time: 0:00:01.285962
+[4/9, 26/94] Training Loss: 0.0568 - Iteration Time: 0:00:01.279027
+[4/9, 27/94] Training Loss: 0.0562 - Iteration Time: 0:00:01.265664
+[4/9, 28/94] Training Loss: 0.0562 - Iteration Time: 0:00:01.266642
+[4/9, 29/94] Training Loss: 0.0556 - Iteration Time: 0:00:01.306293
+[4/9, 30/94] Training Loss: 0.0547 - Iteration Time: 0:00:01.265745
+[4/9, 31/94] Training Loss: 0.0581 - Iteration Time: 0:00:01.253219
+[4/9, 32/94] Training Loss: 0.0572 - Iteration Time: 0:00:01.303356
+[4/9, 33/94] Training Loss: 0.0565 - Iteration Time: 0:00:01.328618
+[4/9, 34/94] Training Loss: 0.0547 - Iteration Time: 0:00:01.277093
+[4/9, 35/94] Training Loss: 0.0565 - Iteration Time: 0:00:01.299369
+[4/9, 36/94] Training Loss: 0.0578 - Iteration Time: 0:00:01.278054
+[4/9, 37/94] Training Loss: 0.0556 - Iteration Time: 0:00:01.293968
+[4/9, 38/94] Training Loss: 0.0557 - Iteration Time: 0:00:01.504752
+[4/9, 39/94] Training Loss: 0.0547 - Iteration Time: 0:00:01.267615
+[4/9, 40/94] Training Loss: 0.0555 - Iteration Time: 0:00:01.278086
+[4/9, 41/94] Training Loss: 0.0555 - Iteration Time: 0:00:01.320672
+[4/9, 42/94] Training Loss: 0.0572 - Iteration Time: 0:00:01.255714
+[4/9, 43/94] Training Loss: 0.0558 - Iteration Time: 0:00:01.259202
+[4/9, 44/94] Training Loss: 0.0553 - Iteration Time: 0:00:01.261171
+[4/9, 45/94] Training Loss: 0.0559 - Iteration Time: 0:00:01.288957
+[4/9, 46/94] Training Loss: 0.0580 - Iteration Time: 0:00:01.385677
+[4/9, 47/94] Training Loss: 0.0547 - Iteration Time: 0:00:01.275600
+[4/9, 48/94] Training Loss: 0.0553 - Iteration Time: 0:00:01.317752
+[4/9, 49/94] Training Loss: 0.0546 - Iteration Time: 0:00:01.354416
+[4/9, 50/94] Training Loss: 0.0569 - Iteration Time: 0:00:01.282044
+[4/9, 51/94] Training Loss: 0.0550 - Iteration Time: 0:00:01.281979
+[4/9, 52/94] Training Loss: 0.0577 - Iteration Time: 0:00:01.280882
+[4/9, 53/94] Training Loss: 0.0553 - Iteration Time: 0:00:01.291044
+[4/9, 54/94] Training Loss: 0.0566 - Iteration Time: 0:00:01.286810
+[4/9, 55/94] Training Loss: 0.0561 - Iteration Time: 0:00:01.269665
+[4/9, 56/94] Training Loss: 0.0555 - Iteration Time: 0:00:01.271572
+[4/9, 57/94] Training Loss: 0.0571 - Iteration Time: 0:00:01.308314
+[4/9, 58/94] Training Loss: 0.0548 - Iteration Time: 0:00:01.421559
+[4/9, 59/94] Training Loss: 0.0542 - Iteration Time: 0:00:01.334593
+[4/9, 60/94] Training Loss: 0.0541 - Iteration Time: 0:00:01.432886
+[4/9, 61/94] Training Loss: 0.0546 - Iteration Time: 0:00:01.282302
+[4/9, 62/94] Training Loss: 0.0542 - Iteration Time: 0:00:01.393151
+[4/9, 63/94] Training Loss: 0.0559 - Iteration Time: 0:00:01.328661
+[4/9, 64/94] Training Loss: 0.0566 - Iteration Time: 0:00:01.284000
+[4/9, 65/94] Training Loss: 0.0551 - Iteration Time: 0:00:01.290930
+[4/9, 66/94] Training Loss: 0.0569 - Iteration Time: 0:00:01.281622
+[4/9, 67/94] Training Loss: 0.0573 - Iteration Time: 0:00:01.280533
+[4/9, 68/94] Training Loss: 0.0538 - Iteration Time: 0:00:01.289508
+[4/9, 69/94] Training Loss: 0.0560 - Iteration Time: 0:00:01.298931
+[4/9, 70/94] Training Loss: 0.0536 - Iteration Time: 0:00:01.305820
+[4/9, 71/94] Training Loss: 0.0558 - Iteration Time: 0:00:01.351567
+[4/9, 72/94] Training Loss: 0.0541 - Iteration Time: 0:00:01.327687
+[4/9, 73/94] Training Loss: 0.0561 - Iteration Time: 0:00:01.336050
+[4/9, 74/94] Training Loss: 0.0542 - Iteration Time: 0:00:01.356473
+[4/9, 75/94] Training Loss: 0.0548 - Iteration Time: 0:00:01.283128
+[4/9, 76/94] Training Loss: 0.0543 - Iteration Time: 0:00:01.292408
+[4/9, 77/94] Training Loss: 0.0557 - Iteration Time: 0:00:01.286969
+[4/9, 78/94] Training Loss: 0.0548 - Iteration Time: 0:00:01.266614
+[4/9, 79/94] Training Loss: 0.0530 - Iteration Time: 0:00:01.305936
+[4/9, 80/94] Training Loss: 0.0566 - Iteration Time: 0:00:01.290429
+[4/9, 81/94] Training Loss: 0.0544 - Iteration Time: 0:00:01.296384
+[4/9, 82/94] Training Loss: 0.0556 - Iteration Time: 0:00:01.353485
+[4/9, 83/94] Training Loss: 0.0581 - Iteration Time: 0:00:01.440790
+[4/9, 84/94] Training Loss: 0.0556 - Iteration Time: 0:00:01.250706
+[4/9, 85/94] Training Loss: 0.0567 - Iteration Time: 0:00:01.279104
+[4/9, 86/94] Training Loss: 0.0569 - Iteration Time: 0:00:01.273545
+[4/9, 87/94] Training Loss: 0.0548 - Iteration Time: 0:00:01.270063
+[4/9, 88/94] Training Loss: 0.0524 - Iteration Time: 0:00:01.261640
+[4/9, 89/94] Training Loss: 0.0545 - Iteration Time: 0:00:01.274677
+[4/9, 90/94] Training Loss: 0.0556 - Iteration Time: 0:00:01.274028
+[4/9, 91/94] Training Loss: 0.0519 - Iteration Time: 0:00:01.276980
+[4/9, 92/94] Training Loss: 0.0553 - Iteration Time: 0:00:01.333657
+[4/9, 93/94] Training Loss: 0.0555 - Iteration Time: 0:00:01.275506
+[4/9, 94/94] Training Loss: 0.0551 - Iteration Time: 0:00:01.249274
+Testing - 2024-06-14 15:15:47.667025
+[4/9, 1/16]
+[4/9, 2/16]
+[4/9, 3/16]
+[4/9, 4/16]
+[4/9, 5/16]
+[4/9, 6/16]
+[4/9, 7/16]
+[4/9, 8/16]
+[4/9, 9/16]
+[4/9, 10/16]
+[4/9, 11/16]
+[4/9, 12/16]
+[4/9, 13/16]
+[4/9, 14/16]
+[4/9, 15/16]
+[4/9, 16/16]
+Testing Loss: 0.0526 - Epoch Time: 0:02:14.227819
+Training - 2024-06-14 15:15:59.344084
+[5/9, 1/94] Training Loss: 0.0545 - Iteration Time: 0:00:01.327194
+[5/9, 2/94] Training Loss: 0.0550 - Iteration Time: 0:00:01.481991
+[5/9, 3/94] Training Loss: 0.0554 - Iteration Time: 0:00:01.299864
+[5/9, 4/94] Training Loss: 0.0548 - Iteration Time: 0:00:01.408530
+[5/9, 5/94] Training Loss: 0.0540 - Iteration Time: 0:00:01.416520
+[5/9, 6/94] Training Loss: 0.0547 - Iteration Time: 0:00:01.284496
+[5/9, 7/94] Training Loss: 0.0552 - Iteration Time: 0:00:01.271100
+[5/9, 8/94] Training Loss: 0.0532 - Iteration Time: 0:00:01.305874
+[5/9, 9/94] Training Loss: 0.0555 - Iteration Time: 0:00:01.293460
+[5/9, 10/94] Training Loss: 0.0537 - Iteration Time: 0:00:01.286030
+[5/9, 11/94] Training Loss: 0.0551 - Iteration Time: 0:00:01.263203
+[5/9, 12/94] Training Loss: 0.0523 - Iteration Time: 0:00:01.299437
+[5/9, 13/94] Training Loss: 0.0553 - Iteration Time: 0:00:01.284460
+[5/9, 14/94] Training Loss: 0.0524 - Iteration Time: 0:00:01.259185
+[5/9, 15/94] Training Loss: 0.0532 - Iteration Time: 0:00:01.286985
+[5/9, 16/94] Training Loss: 0.0532 - Iteration Time: 0:00:01.276028
+[5/9, 17/94] Training Loss: 0.0512 - Iteration Time: 0:00:01.289928
+[5/9, 18/94] Training Loss: 0.0562 - Iteration Time: 0:00:01.284444
+[5/9, 19/94] Training Loss: 0.0531 - Iteration Time: 0:00:01.280120
+[5/9, 20/94] Training Loss: 0.0516 - Iteration Time: 0:00:01.281981
+[5/9, 21/94] Training Loss: 0.0507 - Iteration Time: 0:00:01.270079
+[5/9, 22/94] Training Loss: 0.0533 - Iteration Time: 0:00:01.258655
+[5/9, 23/94] Training Loss: 0.0521 - Iteration Time: 0:00:01.243854
+[5/9, 24/94] Training Loss: 0.0526 - Iteration Time: 0:00:01.267579
+[5/9, 25/94] Training Loss: 0.0531 - Iteration Time: 0:00:01.308294
+[5/9, 26/94] Training Loss: 0.0530 - Iteration Time: 0:00:01.294424
+[5/9, 27/94] Training Loss: 0.0522 - Iteration Time: 0:00:01.288415
+[5/9, 28/94] Training Loss: 0.0541 - Iteration Time: 0:00:01.304841
+[5/9, 29/94] Training Loss: 0.0525 - Iteration Time: 0:00:01.316744
+[5/9, 30/94] Training Loss: 0.0545 - Iteration Time: 0:00:01.262643
+[5/9, 31/94] Training Loss: 0.0522 - Iteration Time: 0:00:01.288439
+[5/9, 32/94] Training Loss: 0.0511 - Iteration Time: 0:00:01.267131
+[5/9, 33/94] Training Loss: 0.0520 - Iteration Time: 0:00:01.251283
+[5/9, 34/94] Training Loss: 0.0518 - Iteration Time: 0:00:01.261158
+[5/9, 35/94] Training Loss: 0.0524 - Iteration Time: 0:00:01.274539
+[5/9, 36/94] Training Loss: 0.0512 - Iteration Time: 0:00:01.249277
+[5/9, 37/94] Training Loss: 0.0532 - Iteration Time: 0:00:01.278051
+[5/9, 38/94] Training Loss: 0.0498 - Iteration Time: 0:00:01.285931
+[5/9, 39/94] Training Loss: 0.0538 - Iteration Time: 0:00:01.356913
+[5/9, 40/94] Training Loss: 0.0549 - Iteration Time: 0:00:01.444792
+[5/9, 41/94] Training Loss: 0.0532 - Iteration Time: 0:00:01.272050
+[5/9, 42/94] Training Loss: 0.0529 - Iteration Time: 0:00:01.278529
+[5/9, 43/94] Training Loss: 0.0531 - Iteration Time: 0:00:01.268613
+[5/9, 44/94] Training Loss: 0.0556 - Iteration Time: 0:00:01.271583
+[5/9, 45/94] Training Loss: 0.0530 - Iteration Time: 0:00:01.298412
+[5/9, 46/94] Training Loss: 0.0540 - Iteration Time: 0:00:01.269572
+[5/9, 47/94] Training Loss: 0.0518 - Iteration Time: 0:00:01.264156
+[5/9, 48/94] Training Loss: 0.0521 - Iteration Time: 0:00:01.379260
+[5/9, 49/94] Training Loss: 0.0518 - Iteration Time: 0:00:01.398103
+[5/9, 50/94] Training Loss: 0.0522 - Iteration Time: 0:00:01.284055
+[5/9, 51/94] Training Loss: 0.0512 - Iteration Time: 0:00:01.421474
+[5/9, 52/94] Training Loss: 0.0527 - Iteration Time: 0:00:01.381302
+[5/9, 53/94] Training Loss: 0.0526 - Iteration Time: 0:00:01.299874
+[5/9, 54/94] Training Loss: 0.0550 - Iteration Time: 0:00:01.340551
+[5/9, 55/94] Training Loss: 0.0518 - Iteration Time: 0:00:01.293380
+[5/9, 56/94] Training Loss: 0.0513 - Iteration Time: 0:00:01.301954
+[5/9, 57/94] Training Loss: 0.0515 - Iteration Time: 0:00:01.274087
+[5/9, 58/94] Training Loss: 0.0515 - Iteration Time: 0:00:01.344516
+[5/9, 59/94] Training Loss: 0.0527 - Iteration Time: 0:00:01.267893
+[5/9, 60/94] Training Loss: 0.0514 - Iteration Time: 0:00:01.332639
+[5/9, 61/94] Training Loss: 0.0526 - Iteration Time: 0:00:01.264688
+[5/9, 62/94] Training Loss: 0.0526 - Iteration Time: 0:00:01.286465
+[5/9, 63/94] Training Loss: 0.0497 - Iteration Time: 0:00:01.285989
+[5/9, 64/94] Training Loss: 0.0519 - Iteration Time: 0:00:01.296366
+[5/9, 65/94] Training Loss: 0.0534 - Iteration Time: 0:00:01.276556
+[5/9, 66/94] Training Loss: 0.0520 - Iteration Time: 0:00:01.264750
+[5/9, 67/94] Training Loss: 0.0513 - Iteration Time: 0:00:01.285059
+[5/9, 68/94] Training Loss: 0.0515 - Iteration Time: 0:00:01.306291
+[5/9, 69/94] Training Loss: 0.0529 - Iteration Time: 0:00:01.270667
+[5/9, 70/94] Training Loss: 0.0523 - Iteration Time: 0:00:01.283995
+[5/9, 71/94] Training Loss: 0.0527 - Iteration Time: 0:00:01.294457
+[5/9, 72/94] Training Loss: 0.0500 - Iteration Time: 0:00:01.291494
+[5/9, 73/94] Training Loss: 0.0506 - Iteration Time: 0:00:01.267243
+[5/9, 74/94] Training Loss: 0.0504 - Iteration Time: 0:00:01.289971
+[5/9, 75/94] Training Loss: 0.0508 - Iteration Time: 0:00:01.306353
+[5/9, 76/94] Training Loss: 0.0516 - Iteration Time: 0:00:01.332683
+[5/9, 77/94] Training Loss: 0.0509 - Iteration Time: 0:00:01.270683
+[5/9, 78/94] Training Loss: 0.0482 - Iteration Time: 0:00:01.307773
+[5/9, 79/94] Training Loss: 0.0499 - Iteration Time: 0:00:01.335155
+[5/9, 80/94] Training Loss: 0.0511 - Iteration Time: 0:00:01.299425
+[5/9, 81/94] Training Loss: 0.0506 - Iteration Time: 0:00:01.281495
+[5/9, 82/94] Training Loss: 0.0512 - Iteration Time: 0:00:01.246825
+[5/9, 83/94] Training Loss: 0.0526 - Iteration Time: 0:00:01.294469
+[5/9, 84/94] Training Loss: 0.0516 - Iteration Time: 0:00:01.280621
+[5/9, 85/94] Training Loss: 0.0508 - Iteration Time: 0:00:01.314365
+[5/9, 86/94] Training Loss: 0.0502 - Iteration Time: 0:00:01.339567
+[5/9, 87/94] Training Loss: 0.0511 - Iteration Time: 0:00:01.308874
+[5/9, 88/94] Training Loss: 0.0518 - Iteration Time: 0:00:01.284493
+[5/9, 89/94] Training Loss: 0.0518 - Iteration Time: 0:00:01.281090
+[5/9, 90/94] Training Loss: 0.0490 - Iteration Time: 0:00:01.258775
+[5/9, 91/94] Training Loss: 0.0497 - Iteration Time: 0:00:01.400617
+[5/9, 92/94] Training Loss: 0.0500 - Iteration Time: 0:00:01.293391
+[5/9, 93/94] Training Loss: 0.0522 - Iteration Time: 0:00:01.271590
+[5/9, 94/94] Training Loss: 0.0504 - Iteration Time: 0:00:01.356413
+Testing - 2024-06-14 15:18:01.654932
+[5/9, 1/16]
+[5/9, 2/16]
+[5/9, 3/16]
+[5/9, 4/16]
+[5/9, 5/16]
+[5/9, 6/16]
+[5/9, 7/16]
+[5/9, 8/16]
+[5/9, 9/16]
+[5/9, 10/16]
+[5/9, 11/16]
+[5/9, 12/16]
+[5/9, 13/16]
+[5/9, 14/16]
+[5/9, 15/16]
+[5/9, 16/16]
+Testing Loss: 0.0484 - Epoch Time: 0:02:14.228572
+Training - 2024-06-14 15:18:13.573153
+[6/9, 1/94] Training Loss: 0.0505 - Iteration Time: 0:00:01.316268
+[6/9, 2/94] Training Loss: 0.0512 - Iteration Time: 0:00:01.299864
+[6/9, 3/94] Training Loss: 0.0493 - Iteration Time: 0:00:01.266213
+[6/9, 4/94] Training Loss: 0.0504 - Iteration Time: 0:00:01.289422
+[6/9, 5/94] Training Loss: 0.0498 - Iteration Time: 0:00:01.256330
+[6/9, 6/94] Training Loss: 0.0498 - Iteration Time: 0:00:01.269648
+[6/9, 7/94] Training Loss: 0.0497 - Iteration Time: 0:00:01.269111
+[6/9, 8/94] Training Loss: 0.0507 - Iteration Time: 0:00:01.306861
+[6/9, 9/94] Training Loss: 0.0509 - Iteration Time: 0:00:01.278045
+[6/9, 10/94] Training Loss: 0.0497 - Iteration Time: 0:00:01.253254
+[6/9, 11/94] Training Loss: 0.0514 - Iteration Time: 0:00:01.281987
+[6/9, 12/94] Training Loss: 0.0513 - Iteration Time: 0:00:01.275125
+[6/9, 13/94] Training Loss: 0.0492 - Iteration Time: 0:00:01.260734
+[6/9, 14/94] Training Loss: 0.0498 - Iteration Time: 0:00:01.290013
+[6/9, 15/94] Training Loss: 0.0503 - Iteration Time: 0:00:01.275572
+[6/9, 16/94] Training Loss: 0.0506 - Iteration Time: 0:00:01.294312
+[6/9, 17/94] Training Loss: 0.0482 - Iteration Time: 0:00:01.342117
+[6/9, 18/94] Training Loss: 0.0503 - Iteration Time: 0:00:01.281977
+[6/9, 19/94] Training Loss: 0.0479 - Iteration Time: 0:00:01.330637
+[6/9, 20/94] Training Loss: 0.0504 - Iteration Time: 0:00:01.300423
+[6/9, 21/94] Training Loss: 0.0491 - Iteration Time: 0:00:01.301315
+[6/9, 22/94] Training Loss: 0.0508 - Iteration Time: 0:00:01.284060
+[6/9, 23/94] Training Loss: 0.0504 - Iteration Time: 0:00:01.285484
+[6/9, 24/94] Training Loss: 0.0517 - Iteration Time: 0:00:01.273759
+[6/9, 25/94] Training Loss: 0.0503 - Iteration Time: 0:00:01.314798
+[6/9, 26/94] Training Loss: 0.0501 - Iteration Time: 0:00:01.317819
+[6/9, 27/94] Training Loss: 0.0508 - Iteration Time: 0:00:01.268675
+[6/9, 28/94] Training Loss: 0.0476 - Iteration Time: 0:00:01.314784
+[6/9, 29/94] Training Loss: 0.0503 - Iteration Time: 0:00:01.273138
+[6/9, 30/94] Training Loss: 0.0486 - Iteration Time: 0:00:01.282094
+[6/9, 31/94] Training Loss: 0.0492 - Iteration Time: 0:00:01.308866
+[6/9, 32/94] Training Loss: 0.0484 - Iteration Time: 0:00:01.256767
+[6/9, 33/94] Training Loss: 0.0485 - Iteration Time: 0:00:01.267259
+[6/9, 34/94] Training Loss: 0.0479 - Iteration Time: 0:00:01.275172
+[6/9, 35/94] Training Loss: 0.0488 - Iteration Time: 0:00:01.264116
+[6/9, 36/94] Training Loss: 0.0500 - Iteration Time: 0:00:01.278623
+[6/9, 37/94] Training Loss: 0.0493 - Iteration Time: 0:00:01.320280
+[6/9, 38/94] Training Loss: 0.0482 - Iteration Time: 0:00:01.338169
+[6/9, 39/94] Training Loss: 0.0490 - Iteration Time: 0:00:01.409152
+[6/9, 40/94] Training Loss: 0.0481 - Iteration Time: 0:00:01.400164
+[6/9, 41/94] Training Loss: 0.0501 - Iteration Time: 0:00:01.355475
+[6/9, 42/94] Training Loss: 0.0490 - Iteration Time: 0:00:01.290516
+[6/9, 43/94] Training Loss: 0.0487 - Iteration Time: 0:00:01.409095
+[6/9, 44/94] Training Loss: 0.0495 - Iteration Time: 0:00:01.284980
+[6/9, 45/94] Training Loss: 0.0493 - Iteration Time: 0:00:01.314276
+[6/9, 46/94] Training Loss: 0.0488 - Iteration Time: 0:00:01.277109
+[6/9, 47/94] Training Loss: 0.0500 - Iteration Time: 0:00:01.266721
+[6/9, 48/94] Training Loss: 0.0489 - Iteration Time: 0:00:01.366836
+[6/9, 49/94] Training Loss: 0.0492 - Iteration Time: 0:00:01.298409
+[6/9, 50/94] Training Loss: 0.0499 - Iteration Time: 0:00:01.324189
+[6/9, 51/94] Training Loss: 0.0504 - Iteration Time: 0:00:01.313284
+[6/9, 52/94] Training Loss: 0.0495 - Iteration Time: 0:00:01.330643
+[6/9, 53/94] Training Loss: 0.0479 - Iteration Time: 0:00:01.269196
+[6/9, 54/94] Training Loss: 0.0487 - Iteration Time: 0:00:01.281061
+[6/9, 55/94] Training Loss: 0.0460 - Iteration Time: 0:00:01.267659
+[6/9, 56/94] Training Loss: 0.0481 - Iteration Time: 0:00:01.298422
+[6/9, 57/94] Training Loss: 0.0494 - Iteration Time: 0:00:01.269679
+[6/9, 58/94] Training Loss: 0.0469 - Iteration Time: 0:00:01.290489
+[6/9, 59/94] Training Loss: 0.0490 - Iteration Time: 0:00:01.290501
+[6/9, 60/94] Training Loss: 0.0476 - Iteration Time: 0:00:01.305367
+[6/9, 61/94] Training Loss: 0.0489 - Iteration Time: 0:00:01.269579
+[6/9, 62/94] Training Loss: 0.0496 - Iteration Time: 0:00:01.352988
+[6/9, 63/94] Training Loss: 0.0472 - Iteration Time: 0:00:01.338621
+[6/9, 64/94] Training Loss: 0.0496 - Iteration Time: 0:00:01.298376
+[6/9, 65/94] Training Loss: 0.0489 - Iteration Time: 0:00:01.266169
+[6/9, 66/94] Training Loss: 0.0480 - Iteration Time: 0:00:01.273119
+[6/9, 67/94] Training Loss: 0.0485 - Iteration Time: 0:00:01.271618
+[6/9, 68/94] Training Loss: 0.0489 - Iteration Time: 0:00:01.262648
+[6/9, 69/94] Training Loss: 0.0480 - Iteration Time: 0:00:01.300383
+[6/9, 70/94] Training Loss: 0.0496 - Iteration Time: 0:00:01.274191
+[6/9, 71/94] Training Loss: 0.0472 - Iteration Time: 0:00:01.265671
+[6/9, 72/94] Training Loss: 0.0492 - Iteration Time: 0:00:01.291933
+[6/9, 73/94] Training Loss: 0.0504 - Iteration Time: 0:00:01.269193
+[6/9, 74/94] Training Loss: 0.0466 - Iteration Time: 0:00:01.326197
+[6/9, 75/94] Training Loss: 0.0495 - Iteration Time: 0:00:01.329692
+[6/9, 76/94] Training Loss: 0.0482 - Iteration Time: 0:00:01.283543
+[6/9, 77/94] Training Loss: 0.0473 - Iteration Time: 0:00:01.290955
+[6/9, 78/94] Training Loss: 0.0497 - Iteration Time: 0:00:01.288465
+[6/9, 79/94] Training Loss: 0.0492 - Iteration Time: 0:00:01.297487
+[6/9, 80/94] Training Loss: 0.0479 - Iteration Time: 0:00:01.268152
+[6/9, 81/94] Training Loss: 0.0472 - Iteration Time: 0:00:01.275602
+[6/9, 82/94] Training Loss: 0.0482 - Iteration Time: 0:00:01.328639
+[6/9, 83/94] Training Loss: 0.0480 - Iteration Time: 0:00:01.440826
+[6/9, 84/94] Training Loss: 0.0488 - Iteration Time: 0:00:01.368885
+[6/9, 85/94] Training Loss: 0.0485 - Iteration Time: 0:00:01.283095
+[6/9, 86/94] Training Loss: 0.0477 - Iteration Time: 0:00:01.365869
+[6/9, 87/94] Training Loss: 0.0494 - Iteration Time: 0:00:01.376258
+[6/9, 88/94] Training Loss: 0.0468 - Iteration Time: 0:00:01.293954
+[6/9, 89/94] Training Loss: 0.0478 - Iteration Time: 0:00:01.292980
+[6/9, 90/94] Training Loss: 0.0482 - Iteration Time: 0:00:01.299969
+[6/9, 91/94] Training Loss: 0.0477 - Iteration Time: 0:00:01.283515
+[6/9, 92/94] Training Loss: 0.0457 - Iteration Time: 0:00:01.317735
+[6/9, 93/94] Training Loss: 0.0464 - Iteration Time: 0:00:01.314264
+[6/9, 94/94] Training Loss: 0.0504 - Iteration Time: 0:00:01.364500
+Testing - 2024-06-14 15:20:15.962246
+[6/9, 1/16]
+[6/9, 2/16]
+[6/9, 3/16]
+[6/9, 4/16]
+[6/9, 5/16]
+[6/9, 6/16]
+[6/9, 7/16]
+[6/9, 8/16]
+[6/9, 9/16]
+[6/9, 10/16]
+[6/9, 11/16]
+[6/9, 12/16]
+[6/9, 13/16]
+[6/9, 14/16]
+[6/9, 15/16]
+[6/9, 16/16]
+Testing Loss: 0.0475 - Epoch Time: 0:02:15.714127
+Training - 2024-06-14 15:20:29.287776
+[7/9, 1/94] Training Loss: 0.0479 - Iteration Time: 0:00:01.327121
+[7/9, 2/94] Training Loss: 0.0483 - Iteration Time: 0:00:01.257713
+[7/9, 3/94] Training Loss: 0.0468 - Iteration Time: 0:00:01.255691
+[7/9, 4/94] Training Loss: 0.0473 - Iteration Time: 0:00:01.209079
+[7/9, 5/94] Training Loss: 0.0467 - Iteration Time: 0:00:01.263710
+[7/9, 6/94] Training Loss: 0.0474 - Iteration Time: 0:00:01.220989
+[7/9, 7/94] Training Loss: 0.0463 - Iteration Time: 0:00:01.221486
+[7/9, 8/94] Training Loss: 0.0481 - Iteration Time: 0:00:01.264320
+[7/9, 9/94] Training Loss: 0.0476 - Iteration Time: 0:00:01.232412
+[7/9, 10/94] Training Loss: 0.0480 - Iteration Time: 0:00:01.234923
+[7/9, 11/94] Training Loss: 0.0480 - Iteration Time: 0:00:01.243832
+[7/9, 12/94] Training Loss: 0.0455 - Iteration Time: 0:00:01.244845
+[7/9, 13/94] Training Loss: 0.0478 - Iteration Time: 0:00:01.264637
+[7/9, 14/94] Training Loss: 0.0466 - Iteration Time: 0:00:01.220934
+[7/9, 15/94] Training Loss: 0.0472 - Iteration Time: 0:00:01.278576
+[7/9, 16/94] Training Loss: 0.0481 - Iteration Time: 0:00:01.338056
+[7/9, 17/94] Training Loss: 0.0465 - Iteration Time: 0:00:01.271563
+[7/9, 18/94] Training Loss: 0.0465 - Iteration Time: 0:00:01.255220
+[7/9, 19/94] Training Loss: 0.0469 - Iteration Time: 0:00:01.212051
+[7/9, 20/94] Training Loss: 0.0483 - Iteration Time: 0:00:01.251232
+[7/9, 21/94] Training Loss: 0.0470 - Iteration Time: 0:00:01.281999
+[7/9, 22/94] Training Loss: 0.0460 - Iteration Time: 0:00:01.207528
+[7/9, 23/94] Training Loss: 0.0478 - Iteration Time: 0:00:01.217041
+[7/9, 24/94] Training Loss: 0.0473 - Iteration Time: 0:00:01.239835
+[7/9, 25/94] Training Loss: 0.0465 - Iteration Time: 0:00:01.264112
+[7/9, 26/94] Training Loss: 0.0471 - Iteration Time: 0:00:01.374768
+[7/9, 27/94] Training Loss: 0.0471 - Iteration Time: 0:00:01.227921
+[7/9, 28/94] Training Loss: 0.0473 - Iteration Time: 0:00:01.200149
+[7/9, 29/94] Training Loss: 0.0475 - Iteration Time: 0:00:01.341056
+[7/9, 30/94] Training Loss: 0.0454 - Iteration Time: 0:00:01.257665
+[7/9, 31/94] Training Loss: 0.0475 - Iteration Time: 0:00:01.252769
+[7/9, 32/94] Training Loss: 0.0476 - Iteration Time: 0:00:01.209542
+[7/9, 33/94] Training Loss: 0.0461 - Iteration Time: 0:00:01.226408
+[7/9, 34/94] Training Loss: 0.0453 - Iteration Time: 0:00:01.201048
+[7/9, 35/94] Training Loss: 0.0458 - Iteration Time: 0:00:01.267617
+[7/9, 36/94] Training Loss: 0.0446 - Iteration Time: 0:00:01.245316
+[7/9, 37/94] Training Loss: 0.0445 - Iteration Time: 0:00:01.256730
+[7/9, 38/94] Training Loss: 0.0450 - Iteration Time: 0:00:01.261211
+[7/9, 39/94] Training Loss: 0.0473 - Iteration Time: 0:00:01.215540
+[7/9, 40/94] Training Loss: 0.0461 - Iteration Time: 0:00:01.277062
+[7/9, 41/94] Training Loss: 0.0448 - Iteration Time: 0:00:01.226414
+[7/9, 42/94] Training Loss: 0.0472 - Iteration Time: 0:00:01.219980
+[7/9, 43/94] Training Loss: 0.0464 - Iteration Time: 0:00:01.242956
+[7/9, 44/94] Training Loss: 0.0463 - Iteration Time: 0:00:01.217008
+[7/9, 45/94] Training Loss: 0.0459 - Iteration Time: 0:00:01.216528
+[7/9, 46/94] Training Loss: 0.0469 - Iteration Time: 0:00:01.243295
+[7/9, 47/94] Training Loss: 0.0457 - Iteration Time: 0:00:01.271230
+[7/9, 48/94] Training Loss: 0.0451 - Iteration Time: 0:00:01.208283
+[7/9, 49/94] Training Loss: 0.0460 - Iteration Time: 0:00:01.246346
+[7/9, 50/94] Training Loss: 0.0456 - Iteration Time: 0:00:01.267243
+[7/9, 51/94] Training Loss: 0.0452 - Iteration Time: 0:00:01.362963
+[7/9, 52/94] Training Loss: 0.0474 - Iteration Time: 0:00:01.241946
+[7/9, 53/94] Training Loss: 0.0448 - Iteration Time: 0:00:01.240883
+[7/9, 54/94] Training Loss: 0.0457 - Iteration Time: 0:00:01.234341
+[7/9, 55/94] Training Loss: 0.0450 - Iteration Time: 0:00:01.208648
+[7/9, 56/94] Training Loss: 0.0451 - Iteration Time: 0:00:01.234937
+[7/9, 57/94] Training Loss: 0.0471 - Iteration Time: 0:00:01.236343
+[7/9, 58/94] Training Loss: 0.0442 - Iteration Time: 0:00:01.264770
+[7/9, 59/94] Training Loss: 0.0456 - Iteration Time: 0:00:01.235379
+[7/9, 60/94] Training Loss: 0.0458 - Iteration Time: 0:00:01.289531
+[7/9, 61/94] Training Loss: 0.0447 - Iteration Time: 0:00:01.230901
+[7/9, 62/94] Training Loss: 0.0470 - Iteration Time: 0:00:01.229381
+[7/9, 63/94] Training Loss: 0.0455 - Iteration Time: 0:00:01.218496
+[7/9, 64/94] Training Loss: 0.0432 - Iteration Time: 0:00:01.314765
+[7/9, 65/94] Training Loss: 0.0466 - Iteration Time: 0:00:01.221484
+[7/9, 66/94] Training Loss: 0.0444 - Iteration Time: 0:00:01.281526
+[7/9, 67/94] Training Loss: 0.0464 - Iteration Time: 0:00:01.225437
+[7/9, 68/94] Training Loss: 0.0457 - Iteration Time: 0:00:01.210586
+[7/9, 69/94] Training Loss: 0.0451 - Iteration Time: 0:00:01.222995
+[7/9, 70/94] Training Loss: 0.0444 - Iteration Time: 0:00:01.243796
+[7/9, 71/94] Training Loss: 0.0453 - Iteration Time: 0:00:01.218087
+[7/9, 72/94] Training Loss: 0.0461 - Iteration Time: 0:00:01.301950
+[7/9, 73/94] Training Loss: 0.0456 - Iteration Time: 0:00:01.319691
+[7/9, 74/94] Training Loss: 0.0448 - Iteration Time: 0:00:01.382281
+[7/9, 75/94] Training Loss: 0.0451 - Iteration Time: 0:00:01.214573
+[7/9, 76/94] Training Loss: 0.0459 - Iteration Time: 0:00:01.222526
+[7/9, 77/94] Training Loss: 0.0448 - Iteration Time: 0:00:01.301474
+[7/9, 78/94] Training Loss: 0.0443 - Iteration Time: 0:00:01.266126
+[7/9, 79/94] Training Loss: 0.0441 - Iteration Time: 0:00:01.230948
+[7/9, 80/94] Training Loss: 0.0451 - Iteration Time: 0:00:01.242407
+[7/9, 81/94] Training Loss: 0.0457 - Iteration Time: 0:00:01.222040
+[7/9, 82/94] Training Loss: 0.0448 - Iteration Time: 0:00:01.314213
+[7/9, 83/94] Training Loss: 0.0443 - Iteration Time: 0:00:01.260712
+[7/9, 84/94] Training Loss: 0.0465 - Iteration Time: 0:00:01.242921
+[7/9, 85/94] Training Loss: 0.0464 - Iteration Time: 0:00:01.303417
+[7/9, 86/94] Training Loss: 0.0456 - Iteration Time: 0:00:01.229457
+[7/9, 87/94] Training Loss: 0.0447 - Iteration Time: 0:00:01.220118
+[7/9, 88/94] Training Loss: 0.0440 - Iteration Time: 0:00:01.265168
+[7/9, 89/94] Training Loss: 0.0457 - Iteration Time: 0:00:01.278608
+[7/9, 90/94] Training Loss: 0.0458 - Iteration Time: 0:00:01.266657
+[7/9, 91/94] Training Loss: 0.0440 - Iteration Time: 0:00:01.219634
+[7/9, 92/94] Training Loss: 0.0455 - Iteration Time: 0:00:01.239776
+[7/9, 93/94] Training Loss: 0.0466 - Iteration Time: 0:00:01.226998
+[7/9, 94/94] Training Loss: 0.0441 - Iteration Time: 0:00:01.180271
+Testing - 2024-06-14 15:22:26.945234
+[7/9, 1/16]
+[7/9, 2/16]
+[7/9, 3/16]
+[7/9, 4/16]
+[7/9, 5/16]
+[7/9, 6/16]
+[7/9, 7/16]
+[7/9, 8/16]
+[7/9, 9/16]
+[7/9, 10/16]
+[7/9, 11/16]
+[7/9, 12/16]
+[7/9, 13/16]
+[7/9, 14/16]
+[7/9, 15/16]
+[7/9, 16/16]
+Testing Loss: 0.0445 - Epoch Time: 0:02:08.806625
+Training - 2024-06-14 15:22:38.094401
+[8/9, 1/94] Training Loss: 0.0448 - Iteration Time: 0:00:01.360965
+[8/9, 2/94] Training Loss: 0.0444 - Iteration Time: 0:00:01.264194
+[8/9, 3/94] Training Loss: 0.0446 - Iteration Time: 0:00:01.236879
+[8/9, 4/94] Training Loss: 0.0435 - Iteration Time: 0:00:01.252768
+[8/9, 5/94] Training Loss: 0.0453 - Iteration Time: 0:00:01.385207
+[8/9, 6/94] Training Loss: 0.0424 - Iteration Time: 0:00:01.225491
+[8/9, 7/94] Training Loss: 0.0439 - Iteration Time: 0:00:01.235375
+[8/9, 8/94] Training Loss: 0.0437 - Iteration Time: 0:00:01.277566
+[8/9, 9/94] Training Loss: 0.0446 - Iteration Time: 0:00:01.247269
+[8/9, 10/94] Training Loss: 0.0432 - Iteration Time: 0:00:01.292991
+[8/9, 11/94] Training Loss: 0.0450 - Iteration Time: 0:00:01.234898
+[8/9, 12/94] Training Loss: 0.0431 - Iteration Time: 0:00:01.261226
+[8/9, 13/94] Training Loss: 0.0462 - Iteration Time: 0:00:01.216021
+[8/9, 14/94] Training Loss: 0.0450 - Iteration Time: 0:00:01.261646
+[8/9, 15/94] Training Loss: 0.0429 - Iteration Time: 0:00:01.212041
+[8/9, 16/94] Training Loss: 0.0429 - Iteration Time: 0:00:01.207697
+[8/9, 17/94] Training Loss: 0.0427 - Iteration Time: 0:00:01.211668
+[8/9, 18/94] Training Loss: 0.0456 - Iteration Time: 0:00:01.375362
+[8/9, 19/94] Training Loss: 0.0422 - Iteration Time: 0:00:01.399634
+[8/9, 20/94] Training Loss: 0.0431 - Iteration Time: 0:00:01.252739
+[8/9, 21/94] Training Loss: 0.0441 - Iteration Time: 0:00:01.279512
+[8/9, 22/94] Training Loss: 0.0449 - Iteration Time: 0:00:01.383229
+[8/9, 23/94] Training Loss: 0.0425 - Iteration Time: 0:00:01.244310
+[8/9, 24/94] Training Loss: 0.0424 - Iteration Time: 0:00:01.223432
+[8/9, 25/94] Training Loss: 0.0441 - Iteration Time: 0:00:01.302974
+[8/9, 26/94] Training Loss: 0.0439 - Iteration Time: 0:00:01.230047
+[8/9, 27/94] Training Loss: 0.0440 - Iteration Time: 0:00:01.274197
+[8/9, 28/94] Training Loss: 0.0448 - Iteration Time: 0:00:01.249425
+[8/9, 29/94] Training Loss: 0.0443 - Iteration Time: 0:00:01.292912
+[8/9, 30/94] Training Loss: 0.0445 - Iteration Time: 0:00:01.224551
+[8/9, 31/94] Training Loss: 0.0442 - Iteration Time: 0:00:01.238385
+[8/9, 32/94] Training Loss: 0.0429 - Iteration Time: 0:00:01.236425
+[8/9, 33/94] Training Loss: 0.0422 - Iteration Time: 0:00:01.198173
+[8/9, 34/94] Training Loss: 0.0430 - Iteration Time: 0:00:01.249346
+[8/9, 35/94] Training Loss: 0.0441 - Iteration Time: 0:00:01.219597
+[8/9, 36/94] Training Loss: 0.0428 - Iteration Time: 0:00:01.232442
+[8/9, 37/94] Training Loss: 0.0433 - Iteration Time: 0:00:01.334154
+[8/9, 38/94] Training Loss: 0.0430 - Iteration Time: 0:00:01.205683
+[8/9, 39/94] Training Loss: 0.0426 - Iteration Time: 0:00:01.253786
+[8/9, 40/94] Training Loss: 0.0431 - Iteration Time: 0:00:01.256279
+[8/9, 41/94] Training Loss: 0.0434 - Iteration Time: 0:00:01.223471
+[8/9, 42/94] Training Loss: 0.0430 - Iteration Time: 0:00:01.277541
+[8/9, 43/94] Training Loss: 0.0428 - Iteration Time: 0:00:01.328236
+[8/9, 44/94] Training Loss: 0.0434 - Iteration Time: 0:00:01.239411
+[8/9, 45/94] Training Loss: 0.0434 - Iteration Time: 0:00:01.328713
+[8/9, 46/94] Training Loss: 0.0432 - Iteration Time: 0:00:01.258264
+[8/9, 47/94] Training Loss: 0.0434 - Iteration Time: 0:00:01.253486
+[8/9, 48/94] Training Loss: 0.0434 - Iteration Time: 0:00:01.272594
+[8/9, 49/94] Training Loss: 0.0436 - Iteration Time: 0:00:01.217546
+[8/9, 50/94] Training Loss: 0.0421 - Iteration Time: 0:00:01.213592
+[8/9, 51/94] Training Loss: 0.0424 - Iteration Time: 0:00:01.279554
+[8/9, 52/94] Training Loss: 0.0435 - Iteration Time: 0:00:01.268628
+[8/9, 53/94] Training Loss: 0.0432 - Iteration Time: 0:00:01.204595
+[8/9, 54/94] Training Loss: 0.0434 - Iteration Time: 0:00:01.238376
+[8/9, 55/94] Training Loss: 0.0423 - Iteration Time: 0:00:01.287970
+[8/9, 56/94] Training Loss: 0.0436 - Iteration Time: 0:00:01.286961
+[8/9, 57/94] Training Loss: 0.0410 - Iteration Time: 0:00:01.242866
+[8/9, 58/94] Training Loss: 0.0431 - Iteration Time: 0:00:01.396683
+[8/9, 59/94] Training Loss: 0.0427 - Iteration Time: 0:00:01.253251
+[8/9, 60/94] Training Loss: 0.0436 - Iteration Time: 0:00:01.240868
+[8/9, 61/94] Training Loss: 0.0424 - Iteration Time: 0:00:01.219977
+[8/9, 62/94] Training Loss: 0.0437 - Iteration Time: 0:00:01.216024
+[8/9, 63/94] Training Loss: 0.0407 - Iteration Time: 0:00:01.242856
+[8/9, 64/94] Training Loss: 0.0422 - Iteration Time: 0:00:01.229399
+[8/9, 65/94] Training Loss: 0.0433 - Iteration Time: 0:00:01.243793
+[8/9, 66/94] Training Loss: 0.0430 - Iteration Time: 0:00:01.241878
+[8/9, 67/94] Training Loss: 0.0429 - Iteration Time: 0:00:01.264147
+[8/9, 68/94] Training Loss: 0.0415 - Iteration Time: 0:00:01.359882
+[8/9, 69/94] Training Loss: 0.0431 - Iteration Time: 0:00:01.314805
+[8/9, 70/94] Training Loss: 0.0425 - Iteration Time: 0:00:01.267562
+[8/9, 71/94] Training Loss: 0.0425 - Iteration Time: 0:00:01.238370
+[8/9, 72/94] Training Loss: 0.0430 - Iteration Time: 0:00:01.271051
+[8/9, 73/94] Training Loss: 0.0426 - Iteration Time: 0:00:01.239402
+[8/9, 74/94] Training Loss: 0.0416 - Iteration Time: 0:00:01.271150
+[8/9, 75/94] Training Loss: 0.0428 - Iteration Time: 0:00:01.306824
+[8/9, 76/94] Training Loss: 0.0424 - Iteration Time: 0:00:01.220500
+[8/9, 77/94] Training Loss: 0.0437 - Iteration Time: 0:00:01.246267
+[8/9, 78/94] Training Loss: 0.0430 - Iteration Time: 0:00:01.213048
+[8/9, 79/94] Training Loss: 0.0431 - Iteration Time: 0:00:01.296429
+[8/9, 80/94] Training Loss: 0.0437 - Iteration Time: 0:00:01.214035
+[8/9, 81/94] Training Loss: 0.0422 - Iteration Time: 0:00:01.236425
+[8/9, 82/94] Training Loss: 0.0420 - Iteration Time: 0:00:01.270557
+[8/9, 83/94] Training Loss: 0.0430 - Iteration Time: 0:00:01.241353
+[8/9, 84/94] Training Loss: 0.0409 - Iteration Time: 0:00:01.226432
+[8/9, 85/94] Training Loss: 0.0414 - Iteration Time: 0:00:01.234870
+[8/9, 86/94] Training Loss: 0.0423 - Iteration Time: 0:00:01.247786
+[8/9, 87/94] Training Loss: 0.0434 - Iteration Time: 0:00:01.314270
+[8/9, 88/94] Training Loss: 0.0442 - Iteration Time: 0:00:01.270100
+[8/9, 89/94] Training Loss: 0.0417 - Iteration Time: 0:00:01.232402
+[8/9, 90/94] Training Loss: 0.0429 - Iteration Time: 0:00:01.274119
+[8/9, 91/94] Training Loss: 0.0422 - Iteration Time: 0:00:01.280006
+[8/9, 92/94] Training Loss: 0.0412 - Iteration Time: 0:00:01.229433
+[8/9, 93/94] Training Loss: 0.0420 - Iteration Time: 0:00:01.214075
+[8/9, 94/94] Training Loss: 0.0430 - Iteration Time: 0:00:01.199656
+Testing - 2024-06-14 15:24:36.620680
+[8/9, 1/16]
+[8/9, 2/16]
+[8/9, 3/16]
+[8/9, 4/16]
+[8/9, 5/16]
+[8/9, 6/16]
+[8/9, 7/16]
+[8/9, 8/16]
+[8/9, 9/16]
+[8/9, 10/16]
+[8/9, 11/16]
+[8/9, 12/16]
+[8/9, 13/16]
+[8/9, 14/16]
+[8/9, 15/16]
+[8/9, 16/16]
+Testing Loss: 0.0418 - Epoch Time: 0:02:09.779758
+Training - 2024-06-14 15:24:47.874159
+[9/9, 1/94] Training Loss: 0.0413 - Iteration Time: 0:00:01.229409
+[9/9, 2/94] Training Loss: 0.0415 - Iteration Time: 0:00:01.242354
+[9/9, 3/94] Training Loss: 0.0413 - Iteration Time: 0:00:01.249321
+[9/9, 4/94] Training Loss: 0.0411 - Iteration Time: 0:00:01.296388
+[9/9, 5/94] Training Loss: 0.0419 - Iteration Time: 0:00:01.230502
+[9/9, 6/94] Training Loss: 0.0411 - Iteration Time: 0:00:01.247863
+[9/9, 7/94] Training Loss: 0.0422 - Iteration Time: 0:00:01.240849
+[9/9, 8/94] Training Loss: 0.0416 - Iteration Time: 0:00:01.212088
+[9/9, 9/94] Training Loss: 0.0411 - Iteration Time: 0:00:01.247257
+[9/9, 10/94] Training Loss: 0.0403 - Iteration Time: 0:00:01.275177
+[9/9, 11/94] Training Loss: 0.0425 - Iteration Time: 0:00:01.329141
+[9/9, 12/94] Training Loss: 0.0417 - Iteration Time: 0:00:01.217531
+[9/9, 13/94] Training Loss: 0.0419 - Iteration Time: 0:00:01.357471
+[9/9, 14/94] Training Loss: 0.0413 - Iteration Time: 0:00:01.280024
+[9/9, 15/94] Training Loss: 0.0405 - Iteration Time: 0:00:01.280508
+[9/9, 16/94] Training Loss: 0.0414 - Iteration Time: 0:00:01.281482
+[9/9, 17/94] Training Loss: 0.0427 - Iteration Time: 0:00:01.243311
+[9/9, 18/94] Training Loss: 0.0390 - Iteration Time: 0:00:01.188283
+[9/9, 19/94] Training Loss: 0.0411 - Iteration Time: 0:00:01.222017
+[9/9, 20/94] Training Loss: 0.0411 - Iteration Time: 0:00:01.292891
+[9/9, 21/94] Training Loss: 0.0400 - Iteration Time: 0:00:01.255245
+[9/9, 22/94] Training Loss: 0.0412 - Iteration Time: 0:00:01.237347
+[9/9, 23/94] Training Loss: 0.0410 - Iteration Time: 0:00:01.300400
+[9/9, 24/94] Training Loss: 0.0418 - Iteration Time: 0:00:01.216994
+[9/9, 25/94] Training Loss: 0.0409 - Iteration Time: 0:00:01.282023
+[9/9, 26/94] Training Loss: 0.0415 - Iteration Time: 0:00:01.270592
+[9/9, 27/94] Training Loss: 0.0417 - Iteration Time: 0:00:01.246293
+[9/9, 28/94] Training Loss: 0.0394 - Iteration Time: 0:00:01.222492
+[9/9, 29/94] Training Loss: 0.0411 - Iteration Time: 0:00:01.210105
+[9/9, 30/94] Training Loss: 0.0400 - Iteration Time: 0:00:01.219081
+[9/9, 31/94] Training Loss: 0.0410 - Iteration Time: 0:00:01.229409
+[9/9, 32/94] Training Loss: 0.0408 - Iteration Time: 0:00:01.229400
+[9/9, 33/94] Training Loss: 0.0391 - Iteration Time: 0:00:01.233887
+[9/9, 34/94] Training Loss: 0.0410 - Iteration Time: 0:00:01.270697
+[9/9, 35/94] Training Loss: 0.0396 - Iteration Time: 0:00:01.227939
+[9/9, 36/94] Training Loss: 0.0405 - Iteration Time: 0:00:01.227898
+[9/9, 37/94] Training Loss: 0.0405 - Iteration Time: 0:00:01.246292
+[9/9, 38/94] Training Loss: 0.0399 - Iteration Time: 0:00:01.269158
+[9/9, 39/94] Training Loss: 0.0406 - Iteration Time: 0:00:01.225459
+[9/9, 40/94] Training Loss: 0.0411 - Iteration Time: 0:00:01.294471
+[9/9, 41/94] Training Loss: 0.0408 - Iteration Time: 0:00:01.231857
+[9/9, 42/94] Training Loss: 0.0401 - Iteration Time: 0:00:01.259276
+[9/9, 43/94] Training Loss: 0.0415 - Iteration Time: 0:00:01.231431
+[9/9, 44/94] Training Loss: 0.0398 - Iteration Time: 0:00:01.271086
+[9/9, 45/94] Training Loss: 0.0396 - Iteration Time: 0:00:01.254229
+[9/9, 46/94] Training Loss: 0.0397 - Iteration Time: 0:00:01.262665
+[9/9, 47/94] Training Loss: 0.0410 - Iteration Time: 0:00:01.270175
+[9/9, 48/94] Training Loss: 0.0410 - Iteration Time: 0:00:01.228397
+[9/9, 49/94] Training Loss: 0.0419 - Iteration Time: 0:00:01.284129
+[9/9, 50/94] Training Loss: 0.0396 - Iteration Time: 0:00:01.259194
+[9/9, 51/94] Training Loss: 0.0389 - Iteration Time: 0:00:01.249355
+[9/9, 52/94] Training Loss: 0.0405 - Iteration Time: 0:00:01.241307
+[9/9, 53/94] Training Loss: 0.0395 - Iteration Time: 0:00:01.241186
+[9/9, 54/94] Training Loss: 0.0410 - Iteration Time: 0:00:01.210615
+[9/9, 55/94] Training Loss: 0.0405 - Iteration Time: 0:00:01.246790
+[9/9, 56/94] Training Loss: 0.0413 - Iteration Time: 0:00:01.275092
+[9/9, 57/94] Training Loss: 0.0392 - Iteration Time: 0:00:01.208985
+[9/9, 58/94] Training Loss: 0.0408 - Iteration Time: 0:00:01.267711
+[9/9, 59/94] Training Loss: 0.0412 - Iteration Time: 0:00:01.336125
+[9/9, 60/94] Training Loss: 0.0410 - Iteration Time: 0:00:01.266662
+[9/9, 61/94] Training Loss: 0.0403 - Iteration Time: 0:00:01.347527
+[9/9, 62/94] Training Loss: 0.0403 - Iteration Time: 0:00:01.309821
+[9/9, 63/94] Training Loss: 0.0408 - Iteration Time: 0:00:01.239399
+[9/9, 64/94] Training Loss: 0.0406 - Iteration Time: 0:00:01.272099
+[9/9, 65/94] Training Loss: 0.0410 - Iteration Time: 0:00:01.242854
+[9/9, 66/94] Training Loss: 0.0395 - Iteration Time: 0:00:01.263652
+[9/9, 67/94] Training Loss: 0.0393 - Iteration Time: 0:00:01.223060
+[9/9, 68/94] Training Loss: 0.0400 - Iteration Time: 0:00:01.280562
+[9/9, 69/94] Training Loss: 0.0395 - Iteration Time: 0:00:01.279544
+[9/9, 70/94] Training Loss: 0.0397 - Iteration Time: 0:00:01.220468
+[9/9, 71/94] Training Loss: 0.0399 - Iteration Time: 0:00:01.276567
+[9/9, 72/94] Training Loss: 0.0390 - Iteration Time: 0:00:01.291947
+[9/9, 73/94] Training Loss: 0.0393 - Iteration Time: 0:00:01.236380
+[9/9, 74/94] Training Loss: 0.0390 - Iteration Time: 0:00:01.340584
+[9/9, 75/94] Training Loss: 0.0391 - Iteration Time: 0:00:01.226086
+[9/9, 76/94] Training Loss: 0.0404 - Iteration Time: 0:00:01.225025
+[9/9, 77/94] Training Loss: 0.0392 - Iteration Time: 0:00:01.227935
+[9/9, 78/94] Training Loss: 0.0393 - Iteration Time: 0:00:01.216073
+[9/9, 79/94] Training Loss: 0.0391 - Iteration Time: 0:00:01.215562
+[9/9, 80/94] Training Loss: 0.0407 - Iteration Time: 0:00:01.209608
+[9/9, 81/94] Training Loss: 0.0398 - Iteration Time: 0:00:01.225009
+[9/9, 82/94] Training Loss: 0.0391 - Iteration Time: 0:00:01.309830
+[9/9, 83/94] Training Loss: 0.0391 - Iteration Time: 0:00:01.296937
+[9/9, 84/94] Training Loss: 0.0400 - Iteration Time: 0:00:01.235888
+[9/9, 85/94] Training Loss: 0.0412 - Iteration Time: 0:00:01.227963
+[9/9, 86/94] Training Loss: 0.0391 - Iteration Time: 0:00:01.212975
+[9/9, 87/94] Training Loss: 0.0407 - Iteration Time: 0:00:01.220567
+[9/9, 88/94] Training Loss: 0.0394 - Iteration Time: 0:00:01.222560
+[9/9, 89/94] Training Loss: 0.0381 - Iteration Time: 0:00:01.231433
+[9/9, 90/94] Training Loss: 0.0407 - Iteration Time: 0:00:01.220005
+[9/9, 91/94] Training Loss: 0.0407 - Iteration Time: 0:00:01.314902
+[9/9, 92/94] Training Loss: 0.0398 - Iteration Time: 0:00:01.260169
+[9/9, 93/94] Training Loss: 0.0403 - Iteration Time: 0:00:01.218550
+[9/9, 94/94] Training Loss: 0.0377 - Iteration Time: 0:00:01.212057
+Testing - 2024-06-14 15:26:45.684424
+[9/9, 1/16]
+[9/9, 2/16]
+[9/9, 3/16]
+[9/9, 4/16]
+[9/9, 5/16]
+[9/9, 6/16]
+[9/9, 7/16]
+[9/9, 8/16]
+[9/9, 9/16]
+[9/9, 10/16]
+[9/9, 11/16]
+[9/9, 12/16]
+[9/9, 13/16]
+[9/9, 14/16]
+[9/9, 15/16]
+[9/9, 16/16]
+Testing Loss: 0.0392 - Epoch Time: 0:02:09.126024
+Training and Testing Finished - Time: 0:20:14.743843
+Assembling test data for t-sne projection
+{'rate_on': 75. * hertz, 'rate_off': 1. * hertz, 'total_time': 200. * msecond, 'bin_size': 1. * msecond}
+Code Layer Shape: torch.Size([64, 100])
+-- 1/16 --
+{'rate_on': 75. * hertz, 'rate_off': 1. * hertz, 'total_time': 200. * msecond, 'bin_size': 1. * msecond}
+Code Layer Shape: torch.Size([64, 100])
+-- 2/16 --
+{'rate_on': 75. * hertz, 'rate_off': 1. * hertz, 'total_time': 200. * msecond, 'bin_size': 1. * msecond}
+Code Layer Shape: torch.Size([64, 100])
+-- 3/16 --
+{'rate_on': 75. * hertz, 'rate_off': 1. * hertz, 'total_time': 200. * msecond, 'bin_size': 1. * msecond}
+Code Layer Shape: torch.Size([64, 100])
+-- 4/16 --
+{'rate_on': 75. * hertz, 'rate_off': 1. * hertz, 'total_time': 200. * msecond, 'bin_size': 1. * msecond}
+Code Layer Shape: torch.Size([64, 100])
+-- 5/16 --
+{'rate_on': 75. * hertz, 'rate_off': 1. * hertz, 'total_time': 200. * msecond, 'bin_size': 1. * msecond}
+Code Layer Shape: torch.Size([64, 100])
+-- 6/16 --
+{'rate_on': 75. * hertz, 'rate_off': 1. * hertz, 'total_time': 200. * msecond, 'bin_size': 1. * msecond}
+Code Layer Shape: torch.Size([64, 100])
+-- 7/16 --
+{'rate_on': 75. * hertz, 'rate_off': 1. * hertz, 'total_time': 200. * msecond, 'bin_size': 1. * msecond}
+Code Layer Shape: torch.Size([64, 100])
+-- 8/16 --
+{'rate_on': 75. * hertz, 'rate_off': 1. * hertz, 'total_time': 200. * msecond, 'bin_size': 1. * msecond}
+Code Layer Shape: torch.Size([64, 100])
+-- 9/16 --
+{'rate_on': 75. * hertz, 'rate_off': 1. * hertz, 'total_time': 200. * msecond, 'bin_size': 1. * msecond}
+Code Layer Shape: torch.Size([64, 100])
+-- 10/16 --
+{'rate_on': 75. * hertz, 'rate_off': 1. * hertz, 'total_time': 200. * msecond, 'bin_size': 1. * msecond}
+Code Layer Shape: torch.Size([64, 100])
+-- 11/16 --
+{'rate_on': 75. * hertz, 'rate_off': 1. * hertz, 'total_time': 200. * msecond, 'bin_size': 1. * msecond}
+Code Layer Shape: torch.Size([64, 100])
+-- 12/16 --
+{'rate_on': 75. * hertz, 'rate_off': 1. * hertz, 'total_time': 200. * msecond, 'bin_size': 1. * msecond}
+Code Layer Shape: torch.Size([64, 100])
+-- 13/16 --
+{'rate_on': 75. * hertz, 'rate_off': 1. * hertz, 'total_time': 200. * msecond, 'bin_size': 1. * msecond}
+Code Layer Shape: torch.Size([64, 100])
+-- 14/16 --
+{'rate_on': 75. * hertz, 'rate_off': 1. * hertz, 'total_time': 200. * msecond, 'bin_size': 1. * msecond}
+Code Layer Shape: torch.Size([64, 100])
+-- 15/16 --
+{'rate_on': 75. * hertz, 'rate_off': 1. * hertz, 'total_time': 200. * msecond, 'bin_size': 1. * msecond}
+Code Layer Shape: torch.Size([40, 100])
+-- 16/16 --
+Plotting Results Grid
+Plotting Spiking Input MNIST
+Plotting Spiking Input MNIST Animation - 4
+Plotting Spiking Output MNIST
+Plotting Spiking Output MNIST Animation - 4
+Applying t-SNE

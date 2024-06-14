@@ -11,7 +11,7 @@ def train_network(network, train_loader, test_loader, input_specs, train_specs):
     device = train_specs["device"]
     num_epochs = train_specs["num_epochs"]
     early_stop = train_specs["early_stop"]
-    logging_freq = 10
+    logging_freq = 1
     print(f"Scaler Value: {train_specs["scaler"]}")
     loss_fn = rmse_count_loss(lambda_rate=train_specs["lambda_rate"],lambda_weights=None)
     
@@ -48,7 +48,7 @@ def train_network(network, train_loader, test_loader, input_specs, train_specs):
             train_running_loss += train_loss.item()
             
             if i % logging_freq == 0:
-                print(f'[{epoch}/{num_epochs}, {i}/{len(train_loader)}] Training Loss: {train_running_loss/logging_freq:.2f} - Iteration Time: {datetime.now()-iterTime}')
+                print(f'[{epoch}/{num_epochs}, {i}/{len(train_loader)}] Training Loss: {train_running_loss/logging_freq:.4f} - Iteration Time: {datetime.now()-iterTime}')
                 epoch_training_loss.append(train_running_loss/logging_freq)
                 wandb.log({"Training Loss": epoch_training_loss[-1]})
                 train_running_loss = 0.0
@@ -72,7 +72,7 @@ def train_network(network, train_loader, test_loader, input_specs, train_specs):
                     
                     test_running_loss = 0
 
-        print(f'Testing Loss: {epoch_testing_loss[-1]:.2f} - Epoch Time: {datetime.now()-epochTime}')
+        print(f'Testing Loss: {epoch_testing_loss[-1]:.4f} - Epoch Time: {datetime.now()-epochTime}')
         wandb.log({"Testing Loss": epoch_testing_loss[-1]})
 
     print(f'\nTraining and Testing Finished - Time: {datetime.now() - startTime}')

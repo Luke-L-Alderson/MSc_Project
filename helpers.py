@@ -100,8 +100,7 @@ def build_datasets(train_specs): # add subsampling parameeter
     
 def build_network(device, noise = 0, recurrence = 1):
     print("Defining network")
-    if recurrence < 0 or recurrence > 1:
-        raise Exception("Must be between 0 and 1.") 
+
     time_params, network_params, oscillation_params, frame_params, \
     convolution_params, input_specs, label_specs, train_specs = {}, {}, {}, {}, {}, {}, {}, {}
     # Parameters for use in network definition
@@ -223,8 +222,10 @@ def tsne_plt(file):
     plt.xlabel('t-SNE 1')
     plt.ylabel('t-SNE 2')
     plt.colorbar(label='Digit Class')
-    plt.savefig("tsne.png")
+    plt.savefig(f"tsne_{file}.png")
+    plt.title(file)
     plt.show()
+    return f"tsne_{file}.png"
     
 def get_poisson_inputs(inputs, total_time, bin_size, rate_on, rate_off):
     num_steps = int(total_time/bin_size)

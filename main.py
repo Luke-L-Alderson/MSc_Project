@@ -7,7 +7,7 @@ date = datetime.now().strftime("%d/%m - %H:%M")
 
 import numpy as np
 import wandb
-from helpers import get_poisson_inputs, build_datasets, build_network, to_np, set_seed
+from helpers import get_poisson_inputs, build_datasets, build_network, to_np, set_seed, tsne_plt
 
 import torch
 # import torch.nn as nn
@@ -112,8 +112,10 @@ def main():
        features, all_labs, all_decs, all_orig_ims = [], [], [], []
        for i,(data, labs) in enumerate(test_loader, 1):
            data = get_poisson_inputs(data, **input_specs)
+           print(input_specs)
            code_layer, decoded = network(data)
            code_layer = code_layer.mean(0)
+           print(f'Code Layer Shape: {code_layer.shape}')
            features.append(to_np(code_layer.view(-1, code_layer.shape[1])))
            all_labs.append(labs)
            all_decs.append(decoded.mean(0).squeeze().cpu())
@@ -222,13 +224,17 @@ def main():
     ax.set_xlim([0, 200])
     
     fig.savefig("figures/output_raster.png")
+    tsne_file = tsne_plt(run.name)
     
     wandb.log({"Test Loss": final_test_loss,
                "Results Grid": wandb.Image("figures/result_summary.png"),
                #"t-SNE": wandb.Table(tsne),
-               "Spike Animation": wandb.Video("figures/spike_mnistrec_{labels[input_index]}.gif", fps=4, format="gif"),
+               "t-SNE": wandb.Image(tsne_file),
+               "Spike Animation": wandb.Video(f"figures/spike_mnistrec_{labels[input_index]}.gif", fps=4, format="gif"),
                "Input Raster": wandb.Image("figures/input_raster.png"),
                "Output Raster": wandb.Image("figures/output_raster.png")})
+    
+    
     
     del network, train_loss, test_loss, final_train_loss, final_test_loss, \
         features, all_labs, all_decs, all_orig_ims, \
@@ -252,17 +258,17 @@ if __name__ == '__main__':
           'parameters': {'bs': {'values': [64]},
                           'lr': {'values': [1e-4]},
                           'epochs': {'values': [1]},
-                          "subset_size": {'values': [10, 100]},
+                          "subset_size": {'values': [100]},
                           "recurrence": {'values': [1]},
                           "noise": {'values': [0]},
                           "rate_on": {'values': [75]},
-                          "rate_off": {'values': [10]},
-                          "num_workers": {'values': [0]}
+                          "rate_off": {'values': [1]},
+                          "num_workers": {'values': [6]}
                           }
           }
   else:
       sweep_config = {
-          'name': f'Error Heat Map (5x5) {date}',
+          'name': f'Recurrency 2 (0 - 2) {date}',
           'method': 'grid',
           'metric': {'name': 'Test Loss',
                       'goal': 'minimize'   
@@ -271,11 +277,11 @@ if __name__ == '__main__':
                           'lr': {'values': [1e-4]},
                           'epochs': {'values': [9]}, # no less than 6
                           "subset_size": {'values': [10]}, #0.1, 0.7
-                          "recurrence": {'values': [1]},
+                          "recurrence": {'values': [0, 0.5, 1, 1.5, 2]},
                           "noise": {'values': [0]},
-                          "rate_on": {'values': [1, 50, 100, 150, 200]}, # 25, 50, 75, 100, 125
-                          "rate_off": {'values': [1, 50, 100, 150, 200]},
-                          "num_workers": {'values': [0]}
+                          "rate_on": {'values': [75]}, # 25, 50, 75, 100, 125
+                          "rate_off": {'values': [1]},
+                          "num_workers": {'values': [6]}
                           }
           }
   

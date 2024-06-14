@@ -1,0 +1,148 @@
+Starting Sweep: Batch Size: 64, Learning Rate: 0.0001
+Making datasets and defining subsets
+Training: 60000 -> 6000
+Testing: 10000 -> 1000
+Making Dataloaders
+Defining network
+2024-06-14 05:08:06.121910
+Scaler Value: 0.02
+Training - 2024-06-14 05:08:06.122902
+[1/9, 10/94] Training Loss: 0.61 - Iteration Time: 0:00:01.285017
+[1/9, 20/94] Training Loss: 0.58 - Iteration Time: 0:00:01.327756
+[1/9, 30/94] Training Loss: 0.55 - Iteration Time: 0:00:01.314831
+[1/9, 40/94] Training Loss: 0.54 - Iteration Time: 0:00:01.306879
+[1/9, 50/94] Training Loss: 0.53 - Iteration Time: 0:00:01.316884
+[1/9, 60/94] Training Loss: 0.52 - Iteration Time: 0:00:01.314898
+[1/9, 70/94] Training Loss: 0.51 - Iteration Time: 0:00:01.296501
+[1/9, 80/94] Training Loss: 0.50 - Iteration Time: 0:00:01.287521
+[1/9, 90/94] Training Loss: 0.50 - Iteration Time: 0:00:01.330713
+Testing - 2024-06-14 05:10:12.538692
+[1/9, 10/16]
+Testing Loss: 0.49 - Epoch Time: 0:02:18.377270
+Training - 2024-06-14 05:10:24.501164
+[2/9, 10/94] Training Loss: 0.49 - Iteration Time: 0:00:01.333690
+[2/9, 20/94] Training Loss: 0.48 - Iteration Time: 0:00:01.312842
+[2/9, 30/94] Training Loss: 0.48 - Iteration Time: 0:00:01.392720
+[2/9, 40/94] Training Loss: 0.47 - Iteration Time: 0:00:01.272109
+[2/9, 50/94] Training Loss: 0.46 - Iteration Time: 0:00:01.300902
+[2/9, 60/94] Training Loss: 0.46 - Iteration Time: 0:00:01.354058
+[2/9, 70/94] Training Loss: 0.45 - Iteration Time: 0:00:01.317300
+[2/9, 80/94] Training Loss: 0.45 - Iteration Time: 0:00:01.270673
+[2/9, 90/94] Training Loss: 0.44 - Iteration Time: 0:00:01.287549
+Testing - 2024-06-14 05:12:30.202345
+[2/9, 10/16]
+Testing Loss: 0.43 - Epoch Time: 0:02:17.569467
+Training - 2024-06-14 05:12:42.071127
+[3/9, 10/94] Training Loss: 0.43 - Iteration Time: 0:00:01.301933
+[3/9, 20/94] Training Loss: 0.43 - Iteration Time: 0:00:01.314826
+[3/9, 30/94] Training Loss: 0.42 - Iteration Time: 0:00:01.298919
+[3/9, 40/94] Training Loss: 0.42 - Iteration Time: 0:00:01.282578
+[3/9, 50/94] Training Loss: 0.41 - Iteration Time: 0:00:01.293002
+[3/9, 60/94] Training Loss: 0.41 - Iteration Time: 0:00:01.390332
+[3/9, 70/94] Training Loss: 0.41 - Iteration Time: 0:00:01.297462
+[3/9, 80/94] Training Loss: 0.41 - Iteration Time: 0:00:01.320815
+[3/9, 90/94] Training Loss: 0.40 - Iteration Time: 0:00:01.298049
+Testing - 2024-06-14 05:14:48.128541
+[3/9, 10/16]
+Testing Loss: 0.40 - Epoch Time: 0:02:18.002277
+Training - 2024-06-14 05:15:00.073899
+[4/9, 10/94] Training Loss: 0.40 - Iteration Time: 0:00:01.400685
+[4/9, 20/94] Training Loss: 0.39 - Iteration Time: 0:00:01.314894
+[4/9, 30/94] Training Loss: 0.39 - Iteration Time: 0:00:01.311860
+[4/9, 40/94] Training Loss: 0.39 - Iteration Time: 0:00:01.282579
+[4/9, 50/94] Training Loss: 0.38 - Iteration Time: 0:00:01.317312
+[4/9, 60/94] Training Loss: 0.38 - Iteration Time: 0:00:01.316352
+[4/9, 70/94] Training Loss: 0.38 - Iteration Time: 0:00:01.339092
+[4/9, 80/94] Training Loss: 0.38 - Iteration Time: 0:00:01.317404
+[4/9, 90/94] Training Loss: 0.37 - Iteration Time: 0:00:01.349579
+Testing - 2024-06-14 05:17:06.285356
+[4/9, 10/16]
+Testing Loss: 0.37 - Epoch Time: 0:02:18.188865
+Training - 2024-06-14 05:17:18.263260
+[5/9, 10/94] Training Loss: 0.37 - Iteration Time: 0:00:01.303919
+[5/9, 20/94] Training Loss: 0.36 - Iteration Time: 0:00:01.314855
+[5/9, 30/94] Training Loss: 0.36 - Iteration Time: 0:00:01.275612
+[5/9, 40/94] Training Loss: 0.35 - Iteration Time: 0:00:01.332650
+[5/9, 50/94] Training Loss: 0.35 - Iteration Time: 0:00:01.290984
+[5/9, 60/94] Training Loss: 0.35 - Iteration Time: 0:00:01.344133
+[5/9, 70/94] Training Loss: 0.34 - Iteration Time: 0:00:01.293547
+[5/9, 80/94] Training Loss: 0.34 - Iteration Time: 0:00:01.352981
+[5/9, 90/94] Training Loss: 0.34 - Iteration Time: 0:00:01.271635
+Testing - 2024-06-14 05:19:25.362783
+[5/9, 10/16]
+Testing Loss: 0.34 - Epoch Time: 0:02:19.079778
+Training - 2024-06-14 05:19:37.343535
+[6/9, 10/94] Training Loss: 0.34 - Iteration Time: 0:00:01.298558
+[6/9, 20/94] Training Loss: 0.33 - Iteration Time: 0:00:01.419970
+[6/9, 30/94] Training Loss: 0.33 - Iteration Time: 0:00:01.320761
+[6/9, 40/94] Training Loss: 0.33 - Iteration Time: 0:00:01.322744
+[6/9, 50/94] Training Loss: 0.32 - Iteration Time: 0:00:01.289496
+[6/9, 60/94] Training Loss: 0.32 - Iteration Time: 0:00:01.283535
+[6/9, 70/94] Training Loss: 0.32 - Iteration Time: 0:00:01.295925
+[6/9, 80/94] Training Loss: 0.32 - Iteration Time: 0:00:01.285607
+[6/9, 90/94] Training Loss: 0.32 - Iteration Time: 0:00:01.301382
+Testing - 2024-06-14 05:21:43.730136
+[6/9, 10/16]
+Testing Loss: 0.32 - Epoch Time: 0:02:18.454050
+Training - 2024-06-14 05:21:55.798082
+[7/9, 10/94] Training Loss: 0.32 - Iteration Time: 0:00:01.337188
+[7/9, 20/94] Training Loss: 0.32 - Iteration Time: 0:00:01.298953
+[7/9, 30/94] Training Loss: 0.31 - Iteration Time: 0:00:01.291551
+[7/9, 40/94] Training Loss: 0.31 - Iteration Time: 0:00:01.316881
+[7/9, 50/94] Training Loss: 0.31 - Iteration Time: 0:00:01.513786
+[7/9, 60/94] Training Loss: 0.31 - Iteration Time: 0:00:01.287515
+[7/9, 70/94] Training Loss: 0.31 - Iteration Time: 0:00:01.284596
+[7/9, 80/94] Training Loss: 0.30 - Iteration Time: 0:00:01.306833
+[7/9, 90/94] Training Loss: 0.30 - Iteration Time: 0:00:01.290548
+Testing - 2024-06-14 05:24:01.437163
+[7/9, 10/16]
+Testing Loss: 0.30 - Epoch Time: 0:02:17.964986
+Training - 2024-06-14 05:24:13.763563
+[8/9, 10/94] Training Loss: 0.30 - Iteration Time: 0:00:01.306875
+[8/9, 20/94] Training Loss: 0.30 - Iteration Time: 0:00:01.294493
+[8/9, 30/94] Training Loss: 0.30 - Iteration Time: 0:00:01.309911
+[8/9, 40/94] Training Loss: 0.29 - Iteration Time: 0:00:01.299010
+[8/9, 50/94] Training Loss: 0.29 - Iteration Time: 0:00:01.273176
+[8/9, 60/94] Training Loss: 0.29 - Iteration Time: 0:00:01.306381
+[8/9, 70/94] Training Loss: 0.29 - Iteration Time: 0:00:02.044296
+[8/9, 80/94] Training Loss: 0.29 - Iteration Time: 0:00:01.348075
+[8/9, 90/94] Training Loss: 0.28 - Iteration Time: 0:00:01.278101
+Testing - 2024-06-14 05:26:19.696878
+[8/9, 10/16]
+Testing Loss: 0.28 - Epoch Time: 0:02:17.912699
+Training - 2024-06-14 05:26:31.676757
+[9/9, 10/94] Training Loss: 0.28 - Iteration Time: 0:00:01.324697
+[9/9, 20/94] Training Loss: 0.28 - Iteration Time: 0:00:01.298959
+[9/9, 30/94] Training Loss: 0.27 - Iteration Time: 0:00:01.341633
+[9/9, 40/94] Training Loss: 0.27 - Iteration Time: 0:00:01.295554
+[9/9, 50/94] Training Loss: 0.27 - Iteration Time: 0:00:01.298587
+[9/9, 60/94] Training Loss: 0.27 - Iteration Time: 0:00:01.296518
+[9/9, 70/94] Training Loss: 0.26 - Iteration Time: 0:00:01.429962
+[9/9, 80/94] Training Loss: 0.26 - Iteration Time: 0:00:01.284993
+[9/9, 90/94] Training Loss: 0.26 - Iteration Time: 0:00:01.301509
+Testing - 2024-06-14 05:28:37.291776
+[9/9, 10/16]
+Testing Loss: 0.26 - Epoch Time: 0:02:17.558676
+Training and Testing Finished - Time: 0:20:43.114019
+Assembling test data for t-sne projection
+-- 1/16 --
+-- 2/16 --
+-- 3/16 --
+-- 4/16 --
+-- 5/16 --
+-- 6/16 --
+-- 7/16 --
+-- 8/16 --
+-- 9/16 --
+-- 10/16 --
+-- 11/16 --
+-- 12/16 --
+-- 13/16 --
+-- 14/16 --
+-- 15/16 --
+-- 16/16 --
+Plotting Results Grid
+Plotting Spiking Input MNIST
+Plotting Spiking Input MNIST Animation - 2
+Plotting Spiking Output MNIST
+Plotting Spiking Output MNIST Animation - 2
