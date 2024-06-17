@@ -1,0 +1,72 @@
+Starting Sweep: Batch Size: 64, Learning Rate: 0.0001
+Making datasets and defining subsets
+Training: 60000 -> 600
+Testing: 10000 -> 100
+Making Dataloaders
+Defining network
+2024-06-17 15:41:03.250407
+Scaler Value: 1000
+Training - 2024-06-17 15:41:03.251399
+[1/1, 1/10] Training Loss: 0.7544 - Iteration Time: 0:00:01.911579
+[1/1, 2/10] Training Loss: 0.6861 - Iteration Time: 0:00:01.472761
+[1/1, 3/10] Training Loss: 0.5540 - Iteration Time: 0:00:01.426578
+[1/1, 4/10] Training Loss: 0.5366 - Iteration Time: 0:00:01.411013
+[1/1, 5/10] Training Loss: 0.5148 - Iteration Time: 0:00:01.404044
+[1/1, 6/10] Training Loss: 0.5057 - Iteration Time: 0:00:01.426968
+[1/1, 7/10] Training Loss: 0.4990 - Iteration Time: 0:00:01.431715
+[1/1, 8/10] Training Loss: 0.5000 - Iteration Time: 0:00:01.404806
+[1/1, 9/10] Training Loss: 0.4964 - Iteration Time: 0:00:01.437371
+[1/1, 10/10] Training Loss: 0.5021 - Iteration Time: 0:00:01.566234
+Testing - 2024-06-17 15:41:18.264359
+[1/1, 1/2]
+[1/1, 2/2]
+Testing Loss: 0.4931 - Epoch Time: 0:00:16.678482
+Training and Testing Finished - Time: 0:00:16.679474
+torch.Size([200, 64, 1, 28, 28])
+torch.Size([200, 64, 1, 28, 28])
+Assembling test data for t-sne projection
+Code Layer Shape: torch.Size([200, 64, 100])
+Code Layer Shape: torch.Size([64, 100])
+-- 1/2 --
+Code Layer Shape: torch.Size([200, 36, 100])
+Code Layer Shape: torch.Size([36, 100])
+-- 2/2 --
+   Labels      0    1    2      3      4  ...   94   95     96   97     98   99
+0       6  0.040  0.0  0.0  0.010  0.085  ...  0.0  0.0  0.020  0.0  0.175  0.0
+1       5  0.035  0.0  0.0  0.015  0.090  ...  0.0  0.0  0.025  0.0  0.180  0.0
+2       7  0.035  0.0  0.0  0.010  0.080  ...  0.0  0.0  0.025  0.0  0.175  0.0
+3       3  0.035  0.0  0.0  0.015  0.085  ...  0.0  0.0  0.020  0.0  0.175  0.0
+4       7  0.035  0.0  0.0  0.020  0.090  ...  0.0  0.0  0.020  0.0  0.175  0.0
+[5 rows x 101 columns]
+Plotting Results Grid
+Plotting Spiking Input MNIST
+Plotting Spiking Input MNIST Animation - 1
+Plotting Spiking Output MNIST
+Plotting Spiking Output MNIST Animation - 1
+Applying UMAP
+    Labels      0    1    2      3      4  ...   93   94   95     96   97     98
+0        6  0.040  0.0  0.0  0.010  0.085  ...  0.0  0.0  0.0  0.020  0.0  0.175
+1        5  0.035  0.0  0.0  0.015  0.090  ...  0.0  0.0  0.0  0.025  0.0  0.180
+2        7  0.035  0.0  0.0  0.010  0.080  ...  0.0  0.0  0.0  0.025  0.0  0.175
+3        3  0.035  0.0  0.0  0.015  0.085  ...  0.0  0.0  0.0  0.020  0.0  0.175
+4        7  0.035  0.0  0.0  0.020  0.090  ...  0.0  0.0  0.0  0.020  0.0  0.175
+..     ...    ...  ...  ...    ...    ...  ...  ...  ...  ...    ...  ...    ...
+95       1  0.035  0.0  0.0  0.015  0.085  ...  0.0  0.0  0.0  0.020  0.0  0.180
+96       3  0.035  0.0  0.0  0.015  0.085  ...  0.0  0.0  0.0  0.015  0.0  0.175
+97       3  0.035  0.0  0.0  0.015  0.085  ...  0.0  0.0  0.0  0.025  0.0  0.180
+98       7  0.035  0.0  0.0  0.015  0.090  ...  0.0  0.0  0.0  0.020  0.0  0.175
+99       0  0.040  0.0  0.0  0.015  0.085  ...  0.0  0.0  0.0  0.025  0.0  0.180
+[100 rows x 100 columns]
+0     6
+1     5
+2     7
+3     3
+4     7
+     ..
+95    1
+96    3
+97    3
+98    7
+99    0
+Name: Labels, Length: 100, dtype: int64
+Applying PCA

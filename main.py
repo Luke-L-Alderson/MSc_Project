@@ -61,7 +61,7 @@ def main():
     train_specs["num_workers"] = wandb.config.num_workers
     
     
-    train_specs["scaler"] = abs(1/(wandb.config.rate_on-wandb.config.rate_off)) if wandb.config.rate_on != wandb.config.rate_off else 1000
+    train_specs["scaler"] = abs(1/((wandb.config.rate_on-wandb.config.rate_off)*(0.001*input_specs["total_time"]/ms))) if wandb.config.rate_on != wandb.config.rate_off else 1000
     
     
     noise = wandb.config.noise
@@ -117,10 +117,10 @@ def main():
            #print(input_specs)
            code_layer, decoded = network(data)
            print(f'Code Layer Shape: {code_layer.shape}')
-           code_layer_sum = code_layer.sum(0)
+           #code_layer_sum = code_layer.sum(0)
            code_layer = code_layer.mean(0)
            print(f'Code Layer Shape: {code_layer.shape}') # if its (x, 100), no need to reshape
-           features.append(to_np(code_layer.view(-1, code_layer.shape[1])))
+           features.append(to_np(code_layer))#.view(-1, code_layer.shape[1])))
            all_labs.append(labs)
            all_decs.append(decoded.mean(0).squeeze().cpu())
            all_orig_ims.append(data.mean(0).squeeze())
@@ -128,7 +128,7 @@ def main():
            if i % 1 == 0:
                print(f'-- {i}/{len(test_loader)} --')
     
-       features = np.concatenate(features, axis = 0)
+       features = np.concatenate(features, axis = 0) #(N, 100)
        all_labs = np.concatenate(all_labs, axis = 0)
        all_orig_ims = np.concatenate(all_orig_ims, axis = 0)
        all_decs = np.concatenate(all_decs, axis = 0)
@@ -219,7 +219,6 @@ def main():
     HTML(animrec.to_html5_video())
     animrec.save(f"figures/spike_mnistrec_{labels[input_index]}.gif")
     
-    
     fig = plt.figure(facecolor="w", figsize=(10, 5))
     ax = fig.add_subplot(111)
     splt.raster(poisson_inputs[:, input_index].reshape(200, -1), ax, s=1.5, c="black")
@@ -231,17 +230,18 @@ def main():
     ax.set_xlim([0, 200])
     
     fig.savefig("figures/output_raster.png")
-    tsne_file = tsne_plt(run.name)
-    umap_file = umap_plt(run.name)
-    pca_file = pca_plt(run.name)
+    umap_file = umap_plt(run.name)    
+    #tsne_file = tsne_plt(run.name)
+
+    #pca_file = pca_plt(run.name)
     #sns.scatterplot(tsne, x="Feat" "" hue="label")
     
     wandb.log({"Test Loss": final_test_loss,
                "Results Grid": wandb.Image("figures/result_summary.png"),
                #"t-SNE": wandb.Table(tsne),
-               "t-SNE": wandb.Image(tsne_file),
+               #"t-SNE": wandb.Image(tsne_file),
                "UMAP": wandb.Image(umap_file),
-               "PCA": wandb.Image(pca_file),
+               #"PCA": wandb.Image(pca_file),
                "Spike Animation": wandb.Video(f"figures/spike_mnistrec_{labels[input_index]}.gif", fps=4, format="gif"),
                "Input Raster": wandb.Image("figures/input_raster.png"),
                "Output Raster": wandb.Image("figures/output_raster.png")})
@@ -273,14 +273,14 @@ if __name__ == '__main__':
                           "subset_size": {'values': [100]},
                           "recurrence": {'values': [1]},
                           "noise": {'values': [0]},
-                          "rate_on": {'values': [75]},
+                          "rate_on": {'values': [1]},
                           "rate_off": {'values': [1]},
                           "num_workers": {'values': [0]}
                           }
           }
   else:
       sweep_config = { #REMEMBER TO CHANGE RUN NAME
-          'name': f'Recurrency 3 (0 - 2) {date}',
+          'name': f'UMAP Error Test (200 / 1 Hz) {date}',
           'method': 'grid',
           'metric': {'name': 'Test Loss',
                       'goal': 'minimize'   
@@ -289,9 +289,9 @@ if __name__ == '__main__':
                           'lr': {'values': [1e-4]},
                           'epochs': {'values': [9]},
                           "subset_size": {'values': [10]},
-                          "recurrence": {'values': [1, 0.1, 0.5, 0, 1.25, 1.5, 1.75, 2]},
-                          "noise": {'values': [10]},
-                          "rate_on": {'values': [75]}, # 25, 50, 75, 100, 125
+                          "recurrence": {'values': [1]}, #1, 0.1, 0.5, 0, 1.25, 1.5, 1.75, 2
+                          "noise": {'values': [0]},
+                          "rate_on": {'values': [1, 25, 50, 75, 100, 125, 150, 175, 200]}, # 25, 50, 75, 100, 125
                           "rate_off": {'values': [1]},
                           "num_workers": {'values': [0]}
                           }

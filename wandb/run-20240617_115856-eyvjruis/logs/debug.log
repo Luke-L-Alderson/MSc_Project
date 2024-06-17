@@ -27,3 +27,10 @@ config: {}
 2024-06-17 11:58:58,329 INFO    Thread-16 (_run_job):31384 [wandb_run.py:_redirect():2294] Wrapping output streams.
 2024-06-17 11:58:58,329 INFO    Thread-16 (_run_job):31384 [wandb_run.py:_redirect():2319] Redirects installed.
 2024-06-17 11:58:58,332 INFO    Thread-16 (_run_job):31384 [wandb_init.py:init():838] run started, returning control to user process
+2024-06-17 12:22:50,651 INFO    Thread-16 (_run_job):31384 [wandb_run.py:_finish():2103] finishing run lukelalderson/MSc Project/eyvjruis
+2024-06-17 12:22:50,651 INFO    Thread-16 (_run_job):31384 [wandb_run.py:_atexit_cleanup():2343] got exitcode: 0
+2024-06-17 12:22:50,652 INFO    Thread-16 (_run_job):31384 [wandb_run.py:_restore():2326] restore
+2024-06-17 12:22:50,652 INFO    Thread-16 (_run_job):31384 [wandb_run.py:_restore():2332] restore done
+2024-06-17 12:22:56,001 INFO    Thread-16 (_run_job):31384 [wandb_run.py:_footer_history_summary_info():3994] rendering history
+2024-06-17 12:22:56,001 INFO    Thread-16 (_run_job):31384 [wandb_run.py:_footer_history_summary_info():4026] rendering summary
+2024-06-17 12:22:56,014 INFO    Thread-16 (_run_job):31384 [wandb_run.py:_footer_sync_info():3953] logging synced files

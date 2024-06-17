@@ -23,7 +23,7 @@ hmap = pd.read_csv("rates heatmap data.csv", index_col=0)#, header=labels, index
 
 plt.figure(figsize = (10,7))
 plt.title('Rates Heat Map (Errors normalised by frequency)')
-ax = sns.heatmap(hmap, vmin=0.0, vmax=0.4, cmap = 'cividis', annot = True, fmt = '.2f')
+ax = sns.heatmap(hmap*100, vmin=0.0, vmax=40, cmap = 'cividis', annot = True, fmt = '.2f')
 plt.xlabel('Rate On, Hz')
 plt.ylabel('Rate Off, Hz')
 ax.invert_yaxis()

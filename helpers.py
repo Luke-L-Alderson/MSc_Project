@@ -214,9 +214,11 @@ def set_seed(value = 42):
     
 def tsne_plt(file):
     features = pd.read_csv(file)
-    features = features.iloc[:, 1:-1]
-    all_labs = features.iloc[:, 0]
+    all_labs = features.iloc[:, 1]
+    features = features.iloc[:, 2:-1]
     print("Applying t-SNE")
+    print(features.head)
+    print(all_labs.head)
     tsne = TSNE().fit_transform(features)
     plt.figure(figsize=(10, 6))
     plt.scatter(tsne[:, 0], tsne[:, 1], c=all_labs, cmap='viridis')
@@ -230,9 +232,11 @@ def tsne_plt(file):
 
 def umap_plt(file):
     features = pd.read_csv(file)
-    features = features.iloc[:, 1:-1]
-    all_labs = features.iloc[:, 0]
+    all_labs = features.iloc[:, 1]
+    features = features.iloc[:, 2:-1]
+    
     print("Applying UMAP")
+
     tsne = UMAP().fit_transform(features)
     plt.figure(figsize=(10, 6))
     plt.scatter(tsne[:, 0], tsne[:, 1], c=all_labs, cmap='viridis')
@@ -246,8 +250,8 @@ def umap_plt(file):
 
 def pca_plt(file):
     features = pd.read_csv(file)
-    features = features.iloc[:, 1:-1]
-    all_labs = features.iloc[:, 0]
+    all_labs = features.iloc[:, 1]
+    features = features.iloc[:, 2:-1]
     print("Applying PCA")
     pca = decomposition.PCA(n_components=2)
     pca.fit(features)
