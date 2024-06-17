@@ -4,6 +4,7 @@ import wandb
 from brian2 import *
 from datetime import datetime
 import torch.nn.functional as F
+from math import ceil
 
 def train_network(network, train_loader, test_loader, input_specs, train_specs):
     startTime = datetime.now()
@@ -11,7 +12,8 @@ def train_network(network, train_loader, test_loader, input_specs, train_specs):
     device = train_specs["device"]
     num_epochs = train_specs["num_epochs"]
     early_stop = train_specs["early_stop"]
-    logging_freq = 1
+    train_logging_freq = ceil(0.1*len(train_loader))
+    test_logging_freq = ceil(0.1*len(test_loader))
     print(f"Scaler Value: {train_specs["scaler"]}")
     loss_fn = rmse_count_loss(lambda_rate=train_specs["lambda_rate"],lambda_weights=None)
     
@@ -38,7 +40,7 @@ def train_network(network, train_loader, test_loader, input_specs, train_specs):
 
             train_spk_recs, train_spk_outs  = network(train_inputs)
 
-            train_loss = loss_fn(train_spk_recs, train_spk_outs, train_inputs)*train_specs["scaler"]
+            train_loss = loss_fn(train_spk_recs, train_spk_outs, train_inputs)#*train_specs["scaler"]
             #train_loss = F.mse_loss(torch.sum(train_spk_outs, 0), torch.sum(train_inputs, 0))
             
             train_loss.backward()
@@ -47,9 +49,9 @@ def train_network(network, train_loader, test_loader, input_specs, train_specs):
 
             train_running_loss += train_loss.item()
             
-            if i % logging_freq == 0:
-                print(f'[{epoch}/{num_epochs}, {i}/{len(train_loader)}] Training Loss: {train_running_loss/logging_freq:.4f} - Iteration Time: {datetime.now()-iterTime}')
-                epoch_training_loss.append(train_running_loss/logging_freq)
+            if i % train_logging_freq == 0:
+                print(f'[{epoch}/{num_epochs}, {i}/{len(train_loader)}] Training Loss: {train_running_loss/train_logging_freq:.4f} - Iteration Time: {datetime.now()-iterTime}')
+                epoch_training_loss.append(train_running_loss/train_logging_freq)
                 wandb.log({"Training Loss": epoch_training_loss[-1]})
                 train_running_loss = 0.0
                 
@@ -63,12 +65,12 @@ def train_network(network, train_loader, test_loader, input_specs, train_specs):
                 test_inputs = get_poisson_inputs(test_inputs, **input_specs).to(device)
                 test_spk_recs, test_spk_outs  = network(test_inputs)
                 #test_loss = F.mse_loss(torch.sum(train_spk_outs, 0), torch.sum(train_inputs, 0))
-                test_loss = loss_fn(test_spk_recs, test_spk_outs, test_inputs)*train_specs["scaler"]
+                test_loss = loss_fn(test_spk_recs, test_spk_outs, test_inputs)#*train_specs["scaler"]
                 test_running_loss += test_loss.item()
                 
-                if j % logging_freq == 0:
+                if j % test_logging_freq == 0:
                     print(f'[{epoch}/{num_epochs}, {j}/{len(test_loader)}]')
-                    epoch_testing_loss.append(test_running_loss/logging_freq)
+                    epoch_testing_loss.append(test_running_loss/test_logging_freq)
                     
                     test_running_loss = 0
 

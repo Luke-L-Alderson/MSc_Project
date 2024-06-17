@@ -1,0 +1,44 @@
+Starting Sweep: Batch Size: 64, Learning Rate: 0.0001
+Making datasets and defining subsets
+Training: 60000 -> 600
+Testing: 10000 -> 100
+Making Dataloaders
+Defining network
+2024-06-17 09:39:49.475585
+Scaler Value: 0.013513513513513514
+Training - 2024-06-17 09:39:49.476080
+[1/1, 1/10] Training Loss: 4.9783 - Iteration Time: 0:00:02.146307
+[1/1, 2/10] Training Loss: 5.0550 - Iteration Time: 0:00:01.428864
+[1/1, 3/10] Training Loss: 5.1666 - Iteration Time: 0:00:01.436300
+[1/1, 4/10] Training Loss: 5.2241 - Iteration Time: 0:00:01.445877
+[1/1, 5/10] Training Loss: 4.9969 - Iteration Time: 0:00:01.412009
+[1/1, 6/10] Training Loss: 5.0792 - Iteration Time: 0:00:01.407031
+[1/1, 7/10] Training Loss: 5.0654 - Iteration Time: 0:00:01.455088
+[1/1, 8/10] Training Loss: 4.9927 - Iteration Time: 0:00:01.671473
+[1/1, 9/10] Training Loss: 4.8207 - Iteration Time: 0:00:01.551843
+[1/1, 10/10] Training Loss: 5.0481 - Iteration Time: 0:00:01.533472
+Testing - 2024-06-17 09:40:05.153359
+[1/1, 1/2]
+[1/1, 2/2]
+Testing Loss: 5.0433 - Epoch Time: 0:00:17.384044
+Training and Testing Finished - Time: 0:00:17.384539
+Assembling test data for t-sne projection
+Code Layer Shape: torch.Size([64, 100])
+-- 1/2 --
+Code Layer Shape: torch.Size([36, 100])
+-- 2/2 --
+Plotting Results Grid
+Plotting Spiking Input MNIST
+Plotting Spiking Input MNIST Animation - 1
+Plotting Spiking Output MNIST
+Plotting Spiking Output MNIST Animation - 1
+Applying t-SNE
+WARNING    C:\Users\lukea\anaconda3\envs\diss\Lib\site-packages\joblib\externals\loky\backend\context.py:136: UserWarning: Could not find the number of physical cores for the following reason:
+found 0 physical cores < 1
+Returning the number of logical cores instead. You can silence this warning by setting LOKY_MAX_CPU_COUNT to the number of cores you want to use.
+  warnings.warn(
+ [py.warnings]
+  File "C:\Users\lukea\anaconda3\envs\diss\Lib\site-packages\joblib\externals\loky\backend\context.py", line 282, in _count_physical_cores
+    raise ValueError(f"found {cpu_count_physical} physical cores < 1")
+Applying UMAP
+Applying PCA

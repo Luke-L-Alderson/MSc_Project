@@ -1,5 +1,6 @@
 import numpy as np
 from sklearn.manifold import TSNE
+from sklearn import decomposition
 import os
 from matplotlib import pyplot as plt
 import pandas as pd
@@ -8,7 +9,7 @@ from torch.utils.data import DataLoader
 #from torch.utils.data import Subset
 
 from brian2 import *
-
+from umap import UMAP
 from image_to_image import SAE
 #from model.aux.functions import get_poisson_inputs, process_labels, mse_count_loss
 
@@ -226,6 +227,40 @@ def tsne_plt(file):
     plt.title(file)
     plt.show()
     return f"tsne_{file}.png"
+
+def umap_plt(file):
+    features = pd.read_csv(file)
+    features = features.iloc[:, 1:-1]
+    all_labs = features.iloc[:, 0]
+    print("Applying UMAP")
+    tsne = UMAP().fit_transform(features)
+    plt.figure(figsize=(10, 6))
+    plt.scatter(tsne[:, 0], tsne[:, 1], c=all_labs, cmap='viridis')
+    plt.xlabel('UMAP 1')
+    plt.ylabel('UMAP 2')
+    plt.colorbar(label='Digit Class')
+    plt.savefig(f"umap_{file}.png")
+    plt.title(file)
+    plt.show()
+    return f"umap_{file}.png"
+
+def pca_plt(file):
+    features = pd.read_csv(file)
+    features = features.iloc[:, 1:-1]
+    all_labs = features.iloc[:, 0]
+    print("Applying PCA")
+    pca = decomposition.PCA(n_components=2)
+    pca.fit(features)
+    tsne = pca.transform(features)
+    plt.figure(figsize=(10, 6))
+    plt.scatter(tsne[:, 0], tsne[:, 1], c=all_labs, cmap='viridis')
+    plt.xlabel('PC 1')
+    plt.ylabel('PC 2')
+    plt.colorbar(label='Digit Class')
+    plt.savefig(f"pca_{file}.png")
+    plt.title(file)
+    plt.show()
+    return f"pca_{file}.png"
     
 def get_poisson_inputs(inputs, total_time, bin_size, rate_on, rate_off):
     num_steps = int(total_time/bin_size)

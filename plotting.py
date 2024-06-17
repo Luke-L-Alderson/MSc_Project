@@ -1,4 +1,4 @@
-from helpers import tsne_plt
+from helpers import tsne_plt, umap_plt, pca_plt
 import seaborn as sns
 import pandas as pd
 from matplotlib import pyplot as plt
@@ -7,10 +7,15 @@ from matplotlib import pyplot as plt
 # tsne_plt("75 Hz_1 Hz_0")
 # tsne_plt("75 Hz_1 Hz_1")
 
-# # Rate Changes (Heat Map)
-# tsne_plt("1 Hz_1 Hz_1")
-# tsne_plt("200 Hz_1 Hz_1")
+# Rate Changes (Heat Map)
+tsne_plt("1 Hz_1 Hz_1")
+tsne_plt("200 Hz_1 Hz_1")
 
+umap_plt("1 Hz_1 Hz_1")
+umap_plt("200 Hz_1 Hz_1")
+
+pca_plt("1 Hz_1 Hz_1")
+pca_plt("200 Hz_1 Hz_1")
 # Heatmap (Seaborn)
 labels = ["1", "50", "100", "150", "200"]
 labels = [1, 50, 100, 150, 200]
@@ -25,4 +30,3 @@ ax.invert_yaxis()
 ax.set_facecolor('y')
 # plt.savefig('heatmap.png')
 # plt.savefig('heatmap.pdf')
-

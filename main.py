@@ -1,5 +1,5 @@
 """## Imports"""
-print("\nImporting modules and defining functions")
+#print("\nImporting modules and defining functions")
 
 #importing module
 from datetime import datetime
@@ -7,7 +7,7 @@ date = datetime.now().strftime("%d/%m - %H:%M")
 
 import numpy as np
 import wandb
-from helpers import get_poisson_inputs, build_datasets, build_network, to_np, set_seed, tsne_plt
+from helpers import get_poisson_inputs, build_datasets, build_network, to_np, set_seed, tsne_plt, pca_plt, umap_plt
 
 import torch
 # import torch.nn as nn
@@ -24,7 +24,7 @@ from IPython.display import HTML
 from brian2 import *
 from matplotlib import pyplot as plt
 import pandas as pd
-
+import seaborn as sns
 from train_network import train_network
 
 import gc
@@ -106,20 +106,25 @@ def main():
     poisson_inputs = get_poisson_inputs(inputs, **input_specs)
     img_spk_recs, img_spk_outs = network(poisson_inputs)
     
+    print(poisson_inputs.shape)
+    print(img_spk_outs.shape)
     print("Assembling test data for t-sne projection")
     ###
     with torch.no_grad():
        features, all_labs, all_decs, all_orig_ims = [], [], [], []
        for i,(data, labs) in enumerate(test_loader, 1):
            data = get_poisson_inputs(data, **input_specs)
-           print(input_specs)
+           #print(input_specs)
            code_layer, decoded = network(data)
-           code_layer = code_layer.mean(0)
            print(f'Code Layer Shape: {code_layer.shape}')
+           code_layer_sum = code_layer.sum(0)
+           code_layer = code_layer.mean(0)
+           print(f'Code Layer Shape: {code_layer.shape}') # if its (x, 100), no need to reshape
            features.append(to_np(code_layer.view(-1, code_layer.shape[1])))
            all_labs.append(labs)
            all_decs.append(decoded.mean(0).squeeze().cpu())
            all_orig_ims.append(data.mean(0).squeeze())
+           
            if i % 1 == 0:
                print(f'-- {i}/{len(test_loader)} --')
     
@@ -129,8 +134,10 @@ def main():
        all_decs = np.concatenate(all_decs, axis = 0)
   
     tsne = pd.DataFrame(data = features)
+    
     tsne.insert(0, "Labels", all_labs) 
     tsne.to_csv(run.name)
+    print(tsne.head())
     
     print("Plotting Results Grid")
     seen_labels = set()
@@ -225,11 +232,16 @@ def main():
     
     fig.savefig("figures/output_raster.png")
     tsne_file = tsne_plt(run.name)
+    umap_file = umap_plt(run.name)
+    pca_file = pca_plt(run.name)
+    #sns.scatterplot(tsne, x="Feat" "" hue="label")
     
     wandb.log({"Test Loss": final_test_loss,
                "Results Grid": wandb.Image("figures/result_summary.png"),
                #"t-SNE": wandb.Table(tsne),
                "t-SNE": wandb.Image(tsne_file),
+               "UMAP": wandb.Image(umap_file),
+               "PCA": wandb.Image(pca_file),
                "Spike Animation": wandb.Video(f"figures/spike_mnistrec_{labels[input_index]}.gif", fps=4, format="gif"),
                "Input Raster": wandb.Image("figures/input_raster.png"),
                "Output Raster": wandb.Image("figures/output_raster.png")})
@@ -263,25 +275,25 @@ if __name__ == '__main__':
                           "noise": {'values': [0]},
                           "rate_on": {'values': [75]},
                           "rate_off": {'values': [1]},
-                          "num_workers": {'values': [6]}
+                          "num_workers": {'values': [0]}
                           }
           }
   else:
-      sweep_config = {
-          'name': f'Recurrency 2 (0 - 2) {date}',
+      sweep_config = { #REMEMBER TO CHANGE RUN NAME
+          'name': f'Recurrency 3 (0 - 2) {date}',
           'method': 'grid',
           'metric': {'name': 'Test Loss',
                       'goal': 'minimize'   
                       },
           'parameters': {'bs': {'values': [64]},
                           'lr': {'values': [1e-4]},
-                          'epochs': {'values': [9]}, # no less than 6
-                          "subset_size": {'values': [10]}, #0.1, 0.7
-                          "recurrence": {'values': [0, 0.5, 1, 1.5, 2]},
-                          "noise": {'values': [0]},
+                          'epochs': {'values': [9]},
+                          "subset_size": {'values': [10]},
+                          "recurrence": {'values': [1, 0.1, 0.5, 0, 1.25, 1.5, 1.75, 2]},
+                          "noise": {'values': [10]},
                           "rate_on": {'values': [75]}, # 25, 50, 75, 100, 125
                           "rate_off": {'values': [1]},
-                          "num_workers": {'values': [6]}
+                          "num_workers": {'values': [0]}
                           }
           }
   

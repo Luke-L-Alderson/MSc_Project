@@ -1,0 +1,244 @@
+Starting Sweep: Batch Size: 64, Learning Rate: 0.0001
+Making datasets and defining subsets
+Training: 60000 -> 6000
+Testing: 10000 -> 1000
+Making Dataloaders
+Defining network
+2024-06-17 10:09:22.756225
+Scaler Value: 0.013513513513513514
+Training - 2024-06-17 10:09:22.757217
+[1/9, 10/94] Training Loss: 17.9069 - Iteration Time: 0:00:01.458745
+[1/9, 20/94] Training Loss: 13.4958 - Iteration Time: 0:00:01.568231
+[1/9, 30/94] Training Loss: 8.2984 - Iteration Time: 0:00:01.464088
+[1/9, 40/94] Training Loss: 6.3669 - Iteration Time: 0:00:01.416997
+[1/9, 50/94] Training Loss: 5.7160 - Iteration Time: 0:00:01.395175
+[1/9, 60/94] Training Loss: 5.4434 - Iteration Time: 0:00:01.396565
+[1/9, 70/94] Training Loss: 5.3016 - Iteration Time: 0:00:01.421955
+[1/9, 80/94] Training Loss: 5.3002 - Iteration Time: 0:00:01.406990
+[1/9, 90/94] Training Loss: 5.2394 - Iteration Time: 0:00:01.376200
+Testing - 2024-06-17 10:11:42.650757
+[1/9, 2/16]
+[1/9, 4/16]
+[1/9, 6/16]
+[1/9, 8/16]
+[1/9, 10/16]
+[1/9, 12/16]
+[1/9, 14/16]
+[1/9, 16/16]
+Testing Loss: 5.0209 - Epoch Time: 0:02:33.114433
+Training - 2024-06-17 10:11:55.871650
+[2/9, 10/94] Training Loss: 5.2680 - Iteration Time: 0:00:01.402995
+[2/9, 20/94] Training Loss: 5.1420 - Iteration Time: 0:00:01.573192
+[2/9, 30/94] Training Loss: 5.1593 - Iteration Time: 0:00:01.462582
+[2/9, 40/94] Training Loss: 5.1686 - Iteration Time: 0:00:01.455104
+[2/9, 50/94] Training Loss: 5.1313 - Iteration Time: 0:00:01.468983
+[2/9, 60/94] Training Loss: 5.1886 - Iteration Time: 0:00:01.506241
+[2/9, 70/94] Training Loss: 5.1273 - Iteration Time: 0:00:01.399549
+[2/9, 80/94] Training Loss: 5.0633 - Iteration Time: 0:00:01.431802
+[2/9, 90/94] Training Loss: 5.1221 - Iteration Time: 0:00:01.416944
+Testing - 2024-06-17 10:14:13.464999
+[2/9, 2/16]
+[2/9, 4/16]
+[2/9, 6/16]
+[2/9, 8/16]
+[2/9, 10/16]
+[2/9, 12/16]
+[2/9, 14/16]
+[2/9, 16/16]
+Testing Loss: 4.9922 - Epoch Time: 0:02:31.200871
+Training - 2024-06-17 10:14:27.072521
+[3/9, 10/94] Training Loss: 5.0645 - Iteration Time: 0:00:01.388137
+[3/9, 20/94] Training Loss: 5.1361 - Iteration Time: 0:00:01.511650
+[3/9, 30/94] Training Loss: 5.0568 - Iteration Time: 0:00:01.408465
+[3/9, 40/94] Training Loss: 5.0728 - Iteration Time: 0:00:01.412449
+[3/9, 50/94] Training Loss: 5.1023 - Iteration Time: 0:00:01.374387
+[3/9, 60/94] Training Loss: 5.0636 - Iteration Time: 0:00:01.481899
+[3/9, 70/94] Training Loss: 5.0235 - Iteration Time: 0:00:01.485440
+[3/9, 80/94] Training Loss: 5.0777 - Iteration Time: 0:00:01.467507
+[3/9, 90/94] Training Loss: 5.0685 - Iteration Time: 0:00:01.439737
+Testing - 2024-06-17 10:16:43.853784
+[3/9, 2/16]
+[3/9, 4/16]
+[3/9, 6/16]
+[3/9, 8/16]
+[3/9, 10/16]
+[3/9, 12/16]
+[3/9, 14/16]
+[3/9, 16/16]
+Testing Loss: 4.8932 - Epoch Time: 0:02:30.399036
+Training - 2024-06-17 10:16:57.471557
+[4/9, 10/94] Training Loss: 5.0042 - Iteration Time: 0:00:01.515210
+[4/9, 20/94] Training Loss: 5.0697 - Iteration Time: 0:00:01.406462
+[4/9, 30/94] Training Loss: 5.0340 - Iteration Time: 0:00:01.628268
+[4/9, 40/94] Training Loss: 4.9956 - Iteration Time: 0:00:01.465542
+[4/9, 50/94] Training Loss: 5.0252 - Iteration Time: 0:00:01.427846
+[4/9, 60/94] Training Loss: 5.0022 - Iteration Time: 0:00:01.505251
+[4/9, 70/94] Training Loss: 5.0725 - Iteration Time: 0:00:01.425832
+[4/9, 80/94] Training Loss: 5.0650 - Iteration Time: 0:00:01.431356
+[4/9, 90/94] Training Loss: 5.0078 - Iteration Time: 0:00:01.345517
+Testing - 2024-06-17 10:19:15.951130
+[4/9, 2/16]
+[4/9, 4/16]
+[4/9, 6/16]
+[4/9, 8/16]
+[4/9, 10/16]
+[4/9, 12/16]
+[4/9, 14/16]
+[4/9, 16/16]
+Testing Loss: 4.9316 - Epoch Time: 0:02:31.638866
+Training - 2024-06-17 10:19:29.110423
+[5/9, 10/94] Training Loss: 5.0150 - Iteration Time: 0:00:01.403012
+[5/9, 20/94] Training Loss: 5.0561 - Iteration Time: 0:00:01.405538
+[5/9, 30/94] Training Loss: 4.9942 - Iteration Time: 0:00:01.458065
+[5/9, 40/94] Training Loss: 5.0014 - Iteration Time: 0:00:01.427332
+[5/9, 50/94] Training Loss: 5.0471 - Iteration Time: 0:00:01.393152
+[5/9, 60/94] Training Loss: 5.0290 - Iteration Time: 0:00:01.452156
+[5/9, 70/94] Training Loss: 5.0224 - Iteration Time: 0:00:01.370808
+[5/9, 80/94] Training Loss: 4.9453 - Iteration Time: 0:00:01.495348
+[5/9, 90/94] Training Loss: 4.9873 - Iteration Time: 0:00:01.396601
+Testing - 2024-06-17 10:21:44.881058
+[5/9, 2/16]
+[5/9, 4/16]
+[5/9, 6/16]
+[5/9, 8/16]
+[5/9, 10/16]
+[5/9, 12/16]
+[5/9, 14/16]
+[5/9, 16/16]
+Testing Loss: 4.8429 - Epoch Time: 0:02:29.927809
+Training - 2024-06-17 10:21:59.038728
+[6/9, 10/94] Training Loss: 5.0161 - Iteration Time: 0:00:01.444702
+[6/9, 20/94] Training Loss: 4.9518 - Iteration Time: 0:00:01.457542
+[6/9, 30/94] Training Loss: 4.9749 - Iteration Time: 0:00:01.418607
+[6/9, 40/94] Training Loss: 4.9908 - Iteration Time: 0:00:01.411994
+[6/9, 50/94] Training Loss: 4.9749 - Iteration Time: 0:00:01.419939
+[6/9, 60/94] Training Loss: 4.9695 - Iteration Time: 0:00:01.452736
+[6/9, 70/94] Training Loss: 5.0067 - Iteration Time: 0:00:01.447761
+[6/9, 80/94] Training Loss: 5.0007 - Iteration Time: 0:00:01.481969
+[6/9, 90/94] Training Loss: 5.0257 - Iteration Time: 0:00:01.443694
+Testing - 2024-06-17 10:24:19.303394
+[6/9, 2/16]
+[6/9, 4/16]
+[6/9, 6/16]
+[6/9, 8/16]
+[6/9, 10/16]
+[6/9, 12/16]
+[6/9, 14/16]
+[6/9, 16/16]
+Testing Loss: 4.7114 - Epoch Time: 0:02:33.458172
+Training - 2024-06-17 10:24:32.496900
+[7/9, 10/94] Training Loss: 4.9878 - Iteration Time: 0:00:01.417455
+[7/9, 20/94] Training Loss: 4.9818 - Iteration Time: 0:00:01.436237
+[7/9, 30/94] Training Loss: 5.0180 - Iteration Time: 0:00:01.365330
+[7/9, 40/94] Training Loss: 4.9966 - Iteration Time: 0:00:01.424384
+[7/9, 50/94] Training Loss: 4.9673 - Iteration Time: 0:00:01.549916
+[7/9, 60/94] Training Loss: 4.8947 - Iteration Time: 0:00:01.471505
+[7/9, 70/94] Training Loss: 4.9648 - Iteration Time: 0:00:01.473478
+[7/9, 80/94] Training Loss: 4.9507 - Iteration Time: 0:00:01.417482
+[7/9, 90/94] Training Loss: 4.9687 - Iteration Time: 0:00:01.405110
+Testing - 2024-06-17 10:26:49.700164
+[7/9, 2/16]
+[7/9, 4/16]
+[7/9, 6/16]
+[7/9, 8/16]
+[7/9, 10/16]
+[7/9, 12/16]
+[7/9, 14/16]
+[7/9, 16/16]
+Testing Loss: 4.7271 - Epoch Time: 0:02:30.750331
+Training - 2024-06-17 10:27:03.247231
+[8/9, 10/94] Training Loss: 5.0081 - Iteration Time: 0:00:01.447727
+[8/9, 20/94] Training Loss: 4.9296 - Iteration Time: 0:00:01.394685
+[8/9, 30/94] Training Loss: 4.9587 - Iteration Time: 0:00:01.419951
+[8/9, 40/94] Training Loss: 4.9424 - Iteration Time: 0:00:01.606501
+[8/9, 50/94] Training Loss: 4.9295 - Iteration Time: 0:00:01.413966
+[8/9, 60/94] Training Loss: 4.9654 - Iteration Time: 0:00:01.406059
+[8/9, 70/94] Training Loss: 4.9575 - Iteration Time: 0:00:01.394607
+[8/9, 80/94] Training Loss: 4.9922 - Iteration Time: 0:00:01.397548
+[8/9, 90/94] Training Loss: 4.9629 - Iteration Time: 0:00:01.381746
+Testing - 2024-06-17 10:29:19.534590
+[8/9, 2/16]
+[8/9, 4/16]
+[8/9, 6/16]
+[8/9, 8/16]
+[8/9, 10/16]
+[8/9, 12/16]
+[8/9, 14/16]
+[8/9, 16/16]
+Testing Loss: 4.7526 - Epoch Time: 0:02:29.503583
+Training - 2024-06-17 10:29:32.750814
+[9/9, 10/94] Training Loss: 4.9339 - Iteration Time: 0:00:01.364373
+[9/9, 20/94] Training Loss: 4.9712 - Iteration Time: 0:00:01.501282
+[9/9, 30/94] Training Loss: 4.9742 - Iteration Time: 0:00:01.360860
+[9/9, 40/94] Training Loss: 4.9259 - Iteration Time: 0:00:01.361878
+[9/9, 50/94] Training Loss: 4.9044 - Iteration Time: 0:00:01.421911
+[9/9, 60/94] Training Loss: 4.9582 - Iteration Time: 0:00:01.359955
+[9/9, 70/94] Training Loss: 4.9408 - Iteration Time: 0:00:01.413055
+[9/9, 80/94] Training Loss: 4.9227 - Iteration Time: 0:00:01.389207
+[9/9, 90/94] Training Loss: 5.0097 - Iteration Time: 0:00:01.528118
+Testing - 2024-06-17 10:31:47.544936
+[9/9, 2/16]
+[9/9, 4/16]
+[9/9, 6/16]
+[9/9, 8/16]
+[9/9, 10/16]
+[9/9, 12/16]
+[9/9, 14/16]
+[9/9, 16/16]
+Testing Loss: 4.7226 - Epoch Time: 0:02:28.389878
+Training and Testing Finished - Time: 0:22:38.384964
+Assembling test data for t-sne projection
+Code Layer Shape: torch.Size([64, 100])
+-- 1/16 --
+Code Layer Shape: torch.Size([64, 100])
+-- 2/16 --
+Code Layer Shape: torch.Size([64, 100])
+-- 3/16 --
+Code Layer Shape: torch.Size([64, 100])
+-- 4/16 --
+Code Layer Shape: torch.Size([64, 100])
+-- 5/16 --
+Code Layer Shape: torch.Size([64, 100])
+-- 6/16 --
+Code Layer Shape: torch.Size([64, 100])
+-- 7/16 --
+Code Layer Shape: torch.Size([64, 100])
+-- 8/16 --
+Code Layer Shape: torch.Size([64, 100])
+-- 9/16 --
+Code Layer Shape: torch.Size([64, 100])
+-- 10/16 --
+Code Layer Shape: torch.Size([64, 100])
+-- 11/16 --
+Code Layer Shape: torch.Size([64, 100])
+-- 12/16 --
+Code Layer Shape: torch.Size([64, 100])
+-- 13/16 --
+Code Layer Shape: torch.Size([64, 100])
+-- 14/16 --
+Code Layer Shape: torch.Size([64, 100])
+-- 15/16 --
+Code Layer Shape: torch.Size([40, 100])
+-- 16/16 --
+   Labels      0      1    2      3      4  ...     94   95   96     97   98     99
+0       2  199.0  199.0  0.0  199.0  196.0  ...  199.0  0.0  0.0  199.0  0.0  198.0
+1       4  199.0  198.0  0.0  199.0  195.0  ...  199.0  0.0  0.0  199.0  0.0  199.0
+2       7  197.0  199.0  0.0  199.0  188.0  ...  199.0  0.0  0.0  199.0  0.0  199.0
+3       3  199.0  199.0  0.0  199.0  190.0  ...  199.0  0.0  0.0  199.0  0.0  199.0
+4       7  199.0  199.0  0.0  199.0  184.0  ...  198.0  0.0  0.0  199.0  0.0  199.0
+[5 rows x 101 columns]
+Plotting Results Grid
+Plotting Spiking Input MNIST
+Plotting Spiking Input MNIST Animation - 2
+Plotting Spiking Output MNIST
+Plotting Spiking Output MNIST Animation - 2
+Applying t-SNE
+WARNING    C:\Users\lukea\anaconda3\envs\diss\Lib\site-packages\joblib\externals\loky\backend\context.py:136: UserWarning: Could not find the number of physical cores for the following reason:
+found 0 physical cores < 1
+Returning the number of logical cores instead. You can silence this warning by setting LOKY_MAX_CPU_COUNT to the number of cores you want to use.
+  warnings.warn(
+ [py.warnings]
+  File "C:\Users\lukea\anaconda3\envs\diss\Lib\site-packages\joblib\externals\loky\backend\context.py", line 282, in _count_physical_cores
+    raise ValueError(f"found {cpu_count_physical} physical cores < 1")
+Applying UMAP
+Applying PCA

@@ -1,0 +1,35 @@
+Starting Sweep: Batch Size: 64, Learning Rate: 0.0001
+Making datasets and defining subsets
+Training: 60000 -> 600
+Testing: 10000 -> 100
+Making Dataloaders
+Defining network
+2024-06-15 22:07:28.846170
+Scaler Value: 0.013513513513513514
+Training - 2024-06-15 22:07:28.851636
+[1/1, 1/10] Training Loss: 4.9783 - Iteration Time: 0:00:02.725519
+[1/1, 2/10] Training Loss: 5.0550 - Iteration Time: 0:00:01.668810
+[1/1, 3/10] Training Loss: 5.1666 - Iteration Time: 0:00:01.771098
+[1/1, 4/10] Training Loss: 5.2241 - Iteration Time: 0:00:01.613292
+[1/1, 5/10] Training Loss: 4.9968 - Iteration Time: 0:00:01.419311
+[1/1, 6/10] Training Loss: 5.0804 - Iteration Time: 0:00:01.559526
+[1/1, 7/10] Training Loss: 5.0643 - Iteration Time: 0:00:01.508070
+[1/1, 8/10] Training Loss: 4.9923 - Iteration Time: 0:00:01.543655
+[1/1, 9/10] Training Loss: 4.8202 - Iteration Time: 0:00:01.459575
+[1/1, 10/10] Training Loss: 5.0471 - Iteration Time: 0:00:01.715280
+Testing - 2024-06-15 22:07:46.218176
+[1/1, 1/2]
+[1/1, 2/2]
+Testing Loss: 5.0428 - Epoch Time: 0:00:19.103780
+Training and Testing Finished - Time: 0:00:19.109246
+Assembling test data for t-sne projection
+-- 1/2 --
+-- 2/2 --
+Plotting Results Grid
+Plotting Spiking Input MNIST
+Plotting Spiking Input MNIST Animation - 1
+Plotting Spiking Output MNIST
+Plotting Spiking Output MNIST Animation - 1
+Applying t-SNE
+Applying UMAP
+Applying PCA
