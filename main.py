@@ -37,7 +37,7 @@ def main():
 
     run = wandb.init()
     run.name = f"{wandb.config.rate_on} Hz_{wandb.config.rate_off} Hz_{wandb.config.recurrence}"
-    
+    print(wandb.config)
     """## Define network architecutre and parameters"""
     network_params, input_specs, train_specs = {}, {}, {}
     
@@ -61,7 +61,7 @@ def main():
     train_specs["num_workers"] = wandb.config.num_workers
     
     
-    train_specs["scaler"] = abs(1/((wandb.config.rate_on-wandb.config.rate_off)*(0.001*input_specs["total_time"]/ms))) if wandb.config.rate_on != wandb.config.rate_off else 1000
+    train_specs["scaler"] = abs(1/((wandb.config.rate_on-wandb.config.rate_off)*(0.001*input_specs["total_time"]/ms))) if wandb.config.rate_on != wandb.config.rate_off else 100000
     
     
     noise = wandb.config.noise
@@ -116,10 +116,7 @@ def main():
            data = get_poisson_inputs(data, **input_specs)
            #print(input_specs)
            code_layer, decoded = network(data)
-           print(f'Code Layer Shape: {code_layer.shape}')
-           #code_layer_sum = code_layer.sum(0)
            code_layer = code_layer.mean(0)
-           print(f'Code Layer Shape: {code_layer.shape}') # if its (x, 100), no need to reshape
            features.append(to_np(code_layer))#.view(-1, code_layer.shape[1])))
            all_labs.append(labs)
            all_decs.append(decoded.mean(0).squeeze().cpu())
@@ -230,6 +227,10 @@ def main():
     ax.set_xlim([0, 200])
     
     fig.savefig("figures/output_raster.png")
+    
+    # if not os.path.exists(newpath):
+    #     os.makedirs(newpath)
+        
     umap_file = umap_plt(run.name)    
     #tsne_file = tsne_plt(run.name)
 
@@ -280,7 +281,7 @@ if __name__ == '__main__':
           }
   else:
       sweep_config = { #REMEMBER TO CHANGE RUN NAME
-          'name': f'UMAP Error Test (200 / 1 Hz) {date}',
+          'name': f'Impact of Recurrency {date}',
           'method': 'grid',
           'metric': {'name': 'Test Loss',
                       'goal': 'minimize'   
@@ -289,9 +290,9 @@ if __name__ == '__main__':
                           'lr': {'values': [1e-4]},
                           'epochs': {'values': [9]},
                           "subset_size": {'values': [10]},
-                          "recurrence": {'values': [1]}, #1, 0.1, 0.5, 0, 1.25, 1.5, 1.75, 2
+                          "recurrence": {'values': [0, 0.5, 1, 1.5, 2]}, #1, 0.1, 0.5, 0, 1.25, 1.5, 1.75, 2
                           "noise": {'values': [0]},
-                          "rate_on": {'values': [1, 25, 50, 75, 100, 125, 150, 175, 200]}, # 25, 50, 75, 100, 125
+                          "rate_on": {'values': [25, 75]}, # 25, 50, 75, 100, 125
                           "rate_off": {'values': [1]},
                           "num_workers": {'values': [0]}
                           }
@@ -301,3 +302,5 @@ if __name__ == '__main__':
   sweep_id = wandb.sweep(sweep = sweep_config, project = "MSc Project", entity="lukelalderson")
       
   wandb.agent(sweep_id, function=main)
+  
+  torch.cuda.empty_cache()

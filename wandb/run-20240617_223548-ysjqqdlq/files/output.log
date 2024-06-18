@@ -1,0 +1,253 @@
+Starting Sweep: Batch Size: 64, Learning Rate: 0.0001
+Making datasets and defining subsets
+Training: 60000 -> 6000
+Testing: 10000 -> 1000
+Making Dataloaders
+Defining network
+2024-06-17 22:35:50.526296
+Scaler Value: 0.1020408163265306
+Training - 2024-06-17 22:35:50.527289
+[1/9, 10/94] Training Loss: 3.5463 - Iteration Time: 0:00:01.374237
+[1/9, 20/94] Training Loss: 3.4772 - Iteration Time: 0:00:01.432288
+[1/9, 30/94] Training Loss: 3.4940 - Iteration Time: 0:00:01.458637
+[1/9, 40/94] Training Loss: 3.4918 - Iteration Time: 0:00:01.445218
+[1/9, 50/94] Training Loss: 3.4626 - Iteration Time: 0:00:01.476414
+[1/9, 60/94] Training Loss: 3.4145 - Iteration Time: 0:00:01.422906
+[1/9, 70/94] Training Loss: 3.3812 - Iteration Time: 0:00:01.395217
+[1/9, 80/94] Training Loss: 3.3835 - Iteration Time: 0:00:01.397591
+[1/9, 90/94] Training Loss: 3.3551 - Iteration Time: 0:00:01.371234
+Testing - 2024-06-17 22:38:05.364855
+[1/9, 2/16]
+[1/9, 4/16]
+[1/9, 6/16]
+[1/9, 8/16]
+[1/9, 10/16]
+[1/9, 12/16]
+[1/9, 14/16]
+[1/9, 16/16]
+Testing Loss: 3.2207 - Epoch Time: 0:02:28.175076
+Training - 2024-06-17 22:38:18.702861
+[2/9, 10/94] Training Loss: 3.3657 - Iteration Time: 0:00:01.416385
+[2/9, 20/94] Training Loss: 3.2792 - Iteration Time: 0:00:01.408065
+[2/9, 30/94] Training Loss: 3.2879 - Iteration Time: 0:00:01.537454
+[2/9, 40/94] Training Loss: 3.2735 - Iteration Time: 0:00:01.440213
+[2/9, 50/94] Training Loss: 3.2353 - Iteration Time: 0:00:01.389609
+[2/9, 60/94] Training Loss: 3.2570 - Iteration Time: 0:00:01.345058
+[2/9, 70/94] Training Loss: 3.2153 - Iteration Time: 0:00:01.501758
+[2/9, 80/94] Training Loss: 3.1654 - Iteration Time: 0:00:01.436746
+[2/9, 90/94] Training Loss: 3.1715 - Iteration Time: 0:00:01.412911
+Testing - 2024-06-17 22:40:32.244048
+[2/9, 2/16]
+[2/9, 4/16]
+[2/9, 6/16]
+[2/9, 8/16]
+[2/9, 10/16]
+[2/9, 12/16]
+[2/9, 14/16]
+[2/9, 16/16]
+Testing Loss: 3.0795 - Epoch Time: 0:02:26.782747
+Training - 2024-06-17 22:40:45.486105
+[3/9, 10/94] Training Loss: 3.1236 - Iteration Time: 0:00:01.373793
+[3/9, 20/94] Training Loss: 3.1390 - Iteration Time: 0:00:01.392619
+[3/9, 30/94] Training Loss: 3.0795 - Iteration Time: 0:00:01.393582
+[3/9, 40/94] Training Loss: 3.0850 - Iteration Time: 0:00:01.383672
+[3/9, 50/94] Training Loss: 3.0916 - Iteration Time: 0:00:01.405558
+[3/9, 60/94] Training Loss: 3.0621 - Iteration Time: 0:00:01.368316
+[3/9, 70/94] Training Loss: 3.0100 - Iteration Time: 0:00:01.386137
+[3/9, 80/94] Training Loss: 3.0239 - Iteration Time: 0:00:01.399578
+[3/9, 90/94] Training Loss: 3.0082 - Iteration Time: 0:00:01.389179
+Testing - 2024-06-17 22:42:58.624171
+[3/9, 2/16]
+[3/9, 4/16]
+[3/9, 6/16]
+[3/9, 8/16]
+[3/9, 10/16]
+[3/9, 12/16]
+[3/9, 14/16]
+[3/9, 16/16]
+Testing Loss: 2.8894 - Epoch Time: 0:02:26.529558
+Training - 2024-06-17 22:43:12.016160
+[4/9, 10/94] Training Loss: 2.9533 - Iteration Time: 0:00:01.580143
+[4/9, 20/94] Training Loss: 2.9759 - Iteration Time: 0:00:01.514654
+[4/9, 30/94] Training Loss: 2.9376 - Iteration Time: 0:00:01.536946
+[4/9, 40/94] Training Loss: 2.9028 - Iteration Time: 0:00:01.480434
+[4/9, 50/94] Training Loss: 2.8907 - Iteration Time: 0:00:01.559027
+[4/9, 60/94] Training Loss: 2.8669 - Iteration Time: 0:00:01.491801
+[4/9, 70/94] Training Loss: 2.8944 - Iteration Time: 0:00:01.481381
+[4/9, 80/94] Training Loss: 2.8734 - Iteration Time: 0:00:01.446129
+[4/9, 90/94] Training Loss: 2.8310 - Iteration Time: 0:00:01.391630
+Testing - 2024-06-17 22:45:34.488240
+[4/9, 2/16]
+[4/9, 4/16]
+[4/9, 6/16]
+[4/9, 8/16]
+[4/9, 10/16]
+[4/9, 12/16]
+[4/9, 14/16]
+[4/9, 16/16]
+Testing Loss: 2.7802 - Epoch Time: 0:02:35.699811
+Training - 2024-06-17 22:45:47.716468
+[5/9, 10/94] Training Loss: 2.8112 - Iteration Time: 0:00:01.445678
+[5/9, 20/94] Training Loss: 2.8158 - Iteration Time: 0:00:01.405985
+[5/9, 30/94] Training Loss: 2.7591 - Iteration Time: 0:00:01.394110
+[5/9, 40/94] Training Loss: 2.7298 - Iteration Time: 0:00:01.401027
+[5/9, 50/94] Training Loss: 2.7290 - Iteration Time: 0:00:01.434257
+[5/9, 60/94] Training Loss: 2.7061 - Iteration Time: 0:00:01.377247
+[5/9, 70/94] Training Loss: 2.6725 - Iteration Time: 0:00:01.398139
+[5/9, 80/94] Training Loss: 2.6110 - Iteration Time: 0:00:01.360357
+[5/9, 90/94] Training Loss: 2.5905 - Iteration Time: 0:00:01.435751
+Testing - 2024-06-17 22:48:01.107755
+[5/9, 2/16]
+[5/9, 4/16]
+[5/9, 6/16]
+[5/9, 8/16]
+[5/9, 10/16]
+[5/9, 12/16]
+[5/9, 14/16]
+[5/9, 16/16]
+Testing Loss: 2.5228 - Epoch Time: 0:02:26.605918
+Training - 2024-06-17 22:48:14.322386
+[6/9, 10/94] Training Loss: 2.5738 - Iteration Time: 0:00:01.455096
+[6/9, 20/94] Training Loss: 2.5200 - Iteration Time: 0:00:01.407026
+[6/9, 30/94] Training Loss: 2.5134 - Iteration Time: 0:00:01.413400
+[6/9, 40/94] Training Loss: 2.5101 - Iteration Time: 0:00:01.360329
+[6/9, 50/94] Training Loss: 2.4859 - Iteration Time: 0:00:01.418904
+[6/9, 60/94] Training Loss: 2.4820 - Iteration Time: 0:00:01.423687
+[6/9, 70/94] Training Loss: 2.4723 - Iteration Time: 0:00:01.424886
+[6/9, 80/94] Training Loss: 2.4589 - Iteration Time: 0:00:01.399045
+[6/9, 90/94] Training Loss: 2.4459 - Iteration Time: 0:00:01.393078
+Testing - 2024-06-17 22:50:27.914771
+[6/9, 2/16]
+[6/9, 4/16]
+[6/9, 6/16]
+[6/9, 8/16]
+[6/9, 10/16]
+[6/9, 12/16]
+[6/9, 14/16]
+[6/9, 16/16]
+Testing Loss: 2.3127 - Epoch Time: 0:02:26.844334
+Training - 2024-06-17 22:50:41.166720
+[7/9, 10/94] Training Loss: 2.4032 - Iteration Time: 0:00:01.407474
+[7/9, 20/94] Training Loss: 2.3809 - Iteration Time: 0:00:01.452106
+[7/9, 30/94] Training Loss: 2.3565 - Iteration Time: 0:00:01.409960
+[7/9, 40/94] Training Loss: 2.3339 - Iteration Time: 0:00:01.391636
+[7/9, 50/94] Training Loss: 2.3081 - Iteration Time: 0:00:01.397526
+[7/9, 60/94] Training Loss: 2.2520 - Iteration Time: 0:00:01.385663
+[7/9, 70/94] Training Loss: 2.2743 - Iteration Time: 0:00:01.409502
+[7/9, 80/94] Training Loss: 2.2683 - Iteration Time: 0:00:01.376777
+[7/9, 90/94] Training Loss: 2.2427 - Iteration Time: 0:00:01.398048
+Testing - 2024-06-17 22:52:54.960871
+[7/9, 2/16]
+[7/9, 4/16]
+[7/9, 6/16]
+[7/9, 8/16]
+[7/9, 10/16]
+[7/9, 12/16]
+[7/9, 14/16]
+[7/9, 16/16]
+Testing Loss: 2.1423 - Epoch Time: 0:02:27.464883
+Training - 2024-06-17 22:53:08.632099
+[8/9, 10/94] Training Loss: 2.2453 - Iteration Time: 0:00:01.392609
+[8/9, 20/94] Training Loss: 2.2092 - Iteration Time: 0:00:01.378733
+[8/9, 30/94] Training Loss: 2.2062 - Iteration Time: 0:00:01.448627
+[8/9, 40/94] Training Loss: 2.1796 - Iteration Time: 0:00:01.403114
+[8/9, 50/94] Training Loss: 2.1748 - Iteration Time: 0:00:01.386655
+[8/9, 60/94] Training Loss: 2.1673 - Iteration Time: 0:00:01.386612
+[8/9, 70/94] Training Loss: 2.1402 - Iteration Time: 0:00:01.369785
+[8/9, 80/94] Training Loss: 2.1464 - Iteration Time: 0:00:01.404025
+[8/9, 90/94] Training Loss: 2.1174 - Iteration Time: 0:00:01.393102
+Testing - 2024-06-17 22:55:22.707850
+[8/9, 2/16]
+[8/9, 4/16]
+[8/9, 6/16]
+[8/9, 8/16]
+[8/9, 10/16]
+[8/9, 12/16]
+[8/9, 14/16]
+[8/9, 16/16]
+Testing Loss: 2.0445 - Epoch Time: 0:02:27.397494
+Training - 2024-06-17 22:55:36.029593
+[9/9, 10/94] Training Loss: 2.0938 - Iteration Time: 0:00:01.382730
+[9/9, 20/94] Training Loss: 2.0970 - Iteration Time: 0:00:01.408559
+[9/9, 30/94] Training Loss: 2.0861 - Iteration Time: 0:00:01.385292
+[9/9, 40/94] Training Loss: 2.0422 - Iteration Time: 0:00:01.439245
+[9/9, 50/94] Training Loss: 2.0356 - Iteration Time: 0:00:01.395606
+[9/9, 60/94] Training Loss: 2.0566 - Iteration Time: 0:00:01.605496
+[9/9, 70/94] Training Loss: 2.0315 - Iteration Time: 0:00:01.406125
+[9/9, 80/94] Training Loss: 2.0050 - Iteration Time: 0:00:01.398564
+[9/9, 90/94] Training Loss: 2.0443 - Iteration Time: 0:00:01.505491
+Testing - 2024-06-17 22:57:50.619110
+[9/9, 2/16]
+[9/9, 4/16]
+[9/9, 6/16]
+[9/9, 8/16]
+[9/9, 10/16]
+[9/9, 12/16]
+[9/9, 14/16]
+[9/9, 16/16]
+Testing Loss: 1.9251 - Epoch Time: 0:02:28.201875
+Training and Testing Finished - Time: 0:22:13.705172
+torch.Size([200, 64, 1, 28, 28])
+torch.Size([200, 64, 1, 28, 28])
+Assembling test data for t-sne projection
+Code Layer Shape: torch.Size([200, 64, 100])
+Code Layer Shape: torch.Size([64, 100])
+-- 1/16 --
+Code Layer Shape: torch.Size([200, 64, 100])
+Code Layer Shape: torch.Size([64, 100])
+-- 2/16 --
+Code Layer Shape: torch.Size([200, 64, 100])
+Code Layer Shape: torch.Size([64, 100])
+-- 3/16 --
+Code Layer Shape: torch.Size([200, 64, 100])
+Code Layer Shape: torch.Size([64, 100])
+-- 4/16 --
+Code Layer Shape: torch.Size([200, 64, 100])
+Code Layer Shape: torch.Size([64, 100])
+-- 5/16 --
+Code Layer Shape: torch.Size([200, 64, 100])
+Code Layer Shape: torch.Size([64, 100])
+-- 6/16 --
+Code Layer Shape: torch.Size([200, 64, 100])
+Code Layer Shape: torch.Size([64, 100])
+-- 7/16 --
+Code Layer Shape: torch.Size([200, 64, 100])
+Code Layer Shape: torch.Size([64, 100])
+-- 8/16 --
+Code Layer Shape: torch.Size([200, 64, 100])
+Code Layer Shape: torch.Size([64, 100])
+-- 9/16 --
+Code Layer Shape: torch.Size([200, 64, 100])
+Code Layer Shape: torch.Size([64, 100])
+-- 10/16 --
+Code Layer Shape: torch.Size([200, 64, 100])
+Code Layer Shape: torch.Size([64, 100])
+-- 11/16 --
+Code Layer Shape: torch.Size([200, 64, 100])
+Code Layer Shape: torch.Size([64, 100])
+-- 12/16 --
+Code Layer Shape: torch.Size([200, 64, 100])
+Code Layer Shape: torch.Size([64, 100])
+-- 13/16 --
+Code Layer Shape: torch.Size([200, 64, 100])
+Code Layer Shape: torch.Size([64, 100])
+-- 14/16 --
+Code Layer Shape: torch.Size([200, 64, 100])
+Code Layer Shape: torch.Size([64, 100])
+-- 15/16 --
+Code Layer Shape: torch.Size([200, 40, 100])
+Code Layer Shape: torch.Size([40, 100])
+-- 16/16 --
+   Labels      0    1      2      3    4  ...   94     95   96     97     98     99
+0       2  0.180  0.0  0.040  0.050  0.0  ...  0.0  0.045  0.0  0.060  0.065  0.095
+1       4  0.075  0.0  0.015  0.085  0.0  ...  0.0  0.055  0.0  0.075  0.085  0.005
+2       7  0.100  0.0  0.010  0.025  0.0  ...  0.0  0.065  0.0  0.080  0.090  0.095
+3       3  0.130  0.0  0.010  0.185  0.0  ...  0.0  0.040  0.0  0.080  0.010  0.105
+4       7  0.070  0.0  0.020  0.035  0.0  ...  0.0  0.050  0.0  0.040  0.065  0.040
+[5 rows x 101 columns]
+Plotting Results Grid
+Plotting Spiking Input MNIST
+Plotting Spiking Input MNIST Animation - 2
+Plotting Spiking Output MNIST
+Plotting Spiking Output MNIST Animation - 2
+Applying UMAP
