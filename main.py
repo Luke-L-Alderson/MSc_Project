@@ -36,8 +36,7 @@ def main():
     torch.backends.cudnn.benchmark = True #TURN OFF WHEN CHANGING ARCHITECTURE    
 
     run = wandb.init()
-    run.name = f"{wandb.config.rate_on} Hz_{wandb.config.rate_off} Hz_{wandb.config.recurrence}"
-    print(wandb.config)
+    run.name = f"{wandb.config.rate_on} Hz_{wandb.config.recurrence} Hz_{wandb.config.noise}"
     """## Define network architecutre and parameters"""
     network_params, input_specs, train_specs = {}, {}, {}
     
@@ -133,8 +132,8 @@ def main():
     tsne = pd.DataFrame(data = features)
     
     tsne.insert(0, "Labels", all_labs) 
-    tsne.to_csv(run.name)
-    print(tsne.head())
+    tsne.to_csv(f"{run.name}_{date}")
+    
     
     print("Plotting Results Grid")
     seen_labels = set()
@@ -281,7 +280,7 @@ if __name__ == '__main__':
           }
   else:
       sweep_config = { #REMEMBER TO CHANGE RUN NAME
-          'name': f'Impact of Recurrency {date}',
+          'name': f'Impact of Noise (6-7) {date}',
           'method': 'grid',
           'metric': {'name': 'Test Loss',
                       'goal': 'minimize'   
@@ -290,11 +289,11 @@ if __name__ == '__main__':
                           'lr': {'values': [1e-4]},
                           'epochs': {'values': [9]},
                           "subset_size": {'values': [10]},
-                          "recurrence": {'values': [0, 0.5, 1, 1.5, 2]}, #1, 0.1, 0.5, 0, 1.25, 1.5, 1.75, 2
+                          "recurrence": {'values': [1]}, #1, 0.1, 0.5, 0, 1.25, 1.5, 1.75, 2
                           "noise": {'values': [0]},
-                          "rate_on": {'values': [25, 75]}, # 25, 50, 75, 100, 125
+                          "rate_on": {'values': [75]}, # 25, 50, 75, 100, 125
                           "rate_off": {'values': [1]},
-                          "num_workers": {'values': [0]}
+                          "num_workers": {'values': [0]} # ADD REC NEURON PARAM
                           }
           }
   
