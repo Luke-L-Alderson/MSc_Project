@@ -7,7 +7,8 @@ date = datetime.now().strftime("%d/%m - %H:%M")
 
 import numpy as np
 import wandb
-from helpers import get_poisson_inputs, build_datasets, build_network, to_np, set_seed, tsne_plt, pca_plt, umap_plt
+from helpers import get_poisson_inputs, build_datasets, build_network,\
+    to_np, set_seed, tsne_plt, pca_plt, umap_plt, save_file
 
 import torch
 # import torch.nn as nn
@@ -58,7 +59,7 @@ def main():
     train_specs["batch_size"] = wandb.config.bs
     train_specs["subset_size"] = wandb.config.subset_size
     train_specs["num_workers"] = wandb.config.num_workers
-    
+    num_rec = wandb.config.num_rec
     
     train_specs["scaler"] = abs(1/((wandb.config.rate_on-wandb.config.rate_off)*(0.001*input_specs["total_time"]/ms))) if wandb.config.rate_on != wandb.config.rate_off else 100000
     
@@ -72,7 +73,7 @@ def main():
     train_dataset, train_loader, test_dataset, test_loader = build_datasets(train_specs)
     
     # build network
-    network, network_params = build_network(device, noise=noise, recurrence=recurrence)
+    network, network_params = build_network(device, noise=noise, recurrence=recurrence, num_rec=num_rec)
     
     # train network
     network, train_loss, test_loss, final_train_loss, final_test_loss = train_network(network, train_loader, test_loader, input_specs, train_specs)
@@ -105,9 +106,7 @@ def main():
     poisson_inputs = get_poisson_inputs(inputs, **input_specs)
     img_spk_recs, img_spk_outs = network(poisson_inputs)
     
-    print(poisson_inputs.shape)
-    print(img_spk_outs.shape)
-    print("Assembling test data for t-sne projection")
+    print("Assembling test data for 2D projection")
     ###
     with torch.no_grad():
        features, all_labs, all_decs, all_orig_ims = [], [], [], []
@@ -132,7 +131,8 @@ def main():
     tsne = pd.DataFrame(data = features)
     
     tsne.insert(0, "Labels", all_labs) 
-    tsne.to_csv(f"{run.name}_{date}")
+    
+    tsne.to_csv(run.name + ".csv")
     
     
     print("Plotting Results Grid")
@@ -203,7 +203,7 @@ def main():
     HTML(anim.to_html5_video())
     anim.save(f"figures/spike_mnist_{labels[input_index]}.gif")
     
-    wandb.log({"Spike Animation": wandb.Video("spike_mnist.gif", fps=4, format="gif")}, commit = False)
+    wandb.log({"Spike Animation": wandb.Video(f"figures/spike_mnist_{labels[input_index]}.gif", fps=4, format="gif")}, commit = False)
     
     print("Plotting Spiking Output MNIST")
     fig, axs = plt.subplots()
@@ -218,15 +218,29 @@ def main():
     fig = plt.figure(facecolor="w", figsize=(10, 5))
     ax = fig.add_subplot(111)
     splt.raster(poisson_inputs[:, input_index].reshape(200, -1), ax, s=1.5, c="black")
+    ax.set_xlim([0, 200])
+    ax.set_ylim([-50, 850])
+    plt.xlabel("Time, ms")
+    plt.ylabel("Neuron Index")
     fig.savefig("figures/input_raster.png")
     
     fig = plt.figure(facecolor="w", figsize=(10, 5))
     ax = fig.add_subplot(111)
     splt.raster(img_spk_outs[:, input_index].reshape(200, -1), ax, s=1.5, c="black")
     ax.set_xlim([0, 200])
-    
+    ax.set_ylim([-50, 850])
+    plt.xlabel("Time, ms")
+    plt.ylabel("Neuron Index")
     fig.savefig("figures/output_raster.png")
     
+    fig = plt.figure(facecolor="w", figsize=(10, 5))
+    ax = fig.add_subplot(111)
+    splt.raster(img_spk_recs[:, input_index].reshape(200, -1), ax, s=1.5, c="black")
+    ax.set_xlim([0, 200])
+    ax.set_ylim([-10, 110])
+    plt.xlabel("Time, ms")
+    plt.ylabel("Neuron Index")
+    fig.savefig("figures/latent_raster.png")    
     # if not os.path.exists(newpath):
     #     os.makedirs(newpath)
         
@@ -258,7 +272,7 @@ def main():
         
 if __name__ == '__main__':  
   
-  test = 0
+  test = 1
   
   if test == 1:
       sweep_config = {
@@ -275,12 +289,13 @@ if __name__ == '__main__':
                           "noise": {'values': [0]},
                           "rate_on": {'values': [1]},
                           "rate_off": {'values': [1]},
-                          "num_workers": {'values': [0]}
+                          "num_workers": {'values': [0]},
+                          "num_rec": {'values': [100]}
                           }
           }
   else:
       sweep_config = { #REMEMBER TO CHANGE RUN NAME
-          'name': f'Impact of Noise (6-7) {date}',
+          'name': f'10 Hz recurrency {date}',
           'method': 'grid',
           'metric': {'name': 'Test Loss',
                       'goal': 'minimize'   
@@ -289,11 +304,12 @@ if __name__ == '__main__':
                           'lr': {'values': [1e-4]},
                           'epochs': {'values': [9]},
                           "subset_size": {'values': [10]},
-                          "recurrence": {'values': [1]}, #1, 0.1, 0.5, 0, 1.25, 1.5, 1.75, 2
+                          "recurrence": {'values': [0, 0.5, 1, 1.5, 2]}, #1, 0.1, 0.5, 0, 1.25, 1.5, 1.75, 2
                           "noise": {'values': [0]},
-                          "rate_on": {'values': [75]}, # 25, 50, 75, 100, 125
+                          "rate_on": {'values': [10]}, # 25, 50, 75, 100, 125
                           "rate_off": {'values': [1]},
-                          "num_workers": {'values': [0]} # ADD REC NEURON PARAM
+                          "num_workers": {'values': [0]},
+                          "num_rec": {'values': [100]} #
                           }
           }
   

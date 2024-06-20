@@ -2,7 +2,9 @@ import numpy as np
 from sklearn.manifold import TSNE
 from sklearn import decomposition
 import os
+import matplotlib as mpl
 from matplotlib import pyplot as plt
+from matplotlib import cm, colors
 import pandas as pd
 from torchvision import datasets, transforms
 from torch.utils.data import DataLoader
@@ -99,7 +101,7 @@ def build_datasets(train_specs): # add subsampling parameeter
     
         return train_dataset, train_loader, test_dataset, test_loader
     
-def build_network(device, noise = 0, recurrence = 1):
+def build_network(device, noise = 0, recurrence = 1, num_rec = 100):
     print("Defining network")
 
     time_params, network_params, oscillation_params, frame_params, \
@@ -113,7 +115,7 @@ def build_network(device, noise = 0, recurrence = 1):
     network_params["R_m"] = 146*Mohm    # not currently used
     network_params["v_th"] = 1          # snn default = 1
     network_params["eta"] = noise        # controls noise amplitude - try adding noise in rec layer
-    network_params["num_rec"] = 100
+    network_params["num_rec"] = num_rec
     network_params["num_latent"] = 8
 
     frame_params["depth"] = 1
@@ -234,19 +236,22 @@ def umap_plt(file):
     features = pd.read_csv(file)
     all_labs = features.iloc[:, 1]
     features = features.iloc[:, 2:-1]
-    
+    f_name = f"UMAPS/umap_{file}.png"
     print("Applying UMAP")
-
-    tsne = UMAP().fit_transform(features)
-    plt.figure(figsize=(10, 6))
-    plt.scatter(tsne[:, 0], tsne[:, 1], c=all_labs, cmap='viridis')
+    umap = UMAP().fit_transform(features)
+    cmap = mpl.colormaps['viridis']
+    plt.figure(figsize=(6, 6))
+    c_range = np.arange(0.5, 10, 1)
+    norm = colors.BoundaryNorm(c_range, cmap.N)
+    plt.scatter(umap[:, 0], umap[:, 1], c=all_labs, cmap=cmap, norm=norm)
     plt.xlabel('UMAP 1')
     plt.ylabel('UMAP 2')
-    plt.colorbar(label='Digit Class')
-    plt.savefig(f"umap_{file}.png")
+    plt.colorbar(label='Digit Class', ticks=c_range-0.5)
+    plt.savefig(f_name)
+    
     plt.title(file)
     plt.show()
-    return f"umap_{file}.png"
+    return f_name
 
 def pca_plt(file):
     features = pd.read_csv(file)
@@ -326,3 +331,14 @@ class rmse_count_loss():
 #     inputs[bon_locs] = inputs[bon_locs]*bin_prob_on
 #     poisson_input = snn.spikegen.rate(inputs, num_steps=num_steps) # default: inputs = data
 #     return poisson_input
+
+def save_file(df, directory, file):
+    outname = file
+
+    outdir = directory
+    if not os.path.exists(outdir):
+        os.mkdir(outdir)
+    
+    fullname = os.path.join(outdir, outname)    
+    
+    df.to_csv(fullname)

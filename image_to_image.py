@@ -91,7 +91,7 @@ class SAE(nn.Module):
             curr_rec = self.ff_rec(spk_rec)
             curr_total = curr_in + self.recurrence*curr_rec
             spk_rec, mem_rec = self.net_rec(curr_total, mem_rec) #can set curr_total to curr_in, param in front
-            #print(mem_rec)
+
             mem_rec += noise_amp*torch.randn(mem_rec.shape, device = self.device)
             
             curr_out = self.ff_out(spk_rec)

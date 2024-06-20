@@ -920,3 +920,109 @@ figures/output_raster.png
 figures/result_summary.png
 figures/spike_mnist_2.gif
 figures/spike_mnistrec_2.gif
+1 Hz_1 Hz_0
+__pycache__/helpers.cpython-312.pyc
+datafiles/1 Hz_1 Hz_1
+datafiles/1 Hz_100 Hz_1
+datafiles/1 Hz_150 Hz_1
+datafiles/1 Hz_200 Hz_1
+datafiles/1 Hz_50 Hz_1
+datafiles/10 Hz_1 Hz_1
+datafiles/100 Hz_1 Hz_1
+datafiles/100 Hz_100 Hz_1
+datafiles/100 Hz_150 Hz_1
+datafiles/100 Hz_200 Hz_1
+datafiles/100 Hz_50 Hz_1
+datafiles/125 Hz_1 Hz_1
+datafiles/15 Hz_1 Hz_0
+datafiles/15 Hz_1 Hz_0.5
+datafiles/15 Hz_1 Hz_1
+datafiles/15 Hz_1 Hz_1.5
+datafiles/15 Hz_1 Hz_2
+datafiles/150 Hz_1 Hz_1
+datafiles/150 Hz_100 Hz_1
+datafiles/150 Hz_150 Hz_1
+datafiles/150 Hz_200 Hz_1
+datafiles/150 Hz_50 Hz_1
+datafiles/175 Hz_1 Hz_1
+datafiles/20 Hz_1 Hz_1
+datafiles/200 Hz_1 Hz_1
+datafiles/200 Hz_100 Hz_1
+datafiles/200 Hz_150 Hz_1
+datafiles/200 Hz_200 Hz_1
+datafiles/200 Hz_50 Hz_1
+datafiles/25 Hz_1 Hz_1
+datafiles/5 Hz_1 Hz_1
+datafiles/50 Hz_1 Hz_1
+datafiles/50 Hz_100 Hz_1
+datafiles/50 Hz_150 Hz_1
+datafiles/50 Hz_200 Hz_1
+datafiles/50 Hz_50 Hz_1
+datafiles/75 Hz_0 Hz_0
+datafiles/75 Hz_0 Hz_0.1
+datafiles/75 Hz_0 Hz_0.5
+datafiles/75 Hz_0 Hz_1
+datafiles/75 Hz_0 Hz_10
+datafiles/75 Hz_0 Hz_2
+datafiles/75 Hz_0 Hz_3
+datafiles/75 Hz_0 Hz_4
+datafiles/75 Hz_0 Hz_5
+datafiles/75 Hz_0 Hz_6
+datafiles/75 Hz_0 Hz_6.2
+datafiles/75 Hz_0 Hz_6.4
+datafiles/75 Hz_0 Hz_6.6
+datafiles/75 Hz_0 Hz_6.8
+datafiles/75 Hz_0 Hz_7
+datafiles/75 Hz_0 Hz_8
+datafiles/75 Hz_0 Hz_9
+datafiles/75 Hz_1 Hz_0
+datafiles/75 Hz_1 Hz_0.1
+datafiles/75 Hz_1 Hz_0.25
+datafiles/75 Hz_1 Hz_0.5
+datafiles/75 Hz_1 Hz_0.75
+datafiles/75 Hz_1 Hz_1
+datafiles/75 Hz_1 Hz_1.5
+datafiles/75 Hz_1 Hz_10
+datafiles/75 Hz_1 Hz_2
+datafiles/75 Hz_1 Hz_3
+datafiles/75 Hz_1 Hz_4
+datafiles/75 Hz_1 Hz_5
+datafiles/75 Hz_1 Hz_6
+datafiles/75 Hz_1 Hz_6.2
+datafiles/75 Hz_1 Hz_6.4
+datafiles/75 Hz_1 Hz_6.6
+datafiles/75 Hz_1 Hz_6.8
+datafiles/75 Hz_1 Hz_7
+datafiles/75 Hz_1 Hz_8
+datafiles/75 Hz_1 Hz_9
+datafiles/75 Hz_10 Hz_1
+datafiles/rates heatmap data.csv
+datafiles/rates heatmap data2.csv
+figures/input_raster.png
+figures/output_raster.png
+figures/result_summary.png
+figures/spike_mnistrec_1.gif
+*.png
+*.log
+*.json
+*.yaml
+*.wandb
+*.txt
+*.gif
+*.png
+*.png
+*.gif
+15 Hz_0 Hz_0
+5 Hz_0 Hz_0
+5 Hz_0.5 Hz_0
+5 Hz_1 Hz_0
+5 Hz_1.5 Hz_0
+5 Hz_2 Hz_0
+*.png
+*.gif
+figures/input_raster.png
+figures/output_raster.png
+figures/result_summary.png
+figures/spike_mnist_2.gif
+figures/spike_mnistrec_1.gif
+figures/spike_mnistrec_2.gif
