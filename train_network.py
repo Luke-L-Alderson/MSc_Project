@@ -33,11 +33,11 @@ def train_network(network, train_loader, test_loader, input_specs, train_specs):
             if i == early_stop+1:
                 print("Stopped early")
                 break
-   
-            train_inputs = get_poisson_inputs(train_inputs, **input_specs).to(device)
-
+            #print(train_inputs.shape)
+            #train_inputs = get_poisson_inputs(train_inputs, **input_specs).to(device)
+            train_inputs = train_inputs.transpose(0,1).to(device)
             optimizer.zero_grad()
-
+            #print(train_inputs.shape)
             train_spk_recs, train_spk_outs  = network(train_inputs)
 
             train_loss = loss_fn(train_spk_recs, train_spk_outs, train_inputs)*train_specs["scaler"]
@@ -61,8 +61,8 @@ def train_network(network, train_loader, test_loader, input_specs, train_specs):
                 if j == early_stop+1:
                     print("Stopped early")
                     break
-                
-                test_inputs = get_poisson_inputs(test_inputs, **input_specs).to(device)
+                test_inputs = test_inputs.transpose(0,1).to(device)
+                #test_inputs = get_poisson_inputs(test_inputs, **input_specs).to(device)
                 test_spk_recs, test_spk_outs  = network(test_inputs)
                 #test_loss = F.mse_loss(torch.sum(train_spk_outs, 0), torch.sum(train_inputs, 0))
                 test_loss = loss_fn(test_spk_recs, test_spk_outs, test_inputs)*train_specs["scaler"]

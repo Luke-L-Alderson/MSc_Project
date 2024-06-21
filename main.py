@@ -8,7 +8,7 @@ date = datetime.now().strftime("%d/%m - %H:%M")
 import numpy as np
 import wandb
 from helpers import get_poisson_inputs, build_datasets, build_network,\
-    to_np, set_seed, tsne_plt, pca_plt, umap_plt, save_file
+    to_np, set_seed, umap_plt
 
 import torch
 # import torch.nn as nn
@@ -69,8 +69,8 @@ def main():
     
     print(f'Starting Sweep: Batch Size: {train_specs["batch_size"]}, Learning Rate: {train_specs["lr"]}')
     
-    # build dataset and loaders
-    train_dataset, train_loader, test_dataset, test_loader = build_datasets(train_specs)
+    # build dataset and loaders, include input specs to try Poisson Transform
+    train_dataset, train_loader, test_dataset, test_loader = build_datasets(train_specs, input_specs)
     
     # build network
     network, network_params = build_network(device, noise=noise, recurrence=recurrence, num_rec=num_rec)
@@ -84,7 +84,7 @@ def main():
     
     for image, label in train_dataset:
         if label not in seen_labels:
-            unique_images.append((image, label))
+            unique_images.append((image.mean(0), label))
             seen_labels.add(label)
     
     unique_images.sort(key=lambda x: x[1])
@@ -101,18 +101,16 @@ def main():
     
     plt.tight_layout()
        
-    # Plot originally input as image and as spiking representation - save gif.
-    inputs, labels = next(iter(test_loader))
-    poisson_inputs = get_poisson_inputs(inputs, **input_specs)
-    img_spk_recs, img_spk_outs = network(poisson_inputs)
+
     
     print("Assembling test data for 2D projection")
     ###
     with torch.no_grad():
        features, all_labs, all_decs, all_orig_ims = [], [], [], []
        for i,(data, labs) in enumerate(test_loader, 1):
-           data = get_poisson_inputs(data, **input_specs)
+           #data = get_poisson_inputs(data, **input_specs)
            #print(input_specs)
+           data = data.transpose(0, 1)
            code_layer, decoded = network(data)
            code_layer = code_layer.mean(0)
            features.append(to_np(code_layer))#.view(-1, code_layer.shape[1])))
@@ -132,7 +130,7 @@ def main():
     
     tsne.insert(0, "Labels", all_labs) 
     
-    tsne.to_csv(run.name + ".csv")
+    tsne.to_csv(run.name+".csv")
     
     
     print("Plotting Results Grid")
@@ -186,20 +184,24 @@ def main():
     fig.savefig("figures/result_summary.png")
     
     print("Plotting Spiking Input MNIST")
-    # img
+    # Plot originally input as image and as spiking representation - save gif.
+    inputs, labels = next(iter(test_loader))
+    inputs = inputs.transpose(0,1)
+    img_spk_recs, img_spk_outs = network(inputs)
+    
     input_index = 0
-    poisson_inputs = poisson_inputs.squeeze().cpu()
+    inputs = inputs.squeeze().cpu()
     img_spk_outs = img_spk_outs.squeeze().detach().cpu()
     
-    fig, ax = plt.subplots()
-    plt.imshow(to_np(inputs[input_index, 0]), cmap = 'grey')
+    # fig, ax = plt.subplots()
+    # plt.imshow(to_np(inputs[input_index, 0]), cmap = 'grey')
     
-    fig, ax = plt.subplots()
-    plt.imshow(poisson_inputs[:, input_index].mean(axis=0), cmap='grey')
+    # fig, ax = plt.subplots()
+    # plt.imshow(inputs[:, input_index].mean(axis=0), cmap='grey')
     
     print(f"Plotting Spiking Input MNIST Animation - {labels[input_index]}")
     fig, ax = plt.subplots()
-    anim = splt.animator(poisson_inputs[:, input_index], fig, ax)
+    anim = splt.animator(inputs[:, input_index], fig, ax)
     HTML(anim.to_html5_video())
     anim.save(f"figures/spike_mnist_{labels[input_index]}.gif")
     
@@ -214,41 +216,23 @@ def main():
     animrec = splt.animator(img_spk_outs[:, input_index], fig1, ax1)
     HTML(animrec.to_html5_video())
     animrec.save(f"figures/spike_mnistrec_{labels[input_index]}.gif")
+      
+    print("Rasters")
+    fig = plt.figure(facecolor="w", figsize=(10, 10))
+    ax1 = plt.subplot(3, 1, 1)
+    splt.raster(inputs[:, input_index].reshape(200, -1), ax1, s=1.5, c="black")
+    ax2 = plt.subplot(3, 1, 2)
+    splt.raster(img_spk_recs[:, input_index].reshape(200, -1), ax2, s=1.5, c="black")
+    ax3 = plt.subplot(3, 1, 3)
+    splt.raster(img_spk_outs[:, input_index].reshape(200, -1), ax3, s=1.5, c="black")
     
-    fig = plt.figure(facecolor="w", figsize=(10, 5))
-    ax = fig.add_subplot(111)
-    splt.raster(poisson_inputs[:, input_index].reshape(200, -1), ax, s=1.5, c="black")
-    ax.set_xlim([0, 200])
-    ax.set_ylim([-50, 850])
-    plt.xlabel("Time, ms")
-    plt.ylabel("Neuron Index")
-    fig.savefig("figures/input_raster.png")
+    ax1.set(xlim=[0, 200], ylim=[-50, 850], xticks=[], ylabel="Neuron Index")
+    ax2.set(xlim=[0, 200], ylim=[-10, 110], xticks=[], ylabel="Neuron Index")
+    ax3.set(xlim=[0, 200], ylim=[-50, 850], ylabel="Neuron Index", xlabel="Time, ms")
+    fig.tight_layout()
+    fig.savefig("figures/rasters.png") 
     
-    fig = plt.figure(facecolor="w", figsize=(10, 5))
-    ax = fig.add_subplot(111)
-    splt.raster(img_spk_outs[:, input_index].reshape(200, -1), ax, s=1.5, c="black")
-    ax.set_xlim([0, 200])
-    ax.set_ylim([-50, 850])
-    plt.xlabel("Time, ms")
-    plt.ylabel("Neuron Index")
-    fig.savefig("figures/output_raster.png")
-    
-    fig = plt.figure(facecolor="w", figsize=(10, 5))
-    ax = fig.add_subplot(111)
-    splt.raster(img_spk_recs[:, input_index].reshape(200, -1), ax, s=1.5, c="black")
-    ax.set_xlim([0, 200])
-    ax.set_ylim([-10, 110])
-    plt.xlabel("Time, ms")
-    plt.ylabel("Neuron Index")
-    fig.savefig("figures/latent_raster.png")    
-    # if not os.path.exists(newpath):
-    #     os.makedirs(newpath)
-        
-    umap_file = umap_plt(run.name)    
-    #tsne_file = tsne_plt(run.name)
-
-    #pca_file = pca_plt(run.name)
-    #sns.scatterplot(tsne, x="Feat" "" hue="label")
+    umap_file = umap_plt(run.name+".csv")
     
     wandb.log({"Test Loss": final_test_loss,
                "Results Grid": wandb.Image("figures/result_summary.png"),
@@ -257,8 +241,8 @@ def main():
                "UMAP": wandb.Image(umap_file),
                #"PCA": wandb.Image(pca_file),
                "Spike Animation": wandb.Video(f"figures/spike_mnistrec_{labels[input_index]}.gif", fps=4, format="gif"),
-               "Input Raster": wandb.Image("figures/input_raster.png"),
-               "Output Raster": wandb.Image("figures/output_raster.png")})
+               "Raster": wandb.Image("figures/rasters.png")
+               })
     
     
     
@@ -287,7 +271,7 @@ if __name__ == '__main__':
                           "subset_size": {'values': [100]},
                           "recurrence": {'values': [1]},
                           "noise": {'values': [0]},
-                          "rate_on": {'values': [1]},
+                          "rate_on": {'values': [75]},
                           "rate_off": {'values': [1]},
                           "num_workers": {'values': [0]},
                           "num_rec": {'values': [100]}

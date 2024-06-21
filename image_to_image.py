@@ -75,7 +75,7 @@ class SAE(nn.Module):
             recorded = {key: [] for key in recorded_vars}
 
         for timestep in range(self.time_params["num_timesteps"]):
-            
+            #print(f"Size of input: {x.shape}")
             # convolution (encoder) - layer 1
             curr_conv1 = self.conv1(x[timestep])
             spk_conv1, mem_conv1 = self.lif_conv1(curr_conv1, mem_conv1)
