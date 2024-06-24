@@ -209,7 +209,7 @@ def main_ns():
         
 if __name__ == '__main__':  
   
-  test = 1
+  test = 0
   
   if test == 1:
       sweep_config = {
