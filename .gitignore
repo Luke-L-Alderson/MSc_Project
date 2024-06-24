@@ -1026,3 +1026,7 @@ figures/result_summary.png
 figures/spike_mnist_2.gif
 figures/spike_mnistrec_1.gif
 figures/spike_mnistrec_2.gif
+*.csv
+*.gif
+/figures
+/figures

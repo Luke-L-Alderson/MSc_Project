@@ -4,7 +4,7 @@
 #importing module
 from datetime import datetime
 date = datetime.now().strftime("%d/%m - %H:%M")
-
+from image_to_image import CAE
 import numpy as np
 import wandb
 from helpers import get_poisson_inputs, build_datasets, build_network,\
@@ -17,11 +17,11 @@ from brian2 import *
 from matplotlib import pyplot as plt
 import pandas as pd
 import seaborn as sns
-from train_network import train_network
+from train_network import train_network, train_network_ns
 
 import gc
     
-def main():
+def main_ns():
     device = torch.device("cuda") if torch.cuda.is_available() else torch.device("cpu")
     print("Using CUDA") if torch.cuda.is_available() else print("Using CPU")
     set_seed()
@@ -30,9 +30,15 @@ def main():
     run = wandb.init()
     run.name = f"{wandb.config.rate_on} Hz_{wandb.config.num_rec} Hz_{wandb.config.noise}"
     """## Define network architecutre and parameters"""
-    network_params, input_specs, train_specs = {}, {}, {}
+    network_params, input_specs, train_specs, convolution_params = {}, {}, {}, {}
     
     # Parameters for use in training
+    
+    convolution_params["channels_1"] = 12
+    convolution_params["filter_1"] = 3
+    convolution_params["channels_2"] = 64
+    convolution_params["filter_2"] = 3
+    
     input_specs["rate_on"] = wandb.config.rate_on*Hz
     input_specs["rate_off"] = wandb.config.rate_off*Hz    
     input_specs["total_time"] = 200*ms
@@ -61,13 +67,13 @@ def main():
     print(f'Starting Sweep: Batch Size: {train_specs["batch_size"]}, Learning Rate: {train_specs["lr"]}')
     
     # Build dataset and loaders
-    train_dataset, train_loader, test_dataset, test_loader = build_datasets(train_specs, input_specs)
+    train_dataset, train_loader, test_dataset, test_loader = build_datasets(train_specs)
     
     # Build network
-    network, network_params = build_network(device, noise=noise, recurrence=recurrence, num_rec=num_rec)
+    network = CAE(num_rec=num_rec, cp=convolution_params, recurrence=recurrence).to(device)
     
     # Train network
-    network, train_loss, test_loss, final_train_loss, final_test_loss = train_network(network, train_loader, test_loader, input_specs, train_specs)
+    network, train_loss, test_loss, final_train_loss, final_test_loss = train_network_ns(network, train_loader, test_loader, train_specs)
 
     # Plot examples from MNIST
     unique_images = []
@@ -75,7 +81,7 @@ def main():
     
     for image, label in train_dataset:
         if label not in seen_labels:
-            unique_images.append((image.mean(0), label))
+            unique_images.append((image, label))
             seen_labels.add(label)
     
     unique_images.sort(key=lambda x: x[1])
@@ -97,15 +103,12 @@ def main():
     with torch.no_grad():
         features, all_labs, all_decs, all_orig_ims = [], [], [], []
         for i,(data, labs) in enumerate(test_loader, 1):
-            #data = get_poisson_inputs(data, **input_specs)
-            #print(input_specs)
-            data = data.transpose(0, 1)
+            data = data.to(device)
             code_layer, decoded = network(data)
-            code_layer = code_layer.mean(0)
-            features.append(to_np(code_layer))#.view(-1, code_layer.shape[1])))
+            features.append(to_np(code_layer))
             all_labs.append(labs)
-            all_decs.append(decoded.mean(0).squeeze().cpu())
-            all_orig_ims.append(data.mean(0).squeeze())
+            all_decs.append(decoded.squeeze().cpu())
+            all_orig_ims.append(data.squeeze().cpu())
            
             if i % 1 == 0:
                 print(f'-- {i}/{len(test_loader)} --')
@@ -176,53 +179,23 @@ def main():
     # Plot originally input as image and as spiking representation - save gif.
     input_index = 0
     inputs, labels = test_dataset[input_index]
+    inputs = inputs.unsqueeze(0)
     img_spk_recs, img_spk_outs = network(inputs)
     inputs = inputs.squeeze().cpu()
     
     img_spk_outs = img_spk_outs.squeeze().detach().cpu()
     
-    print(f"Plotting Spiking Input MNIST Animation - {labels}")
-    fig, ax = plt.subplots()
-    anim = splt.animator(inputs, fig, ax)
-    HTML(anim.to_html5_video())
-    anim.save(f"figures/spike_mnist_{labels}.gif")
-    
-    wandb.log({"Spike Animation": wandb.Video(f"figures/spike_mnist_{labels}.gif", fps=4, format="gif")}, commit = False)
-    
+        
     print("Plotting Spiking Output MNIST")
     fig, axs = plt.subplots()
-    axs.imshow(img_spk_outs.mean(axis=0), cmap='grey')
-    
-    print(f"Plotting Spiking Output MNIST Animation - {labels}")
-    fig1, ax1 = plt.subplots()
-    animrec = splt.animator(img_spk_outs, fig1, ax1)
-    HTML(animrec.to_html5_video())
-    animrec.save(f"figures/spike_mnistrec_{labels}.gif")
-      
-    print("Rasters")
-    fig = plt.figure(facecolor="w", figsize=(10, 10))
-    ax1 = plt.subplot(3, 1, 1)
-    splt.raster(inputs.reshape(200, -1), ax1, s=1.5, c="black")
-    ax2 = plt.subplot(3, 1, 2)
-    splt.raster(img_spk_recs.reshape(200, -1), ax2, s=1.5, c="black")
-    ax3 = plt.subplot(3, 1, 3)
-    splt.raster(img_spk_outs.reshape(200, -1), ax3, s=1.5, c="black")
-    
-    ax1.set(xlim=[0, 200], ylim=[-50, 850], xticks=[], ylabel="Neuron Index")
-    ax2.set(xlim=[0, 200], ylim=[0-round(num_rec*0.1), round(num_rec*1.1)], xticks=[], ylabel="Neuron Index")
-    ax3.set(xlim=[0, 200], ylim=[-50, 850], ylabel="Neuron Index", xlabel="Time, ms")
-    fig.tight_layout()
-    fig.savefig("figures/rasters.png") 
-    
+    axs.imshow(img_spk_outs, cmap='grey')
+          
     umap_file = umap_plt("./datafiles/"+run.name+".csv")
     
     wandb.log({"Test Loss": final_test_loss,
                 "Results Grid": wandb.Image("figures/result_summary.png"),
-                "UMAP": wandb.Image(umap_file),
-                "Spike Animation": wandb.Video(f"figures/spike_mnistrec_{labels}.gif", fps=4, format="gif"),
-                "Raster": wandb.Image("figures/rasters.png")
+                "UMAP": wandb.Image(umap_file)
                 })
-    
     
     
     del network, train_loss, test_loss, final_train_loss, final_test_loss, \
@@ -240,7 +213,7 @@ if __name__ == '__main__':
   
   if test == 1:
       sweep_config = {
-          'name': f'Test Sweep {date}',
+          'name': f'ns_Test Sweep {date}',
           'method': 'grid',
           'metric': {'name': 'Test Loss',
                       'goal': 'minimize'   
@@ -259,7 +232,7 @@ if __name__ == '__main__':
           }
   else:
       sweep_config = { #REMEMBER TO CHANGE RUN NAME
-          'name': f'Code Layer Neuron Count (25-50) {date}',
+          'name': f'NSCAE Baseline Run {date}',
           'method': 'grid',
           'metric': {'name': 'Test Loss',
                       'goal': 'minimize'   
@@ -268,18 +241,18 @@ if __name__ == '__main__':
                           'lr': {'values': [1e-4]},
                           'epochs': {'values': [9]},
                           "subset_size": {'values': [10]},
-                          "recurrence": {'values': [1]}, #1, 0.1, 0.5, 0, 1.25, 1.5, 1.75, 2
+                          "recurrence": {'values': [1]},
                           "noise": {'values': [0]},
-                          "rate_on": {'values': [75]}, # 25, 50, 75, 100, 125
+                          "rate_on": {'values': [75]},
                           "rate_off": {'values': [1]},
                           "num_workers": {'values': [0]},
-                          "num_rec": {'values': [25, 30, 35, 40, 45, 50]} #
+                          "num_rec": {'values': [100]} #
                           }
           }
   
   
   sweep_id = wandb.sweep(sweep = sweep_config, project = "MSc Project", entity="lukelalderson")
       
-  wandb.agent(sweep_id, function=main)
+  wandb.agent(sweep_id, function=main_ns)
   
   torch.cuda.empty_cache()

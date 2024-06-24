@@ -169,7 +169,7 @@ def umap_plt(file, w=6, h=6):
     plt.ylabel('UMAP 2')
     plt.colorbar(label='Digit Class', ticks=c_range-0.5)
     plt.savefig(f_name)
-    plt.title(file)
+    plt.title(tail[1])
     plt.show()
     return f_name
     

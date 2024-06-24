@@ -142,13 +142,15 @@ class SAE(nn.Module):
         return netp["beta"], netp["num_rec"], netp["num_latent"], fp["depth"], netp["num_conv2"]
 
 class CAE(nn.Module):
-    def __init__(self, tp, netp, fp, cp, device, recurrence):
+    def __init__(self, num_rec, cp, recurrence):
         super().__init__()
-        self.device = device
         self.recurrence = recurrence
-        
-        # Process parameter dicts
-        beta, num_rec, num_latent, depth, num_conv2 = self.process_params(tp, netp, fp, cp)
+        self.convolution_params = cp
+        im_dim = 28
+        cp["conv1_size"] = im_dim - cp["filter_1"] + 1
+        cp["conv2_size"] = cp["conv1_size"] - cp["filter_2"] + 1
+        num_conv2 = int(cp["conv2_size"]*cp["conv2_size"]*cp["channels_2"])
+        depth = 1
         
         # Convolution (encoder) - Input size: [batch_size, depth, 28, 28]
         self.conv1 = nn.Conv2d(depth, cp["channels_1"], (cp["filter_1"], cp["filter_1"]))
@@ -165,45 +167,19 @@ class CAE(nn.Module):
         self.reconstruction = nn.ConvTranspose2d(cp["channels_1"], depth, (cp["filter_1"], cp["filter_1"]))
         
     def forward(self, x):
-        num_rec, num_conv2, channels_1, conv1_size, channels_2, conv2_size = (
-            self.network_params["num_rec"], self.network_params["num_conv2"],
-            self.convolution_params["channels_1"], self.convolution_params["conv1_size"],
-            self.convolution_params["channels_2"], self.convolution_params["conv2_size"]
-        )
-        print(x.shape)
-        # Convolution (encoder) - layer 1
+        channels_2, conv2_size = self.convolution_params["channels_2"], self.convolution_params["conv2_size"]
+        try:
+          x = x.type(torch.cuda.FloatTensor)
+        except:
+          x = x.type(torch.FloatTensor)
+        
         x = F.relu(self.conv1(x))
-        print(x.shape)
-        # Convolution (encoder) - layer 2
         x = F.relu(self.conv2(x))
-        print(x.shape)
-        # Recurrent layer (encoder)
         x = x.view(x.size(0), -1)
-        print(x.shape)
-        x = F.relu(self.ff_in(x) + self.recurrence * self.ff_rec(x))
-        print(x.shape)
-        # Fully connected output
-        x = F.relu(self.ff_out(x))
-        print(x.shape)
-        x = x.view(x.size(0), channels_2, conv2_size, conv2_size)
-        print(x.shape)
-        # Convolution (decoder) - undo layer 2
-        x = F.relu(self.deconv2(x))
-        print(x.shape)
-        # Convolution (decoder) - undo layer 1
-        x = F.relu(self.reconstruction(x))
-        print(x.shape)
-        return x
-    
-    def process_params(self, tp, netp, fp, cp):
-        netp["beta"] = np.exp(-tp["dt"]/netp["tau_m"])
-        netp["noise_amplitude"] = netp["eta"] * np.sqrt((1 - np.exp(-2*tp["dt"]/netp["tau_m"]))/2)
-        tp["num_timesteps"] = int(tp["total_time"]/tp["dt"])
-        
-        cp["conv1_size"] = fp["size"] - cp["filter_1"] + 1
-        cp["conv2_size"] = cp["conv1_size"] - cp["filter_2"] + 1
-        netp["num_conv1"] = int(cp["conv1_size"] * cp["conv1_size"] * cp["channels_1"])
-        netp["num_conv2"] = int(cp["conv2_size"] * cp["conv2_size"] * cp["channels_2"])
-        
-        self.time_params, self.network_params, self.frame_params, self.convolution_params = tp, netp, fp, cp
-        return netp["beta"], netp["num_rec"], netp["num_latent"], fp["depth"], netp["num_conv2"]
+        x = F.relu(self.ff_in(x))
+        x_out = F.relu(self.ff_out(x))
+        x_out = x_out.view(x_out.size(0), channels_2, conv2_size, conv2_size)
+        x_out = F.relu(self.deconv2(x_out))
+        x_out = F.relu(self.reconstruction(x_out))
+
+        return x, x_out
