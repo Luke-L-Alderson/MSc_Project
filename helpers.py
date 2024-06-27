@@ -1,6 +1,7 @@
 import numpy as np
 from sklearn.manifold import TSNE
 from sklearn import decomposition
+from sklearn.metrics import davies_bouldin_score, silhouette_score
 import os
 import matplotlib as mpl
 from matplotlib import pyplot as plt
@@ -159,7 +160,7 @@ def umap_plt(file, w=6, h=6):
     tail = os.path.split(file)
     f_name = f"UMAPS/umap_{tail[1]}.png"
     print("Applying UMAP")
-    umap = UMAP().fit_transform(features)
+    umap = UMAP(n_components=2).fit_transform(features)
     cmap = mpl.colormaps['viridis']
     plt.figure(figsize=(w, h))
     c_range = np.arange(0.5, 10, 1)
@@ -171,7 +172,12 @@ def umap_plt(file, w=6, h=6):
     plt.savefig(f_name)
     plt.title(tail[1])
     plt.show()
-    return f_name
+    
+    print("Calculating Cluster Scores - S/D-B")
+    sil_score = silhouette_score(umap, all_labs)
+    db_score = davies_bouldin_score(umap, all_labs)
+    
+    return f_name, sil_score, db_score
     
 def get_poisson_inputs(inputs, total_time, bin_size, rate_on, rate_off):
     num_steps = int(total_time/bin_size)
@@ -184,11 +190,57 @@ class rmse_count_loss():
     def __init__(self, lambda_rate, lambda_weights):  
         self.lambda_r = lambda_rate
         self.lambda_w = lambda_weights
-        self.__name__ = "mse_count_loss"
+        self.__name__ = "rmse_count_loss"
         
-    def __call__(self, spk_recs, spk_outs, targets):
-        spike_count = torch.sum(spk_outs, 0)
-        target_spike_count = torch.sum(targets, 0)
+    def __call__(self, spk_recs, outputs, inputs):
+        spike_count = torch.sum(outputs, 0)
+        target_spike_count = torch.sum(inputs, 0)
         loss_fn = nn.MSELoss()
+        loss = torch.sqrt(loss_fn(spike_count, target_spike_count)) + self.lambda_r*torch.sum(spk_recs)
+        return loss
+
+'''
+Implements the normalised MSE by dividing the MSE by the sum  of squares of the input.
+This is equivalent to normalising the RMSE by the L2 Norm of the input.
+'''    
+class nmse_count_loss():
+    def __init__(self, lambda_rate=0, ntype = None):  
+        self.lambda_r = lambda_rate
+        self.__name__ = "nrmse_count_loss"
+        self.ntype = ntype
+    def __call__(self, outputs, inputs, spk_recs=torch.tensor(0)):
+        
+        # make it agnostic to spiking or non-spiking tensors
+        spike_count = torch.sum(outputs, 0) if outputs.dim() > 4 else outputs
+        target_spike_count = torch.sum(inputs, 0) if inputs.dim() > 4 else inputs
+        loss_fn = nn.MSELoss()
+        
+        if self.ntype == None:
+            loss = torch.sqrt(loss_fn(spike_count, target_spike_count)) + self.lambda_r*torch.sum(spk_recs)
+        
+        if self.ntype == "norm":
+            loss_fn = nn.MSELoss(reduction="sum")
+            loss = loss_fn(spike_count, target_spike_count)/loss_fn(torch.zeros_like(spike_count), target_spike_count) + self.lambda_r*torch.sum(spk_recs)
+        
+        elif self.ntype == "range":
+            loss = torch.sqrt(loss_fn(spike_count, target_spike_count))/(torch.max(target_spike_count) - torch.min(target_spike_count)) + self.lambda_r*torch.sum(spk_recs)
+        
+        elif self.ntype == "mean":
+            loss = torch.sqrt(loss_fn(spike_count, target_spike_count))/torch.mean(target_spike_count) + self.lambda_r*torch.sum(spk_recs)      
+        
+        else:
+            Exception("Enter valid string: norm, range, or mean.")
+        
+        return loss
+    
+class mae_count_loss():
+    def __init__(self, lambda_rate=0):  
+        self.lambda_r = lambda_rate
+        self.__name__ = "rmse_count_loss"
+        
+    def __call__(self, spk_recs, outputs, inputs):
+        spike_count = torch.sum(outputs, 0)
+        target_spike_count = torch.sum(inputs, 0)
+        loss_fn = nn.L1Loss()
         loss = torch.sqrt(loss_fn(spike_count, target_spike_count)) + self.lambda_r*torch.sum(spk_recs)
         return loss
