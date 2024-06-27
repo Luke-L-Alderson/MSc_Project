@@ -28,7 +28,7 @@ def main_ns():
     torch.backends.cudnn.benchmark = True #TURN OFF WHEN CHANGING ARCHITECTURE    
 
     run = wandb.init()
-    run.name = f"{wandb.config.rate_on} Hz_{wandb.config.num_rec} Hz_{wandb.config.noise}"
+    run.name = f"{wandb.config.rate_on} Hz_{wandb.config.norm_type} Hz_{wandb.config.noise}"
     """## Define network architecutre and parameters"""
     network_params, input_specs, train_specs, convolution_params = {}, {}, {}, {}
     
@@ -56,6 +56,8 @@ def main_ns():
     train_specs["batch_size"] = wandb.config.bs
     train_specs["subset_size"] = wandb.config.subset_size
     train_specs["num_workers"] = wandb.config.num_workers
+    
+    train_specs["norm_type"] = wandb.config.norm_type
     num_rec = wandb.config.num_rec
     
     train_specs["scaler"] = abs(1/((wandb.config.rate_on-wandb.config.rate_off)*(0.001*input_specs["total_time"]/ms))) if wandb.config.rate_on != wandb.config.rate_off else 100000
@@ -190,7 +192,7 @@ def main_ns():
     fig, axs = plt.subplots()
     axs.imshow(img_spk_outs, cmap='grey')
           
-    umap_file = umap_plt("./datafiles/"+run.name+".csv")
+    umap_file, sil_score, db_score = umap_plt("./datafiles/"+run.name+".csv")
     
     wandb.log({"Test Loss": final_test_loss,
                 "Results Grid": wandb.Image("figures/result_summary.png"),
@@ -227,12 +229,13 @@ if __name__ == '__main__':
                           "rate_on": {'values': [75]},
                           "rate_off": {'values': [1]},
                           "num_workers": {'values': [0]},
-                          "num_rec": {'values': [100]}
+                          "num_rec": {'values': [100]},
+                          "norm_type": {'values': ["norm", "range", "mean", None]}
                           }
           }
   else:
       sweep_config = { #REMEMBER TO CHANGE RUN NAME
-          'name': f'NSCAE Baseline Run {date}',
+          'name': f'ns_Assessing different Normalisation - No Scaler {date}',
           'method': 'grid',
           'metric': {'name': 'Test Loss',
                       'goal': 'minimize'   
@@ -246,7 +249,8 @@ if __name__ == '__main__':
                           "rate_on": {'values': [75]},
                           "rate_off": {'values': [1]},
                           "num_workers": {'values': [0]},
-                          "num_rec": {'values': [100]} #
+                          "num_rec": {'values': [100]},
+                          "norm_type": {'values': ["norm", "range", "mean", None]} #
                           }
           }
   

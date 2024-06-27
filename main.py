@@ -28,7 +28,7 @@ def main():
     torch.backends.cudnn.benchmark = True #TURN OFF WHEN CHANGING ARCHITECTURE    
 
     run = wandb.init()
-    run.name = f"{wandb.config.rate_on} Hz_{wandb.config.num_rec} Hz_{wandb.config.noise}"
+    run.name = f"{wandb.config.rate_on} Hz_{wandb.config.norm_type} Hz_{wandb.config.noise}"
     """## Define network architecutre and parameters"""
     network_params, input_specs, train_specs = {}, {}, {}
     
@@ -50,10 +50,10 @@ def main():
     train_specs["batch_size"] = wandb.config.bs
     train_specs["subset_size"] = wandb.config.subset_size
     train_specs["num_workers"] = wandb.config.num_workers
+    train_specs["norm_type"] = wandb.config.norm_type
     num_rec = wandb.config.num_rec
     
     train_specs["scaler"] = abs(1/((wandb.config.rate_on-wandb.config.rate_off)*(0.001*input_specs["total_time"]/ms))) if wandb.config.rate_on != wandb.config.rate_off else 100000
-    
     
     noise = wandb.config.noise
     recurrence = wandb.config.recurrence
@@ -214,7 +214,7 @@ def main():
     fig.tight_layout()
     fig.savefig("figures/rasters.png") 
     
-    umap_file = umap_plt("./datafiles/"+run.name+".csv")
+    umap_file, sil_score, db_score = umap_plt("./datafiles/"+run.name+".csv")
     
     wandb.log({"Test Loss": final_test_loss,
                 "Results Grid": wandb.Image("figures/result_summary.png"),
@@ -222,8 +222,6 @@ def main():
                 "Spike Animation": wandb.Video(f"figures/spike_mnistrec_{labels}.gif", fps=4, format="gif"),
                 "Raster": wandb.Image("figures/rasters.png")
                 })
-    
-    
     
     del network, train_loss, test_loss, final_train_loss, final_test_loss, \
         features, all_labs, all_decs, all_orig_ims, \
@@ -254,12 +252,13 @@ if __name__ == '__main__':
                           "rate_on": {'values': [75]},
                           "rate_off": {'values': [1]},
                           "num_workers": {'values': [0]},
-                          "num_rec": {'values': [100]}
+                          "num_rec": {'values': [100]},
+                          "norm_type": {'values': ["norm"]}
                           }
           }
   else:
       sweep_config = { #REMEMBER TO CHANGE RUN NAME
-          'name': f'Code Layer Neuron Count (25-50) {date}',
+          'name': f'Neuron Count Analysis (2 - 36864) {date}',
           'method': 'grid',
           'metric': {'name': 'Test Loss',
                       'goal': 'minimize'   
@@ -269,11 +268,12 @@ if __name__ == '__main__':
                           'epochs': {'values': [9]},
                           "subset_size": {'values': [10]},
                           "recurrence": {'values': [1]}, #1, 0.1, 0.5, 0, 1.25, 1.5, 1.75, 2
-                          "noise": {'values': [0]},
-                          "rate_on": {'values': [75]}, # 25, 50, 75, 100, 125
+                          "noise": {'values': [0]}, #0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0
+                          "rate_on": {'values': [75]},
                           "rate_off": {'values': [1]},
                           "num_workers": {'values': [0]},
-                          "num_rec": {'values': [25, 30, 35, 40, 45, 50]} #
+                          "num_rec": {'values': [2, 100, 1000, 10000, 20000, 36864]},
+                          "norm_type": {'values': ["norm"]} #
                           }
           }
   
