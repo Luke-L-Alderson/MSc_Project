@@ -5,6 +5,7 @@ from brian2 import *
 from datetime import datetime
 import torch.nn.functional as F
 from math import ceil
+from torch.profiler import profile, record_function, ProfilerActivity
 
 def train_network(network, train_loader, test_loader, input_specs, train_specs):
     startTime = datetime.now()
@@ -13,7 +14,6 @@ def train_network(network, train_loader, test_loader, input_specs, train_specs):
     num_epochs = train_specs["num_epochs"]
     train_logging_freq = ceil(0.1*len(train_loader))
     test_logging_freq = ceil(0.1*len(test_loader))
-    print(f"Scaler Value: {train_specs["scaler"]}")
     
     loss_fn = nmse_count_loss(ntype=train_specs["norm_type"])
     
@@ -32,8 +32,9 @@ def train_network(network, train_loader, test_loader, input_specs, train_specs):
             iterTime = datetime.now() 
 
             train_inputs = train_inputs.transpose(0,1).to(device)
-            train_spk_recs, train_spk_outs  = network(train_inputs)
 
+            train_spk_recs, train_spk_outs  = network(train_inputs)         
+            
             train_loss = loss_fn(train_spk_outs, train_inputs, train_spk_recs)#*train_specs["scaler"]#/loss_fn(train_spk_outs.sum(0), torch.zeros_like(train_inputs.sum(0)))
             train_loss.backward()
             optimizer.step()

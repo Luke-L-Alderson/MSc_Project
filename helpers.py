@@ -1,22 +1,19 @@
 import numpy as np
-from sklearn.manifold import TSNE
-from sklearn import decomposition
 from sklearn.metrics import davies_bouldin_score, silhouette_score
 import os
 import matplotlib as mpl
-from matplotlib import pyplot as plt
 from matplotlib import cm, colors
+from matplotlib import pyplot as plt
 import pandas as pd
 from torchvision import datasets#, transforms
 from torchvision.transforms import v2
 from torch.utils.data import DataLoader
 #from torch.utils.data import Subset
-
+import seaborn as sns
 from brian2 import *
 from umap import UMAP
 from image_to_image import SAE
 #from model.aux.functions import get_poisson_inputs, process_labels, mse_count_loss
-
 import torch
 import torch.nn as nn
 import snntorch as snn
@@ -35,7 +32,6 @@ __all__ = ["PoissonTransform",
            "set_seed",
            "umap_plt",
            "get_poisson_inputs",
-           "process_labels",
            "rmse_count_loss"]
 
 class PoissonTransform(torch.nn.Module):
@@ -92,12 +88,12 @@ def build_datasets(train_specs, input_specs = None):
     
     print(f"Training: {trainlen1} -> {trainlen2}\nTesting: {testlen1} -> {testlen2}")
     print("\nMaking Dataloaders")
-    train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True, pin_memory=True, num_workers=num_workers, persistent_workers=persist)
-    test_loader = DataLoader(test_dataset, batch_size=batch_size, shuffle=True, pin_memory=True, num_workers=num_workers, persistent_workers=persist)
+    train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True, pin_memory=True, num_workers=num_workers, persistent_workers=persist, drop_last=True)
+    test_loader = DataLoader(test_dataset, batch_size=batch_size, shuffle=True, pin_memory=True, num_workers=num_workers, persistent_workers=persist, drop_last=True)
 
     return train_dataset, train_loader, test_dataset, test_loader
     
-def build_network(device, noise = 0, recurrence = 1, num_rec = 100):
+def build_network(device, noise = 0, recurrence = 1, num_rec = 100, learnable=True):
     print("Defining network")
     time_params, network_params, frame_params, convolution_params = {}, {}, {}, {}
     
@@ -112,7 +108,7 @@ def build_network(device, noise = 0, recurrence = 1, num_rec = 100):
     network_params["eta"] = noise        # controls noise amplitude - try adding noise in rec layer
     network_params["num_rec"] = num_rec
     network_params["num_latent"] = 8
-
+    network_params["learnable"] = learnable
     frame_params["depth"] = 1
     frame_params["size"] = 28
 
@@ -123,6 +119,34 @@ def build_network(device, noise = 0, recurrence = 1, num_rec = 100):
 
     network = SAE(time_params, network_params, frame_params, convolution_params, device, recurrence).to(device)
     
+    for name, param in network.named_parameters():
+        print(f"{name} --> {param.shape}")
+    
+    # try:
+    fig = plt.figure(facecolor="w", figsize=(10, 10))
+    
+    ax1 = plt.subplot(2, 2, 1)
+    weight_map(network.rlif_rec.recurrent.weight)
+    plt.title("Initial Weights")
+    
+    ax2 = plt.subplot(2, 2, 3)
+    sns.histplot(to_np(torch.flatten(network.rlif_rec.recurrent.weight)))
+    plt.title("Initial Weight Distribution")
+    
+    #network.rlif_rec.recurrent.weight = nn.Parameter(1*torch.ones_like(network.rlif_rec.recurrent.weight))
+    
+    ax3 = plt.subplot(2, 2, 2)
+    weight_map(network.rlif_rec.recurrent.weight)
+    plt.title("Adjusted Weights")
+    
+    ax4 = plt.subplot(2, 2, 4)
+    sns.histplot(to_np(torch.flatten(network.rlif_rec.recurrent.weight)))
+    plt.title("Adjusted Weight Distribution")
+    
+    plt.show() 
+    # except:
+    #     print("Not recurrent")
+
     return network, network_params
     
 def to_np(tensor):
@@ -151,16 +175,22 @@ def set_seed(value = 42):
     torch.cuda.manual_seed(value)
     torch.backends.cudnn.deterministic = True
     os.environ["PYTHONHASHSEED"] = str(value)
+    try:
+        random.seed()
+    except:
+        print("Couldn't set random.seed()")
     print(f"\nSetting Seed to {value}")
 
-def umap_plt(file, w=6, h=6):
+def umap_plt(file, w=10, h=5):
     features = pd.read_csv(file)
-    all_labs = features.iloc[:, 1]
-    features = features.iloc[:, 2:-1]
+    all_labs = features["Labels"]#.to_numpy()
+    #print(all_labs)
+    features = features.loc[:, features.columns != 'Labels']#.to_numpy()
+    #print(f"Printing Features: \n{features.iloc[0, :]}")
     tail = os.path.split(file)
     f_name = f"UMAPS/umap_{tail[1]}.png"
     print("Applying UMAP")
-    umap = UMAP(n_components=2).fit_transform(features)
+    umap = UMAP(n_components=2, random_state=42, n_neighbors=15).fit_transform(features)
     cmap = mpl.colormaps['viridis']
     plt.figure(figsize=(w, h))
     c_range = np.arange(0.5, 10, 1)
@@ -174,8 +204,8 @@ def umap_plt(file, w=6, h=6):
     plt.show()
     
     print("Calculating Cluster Scores - S/D-B")
-    sil_score = silhouette_score(umap, all_labs)
-    db_score = davies_bouldin_score(umap, all_labs)
+    sil_score = silhouette_score(umap[:, 0:1], all_labs)
+    db_score = davies_bouldin_score(umap[:, 0:1], all_labs)
     
     return f_name, sil_score, db_score
     
@@ -213,14 +243,14 @@ class nmse_count_loss():
         # make it agnostic to spiking or non-spiking tensors
         spike_count = torch.sum(outputs, 0) if outputs.dim() > 4 else outputs
         target_spike_count = torch.sum(inputs, 0) if inputs.dim() > 4 else inputs
-        loss_fn = nn.MSELoss()
+        loss_fn = nn.MSELoss() # include max and min rates
         
         if self.ntype == None:
             loss = torch.sqrt(loss_fn(spike_count, target_spike_count)) + self.lambda_r*torch.sum(spk_recs)
         
         if self.ntype == "norm":
             loss_fn = nn.MSELoss(reduction="sum")
-            loss = loss_fn(spike_count, target_spike_count)/loss_fn(torch.zeros_like(spike_count), target_spike_count) + self.lambda_r*torch.sum(spk_recs)
+            loss = torch.sqrt(loss_fn(spike_count, target_spike_count)/loss_fn(torch.zeros_like(spike_count), target_spike_count)) + self.lambda_r*torch.sum(spk_recs)
         
         elif self.ntype == "range":
             loss = torch.sqrt(loss_fn(spike_count, target_spike_count))/(torch.max(target_spike_count) - torch.min(target_spike_count)) + self.lambda_r*torch.sum(spk_recs)
@@ -244,3 +274,17 @@ class mae_count_loss():
         loss_fn = nn.L1Loss()
         loss = torch.sqrt(loss_fn(spike_count, target_spike_count)) + self.lambda_r*torch.sum(spk_recs)
         return loss
+
+def weight_map(wm, w=10, h=10, sign=False): # wm should be a tensor of weights
+    #fig = plt.figure(facecolor="w", figsize=(w, h))
+    weight_log = np.sign(to_np(wm)) if sign else to_np(wm)
+    num_rec = wm.shape[0]
+    ax = sns.heatmap(weight_log)
+    plt.xlabel('# Neuron (Layer Output)')
+    plt.ylabel('# Neuron (Layer Input)')
+    ax.invert_yaxis()
+    plt.xlim([0, num_rec])
+    plt.ylim([0, num_rec])
+    ax.set_xticks(np.arange(0, num_rec+1, num_rec/10), labels=np.arange(0, num_rec+1, num_rec/10))
+    ax.set_yticks(np.arange(0, num_rec+1, num_rec/10), labels=np.arange(0, num_rec+1, num_rec/10))
+    return ax

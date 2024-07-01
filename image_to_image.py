@@ -14,23 +14,31 @@ class SAE(nn.Module):
         #save and proces param dicts
         beta, num_rec, num_latent, depth, num_conv2 = self.process_params(tp, netp, fp, cp)
         threshold = netp["v_th"]
-        
+        learnable = netp["learnable"]
         #define gradient
         spike_grad = surrogate.fast_sigmoid(slope=25)
           
         self.conv1 = nn.Conv2d(depth, cp["channels_1"], (cp["filter_1"], cp["filter_1"]))
         self.lif_conv1 = snn.Leaky(beta=beta, spike_grad=spike_grad, threshold = threshold)
+        self.lif_rec = snn.Leaky(beta=beta, spike_grad=spike_grad, threshold = threshold)
         self.conv2 = nn.Conv2d(cp["channels_1"], cp["channels_2"], (cp["filter_2"], cp["filter_2"]))
         self.lif_conv2 = snn.Leaky(beta=beta, spike_grad=spike_grad, threshold = threshold)
         self.ff_in = nn.Linear(num_conv2, num_rec) # 64x24x24 (12288) -> 100
         self.ff_rec = nn.Linear(num_rec, num_rec)  # 100 -> 100 (same nodes)
-        self.net_rec = snn.Leaky(beta=beta, spike_grad=spike_grad, reset_mechanism="zero", threshold = threshold)
+        self.lif_ff_out = snn.Leaky(beta=beta, spike_grad=spike_grad, threshold = threshold)
         self.ff_out = nn.Linear(num_rec, num_conv2)     
         self.deconv2 = nn.ConvTranspose2d(cp["channels_2"], cp["channels_1"], (cp["filter_2"], cp["filter_2"])) 
         self.lif_deconv2 = snn.Leaky(beta=beta, spike_grad=spike_grad, threshold = threshold)
         self.reconstruction = nn.ConvTranspose2d(cp["channels_1"], depth, (cp["filter_1"], cp["filter_1"]))
         self.lif_reconstruction = snn.Leaky(beta=beta, spike_grad=spike_grad, threshold = threshold)
-        #self.lif_out = snn.Leaky(beta=beta, spike_grad=spike_grad, threshold = threshold)
+        self.rlif_rec = snn.RLeaky(beta=beta, 
+                                   spike_grad=spike_grad, 
+                                   threshold = threshold,
+                                   all_to_all = True, 
+                                   learn_recurrent=learnable,  
+                                   linear_features=num_rec,
+                                   )
+        
         
     def forward(self, x, recorded_vars=None):
         num_rec, noise_amp, channels_2, conv2_size = self.network_params["num_rec"], self.network_params["noise_amplitude"], self.convolution_params["channels_2"], self.convolution_params["conv2_size"]
@@ -42,11 +50,16 @@ class SAE(nn.Module):
         
         batch_size = len(x[0])       
         mem_conv1 = self.lif_conv1.init_leaky()
+        mem_out = self.lif_ff_out.init_leaky()
         mem_conv2 = self.lif_conv2.init_leaky()
-        mem_rec = self.net_rec.init_leaky()
+        
+        if self.recurrence > 0:
+            spk_rec, mem_rec = self.rlif_rec.init_rleaky()
+        else:
+            mem_rec = self.lif_rec.init_leaky()
+            
         mem_deconv2 = self.lif_deconv2.init_leaky()
         mem_reconstruction = self.lif_reconstruction.init_leaky()
-        spk_rec = torch.zeros(batch_size, num_rec, device = self.device)
         spk_outs, spk_recs, mem_outs, mem_recs = [], [], [], []
 
         for timestep in range(self.time_params["num_timesteps"]):
@@ -59,24 +72,27 @@ class SAE(nn.Module):
             mem_conv2 += noise_amp*torch.randn(mem_conv2.shape, device = self.device)
             
             curr_in = self.ff_in(spk_conv2.view(batch_size, -1))
-            curr_rec = self.ff_rec(spk_rec)
-            curr_total = curr_in + self.recurrence*curr_rec
-            spk_rec, mem_rec = self.net_rec(curr_total, mem_rec) #can set curr_total to curr_in, param in front
-            mem_rec += noise_amp*torch.randn(mem_rec.shape, device = self.device)
+            
+            if self.recurrence > 0:
+                spk_rec, mem_rec = self.rlif_rec(curr_in, spk_rec, mem_rec) # this is the snn.RLeaky neuron
+            else:
+                spk_rec, mem_rec = self.lif_rec(curr_in, mem_rec)
+            
             curr_out = self.ff_out(spk_rec)
-
-            curr_deconv2 = self.deconv2(curr_out.view(curr_out.size(0), channels_2, conv2_size, conv2_size))
+            spk_out, mem_out = self.lif_ff_out(curr_out, mem_out)
+            mem_out += noise_amp*torch.randn(mem_out.shape, device = self.device)
+            
+            curr_deconv2 = self.deconv2(spk_out.view(spk_out.size(0), channels_2, conv2_size, conv2_size))
             spk_deconv2, mem_deconv2 = self.lif_conv2(curr_deconv2, mem_deconv2)
             mem_deconv2 += noise_amp*torch.randn(mem_deconv2.shape, device = self.device)
             
-            # convolution (decoder) - undo layer 1
             curr_reconstruction = self.reconstruction(spk_deconv2)
             spk_reconstruction, mem_reconstruction = self.lif_reconstruction(curr_reconstruction, mem_reconstruction)
             mem_reconstruction += noise_amp*torch.randn(mem_reconstruction.shape, device = self.device)
-            
+    
             spk_recs.append(spk_rec)
             spk_outs.append(spk_reconstruction)
-
+        
         return torch.stack(spk_recs), torch.stack(spk_outs)
     
     

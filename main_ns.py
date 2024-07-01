@@ -124,7 +124,7 @@ def main_ns():
     
     tsne.insert(0, "Labels", all_labs) 
     
-    tsne.to_csv("./datafiles/"+run.name+".csv")
+    tsne.to_csv("./datafiles/"+run.name+".csv", index=False)
     
     
     print("Plotting Results Grid")
@@ -211,7 +211,7 @@ def main_ns():
         
 if __name__ == '__main__':  
   
-  test = 0
+  test = 1
   
   if test == 1:
       sweep_config = {
@@ -230,7 +230,7 @@ if __name__ == '__main__':
                           "rate_off": {'values': [1]},
                           "num_workers": {'values': [0]},
                           "num_rec": {'values': [100]},
-                          "norm_type": {'values': ["norm", "range", "mean", None]}
+                          "norm_type": {'values': ["norm"]}
                           }
           }
   else:

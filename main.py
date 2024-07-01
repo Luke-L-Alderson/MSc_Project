@@ -8,9 +8,10 @@ date = datetime.now().strftime("%d/%m - %H:%M")
 import numpy as np
 import wandb
 from helpers import get_poisson_inputs, build_datasets, build_network,\
-    to_np, set_seed, umap_plt
+    to_np, set_seed, umap_plt, weight_map
 
 import torch
+from torch.profiler import profile, record_function, ProfilerActivity
 import snntorch.spikeplot as splt
 from IPython.display import HTML
 from brian2 import *
@@ -28,7 +29,7 @@ def main():
     torch.backends.cudnn.benchmark = True #TURN OFF WHEN CHANGING ARCHITECTURE    
 
     run = wandb.init()
-    run.name = f"{wandb.config.rate_on} Hz_{wandb.config.norm_type} Hz_{wandb.config.noise}"
+    run.name = f"{wandb.config.rate_on}_{wandb.config.recurrence}_{wandb.config.noise}"
     """## Define network architecutre and parameters"""
     network_params, input_specs, train_specs = {}, {}, {}
     
@@ -52,9 +53,7 @@ def main():
     train_specs["num_workers"] = wandb.config.num_workers
     train_specs["norm_type"] = wandb.config.norm_type
     num_rec = wandb.config.num_rec
-    
-    train_specs["scaler"] = abs(1/((wandb.config.rate_on-wandb.config.rate_off)*(0.001*input_specs["total_time"]/ms))) if wandb.config.rate_on != wandb.config.rate_off else 100000
-    
+    learnable = wandb.config.learnable
     noise = wandb.config.noise
     recurrence = wandb.config.recurrence
     
@@ -64,7 +63,7 @@ def main():
     train_dataset, train_loader, test_dataset, test_loader = build_datasets(train_specs, input_specs)
     
     # Build network
-    network, network_params = build_network(device, noise=noise, recurrence=recurrence, num_rec=num_rec)
+    network, network_params = build_network(device, noise=noise, recurrence=recurrence, num_rec=num_rec, learnable=learnable)
     
     # Train network
     network, train_loss, test_loss, final_train_loss, final_test_loss = train_network(network, train_loader, test_loader, input_specs, train_specs)
@@ -97,12 +96,10 @@ def main():
     with torch.no_grad():
         features, all_labs, all_decs, all_orig_ims = [], [], [], []
         for i,(data, labs) in enumerate(test_loader, 1):
-            #data = get_poisson_inputs(data, **input_specs)
-            #print(input_specs)
             data = data.transpose(0, 1)
             code_layer, decoded = network(data)
             code_layer = code_layer.mean(0)
-            features.append(to_np(code_layer))#.view(-1, code_layer.shape[1])))
+            features.append(to_np(code_layer))
             all_labs.append(labs)
             all_decs.append(decoded.mean(0).squeeze().cpu())
             all_orig_ims.append(data.mean(0).squeeze())
@@ -110,16 +107,14 @@ def main():
             if i % 1 == 0:
                 print(f'-- {i}/{len(test_loader)} --')
     
-        features = np.concatenate(features, axis = 0) #(N, 100)
+        features = np.concatenate(features, axis = 0)
         all_labs = np.concatenate(all_labs, axis = 0)
         all_orig_ims = np.concatenate(all_orig_ims, axis = 0)
         all_decs = np.concatenate(all_decs, axis = 0)
   
     tsne = pd.DataFrame(data = features)
-    
     tsne.insert(0, "Labels", all_labs) 
-    
-    tsne.to_csv("./datafiles/"+run.name+".csv")
+    tsne.to_csv("./datafiles/"+run.name+".csv", index=False)
     
     
     print("Plotting Results Grid")
@@ -216,17 +211,34 @@ def main():
     
     umap_file, sil_score, db_score = umap_plt("./datafiles/"+run.name+".csv")
     
+    if recurrence == 1:
+        fig = plt.figure(facecolor="w", figsize=(10, 5))
+        ax1 = plt.subplot(1,2,1)
+        weight_map(network.rlif_rec.recurrent.weight)
+        ax2 = plt.subplot(1,2,2)
+        sns.histplot(to_np(torch.flatten(network.rlif_rec.recurrent.weight)))
+        
+        fig.savefig(f"figures/weightmap_{run.name}.png")
+        plt.show()    
+    
     wandb.log({"Test Loss": final_test_loss,
                 "Results Grid": wandb.Image("figures/result_summary.png"),
                 "UMAP": wandb.Image(umap_file),
                 "Spike Animation": wandb.Video(f"figures/spike_mnistrec_{labels}.gif", fps=4, format="gif"),
-                "Raster": wandb.Image("figures/rasters.png")
+                "Raster": wandb.Image("figures/rasters.png"),
+                "Sil Score": sil_score,
+                "DB Score": db_score,
                 })
+    
+    try:
+        wandb.log({"Weights": wandb.Image("figures/weightmap.png")})
+    except:
+        pass
     
     del network, train_loss, test_loss, final_train_loss, final_test_loss, \
         features, all_labs, all_decs, all_orig_ims, \
         train_dataset, train_loader, test_dataset, test_loader, tsne, inputs, \
-        img_spk_outs, img_spk_recs, code_layer, decoded
+        img_spk_outs, img_spk_recs, code_layer, decoded, fig, ax
         
     gc.collect()
     torch.cuda.empty_cache()
@@ -253,12 +265,13 @@ if __name__ == '__main__':
                           "rate_off": {'values': [1]},
                           "num_workers": {'values': [0]},
                           "num_rec": {'values': [100]},
-                          "norm_type": {'values': ["norm"]}
+                          "norm_type": {'values': ["norm", "mean"]},
+                          "learnable": {'values': [True]}
                           }
           }
   else:
       sweep_config = { #REMEMBER TO CHANGE RUN NAME
-          'name': f'Neuron Count Analysis (2 - 36864) {date}',
+          'name': f'Recurrency and Noise (4-10) {date}',
           'method': 'grid',
           'metric': {'name': 'Test Loss',
                       'goal': 'minimize'   
@@ -267,13 +280,14 @@ if __name__ == '__main__':
                           'lr': {'values': [1e-4]},
                           'epochs': {'values': [9]},
                           "subset_size": {'values': [10]},
-                          "recurrence": {'values': [1]}, #1, 0.1, 0.5, 0, 1.25, 1.5, 1.75, 2
-                          "noise": {'values': [0]}, #0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0
+                          "recurrence": {'values': [0, 1]}, #1, 0.1, 0.5, 0, 1.25, 1.5, 1.75, 2
+                          "noise": {'values': [4, 5, 6, 6.2, 6.4, 6.6, 6.8, 7, 8, 9, 10]},
                           "rate_on": {'values': [75]},
                           "rate_off": {'values': [1]},
                           "num_workers": {'values': [0]},
-                          "num_rec": {'values': [2, 100, 1000, 10000, 20000, 36864]},
-                          "norm_type": {'values': ["norm"]} #
+                          "num_rec": {'values': [100]},
+                          "norm_type": {'values': ["norm"]},
+                          "learnable": {'values': [True]} #
                           }
           }
   

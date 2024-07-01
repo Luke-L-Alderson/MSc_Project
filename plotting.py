@@ -8,8 +8,8 @@ from matplotlib import pyplot as plt
 # tsne_plt("75 Hz_1 Hz_1")
 
 # Rate Changes (Heat Map)
-umap_plt("datafiles/75 Hz_1 Hz_1", 15, 10)
-
+umap_plt("datafiles/75 Hz_1 Hz_0.csv", 15, 10)
+umap_plt("datafiles/75 Hz_0.75 Hz_0.csv", 15, 10)
 # Heatmap (Seaborn)
 # labels = ["1", "50", "100", "150", "200"]
 # labels = [1, 50, 100, 150, 200]
