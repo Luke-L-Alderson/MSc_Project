@@ -265,7 +265,7 @@ if __name__ == '__main__':
                           "rate_off": {'values': [1]},
                           "num_workers": {'values': [0]},
                           "num_rec": {'values': [100]},
-                          "norm_type": {'values': ["norm", "mean"]},
+                          "norm_type": {'values': ["norm"]},
                           "learnable": {'values': [True]}
                           }
           }

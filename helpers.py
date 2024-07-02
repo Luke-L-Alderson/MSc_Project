@@ -122,30 +122,31 @@ def build_network(device, noise = 0, recurrence = 1, num_rec = 100, learnable=Tr
     for name, param in network.named_parameters():
         print(f"{name} --> {param.shape}")
     
-    # try:
-    fig = plt.figure(facecolor="w", figsize=(10, 10))
+    try:
+        fig = plt.figure(facecolor="w", figsize=(10, 10))
+        
+        ax1 = plt.subplot(2, 2, 1)
+        weight_map(network.rlif_rec.recurrent.weight)
+        plt.title("Initial Weights")
+        
+        ax2 = plt.subplot(2, 2, 3)
+        sns.histplot(to_np(torch.flatten(network.rlif_rec.recurrent.weight)))
+        plt.title("Initial Weight Distribution")
+        
+        #network.rlif_rec.recurrent.weight = nn.Parameter(1*torch.ones_like(network.rlif_rec.recurrent.weight))
+        
+        ax3 = plt.subplot(2, 2, 2)
+        weight_map(network.rlif_rec.recurrent.weight)
+        plt.title("Adjusted Weights")
+        
+        ax4 = plt.subplot(2, 2, 4)
+        sns.histplot(to_np(torch.flatten(network.rlif_rec.recurrent.weight)))
+        plt.title("Adjusted Weight Distribution")
+        
+        plt.show() 
     
-    ax1 = plt.subplot(2, 2, 1)
-    weight_map(network.rlif_rec.recurrent.weight)
-    plt.title("Initial Weights")
-    
-    ax2 = plt.subplot(2, 2, 3)
-    sns.histplot(to_np(torch.flatten(network.rlif_rec.recurrent.weight)))
-    plt.title("Initial Weight Distribution")
-    
-    #network.rlif_rec.recurrent.weight = nn.Parameter(1*torch.ones_like(network.rlif_rec.recurrent.weight))
-    
-    ax3 = plt.subplot(2, 2, 2)
-    weight_map(network.rlif_rec.recurrent.weight)
-    plt.title("Adjusted Weights")
-    
-    ax4 = plt.subplot(2, 2, 4)
-    sns.histplot(to_np(torch.flatten(network.rlif_rec.recurrent.weight)))
-    plt.title("Adjusted Weight Distribution")
-    
-    plt.show() 
-    # except:
-    #     print("Not recurrent")
+    except:
+        print("Not recurrent")
 
     return network, network_params
     
