@@ -12,7 +12,7 @@ class SAE(nn.Module):
         self.device = device
         self.recurrence = recurrence
         #save and proces param dicts
-        beta, num_rec, num_latent, depth, num_conv2 = self.process_params(tp, netp, fp, cp)
+        beta, num_rec, depth, num_conv2 = self.process_params(tp, netp, fp, cp)
         threshold = netp["v_th"]
         learnable = netp["learnable"]
         #define gradient
@@ -48,7 +48,12 @@ class SAE(nn.Module):
         except:
           x = x.type(torch.FloatTensor)
         
-        batch_size = len(x[0])       
+        
+        batch_size = x.shape[1]
+        time_steps = x.shape[0]
+        # print(batch_size)
+        # print(time_steps)
+        # print(x.shape)
         mem_conv1 = self.lif_conv1.init_leaky()
         mem_out = self.lif_ff_out.init_leaky()
         mem_conv2 = self.lif_conv2.init_leaky()
@@ -62,7 +67,7 @@ class SAE(nn.Module):
         mem_reconstruction = self.lif_reconstruction.init_leaky()
         spk_outs, spk_recs, mem_outs, mem_recs = [], [], [], []
 
-        for timestep in range(self.time_params["num_timesteps"]):
+        for timestep in range(time_steps):
             curr_conv1 = self.conv1(x[timestep])
             spk_conv1, mem_conv1 = self.lif_conv1(curr_conv1, mem_conv1)
             mem_conv1 += noise_amp*torch.randn(mem_conv1.shape, device = self.device)
@@ -109,7 +114,7 @@ class SAE(nn.Module):
         #time_array = np.arange(0, tp["total_time"], tp["dt"])
         
         self.time_params, self.network_params, self.frame_params, self.convolution_params = tp, netp, fp, cp
-        return netp["beta"], netp["num_rec"], netp["num_latent"], fp["depth"], netp["num_conv2"]
+        return netp["beta"], netp["num_rec"], fp["depth"], netp["num_conv2"]
 
 class CAE(nn.Module):
     def __init__(self, num_rec, cp, recurrence):
