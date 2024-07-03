@@ -20,3 +20,5 @@
 *.bak
 *.gif
 *.pyc
+/__pycache__
+/.spyproject
