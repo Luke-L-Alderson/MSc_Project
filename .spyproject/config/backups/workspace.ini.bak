@@ -4,7 +4,7 @@ save_data_on_exit = True
 save_history = True
 save_non_project_files = False
 project_type = 'empty-project-type'
-recent_files = ['helpers.py', 'main.py', 'train_network.py', 'image_to_image.py', 'main_ns.py', 'main_nmnist.py']
+recent_files = ['train_network.py', 'main.py', 'image_to_image.py', 'helpers.py', 'main_nmnist.py']
 
 [main]
 version = 0.2.0

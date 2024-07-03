@@ -51,8 +51,8 @@ class SAE(nn.Module):
         
         batch_size = x.shape[1]
         time_steps = x.shape[0]
-        # print(batch_size)
-        # print(time_steps)
+        #print(batch_size)
+        #print(time_steps)
         # print(x.shape)
         mem_conv1 = self.lif_conv1.init_leaky()
         mem_out = self.lif_ff_out.init_leaky()
