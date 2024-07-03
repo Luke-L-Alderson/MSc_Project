@@ -7,7 +7,7 @@ from matplotlib import pyplot as plt
 import pandas as pd
 from torchvision import datasets#, transforms
 from torchvision.transforms import v2
-from torch.utils.data import DataLoader
+from torch.utils.data import DataLoader, Dataset, Subset
 #from torch.utils.data import Subset
 import seaborn as sns
 from brian2 import *
@@ -20,6 +20,9 @@ import snntorch as snn
 from snntorch import spikegen
 from snntorch import utils
 from random import random
+
+import tonic.transforms as transforms
+import tonic
 
 __all__ = ["PoissonTransform",
            "build_datasets",
@@ -46,13 +49,20 @@ class PoissonTransform(torch.nn.Module):
         new_image = get_poisson_inputs(img, self.total_time, self.bin_size, self.rate_on, self.rate_off)
         #print(f"Converted {img.shape} to {new_image.shape}")
         return new_image
+    
+class dtype_transform(torch.nn.Module):
+    def __init__(self,):
+        super().__init__()
+        
+    def forward(self, img):
+        #print(img[:, 1].unsqueeze(1).shape)
+        return img[:, 0].unsqueeze(1).type(torch.FloatTensor)
 
 def build_datasets(train_specs, input_specs = None):
     batch_size = train_specs["batch_size"]
     subset_size = train_specs["subset_size"]
     num_workers = train_specs["num_workers"]
     persist = True if num_workers > 0 else False
-    
     if input_specs:
         print("Applying Poisson Transform")
         total_time = input_specs["total_time"]
@@ -88,18 +98,18 @@ def build_datasets(train_specs, input_specs = None):
     
     print(f"Training: {trainlen1} -> {trainlen2}\nTesting: {testlen1} -> {testlen2}")
     print("\nMaking Dataloaders")
-    train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True, pin_memory=True, num_workers=num_workers, persistent_workers=persist, drop_last=True)
-    test_loader = DataLoader(test_dataset, batch_size=batch_size, shuffle=True, pin_memory=True, num_workers=num_workers, persistent_workers=persist, drop_last=True)
+    train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True, pin_memory=True, num_workers=num_workers, persistent_workers=persist)
+    test_loader = DataLoader(test_dataset, batch_size=batch_size, shuffle=False, pin_memory=True, num_workers=num_workers, persistent_workers=persist)
 
     return train_dataset, train_loader, test_dataset, test_loader
     
-def build_network(device, noise = 0, recurrence = 1, num_rec = 100, learnable=True):
+def build_network(device, noise = 0, recurrence = 1, num_rec = 100, learnable=True, depth=1, size=28, time=200):
     print("Defining network")
     time_params, network_params, frame_params, convolution_params = {}, {}, {}, {}
     
     # Parameters for use in network definition
     time_params["dt"] = 1*ms
-    time_params["total_time"] = 200*ms
+    time_params["total_time"] = time*ms
 
     network_params["tau_m"] = 24*ms     # affects beta
     network_params["tau_syn"] = 10*ms   # not currently used
@@ -107,10 +117,9 @@ def build_network(device, noise = 0, recurrence = 1, num_rec = 100, learnable=Tr
     network_params["v_th"] = 1          # snn default = 1
     network_params["eta"] = noise        # controls noise amplitude - try adding noise in rec layer
     network_params["num_rec"] = num_rec
-    network_params["num_latent"] = 8
     network_params["learnable"] = learnable
-    frame_params["depth"] = 1
-    frame_params["size"] = 28
+    frame_params["depth"] = depth
+    frame_params["size"] = size
 
     convolution_params["channels_1"] = 12
     convolution_params["filter_1"] = 3
@@ -289,3 +298,71 @@ def weight_map(wm, w=10, h=10, sign=False): # wm should be a tensor of weights
     ax.set_xticks(np.arange(0, num_rec+1, num_rec/10), labels=np.arange(0, num_rec+1, num_rec/10))
     ax.set_yticks(np.arange(0, num_rec+1, num_rec/10), labels=np.arange(0, num_rec+1, num_rec/10))
     return ax
+
+def create_subset(dataset, subset_size):
+    indices = np.random.choice(len(dataset), subset_size, replace=False)
+    subset=Subset(dataset, indices)
+    return subset
+
+'''
+Inputs: train_specs, input_specs [Optional]
+
+Outputs: Dataloaders
+         Datasets, where each element is a tuple (data, label), and data is a tensor.
+'''
+def build_nmnist_dataset(train_specs, input_specs = None):
+    num_workers = train_specs["num_workers"]
+    batch_size = train_specs["batch_size"]
+    sensor_size = tonic.datasets.NMNIST.sensor_size
+    subset_size = train_specs["subset_size"]
+    
+    persist = True if num_workers > 0 else False
+    
+    raw_transform = tonic.transforms.Compose([
+                transforms.Denoise(filter_time=10000),
+                transforms.ToFrame(sensor_size=sensor_size, time_window=1000),
+                torch.from_numpy,
+                dtype_transform()
+                ])
+    
+    print("\nMaking datasets and defining subsets")
+    train_dataset = tonic.datasets.NMNIST(save_to='./dataset',
+                                          transform=raw_transform,
+                                          train=True,
+                                          )
+    
+    test_dataset = tonic.datasets.NMNIST(save_to='./dataset',
+                                          transform=raw_transform,
+                                          train=False)
+    
+    trainlen1 = len(train_dataset)
+    testlen1 = len(test_dataset)
+     
+    train_dataset = create_subset(train_dataset, int(len(train_dataset)/subset_size))
+    test_dataset = create_subset(test_dataset, int(len(test_dataset)/subset_size))
+    
+    trainlen2 = len(train_dataset)
+    testlen2 = len(test_dataset)
+    
+    print(f"Training: {trainlen1} -> {trainlen2}\nTesting: {testlen1} -> {testlen2}")
+    print("\nMaking Dataloaders")
+    
+    train_loader = DataLoader(train_dataset, 
+                              batch_size=batch_size, 
+                              collate_fn=tonic.collation.PadTensors(batch_first=False), 
+                              shuffle=True, 
+                              pin_memory=True, 
+                              num_workers=num_workers, 
+                              persistent_workers=persist, 
+                              drop_last=True)
+    
+    test_loader = DataLoader(test_dataset,
+                             batch_size=batch_size, 
+                             collate_fn=tonic.collation.PadTensors(batch_first=False), 
+                             pin_memory=True, 
+                             num_workers=num_workers, 
+                             persistent_workers=persist, 
+                             drop_last=True)
+    
+    
+    return train_dataset, train_loader, test_dataset, test_loader
