@@ -36,7 +36,7 @@ def main():
     # Parameters for use in training
     input_specs["rate_on"] = wandb.config.rate_on*Hz
     input_specs["rate_off"] = wandb.config.rate_off*Hz    
-    input_specs["total_time"] = 200*ms
+    input_specs["total_time"] = 100*ms
     input_specs["bin_size"] = 1*ms
     
     train_specs["code"] = 'rate'
@@ -63,7 +63,7 @@ def main():
     train_dataset, train_loader, test_dataset, test_loader = build_datasets(train_specs, input_specs)
     
     # Build network
-    network, network_params = build_network(device, noise=noise, recurrence=recurrence, num_rec=num_rec, learnable=learnable)
+    network, network_params = build_network(device, noise=noise, recurrence=recurrence, num_rec=num_rec, learnable=learnable, time=100)
     
     # Train network
     network, train_loss, test_loss, final_train_loss, final_test_loss = train_network(network, train_loader, test_loader, train_specs)
@@ -96,13 +96,13 @@ def main():
     with torch.no_grad():
         features, all_labs, all_decs, all_orig_ims = [], [], [], []
         for i,(data, labs) in enumerate(test_loader, 1):
-            data = data.transpose(0, 1)
+            data = data.to(device)
             code_layer, decoded = network(data)
             code_layer = code_layer.mean(0)
             features.append(to_np(code_layer))
             all_labs.append(labs)
             all_decs.append(decoded.mean(0).squeeze().cpu())
-            all_orig_ims.append(data.mean(0).squeeze())
+            all_orig_ims.append(data.mean(0).squeeze().cpu())
            
             if i % 1 == 0:
                 print(f'-- {i}/{len(test_loader)} --')
@@ -195,18 +195,22 @@ def main():
     animrec.save(f"figures/spike_mnistrec_{labels}.gif")
       
     print("Rasters")
+    num_pixels = inputs.shape[1]*inputs.shape[2]
+    round_pixels = int(ceil(num_pixels / 100.0)) * 100
+    print(round_pixels)
     fig = plt.figure(facecolor="w", figsize=(10, 10))
     ax1 = plt.subplot(3, 1, 1)
-    splt.raster(inputs.reshape(200, -1), ax1, s=1.5, c="black")
+    splt.raster(inputs.reshape(inputs.shape[0], -1), ax1, s=1.5, c="black")
     ax2 = plt.subplot(3, 1, 2)
-    splt.raster(img_spk_recs.reshape(200, -1), ax2, s=1.5, c="black")
+    splt.raster(img_spk_recs.reshape(inputs.shape[0], -1), ax2, s=1.5, c="black")
     ax3 = plt.subplot(3, 1, 3)
-    splt.raster(img_spk_outs.reshape(200, -1), ax3, s=1.5, c="black")
-    
-    ax1.set(xlim=[0, 200], ylim=[-50, 850], xticks=[], ylabel="Neuron Index")
-    ax2.set(xlim=[0, 200], ylim=[0-round(num_rec*0.1), round(num_rec*1.1)], xticks=[], ylabel="Neuron Index")
-    ax3.set(xlim=[0, 200], ylim=[-50, 850], ylabel="Neuron Index", xlabel="Time, ms")
+    splt.raster(img_spk_outs.reshape(inputs.shape[0], -1), ax3, s=1.5, c="black")
+
+    ax1.set(xlim=[0, inputs.shape[0]], ylim=[-50, round_pixels+50], xticks=[], ylabel="Neuron Index")
+    ax2.set(xlim=[0, inputs.shape[0]], ylim=[0-round(num_rec*0.1), round(num_rec*1.1)], xticks=[], ylabel="Neuron Index")
+    ax3.set(xlim=[0, inputs.shape[0]], ylim=[-50, round_pixels+50], ylabel="Neuron Index", xlabel="Time, ms")
     fig.tight_layout()
+    
     fig.savefig("figures/rasters.png") 
     
     umap_file, sil_score, db_score = umap_plt("./datafiles/"+run.name+".csv")

@@ -76,6 +76,24 @@ def build_datasets(train_specs, input_specs = None):
                     v2.Normalize((0,), (1,)),
                     PoissonTransform(total_time, bin_size, rate_on, rate_off)
                     ])
+        
+        # create dataset in /content
+        print("\nMaking datasets and defining subsets")
+        train_dataset = datasets.MNIST(root='dataset/', train=True, transform=transform, download=True)
+        test_dataset = datasets.MNIST(root='dataset/', train=False, transform=transform, download=True)
+        
+        trainlen1 = len(train_dataset)
+        testlen1 = len(test_dataset)
+        snn.utils.data_subset(train_dataset, subset_size)
+        snn.utils.data_subset(test_dataset, subset_size)
+        trainlen2 = len(train_dataset)
+        testlen2 = len(test_dataset)
+        
+        print(f"Training: {trainlen1} -> {trainlen2}\nTesting: {testlen1} -> {testlen2}")
+        print("\nMaking Dataloaders")
+        train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True, pin_memory=True, num_workers=num_workers, persistent_workers=persist, collate_fn=custom_collate_fn)
+        test_loader = DataLoader(test_dataset, batch_size=batch_size, shuffle=False, pin_memory=True, num_workers=num_workers, persistent_workers=persist, collate_fn=custom_collate_fn)
+    
     else:
         print("Not Applying Poisson Transform")
         transform = v2.Compose([
@@ -83,23 +101,24 @@ def build_datasets(train_specs, input_specs = None):
                     v2.ToTensor(),
                     v2.Normalize((0,), (1,)),
                     ])
+        
+        # create dataset in /content
+        print("\nMaking datasets and defining subsets")
+        train_dataset = datasets.MNIST(root='dataset/', train=True, transform=transform, download=True)
+        test_dataset = datasets.MNIST(root='dataset/', train=False, transform=transform, download=True)
+        
+        trainlen1 = len(train_dataset)
+        testlen1 = len(test_dataset)
+        snn.utils.data_subset(train_dataset, subset_size)
+        snn.utils.data_subset(test_dataset, subset_size)
+        trainlen2 = len(train_dataset)
+        testlen2 = len(test_dataset)
+        
+        print(f"Training: {trainlen1} -> {trainlen2}\nTesting: {testlen1} -> {testlen2}")
+        print("\nMaking Dataloaders")
+        train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True, pin_memory=True, num_workers=num_workers, persistent_workers=persist)
+        test_loader = DataLoader(test_dataset, batch_size=batch_size, shuffle=False, pin_memory=True, num_workers=num_workers, persistent_workers=persist)
     
-    # create dataset in /content
-    print("\nMaking datasets and defining subsets")
-    train_dataset = datasets.MNIST(root='dataset/', train=True, transform=transform, download=True)
-    test_dataset = datasets.MNIST(root='dataset/', train=False, transform=transform, download=True)
-    
-    trainlen1 = len(train_dataset)
-    testlen1 = len(test_dataset)
-    snn.utils.data_subset(train_dataset, subset_size)
-    snn.utils.data_subset(test_dataset, subset_size)
-    trainlen2 = len(train_dataset)
-    testlen2 = len(test_dataset)
-    
-    print(f"Training: {trainlen1} -> {trainlen2}\nTesting: {testlen1} -> {testlen2}")
-    print("\nMaking Dataloaders")
-    train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True, pin_memory=True, num_workers=num_workers, persistent_workers=persist)
-    test_loader = DataLoader(test_dataset, batch_size=batch_size, shuffle=False, pin_memory=True, num_workers=num_workers, persistent_workers=persist)
 
     return train_dataset, train_loader, test_dataset, test_loader
     
@@ -329,11 +348,13 @@ def build_nmnist_dataset(train_specs, input_specs = None):
     train_dataset = tonic.datasets.NMNIST(save_to='./dataset',
                                           transform=raw_transform,
                                           train=True,
+                                          first_saccade_only=True
                                           )
     
     test_dataset = tonic.datasets.NMNIST(save_to='./dataset',
                                           transform=raw_transform,
-                                          train=False)
+                                          train=False,
+                                          first_saccade_only=True)
     
     trainlen1 = len(train_dataset)
     testlen1 = len(test_dataset)
@@ -353,16 +374,27 @@ def build_nmnist_dataset(train_specs, input_specs = None):
                               shuffle=True, 
                               pin_memory=True, 
                               num_workers=num_workers, 
-                              persistent_workers=persist, 
-                              drop_last=True)
+                              persistent_workers=persist)
     
     test_loader = DataLoader(test_dataset,
                              batch_size=batch_size, 
                              collate_fn=tonic.collation.PadTensors(batch_first=False), 
                              pin_memory=True, 
                              num_workers=num_workers, 
-                             persistent_workers=persist, 
-                             drop_last=True)
+                             persistent_workers=persist)
     
     
     return train_dataset, train_loader, test_dataset, test_loader
+
+def custom_collate_fn(batch):
+    # Unpack the batch
+    images, labels = zip(*batch)
+    
+    # Stack the images and labels
+    # images is a list of tensors of shape [t, 1, 28, 28]
+    images = torch.stack(images)  # Shape: [bs, t, 1, 28, 28]
+    labels = torch.tensor(labels) # Shape: [bs]
+    # Permute the images to the desired shape [t, bs, 1, 28, 28]
+    images = images.transpose(0, 1)  # New shape: [t, bs, 1, 28, 28]
+    
+    return images, labels

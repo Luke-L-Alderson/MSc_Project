@@ -23,7 +23,7 @@ set_seed()
 
 
 train_specs = {}
-train_specs["batch_size"] = 16
+train_specs["batch_size"] = 64
 
 
 train_specs["code"] = 'rate'
@@ -57,7 +57,7 @@ network, network_params = build_network(device,
                                         depth=1, 
                                         size=train_dataset[0][0].shape[-1])
 
-print(data_shape:=train_dataset[0][1].shape[-1])
+print(data_shape:=train_dataset[0][0].shape[-1])
 # Train network
 network, train_loss, test_loss, final_train_loss, final_test_loss = train_network(network, train_loader, test_loader, train_specs)
 
@@ -126,6 +126,8 @@ for i, label in enumerate(all_labs):
         seen_labels.add(label)
         unique_ims.append((all_decs[i], label))
         orig_ims.append((all_orig_ims[i], label))
+        if len(seen_labels) == 10:
+            break
 
 unique_ims.sort(key=lambda x: x[1])
 orig_ims.sort(key=lambda x: x[1])
@@ -187,9 +189,7 @@ img_spk_outs = img_spk_outs.squeeze().detach().cpu()
 print(type(img_spk_outs))
 print(img_spk_outs.shape)
 
-num_pixels = inputs.shape[1]*inputs.shape[2]
-round_pixels = int(ceil(num_pixels / 100.0)) * 100
-print(round_pixels)
+
 #wandb.log({"Spike Animation": wandb.Video(f"figures/spike_mnist_{labels}.gif", fps=4, format="gif")}, commit = False)
 
 print("Plotting Spiking Output MNIST")
@@ -203,6 +203,9 @@ HTML(animrec.to_html5_video())
 animrec.save(f"figures/spike_mnistrec_{labels}.gif")
   
 print("Rasters")
+num_pixels = inputs.shape[1]*inputs.shape[2]
+round_pixels = int(ceil(num_pixels / 100.0)) * 100
+print(round_pixels)
 fig = plt.figure(facecolor="w", figsize=(10, 10))
 ax1 = plt.subplot(3, 1, 1)
 splt.raster(inputs.reshape(inputs.shape[0], -1), ax1, s=1.5, c="black")

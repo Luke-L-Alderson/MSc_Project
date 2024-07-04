@@ -29,7 +29,8 @@ def train_network(network, train_loader, test_loader, train_specs):
 
         for i, (train_inputs, train_labels) in enumerate(train_loader, 1): #something here takes 30 seconds
             iterTime = datetime.now() 
-            train_inputs = train_inputs.transpose(0,1)# if train_inputs.shape[0] < train_inputs.shape[1] else train_inputs            
+            #print(train_inputs.shape)
+            #train_inputs = train_inputs.transpose(0,1) if train_inputs.shape[0] < train_inputs.shape[1] else train_inputs            
             train_inputs = train_inputs.to(device)
             #print(train_inputs.shape)
             train_spk_recs, train_spk_outs  = network(train_inputs)         
@@ -53,7 +54,7 @@ def train_network(network, train_loader, test_loader, train_specs):
         print(f"\nTesting - {datetime.now()}")
         with torch.no_grad():
             for j, (test_inputs, test_labels) in enumerate(test_loader, 1):
-                test_inputs = test_inputs.transpose(0,1)# if test_inputs.shape[0] < test_inputs.shape[1] else test_inputs  
+                #test_inputs = test_inputs.transpose(0,1) if test_inputs.shape[0] < test_inputs.shape[1] else test_inputs  
                 test_inputs = test_inputs.to(device)
                 test_spk_recs, test_spk_outs  = network(test_inputs)
                 test_loss = loss_fn(test_spk_outs, test_inputs, test_spk_recs)
