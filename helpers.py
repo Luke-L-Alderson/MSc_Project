@@ -125,7 +125,7 @@ def build_datasets(train_specs, input_specs = None):
 def build_network(device, noise = 0, recurrence = 1, num_rec = 100, learnable=True, depth=1, size=28, time=200):
     print("Defining network")
     time_params, network_params, frame_params, convolution_params = {}, {}, {}, {}
-    
+    print(f"Input Size is {size}")
     # Parameters for use in network definition
     time_params["dt"] = 1*ms
     time_params["total_time"] = time*ms
@@ -150,26 +150,18 @@ def build_network(device, noise = 0, recurrence = 1, num_rec = 100, learnable=Tr
     for name, param in network.named_parameters():
         print(f"{name} --> {param.shape}")
     
+    
+    
     try:
         fig = plt.figure(facecolor="w", figsize=(10, 10))
         
-        ax1 = plt.subplot(2, 2, 1)
+        ax1 = plt.subplot(1, 2, 1)
         weight_map(network.rlif_rec.recurrent.weight)
-        plt.title("Initial Weights")
+        plt.title("Initial Weight Heatmap")
         
-        ax2 = plt.subplot(2, 2, 3)
+        ax2 = plt.subplot(1, 2, 2)
         sns.histplot(to_np(torch.flatten(network.rlif_rec.recurrent.weight)))
         plt.title("Initial Weight Distribution")
-        
-        #network.rlif_rec.recurrent.weight = nn.Parameter(1*torch.ones_like(network.rlif_rec.recurrent.weight))
-        
-        ax3 = plt.subplot(2, 2, 2)
-        weight_map(network.rlif_rec.recurrent.weight)
-        plt.title("Adjusted Weights")
-        
-        ax4 = plt.subplot(2, 2, 4)
-        sns.histplot(to_np(torch.flatten(network.rlif_rec.recurrent.weight)))
-        plt.title("Adjusted Weight Distribution")
         
         plt.show() 
     
@@ -272,6 +264,7 @@ class nmse_count_loss():
         # make it agnostic to spiking or non-spiking tensors
         spike_count = torch.sum(outputs, 0) if outputs.dim() > 4 else outputs
         target_spike_count = torch.sum(inputs, 0) if inputs.dim() > 4 else inputs
+        
         loss_fn = nn.MSELoss() # include max and min rates
         
         if self.ntype == None:
@@ -287,6 +280,11 @@ class nmse_count_loss():
         elif self.ntype == "mean":
             loss = torch.sqrt(loss_fn(spike_count, target_spike_count))/torch.mean(target_spike_count) + self.lambda_r*torch.sum(spk_recs)      
         
+        elif self.ntype == "spike_train":
+            #loss_fn = nn.MSELoss(reduction="sum")
+            loss = torch.sqrt(loss_fn(outputs, inputs)/loss_fn(torch.zeros_like(outputs), inputs)) + self.lambda_r*torch.sum(spk_recs)
+            #loss = loss_fn(outputs, inputs) + self.lambda_r*torch.sum(spk_recs)
+            
         else:
             Exception("Enter valid string: norm, range, or mean.")
         
@@ -305,7 +303,6 @@ class mae_count_loss():
         return loss
 
 def weight_map(wm, w=10, h=10, sign=False): # wm should be a tensor of weights
-    #fig = plt.figure(facecolor="w", figsize=(w, h))
     weight_log = np.sign(to_np(wm)) if sign else to_np(wm)
     num_rec = wm.shape[0]
     ax = sns.heatmap(weight_log)
@@ -329,7 +326,7 @@ Inputs: train_specs, input_specs [Optional]
 Outputs: Dataloaders
          Datasets, where each element is a tuple (data, label), and data is a tensor.
 '''
-def build_nmnist_dataset(train_specs, input_specs = None):
+def build_nmnist_dataset(train_specs, input_specs = None, first_saccade = False):
     num_workers = train_specs["num_workers"]
     batch_size = train_specs["batch_size"]
     sensor_size = tonic.datasets.NMNIST.sensor_size
@@ -344,17 +341,18 @@ def build_nmnist_dataset(train_specs, input_specs = None):
                 dtype_transform()
                 ])
     
+    first_saccade_only = first_saccade
     print("\nMaking datasets and defining subsets")
     train_dataset = tonic.datasets.NMNIST(save_to='./dataset',
                                           transform=raw_transform,
                                           train=True,
-                                          first_saccade_only=True
+                                          first_saccade_only=first_saccade_only
                                           )
     
     test_dataset = tonic.datasets.NMNIST(save_to='./dataset',
                                           transform=raw_transform,
                                           train=False,
-                                          first_saccade_only=True)
+                                          first_saccade_only=first_saccade_only)
     
     trainlen1 = len(train_dataset)
     testlen1 = len(test_dataset)
@@ -387,14 +385,12 @@ def build_nmnist_dataset(train_specs, input_specs = None):
     return train_dataset, train_loader, test_dataset, test_loader
 
 def custom_collate_fn(batch):
-    # Unpack the batch
     images, labels = zip(*batch)
-    
-    # Stack the images and labels
-    # images is a list of tensors of shape [t, 1, 28, 28]
-    images = torch.stack(images)  # Shape: [bs, t, 1, 28, 28]
-    labels = torch.tensor(labels) # Shape: [bs]
-    # Permute the images to the desired shape [t, bs, 1, 28, 28]
-    images = images.transpose(0, 1)  # New shape: [t, bs, 1, 28, 28]
+    images = torch.stack(images)
+    labels = torch.tensor(labels)
+    images = images.transpose(0, 1)
     
     return images, labels
+
+#def plotting_data(train_dataset, test_dataset, train_loader, test_loader, recurrence):
+    

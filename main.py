@@ -8,7 +8,7 @@ date = datetime.now().strftime("%d/%m - %H:%M")
 import numpy as np
 import wandb
 from helpers import get_poisson_inputs, build_datasets, build_network,\
-    to_np, set_seed, umap_plt, weight_map
+    to_np, set_seed, umap_plt, weight_map, build_nmnist_dataset
 
 import torch
 from torch.profiler import profile, record_function, ProfilerActivity
@@ -29,7 +29,7 @@ def main():
     torch.backends.cudnn.benchmark = True #TURN OFF WHEN CHANGING ARCHITECTURE    
 
     run = wandb.init()
-    run.name = f"{wandb.config.rate_on}_{wandb.config.recurrence}_{wandb.config.noise}"
+    
     """## Define network architecutre and parameters"""
     network_params, input_specs, train_specs = {}, {}, {}
     
@@ -48,7 +48,7 @@ def main():
     train_specs["num_epochs"] = wandb.config.epochs    
     train_specs["device"] = device
     train_specs["lr"] = wandb.config.lr    
-    train_specs["batch_size"] = wandb.config.bs
+    train_specs["batch_size"] = wandb.config.bs# if not wandb.config.first_saccade and not wandb.config.MNIST else 16
     train_specs["subset_size"] = wandb.config.subset_size
     train_specs["num_workers"] = wandb.config.num_workers
     train_specs["norm_type"] = wandb.config.norm_type
@@ -56,14 +56,26 @@ def main():
     learnable = wandb.config.learnable
     noise = wandb.config.noise
     recurrence = wandb.config.recurrence
+    MNIST = wandb.config.MNIST
+    first_saccade_only = wandb.config.first_saccade
     
     print(f'Starting Sweep: Batch Size: {train_specs["batch_size"]}, Learning Rate: {train_specs["lr"]}')
     
     # Build dataset and loaders
-    train_dataset, train_loader, test_dataset, test_loader = build_datasets(train_specs, input_specs)
+    
+    if MNIST:
+        dataset = "MNIST"
+        train_dataset, train_loader, test_dataset, test_loader = build_datasets(train_specs, input_specs)
+    else:
+        dataset = "NMNIST"
+        train_dataset, train_loader, test_dataset, test_loader = build_nmnist_dataset(train_specs, first_saccade=first_saccade_only)
+    
+    run.name = f"{dataset}_{wandb.config.first_saccade}fs_{wandb.config.bs}_{wandb.config.lr}"
+    
+    in_size = train_dataset[0][0].shape[-1]
     
     # Build network
-    network, network_params = build_network(device, noise=noise, recurrence=recurrence, num_rec=num_rec, learnable=learnable, time=100)
+    network, network_params = build_network(device, noise=noise, recurrence=recurrence, num_rec=num_rec, learnable=learnable, size=in_size)
     
     # Train network
     network, train_loss, test_loss, final_train_loss, final_test_loss = train_network(network, train_loader, test_loader, train_specs)
@@ -86,7 +98,7 @@ def main():
     # Loop over each subplot
     for i, ax in enumerate(axes):
         ax.set_title(f'Number: {unique_images[i][1]}')
-        ax.imshow(unique_images[i][0].reshape(28,28), cmap = 'gray')  # Blank image, you can replace this with your content
+        ax.imshow(unique_images[i][0].squeeze(), cmap = 'gray')  # Blank image, you can replace this with your content
         ax.axis('off')
     
     plt.tight_layout()
@@ -173,7 +185,6 @@ def main():
     inputs, labels = test_dataset[input_index]
     img_spk_recs, img_spk_outs = network(inputs)
     inputs = inputs.squeeze().cpu()
-    
     img_spk_outs = img_spk_outs.squeeze().detach().cpu()
     
     print(f"Plotting Spiking Input MNIST Animation - {labels}")
@@ -195,7 +206,7 @@ def main():
     animrec.save(f"figures/spike_mnistrec_{labels}.gif")
       
     print("Rasters")
-    num_pixels = inputs.shape[1]*inputs.shape[2]
+    num_pixels = in_size**2
     round_pixels = int(ceil(num_pixels / 100.0)) * 100
     print(round_pixels)
     fig = plt.figure(facecolor="w", figsize=(10, 10))
@@ -242,7 +253,8 @@ def main():
     del network, train_loss, test_loss, final_train_loss, final_test_loss, \
         features, all_labs, all_decs, all_orig_ims, \
         train_dataset, train_loader, test_dataset, test_loader, tsne, inputs, \
-        img_spk_outs, img_spk_recs, code_layer, decoded, fig, ax
+        img_spk_outs, img_spk_recs, code_layer, decoded, fig, ax, num_pixels, \
+        round_pixels, unique_ims, orig_ims, image, label
         
     gc.collect()
     torch.cuda.empty_cache()
@@ -254,7 +266,7 @@ if __name__ == '__main__':
   
   if test == 1:
       sweep_config = {
-          'name': f'Test Sweep {date}',
+          'name': f'Test Sweep (Mem Leaks) {date}',
           'method': 'grid',
           'metric': {'name': 'Test Loss',
                       'goal': 'minimize'   
@@ -263,35 +275,39 @@ if __name__ == '__main__':
                           'lr': {'values': [1e-4]},
                           'epochs': {'values': [9]},
                           "subset_size": {'values': [10]},
-                          "recurrence": {'values': [1]},
+                          "recurrence": {'values': [True, False]},
                           "noise": {'values': [0]},
                           "rate_on": {'values': [75]},
                           "rate_off": {'values': [1]},
                           "num_workers": {'values': [0]},
                           "num_rec": {'values': [100]},
                           "norm_type": {'values': ["norm"]},
-                          "learnable": {'values': [True]}
+                          "learnable": {'values': [True]},
+                          "MNIST": {'values': [True]},
+                          "first_saccade": {'values': [True]}
                           }
           }
   else:
       sweep_config = { #REMEMBER TO CHANGE RUN NAME
-          'name': f'Recurrency and Noise (4-10) {date}',
+          'name': f'NMNIST recurrence and learnable {date}',
           'method': 'grid',
           'metric': {'name': 'Test Loss',
                       'goal': 'minimize'   
                       },
-          'parameters': {'bs': {'values': [64]},
+          'parameters': {'bs': {'values': [16]},
                           'lr': {'values': [1e-4]},
                           'epochs': {'values': [9]},
                           "subset_size": {'values': [10]},
-                          "recurrence": {'values': [0, 1]}, #1, 0.1, 0.5, 0, 1.25, 1.5, 1.75, 2
-                          "noise": {'values': [4, 5, 6, 6.2, 6.4, 6.6, 6.8, 7, 8, 9, 10]},
+                          "recurrence": {'values': [1, 0]},
+                          "noise": {'values': [0]},
                           "rate_on": {'values': [75]},
                           "rate_off": {'values': [1]},
                           "num_workers": {'values': [0]},
                           "num_rec": {'values': [100]},
                           "norm_type": {'values': ["norm"]},
-                          "learnable": {'values': [True]} #
+                          "learnable": {'values': [True, False]},
+                          "MNIST": {'values': [False]},
+                          "first_saccade": {'values': [False]}
                           }
           }
   

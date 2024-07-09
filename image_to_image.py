@@ -51,17 +51,16 @@ class SAE(nn.Module):
         
         batch_size = x.shape[1]
         time_steps = x.shape[0]
-        #print(batch_size)
-        #print(time_steps)
-        # print(x.shape)
+
         mem_conv1 = self.lif_conv1.init_leaky()
         mem_out = self.lif_ff_out.init_leaky()
         mem_conv2 = self.lif_conv2.init_leaky()
         
-        if self.recurrence > 0:
+        if self.recurrence:
             spk_rec, mem_rec = self.rlif_rec.init_rleaky()
         else:
             mem_rec = self.lif_rec.init_leaky()
+            spk_rec = torch.zeros(batch_size, num_rec, device = self.device)
             
         mem_deconv2 = self.lif_deconv2.init_leaky()
         mem_reconstruction = self.lif_reconstruction.init_leaky()
@@ -78,22 +77,21 @@ class SAE(nn.Module):
             
             curr_in = self.ff_in(spk_conv2.view(batch_size, -1))
             
-            if self.recurrence > 0:
+            if self.recurrence:
                 spk_rec, mem_rec = self.rlif_rec(curr_in, spk_rec, mem_rec) # this is the snn.RLeaky neuron
             else:
                 spk_rec, mem_rec = self.lif_rec(curr_in, mem_rec)
+                
+            mem_rec += noise_amp*torch.randn(mem_rec.shape, device = self.device)
             
             curr_out = self.ff_out(spk_rec)
             spk_out, mem_out = self.lif_ff_out(curr_out, mem_out)
-            mem_out += noise_amp*torch.randn(mem_out.shape, device = self.device)
             
             curr_deconv2 = self.deconv2(spk_out.view(spk_out.size(0), channels_2, conv2_size, conv2_size))
             spk_deconv2, mem_deconv2 = self.lif_conv2(curr_deconv2, mem_deconv2)
-            mem_deconv2 += noise_amp*torch.randn(mem_deconv2.shape, device = self.device)
             
             curr_reconstruction = self.reconstruction(spk_deconv2)
             spk_reconstruction, mem_reconstruction = self.lif_reconstruction(curr_reconstruction, mem_reconstruction)
-            mem_reconstruction += noise_amp*torch.randn(mem_reconstruction.shape, device = self.device)
     
             spk_recs.append(spk_rec)
             spk_outs.append(spk_reconstruction)

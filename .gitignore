@@ -27,3 +27,5 @@ __pycache__/train_network.cpython-312.pyc
 __pycache__/helpers.cpython-312.pyc
 .spyproject/config/workspace.ini
 .spyproject/config/backups/workspace.ini.bak
+*.csv
+*.gif
