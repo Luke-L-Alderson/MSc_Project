@@ -18,7 +18,7 @@ from brian2 import *
 from matplotlib import pyplot as plt
 import pandas as pd
 import seaborn as sns
-from train_network import train_network
+from train_network import train_network, train_network_bptt
 
 import gc
     
@@ -27,7 +27,7 @@ def main():
     print("Using CUDA") if torch.cuda.is_available() else print("Using CPU")
     set_seed()
     torch.backends.cudnn.benchmark = True #TURN OFF WHEN CHANGING ARCHITECTURE    
-
+    torch.autograd.set_detect_anomaly(True)
     run = wandb.init()
     
     """## Define network architecutre and parameters"""
@@ -79,7 +79,8 @@ def main():
     
     # Train network
     network, train_loss, test_loss, final_train_loss, final_test_loss = train_network(network, train_loader, test_loader, train_specs)
-
+    #network, train_loss, test_loss, final_train_loss, final_test_loss = train_network_bptt(network, train_loader, test_loader, train_specs, train_dataset, test_dataset)
+    
     # Plot examples from MNIST
     unique_images = []
     seen_labels = set()
@@ -196,8 +197,19 @@ def main():
     wandb.log({"Spike Animation": wandb.Video(f"figures/spike_mnist_{labels}.gif", fps=4, format="gif")}, commit = False)
     
     print("Plotting Spiking Output MNIST")
-    fig, axs = plt.subplots()
-    axs.imshow(img_spk_outs.mean(axis=0), cmap='grey')
+    fig =  plt.figure()
+    ax1 = plt.subplot(1, 4, 1)
+    ax1.imshow(img_spk_outs[20], cmap='grey')
+    plt.axis('off')
+    ax2 = plt.subplot(1, 4, 2)
+    ax2.imshow(img_spk_outs[50], cmap='grey')
+    plt.axis('off')
+    ax3 = plt.subplot(1, 4, 3)
+    ax3.imshow(img_spk_outs[90], cmap='grey')
+    plt.axis('off')
+    ax4 = plt.subplot(1, 4, 4)
+    ax4.imshow(img_spk_outs.mean(axis=0), cmap='grey')
+    plt.axis('off')
     
     print(f"Plotting Spiking Output MNIST Animation - {labels}")
     fig1, ax1 = plt.subplots()
@@ -275,7 +287,7 @@ if __name__ == '__main__':
                           'lr': {'values': [1e-4]},
                           'epochs': {'values': [9]},
                           "subset_size": {'values': [10]},
-                          "recurrence": {'values': [True, False]},
+                          "recurrence": {'values': [True]},
                           "noise": {'values': [0]},
                           "rate_on": {'values': [75]},
                           "rate_off": {'values': [1]},
@@ -283,7 +295,7 @@ if __name__ == '__main__':
                           "num_rec": {'values': [100]},
                           "norm_type": {'values': ["norm"]},
                           "learnable": {'values': [True]},
-                          "MNIST": {'values': [True]},
+                          "MNIST": {'values': [True, False]},
                           "first_saccade": {'values': [True]}
                           }
           }
