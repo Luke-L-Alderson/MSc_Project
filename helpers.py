@@ -560,9 +560,10 @@ def plotting_data(network, train_dataset, test_dataset, train_loader, test_loade
         fig = plt.figure(facecolor="w", figsize=(10, 5))
         ax1 = plt.subplot(1,2,1)
         weight_map(network.rlif_rec.recurrent.weight)
+        plt.title("Initial Weight Heatmap")
         ax2 = plt.subplot(1,2,2)
         sns.histplot(to_np(torch.flatten(network.rlif_rec.recurrent.weight)))
-        
+        plt.title("Initial Weight Distribution")
         fig.savefig(f"figures/weightmap_{run.name}.png")
         plt.show()  
     
