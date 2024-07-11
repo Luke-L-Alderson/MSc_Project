@@ -29,3 +29,4 @@ __pycache__/helpers.cpython-312.pyc
 .spyproject/config/backups/workspace.ini.bak
 *.csv
 *.gif
+hard code backup/main_nmnist.py
