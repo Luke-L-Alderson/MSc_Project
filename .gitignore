@@ -30,3 +30,4 @@ __pycache__/helpers.cpython-312.pyc
 *.csv
 *.gif
 hard code backup/main_nmnist.py
+/hard code backup
