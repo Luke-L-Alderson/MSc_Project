@@ -20,11 +20,13 @@ import torch.nn as nn
 import snntorch as snn
 from snntorch import spikegen
 from snntorch import utils
+import torchvision.utils as utls
 from random import random
 import snntorch.spikeplot as splt
 from IPython.display import HTML
 import tonic.transforms as transforms
 import tonic
+from torchsummary import summary
 
 __all__ = ["PoissonTransform",
            "build_datasets",
@@ -122,7 +124,7 @@ def build_datasets(train_specs, input_specs = None):
 
     return train_dataset, train_loader, test_dataset, test_loader
     
-def build_network(device, noise = 0, recurrence = 1, num_rec = 100, learnable=True, depth=1, size=28, time=200):
+def build_network(device, noise = 0, recurrence = 1, num_rec = 100, learnable=True, depth=1, size=28, time=200, kernel_size = 3):
     print("Defining network")
     time_params, network_params, frame_params, convolution_params = {}, {}, {}, {}
     print(f"Input Size is {size}")
@@ -141,17 +143,15 @@ def build_network(device, noise = 0, recurrence = 1, num_rec = 100, learnable=Tr
     frame_params["size"] = size
 
     convolution_params["channels_1"] = 12
-    convolution_params["filter_1"] = 3
+    convolution_params["filter_1"] = kernel_size
     convolution_params["channels_2"] = 64
-    convolution_params["filter_2"] = 3
+    convolution_params["filter_2"] = kernel_size
 
-    network = SAE(time_params, network_params, frame_params, convolution_params, device, recurrence).to(device)
+    network = SAE_ni(time_params, network_params, frame_params, convolution_params, device, recurrence).to(device)
     
-    for name, param in network.named_parameters():
-        print(f"{name} --> {param.shape} --> {param.requires_grad}")
-    
-    
-    
+    print_params(network)
+    visTensor(network.conv2.weight.detach().cpu())
+    summary(network, (depth, size, size))
     try:
         fig = plt.figure(facecolor="w", figsize=(10, 5))
         
@@ -302,7 +302,7 @@ class mae_count_loss():
         loss = torch.sqrt(loss_fn(spike_count, target_spike_count)) + self.lambda_r*torch.sum(spk_recs)
         return loss
 
-def weight_map(wm, w=10, h=10, sign=False): # wm should be a tensor of weights
+def weight_map(wm, w=10, h=10, sign=True): # wm should be a tensor of weights
     weight_log = np.sign(to_np(wm)) if sign else to_np(wm)
     num_rec = wm.shape[0]
     ax = sns.heatmap(weight_log)
@@ -311,8 +311,9 @@ def weight_map(wm, w=10, h=10, sign=False): # wm should be a tensor of weights
     ax.invert_yaxis()
     plt.xlim([0, num_rec])
     plt.ylim([0, num_rec])
-    ax.set_xticks(np.arange(0, num_rec+1, num_rec/10), labels=np.arange(0, num_rec+1, num_rec/10))
-    ax.set_yticks(np.arange(0, num_rec+1, num_rec/10), labels=np.arange(0, num_rec+1, num_rec/10))
+    labels = np.arange(0, num_rec+1, num_rec/10, dtype="int16")
+    ax.set_xticks(np.arange(0, num_rec+1, num_rec/10), labels=labels)
+    ax.set_yticks(np.arange(0, num_rec+1, num_rec/10), labels=labels)
     return ax
 
 def create_subset(dataset, subset_size):
@@ -400,6 +401,7 @@ def plotting_data(network, train_dataset, test_dataset, train_loader, test_loade
     for image, label in train_dataset:
         if label not in seen_labels:
             unique_images.append((image.mean(0), label))
+            torch.save(unique_images, "EncodedIms.png")
             seen_labels.add(label)
     
     unique_images.sort(key=lambda x: x[1])
@@ -554,6 +556,8 @@ def plotting_data(network, train_dataset, test_dataset, train_loader, test_loade
     
     fig.savefig("figures/rasters.png") 
     
+    visTensor(network.conv2.weight.detach().cpu())
+    
     umap_file, sil_score, db_score = umap_plt("./datafiles/"+run.name+".csv")
     
     if recurrence == 1:
@@ -563,9 +567,32 @@ def plotting_data(network, train_dataset, test_dataset, train_loader, test_loade
         plt.title("Initial Weight Heatmap")
         ax2 = plt.subplot(1,2,2)
         sns.histplot(to_np(torch.flatten(network.rlif_rec.recurrent.weight)))
-        plt.title("Initial Weight Distribution")
+        plt.title("Posterior Weight Distribution")
         fig.savefig(f"figures/weightmap_{run.name}.png")
         plt.show()  
     
     return labels, umap_file, sil_score, db_score
+
+def print_params(network):
+    print("\n--------------------------------------------------------")
+    for name, param in network.named_parameters():
+        if param.grad == None:
+            print(f"{name} --> {param.shape}")
+        else:
+            print(f"{name} --> {param.shape} --> {param.grad.mean()}")
+    print("--------------------------------------------------------\n")
     
+def visTensor(tensor, ch=0, allkernels=False, nrow=8, padding=1):
+    n,c,h,w = tensor.shape # i.e. [64, 12, 5, 5] --> 
+    print(f"Printing convolutional tensor of shape {tensor.shape} with grad = {tensor.requires_grad}")
+    if allkernels: tensor = tensor.view(n*c, -1, w, h)
+    elif c != 3: tensor = tensor[:,ch,:,:].unsqueeze(dim=1)
+
+    rows = np.min((tensor.shape[0] // nrow + 1, 64))    
+    grid = utls.make_grid(tensor, nrow=nrow, normalize=True, padding=padding)
+    plt.figure( figsize=(nrow,rows) )
+    plt.imshow(grid.numpy().transpose((1, 2, 0)))
+    plt.axis('off')
+    plt.ioff()
+    plt.show()
+    plt.savefig("figures/kernels.png") 
