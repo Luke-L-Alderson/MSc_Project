@@ -61,7 +61,7 @@ def main():
         dataset = "NMNIST"
         train_dataset, train_loader, test_dataset, test_loader = build_nmnist_dataset(train_specs, first_saccade=first_saccade_only)
     
-    run.name = f"{dataset}_{wandb.config.num_rec}nr_{wandb.config.recurrence}rec"
+    run.name = f"{dataset}_{wandb.config.kernel_size}"
     
     in_size = train_dataset[0][0].shape[-1]
     
@@ -69,7 +69,7 @@ def main():
     network, network_params = build_network(device, noise=noise, recurrence=recurrence, num_rec=num_rec, learnable=learnable, size=in_size, kernel_size=kernel_size)
     
     # Train network
-    network, train_loss, test_loss, final_train_loss, final_test_loss = train_network_bptt(network, train_loader, test_loader, train_specs)
+    network, train_loss, test_loss, final_train_loss, final_test_loss = train_network(network, train_loader, test_loader, train_specs)
     
     # Plotting
     labels, umap_file, sil_score, db_score = plotting_data(network, train_dataset, test_dataset, train_loader, test_loader, recurrence, device, run)
@@ -98,11 +98,11 @@ def main():
         
 if __name__ == '__main__':  
   
-  test = 1
+  test = 0
   
   if test == 1:
       sweep_config = {
-          'name': f'Test Sweep (Mem Leaks) {date}',
+          'name': f'Test Sweep - BPTT attempt {date}',
           'method': 'grid',
           'metric': {'name': 'Test Loss',
                       'goal': 'minimize'   
@@ -111,7 +111,7 @@ if __name__ == '__main__':
                           'lr': {'values': [1e-4]},
                           'epochs': {'values': [10]},
                           "subset_size": {'values': [10]},
-                          "recurrence": {'values': [True]},
+                          "recurrence": {'values': [False]},
                           "noise": {'values': [0]},
                           "rate_on": {'values': [75]},
                           "rate_off": {'values': [1]},
@@ -126,7 +126,7 @@ if __name__ == '__main__':
           }
   else:
       sweep_config = { #REMEMBER TO CHANGE RUN NAME
-          'name': f'Kernel Sizes [3, 5, 7, 9, 11, 13] {date}',
+          'name': f'Conv Architecture (64 --> 128) {date}',
           'method': 'grid',
           'metric': {'name': 'Test Loss',
                       'goal': 'minimize'   
@@ -143,9 +143,9 @@ if __name__ == '__main__':
                           "num_rec": {'values': [100]},
                           "norm_type": {'values': ["mean"]},
                           "learnable": {'values': [True]},
-                          "MNIST": {'values': [True]},
+                          "MNIST": {'values': [True, False]},
                           "first_saccade": {'values': [True]},
-                          "kernel_size": {'values': [3, 5, 7, 9, 11, 13]}
+                          "kernel_size": {'values': [7]}
                           }
           }
   

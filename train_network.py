@@ -1,4 +1,4 @@
-from helpers import get_poisson_inputs, rmse_count_loss, nmse_count_loss, print_params
+from helpers import get_poisson_inputs, rmse_count_loss, nmse_count_loss, print_params, get_grad
 import torch
 import wandb
 from brian2 import *
@@ -135,11 +135,11 @@ def train_network_bptt(network, train_loader, test_loader, train_specs):
     num_epochs = train_specs["num_epochs"]
     train_logging_freq = ceil(0.1*len(train_loader))
     test_logging_freq = ceil(0.1*len(test_loader))
-    loss_fn = nmse_count_loss(ntype=train_specs["norm_type"])
-    #loss_fn = torch.nn.MSELoss()
+    #loss_fn = nmse_count_loss(ntype=train_specs["norm_type"])
+    loss_fn = torch.nn.BCELoss()
     optimizer = torch.optim.Adam(network.parameters(), lr=train_specs["lr"], betas=(0.9, 0.999))
     k1 = 25
-    k2 = 25
+    #k2 = 25
     epoch_training_loss = [];
     epoch_testing_loss = [];
     
@@ -150,43 +150,39 @@ def train_network_bptt(network, train_loader, test_loader, train_specs):
         test_running_loss = 0.0
 
         for i, (train_inputs, train_labels) in enumerate(train_loader, 1):
-            #utils.reset(network)
-            #optimizer.zero_grad()
+            # Detach hidden state to prevent backpropagating through the entire history
+            utils.reset(network)
+            optimizer.zero_grad()
             iterTime = datetime.now()   
             train_inputs = train_inputs.to(device)  # Input shape: [ts, bs, ch, h, w]
             num_steps_trn = train_inputs.shape[0]
-            
-            training_loss = torch.zeros((1), device=device)
-            train_spk_recs, train_spk_outs  = network(train_inputs)
-            
+                        
             # BPTT(n , n) - BPTT for whole sequence followed by whole backprop
             # BPTT(1, n) - BPTT for 1 timestep, followed by whole backprop
             # BPTT(k1, k2) - BPTT for k1 timesteps, follwed by a backprop over k2 timesteps
             train_loss = 0
             for t in range(0, num_steps_trn, k1):
+                #print(f"{t} - {t+k1}")
+                #optimizer.zero_grad()
                 # Truncate the sequence
                 train_inputs_k1 = train_inputs[t:t+k1]
                 
+                # Forward pass through k1 time steps
                 train_spk_recs, train_spk_outs  = network(train_inputs_k1)         
-                train_loss = loss_fn(train_spk_outs, train_inputs, train_spk_recs)
+                train_loss += loss_fn(train_spk_outs, train_inputs_k1)
                 
-                print(f"Shape = {train_inputs_k1.shape}, t = {t}, seq_length = {num_steps_trn}, k1 = {k1}")
-                
-                optimizer.zero_grad()
-                
-                # Backward pass
-                train_loss.backward()
-                
-                # Update weights
-                optimizer.step()
-                
-                # Detach hidden state to prevent backpropagating through the entire history
-                utils.reset(network)
+                # Backward pass through k2 = k1 time steps
+            train_loss.backward()
             
+            wandb.log({"Mean Gradients": get_grad(network)})    
+            
+            # Update weights
+            optimizer.step()
+                
             train_running_loss += train_loss.item()
             
             if i % train_logging_freq == 0: #:.4f
-                print(f'[{epoch}/{num_epochs}, {i}/{len(train_loader)}] Training Loss: {train_running_loss/train_logging_freq} - Iteration Time: {datetime.now()-iterTime} - Data Size: {train_inputs.shape}')
+                print(f'[{epoch}/{num_epochs}, {i}/{len(train_loader)}] Training Loss: {train_running_loss/train_logging_freq} - Iteration Time: {datetime.now()-iterTime} - Data Size: {train_inputs.shape}-->{train_inputs_k1.shape}')
                 epoch_training_loss.append(train_running_loss/train_logging_freq)
                 try:
                     wandb.log({"Training Loss": epoch_training_loss[-1]})

@@ -142,16 +142,17 @@ def build_network(device, noise = 0, recurrence = 1, num_rec = 100, learnable=Tr
     frame_params["depth"] = depth
     frame_params["size"] = size
 
-    convolution_params["channels_1"] = 12
+    convolution_params["channels_1"] = 64#12
     convolution_params["filter_1"] = kernel_size
-    convolution_params["channels_2"] = 64
+    convolution_params["channels_2"] = 128#64
     convolution_params["filter_2"] = kernel_size
 
-    network = SAE_ni(time_params, network_params, frame_params, convolution_params, device, recurrence).to(device)
+    network = SAE(time_params, network_params, frame_params, convolution_params, device, recurrence).to(device)
     
     print_params(network)
-    visTensor(network.conv2.weight.detach().cpu())
+    visTensor(network.conv1.weight.detach().cpu())
     summary(network, (depth, size, size))
+    
     try:
         fig = plt.figure(facecolor="w", figsize=(10, 5))
         
@@ -395,28 +396,28 @@ def custom_collate_fn(batch):
 
 def plotting_data(network, train_dataset, test_dataset, train_loader, test_loader, recurrence, device, run):
     # Plot examples from MNIST
-    unique_images = []
-    seen_labels = set()
+    # unique_images = []
+    # seen_labels = set()
     
-    for image, label in train_dataset:
-        if label not in seen_labels:
-            unique_images.append((image.mean(0), label))
-            torch.save(unique_images, "EncodedIms.png")
-            seen_labels.add(label)
+    # for image, label in train_dataset:
+    #     if label not in seen_labels:
+    #         unique_images.append((image.mean(0), label))
+    #         torch.save(unique_images, "EncodedIms.png")
+    #         seen_labels.add(label)
     
-    unique_images.sort(key=lambda x: x[1])
+    # unique_images.sort(key=lambda x: x[1])
     
-    fig, axes = plt.subplots(2, 5, figsize=(15, 6))
+    # fig, axes = plt.subplots(2, 5, figsize=(15, 6))
     
-    axes = axes.flatten()
+    # axes = axes.flatten()
     
-    # Loop over each subplot
-    for i, ax in enumerate(axes):
-        ax.set_title(f'Number: {unique_images[i][1]}')
-        ax.imshow(unique_images[i][0].squeeze(), cmap = 'gray')  # Blank image, you can replace this with your content
-        ax.axis('off')
+    # # Loop over each subplot
+    # for i, ax in enumerate(axes):
+    #     ax.set_title(f'Number: {unique_images[i][1]}')
+    #     ax.imshow(unique_images[i][0].squeeze(), cmap = 'gray')  # Blank image, you can replace this with your content
+    #     ax.axis('off')
     
-    plt.tight_layout()
+    # plt.tight_layout()
     
     print("Assembling test data for 2D projection")
     ###
@@ -457,41 +458,36 @@ def plotting_data(network, train_dataset, test_dataset, train_loader, test_loade
     unique_ims.sort(key=lambda x: x[1])
     orig_ims.sort(key=lambda x: x[1])
     
-    fig, axs = plt.subplots(4, 5, figsize=(12, 10))
+    #figsize=(12, 10)
+    fig, axs = plt.subplots(1, 10, layout="constrained")
+    
+    pad = 0
+    h = 0
+    w = 0
     
     # Flatten the axis array for easier indexing
     axs = axs.flatten()
     
     # Plot the first 5 images from orig_ims
-    for i in range(5):
+    
+    for i in range(10):
         axs[i].imshow(orig_ims[i][0], cmap='grey')
-        if i==2:
-            axs[i].set_title('Originals: 0 - 4')
         axs[i].axis('off')
     
-    # Plot the first 5 images from unique_ims
-    for i in range(5):
-        axs[i+5].imshow(unique_ims[i][0], cmap='grey')
-        if i==2:
-            axs[i+5].set_title('Reconstructions: 0 - 4')
-        axs[i+5].axis('off')
+    plt.tight_layout(pad=pad, h_pad=h, w_pad=w)
+    fig.savefig("figures/poisson_inputs.png")
     
-    # Plot the remaining images from orig_ims
-    for i in range(5, 10):
-        axs[i+5].imshow(orig_ims[i][0], cmap='grey')
-        if i==7:
-            axs[i+5].set_title('Originals: 5 - 9')
-        axs[i+5].axis('off')
+    #figsize=(12, 10)
+    fig, axs = plt.subplots(1, 10, layout="constrained")
     
-    # Plot the remaining images from unique_ims
-    for i in range(5, 10):
-        axs[i+10].imshow(unique_ims[i][0], cmap='grey')
-        if i==7:
-            axs[i+10].set_title('Reconstructions: 5 - 9')
-        axs[i+10].axis('off')
+    # Flatten the axis array for easier indexing
+    axs = axs.flatten()    
+    for i in range(10):
+        axs[i].imshow(unique_ims[i][0], cmap='grey')
+        axs[i].axis('off')      
     
-    plt.tight_layout()
-    
+    plt.tight_layout(pad=pad, h_pad=h, w_pad=w)
+   
     fig.savefig("figures/result_summary.png")
     
     print("Plotting Spiking Input MNIST")
@@ -556,7 +552,7 @@ def plotting_data(network, train_dataset, test_dataset, train_loader, test_loade
     
     fig.savefig("figures/rasters.png") 
     
-    visTensor(network.conv2.weight.detach().cpu())
+    visTensor(network.conv1.weight.detach().cpu())
     
     umap_file, sil_score, db_score = umap_plt("./datafiles/"+run.name+".csv")
     
@@ -582,17 +578,32 @@ def print_params(network):
             print(f"{name} --> {param.shape} --> {param.grad.mean()}")
     print("--------------------------------------------------------\n")
     
-def visTensor(tensor, ch=0, allkernels=False, nrow=8, padding=1):
+def visTensor(tensor, ch=0, allkernels=False, nrow=12, padding=1):
     n,c,h,w = tensor.shape # i.e. [64, 12, 5, 5] --> 
     print(f"Printing convolutional tensor of shape {tensor.shape} with grad = {tensor.requires_grad}")
     if allkernels: tensor = tensor.view(n*c, -1, w, h)
     elif c != 3: tensor = tensor[:,ch,:,:].unsqueeze(dim=1)
-
+    print(f"Printing convolutional tensor of shape {tensor.shape} with grad = {tensor.requires_grad}")
+    print(f"Tensor: {tensor[0, 0, :, :]}")
     rows = np.min((tensor.shape[0] // nrow + 1, 64))    
     grid = utls.make_grid(tensor, nrow=nrow, normalize=True, padding=padding)
+    print(f"Grid shape: {grid.numpy().transpose((1, 2, 0)).shape}")
     plt.figure( figsize=(nrow,rows) )
     plt.imshow(grid.numpy().transpose((1, 2, 0)))
+    
     plt.axis('off')
     plt.ioff()
     plt.show()
-    plt.savefig("figures/kernels.png") 
+    plt.savefig("figures/kernels.png")
+    #fig = figure()
+    #example = (tensor[0, 0, :, :] - torch.min(tensor[0, 0, :, :]))/(torch.max(tensor[0, 0, :, :]) - torch.min(tensor[0, 0, :, :]))                                                                              
+    #print(f"Tensor: {example}")
+    #plt.imshow(example)
+    
+def get_grad(network):
+    gradients = []
+    for name, param in network.named_parameters():
+        if param.grad is not None:
+            gradients.append(param.grad.detach().cpu().min())
+        
+    return np.mean(np.array(gradients))

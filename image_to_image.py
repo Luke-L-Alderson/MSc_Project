@@ -220,7 +220,7 @@ class SAE_ni(nn.Module):
                 spk_rec = self.lif_rec(curr_in)
             
             curr_out = self.ff_out(spk_rec)
-            spk_out = self.lif_ff_out(curr_out)
+            spk_out = self.lif_ff_out(curr_out) #try adding a feedforward connection here
             
             curr_deconv2 = self.deconv2(spk_out.view(-1, channels_2, conv2_size, conv2_size))
             spk_deconv2 = self.lif_deconv2(curr_deconv2)
