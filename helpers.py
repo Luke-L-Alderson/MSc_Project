@@ -20,13 +20,18 @@ import torch.nn as nn
 import snntorch as snn
 from snntorch import spikegen
 from snntorch import utils
+from snntorch import functional as F
 import torchvision.utils as utls
-from random import random
 import snntorch.spikeplot as splt
 from IPython.display import HTML
 import tonic.transforms as transforms
 import tonic
 from torchsummary import summary
+import random as rand
+from tonic import DiskCachedDataset
+import warnings
+import gc
+from snntorch import utils
 
 __all__ = ["PoissonTransform",
            "build_datasets",
@@ -124,7 +129,7 @@ def build_datasets(train_specs, input_specs = None):
 
     return train_dataset, train_loader, test_dataset, test_loader
     
-def build_network(device, noise = 0, recurrence = 1, num_rec = 100, learnable=True, depth=1, size=28, time=200, kernel_size = 3):
+def build_network(device, noise = 0, recurrence = True, num_rec = 100, depth=1, size=28, time=200, kernel_size = 3):
     print("Defining network")
     time_params, network_params, frame_params, convolution_params = {}, {}, {}, {}
     print(f"Input Size is {size}")
@@ -138,36 +143,18 @@ def build_network(device, noise = 0, recurrence = 1, num_rec = 100, learnable=Tr
     network_params["v_th"] = 1          # snn default = 1
     network_params["eta"] = noise        # controls noise amplitude - try adding noise in rec layer
     network_params["num_rec"] = num_rec
-    network_params["learnable"] = learnable
     frame_params["depth"] = depth
     frame_params["size"] = size
 
-    convolution_params["channels_1"] = 64#12
+    convolution_params["channels_1"] = 12
     convolution_params["filter_1"] = kernel_size
-    convolution_params["channels_2"] = 128#64
+    convolution_params["channels_2"] = 64
     convolution_params["filter_2"] = kernel_size
 
     network = SAE(time_params, network_params, frame_params, convolution_params, device, recurrence).to(device)
     
     print_params(network)
-    visTensor(network.conv1.weight.detach().cpu())
-    summary(network, (depth, size, size))
-    
-    try:
-        fig = plt.figure(facecolor="w", figsize=(10, 5))
-        
-        ax1 = plt.subplot(1, 2, 1)
-        weight_map(network.rlif_rec.recurrent.weight)
-        plt.title("Initial Weight Heatmap")
-        
-        ax2 = plt.subplot(1, 2, 2)
-        sns.histplot(to_np(torch.flatten(network.rlif_rec.recurrent.weight)))
-        plt.title("Initial Weight Distribution")
-        
-        plt.show() 
-    
-    except:
-        print("Not recurrent")
+    print(f"Total number of parameters is {count_params(network)}")
 
     return network, network_params
     
@@ -198,26 +185,32 @@ def set_seed(value = 42):
     torch.backends.cudnn.deterministic = True
     os.environ["PYTHONHASHSEED"] = str(value)
     try:
-        random.seed()
+        rand.seed(value)
+        print("Successfully set random.seed()")
     except:
         print("Couldn't set random.seed()")
     print(f"\nSetting Seed to {value}")
 
-def umap_plt(file, w=10, h=5):
+def umap_plt(file, w=10, h=5, s=1):
     features = pd.read_csv(file)
     all_labs = features["Labels"]#.to_numpy()
+    num_labs = len(set(all_labs.to_numpy()))
+    print(num_labs)
     #print(all_labs)
     features = features.loc[:, features.columns != 'Labels']#.to_numpy()
     #print(f"Printing Features: \n{features.iloc[0, :]}")
     tail = os.path.split(file)
     f_name = f"UMAPS/umap_{tail[1]}.png"
     print("Applying UMAP")
-    umap = UMAP(n_components=2, random_state=42, n_neighbors=15).fit_transform(features)
+    with warnings.catch_warnings():
+        warnings.filterwarnings("ignore")
+        umap = UMAP(n_components=2, random_state=42, n_neighbors=15).fit_transform(features)
     cmap = mpl.colormaps['viridis']
-    plt.figure(figsize=(w, h))
-    c_range = np.arange(0.5, 10, 1)
+    fig = plt.figure(figsize=(w, h))
+    #c_range = np.arange(0.5, 10, 1)
+    c_range = np.arange(0.5, num_labs, 1)
     norm = colors.BoundaryNorm(c_range, cmap.N)
-    plt.scatter(umap[:, 0], umap[:, 1], c=all_labs, cmap=cmap, norm=norm)
+    ax = plt.scatter(umap[:, 0], umap[:, 1], c=all_labs, cmap=cmap, norm=norm, s=s)
     plt.xlabel('UMAP 1')
     plt.ylabel('UMAP 2')
     plt.colorbar(label='Digit Class', ticks=c_range-0.5)
@@ -229,7 +222,7 @@ def umap_plt(file, w=10, h=5):
     sil_score = silhouette_score(umap[:, 0:1], all_labs)
     db_score = davies_bouldin_score(umap[:, 0:1], all_labs)
     
-    return f_name, sil_score, db_score
+    return f_name, sil_score, db_score, ax
     
 def get_poisson_inputs(inputs, total_time, bin_size, rate_on, rate_off):
     num_steps = int(total_time/bin_size)
@@ -261,30 +254,29 @@ class nmse_count_loss():
         self.__name__ = "nrmse_count_loss"
         self.ntype = ntype
     def __call__(self, outputs, inputs, spk_recs=torch.tensor(0)):
+        # inputs = [t, bs, ch, h, w]
         
-        # make it agnostic to spiking or non-spiking tensors
+        # make it agnostic to spiking or non-spiking tensors - sums over time if available
         spike_count = torch.sum(outputs, 0) if outputs.dim() > 4 else outputs
         target_spike_count = torch.sum(inputs, 0) if inputs.dim() > 4 else inputs
         
-        loss_fn = nn.MSELoss() # include max and min rates
+        loss_fn = nn.MSELoss()
         
-        if self.ntype == None:
-            loss = torch.sqrt(loss_fn(spike_count, target_spike_count)) + self.lambda_r*torch.sum(spk_recs)
+        if self.ntype == None: # RMSE Spike Count
+            loss = torch.sqrt(loss_fn(spike_count, target_spike_count)) + self.lambda_r*torch.sum(spk_recs)  
         
-        if self.ntype == "norm":
+        if self.ntype == "norm": # RMSE/"norm" Spike Count
             loss_fn = nn.MSELoss(reduction="sum")
             loss = torch.sqrt(loss_fn(spike_count, target_spike_count)/loss_fn(torch.zeros_like(spike_count), target_spike_count)) + self.lambda_r*torch.sum(spk_recs)
         
-        elif self.ntype == "range":
+        elif self.ntype == "range": # RMSE/range Spike Count
             loss = torch.sqrt(loss_fn(spike_count, target_spike_count))/(torch.max(target_spike_count) - torch.min(target_spike_count)) + self.lambda_r*torch.sum(spk_recs)
         
-        elif self.ntype == "mean":
+        elif self.ntype == "mean": # RMSE/mean Spike Count
             loss = torch.sqrt(loss_fn(spike_count, target_spike_count))/torch.mean(target_spike_count) + self.lambda_r*torch.sum(spk_recs)      
         
-        elif self.ntype == "spike_train":
-            #loss_fn = nn.MSELoss(reduction="sum")
-            loss = torch.sqrt(loss_fn(outputs, inputs)/loss_fn(torch.zeros_like(outputs), inputs)) + self.lambda_r*torch.sum(spk_recs)
-            #loss = loss_fn(outputs, inputs) + self.lambda_r*torch.sum(spk_recs)
+        elif self.ntype == "spike_train": # RMSE/"norm" All Spikes
+            loss = loss_fn(outputs, inputs) + self.lambda_r*torch.sum(spk_recs)
             
         else:
             Exception("Enter valid string: norm, range, or mean.")
@@ -394,30 +386,7 @@ def custom_collate_fn(batch):
     
     return images, labels
 
-def plotting_data(network, train_dataset, test_dataset, train_loader, test_loader, recurrence, device, run):
-    # Plot examples from MNIST
-    # unique_images = []
-    # seen_labels = set()
-    
-    # for image, label in train_dataset:
-    #     if label not in seen_labels:
-    #         unique_images.append((image.mean(0), label))
-    #         torch.save(unique_images, "EncodedIms.png")
-    #         seen_labels.add(label)
-    
-    # unique_images.sort(key=lambda x: x[1])
-    
-    # fig, axes = plt.subplots(2, 5, figsize=(15, 6))
-    
-    # axes = axes.flatten()
-    
-    # # Loop over each subplot
-    # for i, ax in enumerate(axes):
-    #     ax.set_title(f'Number: {unique_images[i][1]}')
-    #     ax.imshow(unique_images[i][0].squeeze(), cmap = 'gray')  # Blank image, you can replace this with your content
-    #     ax.axis('off')
-    
-    # plt.tight_layout()
+def plotting_data(network, train_dataset, test_dataset, train_loader, test_loader, recurrence, device, run, k1):
     
     print("Assembling test data for 2D projection")
     ###
@@ -426,12 +395,15 @@ def plotting_data(network, train_dataset, test_dataset, train_loader, test_loade
         for i,(data, labs) in enumerate(test_loader, 1):
             data = data.to(device)
             code_layer, decoded = network(data)
-            code_layer = code_layer.mean(0)
-            features.append(to_np(code_layer))
+            features.append(to_np(code_layer.mean(0)))
             all_labs.append(labs)
-            all_decs.append(decoded.mean(0).squeeze().cpu())
-            all_orig_ims.append(data.mean(0).squeeze().cpu())
-           
+            all_decs.append(to_np(decoded.squeeze().mean(0)))
+            all_orig_ims.append(to_np(data.squeeze().mean(0)))
+            
+            del data, code_layer, decoded
+            gc.collect()
+            torch.cuda.empty_cache()
+            
             if i % 1 == 0:
                 print(f'-- {i}/{len(test_loader)} --')
     
@@ -439,133 +411,281 @@ def plotting_data(network, train_dataset, test_dataset, train_loader, test_loade
         all_labs = np.concatenate(all_labs, axis = 0)
         all_orig_ims = np.concatenate(all_orig_ims, axis = 0)
         all_decs = np.concatenate(all_decs, axis = 0)
-  
-    tsne = pd.DataFrame(data = features)
-    tsne.insert(0, "Labels", all_labs) 
-    tsne.to_csv("./datafiles/"+run.name+".csv", index=False)
     
-    
-    print("Plotting Results Grid")
-    seen_labels = set()
-    unique_ims = []
-    orig_ims = []
-    for i, label in enumerate(all_labs):
-        if label not in seen_labels:
-            seen_labels.add(label)
-            unique_ims.append((all_decs[i], label))
-            orig_ims.append((all_orig_ims[i], label))
-    
-    unique_ims.sort(key=lambda x: x[1])
-    orig_ims.sort(key=lambda x: x[1])
-    
-    #figsize=(12, 10)
-    fig, axs = plt.subplots(1, 10, layout="constrained")
-    
-    pad = 0
-    h = 0
-    w = 0
-    
-    # Flatten the axis array for easier indexing
-    axs = axs.flatten()
-    
-    # Plot the first 5 images from orig_ims
-    
-    for i in range(10):
-        axs[i].imshow(orig_ims[i][0], cmap='grey')
-        axs[i].axis('off')
-    
-    plt.tight_layout(pad=pad, h_pad=h, w_pad=w)
-    fig.savefig("figures/poisson_inputs.png")
-    
-    #figsize=(12, 10)
-    fig, axs = plt.subplots(1, 10, layout="constrained")
-    
-    # Flatten the axis array for easier indexing
-    axs = axs.flatten()    
-    for i in range(10):
-        axs[i].imshow(unique_ims[i][0], cmap='grey')
-        axs[i].axis('off')      
-    
-    plt.tight_layout(pad=pad, h_pad=h, w_pad=w)
-   
-    fig.savefig("figures/result_summary.png")
-    
-    print("Plotting Spiking Input MNIST")
-    # Plot originally input as image and as spiking representation - save gif.
-    input_index = 0
-    inputs, labels = test_dataset[input_index]
-    img_spk_recs, img_spk_outs = network(inputs)
-    inputs = inputs.squeeze().cpu()
-    img_spk_outs = img_spk_outs.squeeze().detach().cpu()
-    
-    print(f"Plotting Spiking Input MNIST Animation - {labels}")
-    fig, ax = plt.subplots()
-    anim = splt.animator(inputs, fig, ax)
-    HTML(anim.to_html5_video())
-    anim.save(f"figures/spike_mnist_{labels}.gif")
-    
-    wandb.log({"Spike Animation": wandb.Video(f"figures/spike_mnist_{labels}.gif", fps=4, format="gif")}, commit = False)
-    
-    print("Plotting Spiking Output MNIST")
-    t1, t2, t3 = 20, 50, 80
-    fig =  plt.figure()
-    ax1 = plt.subplot(1, 4, 1)
-    ax1.imshow(img_spk_outs[t1], cmap='grey')
-    plt.axis('off')
-    plt.xlabel(f"t = {t1}")
-    ax2 = plt.subplot(1, 4, 2)
-    ax2.imshow(img_spk_outs[t2], cmap='grey')
-    plt.axis('off')
-    plt.xlabel(f"t = {t2}")
-    ax3 = plt.subplot(1, 4, 3)
-    ax3.imshow(img_spk_outs[t3], cmap='grey')
-    plt.axis('off')
-    plt.xlabel(f"t = {t3}")
-    ax4 = plt.subplot(1, 4, 4)
-    ax4.imshow(img_spk_outs.mean(axis=0), cmap='grey')
-    plt.axis('off')
-    plt.xlabel("Average over all timesteps")
-    
-    print(f"Plotting Spiking Output MNIST Animation - {labels}")
-    fig1, ax1 = plt.subplots()
-    animrec = splt.animator(img_spk_outs, fig1, ax1)
-    HTML(animrec.to_html5_video())
-    animrec.save(f"figures/spike_mnistrec_{labels}.gif")
-    in_size = train_dataset[0][0].shape[-1]
-    num_rec = img_spk_recs.shape[-1]
-    print("Rasters")
-    num_pixels = in_size**2
-    round_pixels = int(ceil(num_pixels / 100.0)) * 100
-    print(round_pixels)
-    fig = plt.figure(facecolor="w", figsize=(10, 10))
-    ax1 = plt.subplot(3, 1, 1)
-    splt.raster(inputs.reshape(inputs.shape[0], -1), ax1, s=1.5, c="black")
-    ax2 = plt.subplot(3, 1, 2)
-    splt.raster(img_spk_recs.reshape(inputs.shape[0], -1), ax2, s=1.5, c="black")
-    ax3 = plt.subplot(3, 1, 3)
-    splt.raster(img_spk_outs.reshape(inputs.shape[0], -1), ax3, s=1.5, c="black")
+        # del data, code_layer, decoded
+        gc.collect()
+        torch.cuda.empty_cache()
+        
+        tsne = pd.DataFrame(data = features)
+        tsne.insert(0, "Labels", all_labs) 
+        tsne.to_csv("./datafiles/"+run.name+".csv", index=False)
+        
+        
+        print("Plotting Results Grid")
+        seen_labels = set()
+        unique_ims = []
+        orig_ims = []
+        for i, label in enumerate(all_labs):
+            if label not in seen_labels:
+                seen_labels.add(label)
+                unique_ims.append((all_decs[i], label))
+                orig_ims.append((all_orig_ims[i], label))
+        
+        unique_ims.sort(key=lambda x: x[1])
+        orig_ims.sort(key=lambda x: x[1])
+        
+        #figsize=(12, 10)
+        fig, axs = plt.subplots(1, 10, layout="constrained")
+        
+        pad = 0
+        h = 0
+        w = 0
+        
+        # Flatten the axis array for easier indexing
+        axs = axs.flatten()
+        
+        # Plot the first 5 images from orig_ims
+        
+        for i in range(10):
+            axs[i].imshow(orig_ims[i][0], cmap='grey')
+            axs[i].axis('off')
+        
+        plt.tight_layout(pad=pad, h_pad=h, w_pad=w)
+        fig.savefig("figures/poisson_inputs.png", bbox_inches="tight", pad_inches=0)
+        
+        #figsize=(12, 10)
+        fig, axs = plt.subplots(1, 10, layout="constrained")
+        
+        # Flatten the axis array for easier indexing
+        axs = axs.flatten()    
+        for i in range(10):
+            axs[i].imshow(unique_ims[i][0], cmap='grey')
+            axs[i].set(yticks = [], xticks=[])
+            # if i==0:
+            #     axs[i].set_ylabel(f"{run.name.replace("_", "/")}\n(Off)", rotation=0, labelpad=40)
+        
+        plt.tight_layout(pad=pad, h_pad=h, w_pad=w)
+       
+        fig.savefig(f"figures/result_summary_{run.name}.png", bbox_inches="tight", pad_inches=0)
+        
+        print("Plotting Spiking Input MNIST")
 
-    ax1.set(xlim=[0, inputs.shape[0]], ylim=[-50, round_pixels+50], xticks=[], ylabel="Neuron Index")
-    ax2.set(xlim=[0, inputs.shape[0]], ylim=[0-round(num_rec*0.1), round(num_rec*1.1)], xticks=[], ylabel="Neuron Index")
-    ax3.set(xlim=[0, inputs.shape[0]], ylim=[-50, round_pixels+50], ylabel="Neuron Index", xlabel="Time, ms")
-    fig.tight_layout()
+        # Plot originally input as image and as spiking representation - save gif.
+        input_index = 1
+        inputs, labels = next(iter(test_loader))
+        inputs = inputs.to(device)
+        img_spk_recs, img_spk_outs = network(inputs)
+        new_inputs = inputs[:, input_index].squeeze().detach().cpu()
+        labels = labels[input_index]
+        
+        new_img_spk_outs = img_spk_outs[:, input_index].squeeze().detach().cpu()
+        new_img_spk_recs = img_spk_recs[:, input_index].squeeze().detach().cpu()
     
-    fig.savefig("figures/rasters.png") 
+        del inputs, img_spk_recs, img_spk_outs
+        
+        gc.collect()
+        torch.cuda.empty_cache()
+        
+        print(f"Plotting Spiking Input MNIST Animation - {labels}")
+        fig, ax = plt.subplots()
+        anim = splt.animator(new_inputs, fig, ax)
+        HTML(anim.to_html5_video())
+        anim.save(f"figures/spike_mnist_{labels}.gif")
+        
+        wandb.log({"Spike Animation": wandb.Video(f"figures/spike_mnist_{labels}.gif", fps=4, format="gif")}, commit = False)
+        
+        print("Plotting Spiking Output MNIST")
+        t1, t2, t3 = 20, 50, 80
+        fig =  plt.figure()
+        ax1 = plt.subplot(1, 4, 1)
+        ax1.imshow(new_inputs[t1], cmap='grey')
+        plt.axis('off')
+        plt.xlabel(f"t = {t1}")
+        ax2 = plt.subplot(1, 4, 2)
+        ax2.imshow(new_inputs[t2], cmap='grey')
+        plt.axis('off')
+        plt.xlabel(f"t = {t2}")
+        ax3 = plt.subplot(1, 4, 3)
+        ax3.imshow(new_inputs[t3], cmap='grey')
+        plt.axis('off')
+        plt.xlabel(f"t = {t3}")
+        ax4 = plt.subplot(1, 4, 4)
+        ax4.imshow(new_inputs.mean(axis=0), cmap='grey')
+        plt.axis('off')
+        plt.xlabel("Average over all timesteps")
+        
+        
+        t0, t1, t2, t3 = 0, 25, 50, 75
+        fig, ((ax1, ax2, ax3, ax4, ax5), (axa, axb, axc, axd, axe)) = plt.subplots(2, 5, layout="constrained", figsize=(10, 4))
+    #    fontsize=8
     
-    visTensor(network.conv1.weight.detach().cpu())
+        axa.imshow(new_img_spk_outs[t0:t0+5].mean(0), cmap="gray")
+        plt.tick_params(
+            axis='both',          # changes apply to the x-axis
+            which='both',      # both major and minor ticks are affected
+            bottom=False,      # ticks along the bottom edge are off
+            top=False,         # ticks along the top edge are off
+            labelbottom=False) # labels along the bottom edge are off
+        axa.set_xticks([])
+        axa.set_yticks([])
     
-    umap_file, sil_score, db_score = umap_plt("./datafiles/"+run.name+".csv")
+        axb.imshow(new_img_spk_outs[t1:t1+5].mean(0), cmap="gray")
+        plt.tick_params(
+            axis='both',          # changes apply to the x-axis
+            which='both',      # both major and minor ticks are affected
+            bottom=False,      # ticks along the bottom edge are off
+            top=False,         # ticks along the top edge are off
+            labelbottom=True) # labels along the bottom edge are off
+        axb.set_xticks([])
+        axb.set_yticks([])
     
-    if recurrence == 1:
-        fig = plt.figure(facecolor="w", figsize=(10, 5))
-        ax1 = plt.subplot(1,2,1)
-        weight_map(network.rlif_rec.recurrent.weight)
-        plt.title("Initial Weight Heatmap")
-        ax2 = plt.subplot(1,2,2)
-        sns.histplot(to_np(torch.flatten(network.rlif_rec.recurrent.weight)))
-        plt.title("Posterior Weight Distribution")
-        fig.savefig(f"figures/weightmap_{run.name}.png")
-        plt.show()  
+        axc.imshow(new_img_spk_outs[t2:t2+5].mean(0), cmap="gray")
+        plt.tick_params(
+            axis='both',          # changes apply to the x-axis
+            which='both',      # both major and minor ticks are affected
+            bottom=False,      # ticks along the bottom edge are off
+            top=False,         # ticks along the top edge are off
+            labelbottom=False) # labels along the bottom edge are off
+        axc.set_xticks([])
+        axc.set_yticks([])
+    
+        axd.imshow(new_img_spk_outs[t3:t3+5].mean(0), cmap="gray")
+        plt.tick_params(
+            axis='both',          # changes apply to the x-axis
+            which='both',      # both major and minor ticks are affected
+            bottom=False,      # ticks along the bottom edge are off
+            top=False,         # ticks along the top edge are off
+            labelbottom=False) # labels along the bottom edge are off
+        axd.set_xticks([])
+        axd.set_yticks([])
+    
+        axe.imshow(new_img_spk_outs.mean(axis=0), cmap="gray")
+        plt.tick_params(
+            axis='both',          # changes apply to the x-axis
+            which='both',      # both major and minor ticks are affected
+            bottom=False,      # ticks along the bottom edge are off
+            top=False,         # ticks along the top edge are off
+            labelbottom=False) # labels along the bottom edge are off
+        axe.set_xticks([])
+        axe.set_yticks([])
+    
+        ax1.imshow(new_inputs[t0:t0+5].mean(0), cmap="gray")
+        axa.set_xlabel(f"t = {t0}")
+        plt.tick_params(
+            axis='both',          # changes apply to the x-axis
+            which='both',      # both major and minor ticks are affected
+            bottom=False,      # ticks along the bottom edge are off
+            top=False,         # ticks along the top edge are off
+            labelbottom=True) # labels along the bottom edge are off
+        ax1.set_xticks([])
+        ax1.set_yticks([])
+    
+        ax2.imshow(new_inputs[t1:t1+5].mean(0), cmap="gray")
+        axb.set_xlabel(f"t = {t1}")
+        plt.tick_params(
+            axis='both',          # changes apply to the x-axis
+            which='both',      # both major and minor ticks are affected
+            bottom=False,      # ticks along the bottom edge are off
+            top=False,         # ticks along the top edge are off
+            labelbottom=True) # labels along the bottom edge are off
+        ax2.set_xticks([])
+        ax2.set_yticks([])
+    
+        ax3.imshow(new_inputs[t2:t2+5].mean(0), cmap="gray")
+        axc.set_xlabel(f"t = {t2}")
+        plt.tick_params(
+            axis='both',          # changes apply to the x-axis
+            which='both',      # both major and minor ticks are affected
+            bottom=False,      # ticks along the bottom edge are off
+            top=False,         # ticks along the top edge are off
+            labelbottom=True) # labels along the bottom edge are off
+        ax3.set_xticks([])
+        ax3.set_yticks([])
+    
+        ax4.imshow(new_inputs[t3:t3+5].mean(0), cmap="gray")
+        axd.set_xlabel(f"t = {t3}")
+        plt.tick_params(
+            axis='both',          # changes apply to the x-axis
+            which='both',      # both major and minor ticks are affected
+            bottom=False,      # ticks along the bottom edge are off
+            top=False,         # ticks along the top edge are off
+            labelbottom=True) # labels along the bottom edge are off
+        ax4.set_xticks([])
+        ax4.set_yticks([])
+    
+    
+        ax5.imshow(new_inputs.mean(axis=0), cmap="gray")
+    
+        axe.set_xlabel("Time Averaged")
+        plt.tick_params(
+            axis='both',          # changes apply to the x-axis
+            which='both',      # both major and minor ticks are affected
+            bottom=False,      # ticks along the bottom edge are off
+            top=False,         # ticks along the top edge are off
+            labelbottom=True) # labels along the bottom edge are off
+        ax5.set_xticks([])
+        ax5.set_yticks([])
+    
+        plt.tight_layout(pad=0, h_pad=0.7, w_pad=0)
+        fig.savefig(f"figures/time_slices_{run.name}.png")
+        
+        print(f"Plotting Spiking Output MNIST Animation - {labels}")
+        fig1, ax1 = plt.subplots()
+        animrec = splt.animator(new_img_spk_outs, fig1, ax1)
+        HTML(animrec.to_html5_video())
+        animrec.save(f"figures/spike_mnistrec_{labels}.gif")
+        in_size = train_dataset[0][0].shape[-1]
+        num_rec = new_img_spk_recs.shape[-1]
+        print("Rasters")
+        dot_size = 0.5
+        num_pixels = in_size**2
+        round_pixels = int(ceil(num_pixels / 100.0)) * 100
+        print(round_pixels)
+        fig = plt.figure(facecolor="w", figsize=(10, 3))
+        ax1 = plt.subplot(3, 1, 1)
+        splt.raster(new_inputs.reshape(new_inputs.shape[0], -1), ax1, s=dot_size, c="black")
+        plt.ylabel(ylabel=r"X", rotation=0, labelpad=10)
+        ax2 = plt.subplot(3, 1, 2)
+        splt.raster(new_img_spk_recs.reshape(new_inputs.shape[0], -1), ax2, s=dot_size, c="black")
+        plt.ylabel(ylabel=r"Y", rotation=0, labelpad=10)
+        ax3 = plt.subplot(3, 1, 3)
+        splt.raster(new_img_spk_outs.reshape(new_inputs.shape[0], -1), ax3, s=dot_size, c="black")
+        plt.ylabel(ylabel=r"Z", rotation=0, labelpad=10)
+    
+        ax1.yaxis.set_label_coords(-0.02,0.4)
+        ax2.yaxis.set_label_coords(-0.02,0.4)
+        ax3.yaxis.set_label_coords(-0.02,0.4)
+        ax1.set(xlim=[0, new_inputs.shape[0]], ylim=[-50, round_pixels+50], yticks = [], xticks=[])
+        ax2.set(xlim=[0, new_inputs.shape[0]], ylim=[0-round(num_rec*0.1), round(num_rec*1.1)], xticks=[], yticks = [])
+        ax3.set(xlim=[0, new_inputs.shape[0]], ylim=[-50, round_pixels+50], yticks = [], xlabel="Time, ms")
+
+        fig.tight_layout()
+        
+        fig.savefig("figures/rasters.png")
+        
+        umap_file, sil_score, db_score, ax = umap_plt("./datafiles/"+run.name+".csv")
+        
+        if recurrence == True:
+            fig = plt.figure(facecolor="w", figsize=(10, 5))
+            ax1 = plt.subplot(1,2,1)
+            weight_map(network.rlif_rec.recurrent.weight)
+            plt.title("Posterior Weight Heatmap")
+            ax2 = plt.subplot(1,2,2)
+            sns.histplot(to_np(torch.flatten(network.rlif_rec.recurrent.weight)))
+            plt.title("Posterior Weight Distribution")
+            fig.savefig(f"figures/weightmap_{run.name}.png")
+            plt.show()  
+    
+    
+    del features, all_labs, all_decs, all_orig_ims, tsne, network, \
+         input_index, new_inputs, \
+         seen_labels, unique_ims, orig_ims, fig, axs, \
+        t1, t2, t3, ax1, ax2, ax3, ax4, ax5, axa, axb, axc, axd, axe, fig1, animrec, \
+        in_size, num_rec, dot_size, num_pixels, round_pixels
+        
+    gc.collect()
+    torch.cuda.empty_cache()
+    
     
     return labels, umap_file, sil_score, db_score
 
@@ -573,21 +693,27 @@ def print_params(network):
     print("\n--------------------------------------------------------")
     for name, param in network.named_parameters():
         if param.grad == None:
-            print(f"{name} --> {param.shape}")
+            print(f"{name} --> {param.shape} --> {param.requires_grad}")
         else:
-            print(f"{name} --> {param.shape} --> {param.grad.mean()}")
+            print(f"{name} --> {param.shape} --> {param.requires_grad}")
     print("--------------------------------------------------------\n")
     
-def visTensor(tensor, ch=0, allkernels=False, nrow=12, padding=1):
+def visTensor(network, ch=0, allkernels=False, nrow=12, padding=1):
+    tensor = network.conv1.weight.clone().cpu()
     n,c,h,w = tensor.shape # i.e. [64, 12, 5, 5] --> 
-    print(f"Printing convolutional tensor of shape {tensor.shape} with grad = {tensor.requires_grad}")
-    if allkernels: tensor = tensor.view(n*c, -1, w, h)
-    elif c != 3: tensor = tensor[:,ch,:,:].unsqueeze(dim=1)
-    print(f"Printing convolutional tensor of shape {tensor.shape} with grad = {tensor.requires_grad}")
-    print(f"Tensor: {tensor[0, 0, :, :]}")
+    # print(f"Printing convolutional tensor of shape {tensor.shape} with grad = {tensor.requires_grad}")
+    if allkernels:
+        tensor = tensor.view(n*c, -1, w, h)
+    elif c != 3:
+        tensor = tensor[:,ch,:,:].unsqueeze(dim=1)
+    
+    # print(f"Printing convolutional tensor of shape {tensor.shape} with grad = {tensor.requires_grad}")
+    # print(f"Tensor: {tensor[0, 0, :, :]}")
+    
     rows = np.min((tensor.shape[0] // nrow + 1, 64))    
     grid = utls.make_grid(tensor, nrow=nrow, normalize=True, padding=padding)
-    print(f"Grid shape: {grid.numpy().transpose((1, 2, 0)).shape}")
+    
+    # print(f"Grid shape: {grid.shape}")
     plt.figure( figsize=(nrow,rows) )
     plt.imshow(grid.numpy().transpose((1, 2, 0)))
     
@@ -595,15 +721,92 @@ def visTensor(tensor, ch=0, allkernels=False, nrow=12, padding=1):
     plt.ioff()
     plt.show()
     plt.savefig("figures/kernels.png")
-    #fig = figure()
-    #example = (tensor[0, 0, :, :] - torch.min(tensor[0, 0, :, :]))/(torch.max(tensor[0, 0, :, :]) - torch.min(tensor[0, 0, :, :]))                                                                              
-    #print(f"Tensor: {example}")
-    #plt.imshow(example)
     
-def get_grad(network):
+def get_grad(network, mode="mean"):
     gradients = []
     for name, param in network.named_parameters():
         if param.grad is not None:
-            gradients.append(param.grad.detach().cpu().min())
-        
+            if mode == "min":
+                gradients.append(param.grad.detach().cpu().min())
+            elif mode == "mean":
+                gradients.append(param.grad.detach().cpu().mean())
+            elif mode == "max":
+                gradients.append(param.grad.detach().cpu().max())
+            else:
+                Exception("Enter Valid Mode")
     return np.mean(np.array(gradients))
+
+def get_weights(network):
+    weights = []
+    for name, param in network.named_parameters():
+        weights.append(param.detach().square().view(-1))
+    
+    return torch.cat(weights).sum()
+
+def range_norm(tensor):
+    return (tensor - tensor.min())/(tensor.max()-tensor.min())
+
+class SignTransform:
+    def __call__(self, sample):
+        return torch.sign(sample)
+
+def build_dvs_dataset(train_specs, input_specs = None, first_saccade = False):
+    num_workers = train_specs["num_workers"]
+    batch_size = train_specs["batch_size"]
+    sensor_size = tonic.datasets.NMNIST.sensor_size
+    subset_size = train_specs["subset_size"]
+    
+    persist = True if num_workers > 0 else False
+    
+    sensor_size = tonic.datasets.DVSGesture.sensor_size
+    new_size = (28, 28, 2)
+
+    ds_transform = tonic.transforms.Compose([
+                transforms.Denoise(filter_time=1000),
+                tonic.transforms.Downsample(spatial_factor=0.21875, time_factor=0.001),
+                transforms.ToFrame(sensor_size=new_size, n_time_bins=100),
+                torch.from_numpy,
+                dtype_transform(),
+                SignTransform()
+                ])
+
+    # create datasets
+    train_ds = tonic.datasets.DVSGesture("dataset/dvs_gesture", train=True, transform=ds_transform)
+    test_ds = tonic.datasets.DVSGesture("dataset/dvs_gesture", train=False, transform=ds_transform)
+    
+    trainlen1 = len(train_ds)
+    testlen1 = len(test_ds)
+     
+    train_dataset = create_subset(train_ds, int(len(train_ds)/subset_size))
+    test_dataset = create_subset(test_ds, int(len(test_ds)/subset_size))
+    
+    trainlen2 = len(train_dataset)
+    testlen2 = len(test_dataset)
+    
+    train_dataset = DiskCachedDataset(train_dataset, cache_path="C:/Users/lukea/Documents/Masters Project Code/MSc_Project/cache/fast_dataloading_trn")
+    test_dataset = DiskCachedDataset(test_dataset, cache_path="C:/Users/lukea/Documents/Masters Project Code/MSc_Project/cache/fast_dataloading_test")
+
+    print(f"Training: {trainlen1} -> {trainlen2}\nTesting: {testlen1} -> {testlen2}")
+    print("\nMaking Dataloaders")
+
+    # create dataloaders
+    train_loader = DataLoader(train_dataset,
+                              shuffle=True, 
+                              batch_size=batch_size, 
+                              collate_fn=tonic.collation.PadTensors(batch_first=False),
+                              pin_memory=False, 
+                              num_workers=num_workers, 
+                              persistent_workers=persist)
+    test_loader = DataLoader(test_dataset, 
+                             shuffle=False, 
+                             batch_size=batch_size, 
+                             collate_fn=tonic.collation.PadTensors(batch_first=False), 
+                             pin_memory=False, 
+                             num_workers=num_workers, 
+                             persistent_workers=persist)
+    
+    print("Finished Building Dataset")
+    return train_dataset, train_loader, test_dataset, test_loader
+
+def count_params(model):
+    return sum(p.numel() for p in model.parameters())
