@@ -62,7 +62,7 @@ def main_ns():
     num_rec = wandb.config.num_rec
     noise = wandb.config.noise
     recurrence = wandb.config.recurrence
-    run.name = f"{num_rec}"
+    run.name = f"{wandb.config.seed}_{wandb.config.kernel_size}_{wandb.config.num_rec}"
     print(f'Starting Sweep: Batch Size: {train_specs["batch_size"]}, Learning Rate: {train_specs["lr"]}')
     
     # Build dataset and loaders
@@ -264,7 +264,7 @@ if __name__ == '__main__':
           }
   else:
       sweep_config = { #REMEMBER TO CHANGE RUN NAME
-          'name': f'ns_Node Assessment Multi Seeds 1 {date}', 
+          'name': f'ns_Kernel Size Sweep {date}', 
           'method': 'grid',
           'metric': {'name': 'Test Loss',
                       'goal': 'minimize'   
@@ -278,10 +278,10 @@ if __name__ == '__main__':
                           "rate_on": {'values': [75]},
                           "rate_off": {'values': [1]},
                           "num_workers": {'values': [0]},
-                          "num_rec": {'values': [100, 2, 20, 30, 10, 200, 450, 550, 700, 1000]+numrecs},
+                          "num_rec": {'values': [100]},
                           "norm_type": {'values': ["mean"]},
-                          "kernel_size": {'values': [7]},
-                          "seed": {'values': [42, 28]}
+                          "kernel_size": {'values': [3, 5, 7, 9, 11, 13]},
+                          "seed": {'values': [42]}
                           }
           }
   

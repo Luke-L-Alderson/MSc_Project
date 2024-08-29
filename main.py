@@ -13,7 +13,7 @@ from matplotlib import pyplot as plt
 import torch
 import torchvision.models as models
 from brian2 import *
-from train_network import train_network, train_network_bptt
+from train_network import train_network, train_network_bptt, train_network_c
 import seaborn as sns
 import gc
     
@@ -45,7 +45,7 @@ def main():
     
     train_specs["early_stop"] = -1
     train_specs["loss_fn"] = "spike_count"
-    train_specs["lambda_rate"] = 0.0
+    train_specs["lambda_rate"] = wandb.config.lmbda
     train_specs["lambda_weights"] = None
     train_specs["num_epochs"] = wandb.config.epochs    
     train_specs["device"] = device
@@ -72,7 +72,7 @@ def main():
         dataset = "DVS"
         train_dataset, train_loader, test_dataset, test_loader = build_dvs_dataset(train_specs, first_saccade=first_saccade_only)
     
-    run.name = f"{wandb.config.recurrence}_{wandb.config.kernel_size}"
+    run.name = f"{wandb.config.rate_on}_{wandb.config.rate_off}"
     #run.name = "UMAP"
     
     in_size = train_dataset[0][0].shape[-1]
@@ -96,11 +96,11 @@ def main():
     #visTensor(network)
     
     # Train network
-    network, train_loss, test_loss, final_train_loss, final_test_loss = train_network(network, train_loader, test_loader, train_specs, k1=k1)
+    network, train_loss, test_loss, final_train_loss, final_test_loss = train_network(network, train_loader, test_loader, train_specs, k1=k1, state=wandb.config.state)
     
     #visTensor(network)
     
-    torch.save(network.state_dict(), f'SAE_{run.name}.pth')
+    #torch.save(network.state_dict(), f'SAE_{run.name}.pth')
     
     # Plotting
     labels, umap_file, sil_score, db_score = plotting_data(network, train_dataset, test_dataset, train_loader, test_loader, recurrence, device, run, k1=k1)
@@ -133,10 +133,38 @@ if __name__ == '__main__':
   test = 0
   
   numrecs = list(range(490, 511, 2)) + list(range(590, 611, 2))
+  seeds = [42, 28, 1997, 1984, 1, 2, 100, 200, 800, 500]
   
   if test == 1:
       sweep_config = {
-          'name': f'Test Sweep (DVS) {date}',
+          'name': f'Test Sweep (DVS classifier) {date}',
+          'method': 'grid',
+          'metric': {'name': 'Test Loss',
+                      'goal': 'minimize'   
+                      },
+          'parameters': {'bs': {'values': [64]},
+                          'lr': {'values': [1e-4]},
+                          'epochs': {'values': [30]},
+                          "subset_size": {'values': [1]},
+                          "recurrence": {'values': [False]},
+                          "noise": {'values': [0]},
+                          "rate_on": {'values': [75]},
+                          "rate_off": {'values': [1]},
+                          "num_workers": {'values': [0]},
+                          "num_rec": {'values': [1000]},
+                          "norm_type": {'values': ["mean"]},
+                          "MNIST": {'values': [False]},
+                          "first_saccade": {'values': [True]},
+                          "kernel_size": {'values': [7]},
+                          "seed": {'values': [42]},
+                          "k1": {'values': [20]}, # 42, 28, 1997, 1984, 1
+                          "lmbda": {'values': [0]}, # 42, 28, 1997, 1984, 1
+                          "state": {'values': ["present"]}
+                          }
+          }
+  else:
+      sweep_config = { #REMEMBER TO CHANGE RUN NAME
+          'name': f'MNIST freq scan 3 {date}',
           'method': 'grid',
           'metric': {'name': 'Test Loss',
                       'goal': 'minimize'   
@@ -147,62 +175,43 @@ if __name__ == '__main__':
                           "subset_size": {'values': [10]},
                           "recurrence": {'values': [False]},
                           "noise": {'values': [0]},
-                          "rate_on": {'values': [75]},
-                          "rate_off": {'values': [1]},
+                          "rate_on": {'values': [1, 50, 75, 100, 150, 200]},
+                          "rate_off": {'values': [1, 50, 75, 100, 150, 200]},
                           "num_workers": {'values': [0]},
-                          "num_rec": {'values': [100]},
+                          "num_rec": {'values': [100, 600]}, # 550, 500, 600, 100
                           "norm_type": {'values': ["mean"]},
                           "MNIST": {'values': [True]},
                           "first_saccade": {'values': [True]},
                           "kernel_size": {'values': [7]},
-                          "seed": {'values': [42]},
-                          "k1": {'values': [20]}
-                          }
-          }
-  else:
-      sweep_config = { #REMEMBER TO CHANGE RUN NAME
-          'name': f'Recurrence Assessment (MNIST) {date}',
-          'method': 'grid',
-          'metric': {'name': 'Test Loss',
-                      'goal': 'minimize'   
-                      },
-          'parameters': {'bs': {'values': [64]},
-                          'lr': {'values': [1e-4]},
-                          'epochs': {'values': [10]},
-                          "subset_size": {'values': [10]},
-                          "recurrence": {'values': [True, False]},
-                          "noise": {'values': [0]},
-                          "rate_on": {'values': [75]},
-                          "rate_off": {'values': [1]},
-                          "num_workers": {'values': [0]},
-                          "num_rec": {'values': [100]}, # 100, 2, 50, 200, 500, 1000
-                          "norm_type": {'values': ["mean"]},
-                          "MNIST": {'values': [True]},
-                          "first_saccade": {'values': [True]},
-                          "kernel_size": {'values': [3, 5, 7]},
-                          "seed": {'values': [42, 28, 1997, 1984, 1]}, # 42, 28, 1997, 1984, 1
-                          "k1": {'values': [20]} #k1 = 25, bs = 64, morm=None worked
+                          "seed": {'values': [42]}, # 42, 28, 1997, 1984, 1
+                          "k1": {'values': [20]}, # 42, 28, 1997, 1984, 1
+                          "lmbda": {'values': [0]}, # 42, 28, 1997, 1984, 1
+                          "state": {'values': ["present"]} #k1 = 25, bs = 64, morm=None worked
                           }
           }
   
   
+    
+                          
+    
   '''
     {'bs': {'values': [64]},
                     'lr': {'values': [1e-4]},
                     'epochs': {'values': [10]},
-                    "subset_size": {'values': [1]},
-                    "recurrence": {'values': [True, False]},
+                    "subset_size": {'values': [10]},
+                    "recurrence": {'values': [False]},
                     "noise": {'values': [0]},
                     "rate_on": {'values': [75]},
                     "rate_off": {'values': [1]},
                     "num_workers": {'values': [0]},
-                    "num_rec": {'values': [100]}, # 100, 2, 50, 200, 500, 1000
+                    "num_rec": {'values': [100, 2, 20, 30, 10, 200, 450, 550, 700, 1000]+numrecs}, # 550, 500, 600, 100
                     "norm_type": {'values': ["mean"]},
                     "MNIST": {'values': [True]},
                     "first_saccade": {'values': [True]},
-                    "kernel_size": {'values': [3, 5, 7]},
-                    "seed": {'values': [42, 28, 1997, 1984, 1]}, # 42, 28, 1997, 1984, 1
-                    "k1": {'values': [20]} #k1 = 25, bs = 64, morm=None worked
+                    "kernel_size": {'values': [3, 5, 9, 11]},
+                    "seed": {'values': [42]}, # 42, 28, 1997, 1984, 1
+                    "k1": {'values': [10]}, # 42, 28, 1997, 1984, 1
+                    "lmbda": {'values': [0]} #k1 = 25, bs = 64, morm=None worked
                     }
     '''
     

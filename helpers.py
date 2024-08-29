@@ -13,7 +13,7 @@ from math import ceil
 import seaborn as sns
 from brian2 import *
 from umap import UMAP
-from image_to_image import SAE, SAE_ni
+from image_to_image import SAE, SAE_ni, SC
 #from model.aux.functions import get_poisson_inputs, process_labels, mse_count_loss
 import torch
 import torch.nn as nn
@@ -32,6 +32,7 @@ from tonic import DiskCachedDataset
 import warnings
 import gc
 from snntorch import utils
+from math import ceil
 
 __all__ = ["PoissonTransform",
            "build_datasets",
@@ -643,20 +644,21 @@ def plotting_data(network, train_dataset, test_dataset, train_loader, test_loade
         print(round_pixels)
         fig = plt.figure(facecolor="w", figsize=(10, 3))
         ax1 = plt.subplot(3, 1, 1)
+        # rotation=0
         splt.raster(new_inputs.reshape(new_inputs.shape[0], -1), ax1, s=dot_size, c="black")
-        plt.ylabel(ylabel=r"X", rotation=0, labelpad=10)
+        plt.ylabel(ylabel=r"Input", labelpad=1)
         ax2 = plt.subplot(3, 1, 2)
         splt.raster(new_img_spk_recs.reshape(new_inputs.shape[0], -1), ax2, s=dot_size, c="black")
-        plt.ylabel(ylabel=r"Y", rotation=0, labelpad=10)
+        plt.ylabel(ylabel=r"Code", labelpad=1)
         ax3 = plt.subplot(3, 1, 3)
         splt.raster(new_img_spk_outs.reshape(new_inputs.shape[0], -1), ax3, s=dot_size, c="black")
-        plt.ylabel(ylabel=r"Z", rotation=0, labelpad=10)
+        plt.ylabel(ylabel=r"Output", labelpad=1)
     
-        ax1.yaxis.set_label_coords(-0.02,0.4)
-        ax2.yaxis.set_label_coords(-0.02,0.4)
-        ax3.yaxis.set_label_coords(-0.02,0.4)
+        ax1.yaxis.set_label_coords(-0.01,0.501)
+        ax2.yaxis.set_label_coords(-0.01,0.501)
+        ax3.yaxis.set_label_coords(-0.01,0.501)
         ax1.set(xlim=[0, new_inputs.shape[0]], ylim=[-50, round_pixels+50], yticks = [], xticks=[])
-        ax2.set(xlim=[0, new_inputs.shape[0]], ylim=[0-round(num_rec*0.1), round(num_rec*1.1)], xticks=[], yticks = [])
+        ax2.set(xlim=[0, new_inputs.shape[0]], ylim=[0-ceil(num_rec*0.1), round(num_rec*1.1)], xticks=[], yticks = [])
         ax3.set(xlim=[0, new_inputs.shape[0]], ylim=[-50, round_pixels+50], yticks = [], xlabel="Time, ms")
 
         fig.tight_layout()
@@ -810,3 +812,25 @@ def build_dvs_dataset(train_specs, input_specs = None, first_saccade = False):
 
 def count_params(model):
     return sum(p.numel() for p in model.parameters())
+
+def get_test_accuracy(test_loader, net, device):
+    total = 0
+    correct = 0
+   
+    with torch.no_grad():
+      net.eval()
+      for data, targets in test_loader:
+        data = data.to(device)
+        targets = targets.to(device)
+        
+        # forward pass
+        test_spk, _ = net(data.view(data.size(0), -1))
+    
+        # calculate total accuracy
+        _, predicted = test_spk.sum(dim=0).max(1)
+        total += targets.size(0)
+        correct += (predicted == targets).sum().item()
+    
+    print(f"Total correctly classified test set images: {correct}/{total}")
+    print(f"Test Set Accuracy: {100 * correct / total:.2f}%")
+    return 100 * correct / total
