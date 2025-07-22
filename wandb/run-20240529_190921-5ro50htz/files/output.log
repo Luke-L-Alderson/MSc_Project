@@ -1,7 +1,0 @@
-[4mReloaded modules[24m: helpers, model, model.aux, model.aux.functions, model.train.train_network, model.image_to_latent, model.image_to_image, data.aux.dataset, data_generator, data_generator.shapes, data_generator.frames_generator, data_generator.ds_generator, testing, testing.aux.dataset, testing.aux.functions, testing.exam, model.train.trainMNIST
-Importing modules and defining functions
-Output from spyder call 'get_namespace_view':
-WARNING    Active device does not have an attribute 'size', ignoring this. [brian2.devices.device]
-WARNING    Active device does not have an attribute 'size', ignoring this. [brian2.devices.device]
-Output from spyder call 'get_var_properties':
-WARNING    Active device does not have an attribute 'size', ignoring this. [brian2.devices.device]

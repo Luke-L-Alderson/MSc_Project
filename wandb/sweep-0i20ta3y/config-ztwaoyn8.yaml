@@ -1,8 +1,0 @@
-wandb_version: 1
-
-bs:
-  value: 64
-epochs:
-  value: 3
-lr:
-  value: 0.0001
