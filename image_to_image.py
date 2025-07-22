@@ -11,13 +11,13 @@ class SAE(nn.Module):
         super().__init__()
         self.device = device
         self.recurrence = recurrence
+        
         #save and proces param dicts
         beta, num_rec, depth, num_conv2 = self.process_params(tp, netp, fp, cp)
         threshold = netp["v_th"]
         learnable = True
         
-        #define gradient
-        spike_grad = surrogate.fast_sigmoid(slope=25)
+        spike_grad = surrogate.fast_sigmoid()
           
         self.conv1 = nn.Conv2d(depth, cp["channels_1"], (cp["filter_1"], cp["filter_1"]))
         self.lif_conv1 = snn.Leaky(beta=beta, spike_grad=spike_grad, threshold = threshold)
@@ -51,7 +51,7 @@ class SAE(nn.Module):
 
         
     def forward(self, x, recorded_vars=None):
-        num_rec, noise_amp, channels_2, conv2_size = self.network_params["num_rec"], self.network_params["noise_amplitude"], self.convolution_params["channels_2"], self.convolution_params["conv2_size"]
+        channels_2, conv2_size = self.convolution_params["channels_2"], self.convolution_params["conv2_size"]
 
         try:
           x = x.type(torch.cuda.FloatTensor)
@@ -73,7 +73,7 @@ class SAE(nn.Module):
             
         mem_deconv2 = self.lif_deconv2.init_leaky()
         mem_reconstruction = self.lif_reconstruction.init_leaky()
-        spk_outs, spk_recs, mem_outs, mem_recs = [], [], [], []
+        spk_outs, spk_recs = [], []
 
         for timestep in range(time_steps):
             curr_conv1 = self.conv1(x[timestep])
@@ -88,8 +88,6 @@ class SAE(nn.Module):
                 spk_rec, mem_rec = self.rlif_rec(curr_in, spk_rec, mem_rec)
             else:
                 spk_rec, mem_rec1 = self.lif_rec(curr_in, mem_rec1)
-                # curr_in2 = self.ff_in2(spk_rec1)
-                # spk_rec, mem_rec = self.lif_rec2(curr_in2, mem_rec)
             
             curr_out = self.ff_out(spk_rec)
             
@@ -117,8 +115,6 @@ class SAE(nn.Module):
         cp["conv2_size"] = cp["conv1_size"] - cp["filter_2"] + 1
         netp["num_conv1"] = int(cp["conv1_size"]*cp["conv1_size"]*cp["channels_1"])
         netp["num_conv2"] = int(cp["conv2_size"]*cp["conv2_size"]*cp["channels_2"])
-
-        #time_array = np.arange(0, tp["total_time"], tp["dt"])
         
         self.time_params, self.network_params, self.frame_params, self.convolution_params = tp, netp, fp, cp
         return netp["beta"], netp["num_rec"], fp["depth"], netp["num_conv2"]
@@ -204,13 +200,12 @@ class SAE_ni(nn.Module):
         
         
     def forward(self, x, recorded_vars=None):
-        num_rec, noise_amp, channels_2, conv2_size = self.network_params["num_rec"], self.network_params["noise_amplitude"], self.convolution_params["channels_2"], self.convolution_params["conv2_size"]
-        #print(type(x)) 
+        channels_2, conv2_size = self.convolution_params["channels_2"], self.convolution_params["conv2_size"]
+        
         try:
           x = x.type(torch.cuda.FloatTensor)
         except:
           x = x.type(torch.FloatTensor)
-        
         
         batch_size = x.shape[1]
         time_steps = x.shape[0]
@@ -229,8 +224,6 @@ class SAE_ni(nn.Module):
                 spk_rec = self.rlif_rec(curr_in)
             else:
                 spk_rec = self.lif_rec(curr_in)
-                #curr_in2 = self.ff_in2(spk_rec1)
-                #spk_rec = self.lif_rec2(curr_in2)
             
             curr_out = self.ff_out(spk_rec)
             
@@ -246,7 +239,6 @@ class SAE_ni(nn.Module):
             spk_outs.append(spk_reconstruction)
     
         return torch.stack(spk_recs), torch.stack(spk_outs)
-    
     
     def process_params(self, tp, netp, fp, cp):
         netp["beta"] = np.exp(-tp["dt"]/netp["tau_m"])
@@ -291,11 +283,10 @@ class SC(nn.Module):
                                         linear_features=num_rec,
                                         init_hidden=True)
 
-        self.ff_out = nn.Linear(num_rec, num_classes)  # Final linear layer to output logits for classification
+        self.ff_out = nn.Linear(num_rec, num_classes)
         self.lif_out = snn.Leaky(beta=beta, spike_grad=spike_grad, threshold=threshold, init_hidden=True, output=True)
 
     def forward(self, x, recorded_vars=None):
-        num_rec, conv2_size = self.network_params["num_rec"], self.convolution_params["conv2_size"]
         
         try:
             x = x.type(torch.cuda.FloatTensor)
@@ -305,7 +296,7 @@ class SC(nn.Module):
         batch_size = x.shape[1]
         time_steps = x.shape[0]
         
-        spk_outs, spk_recs, mem_outs, mem_recs = [], [], [], []
+        spk_outs, mem_outs, = [], []
         
         for timestep in range(time_steps):
             curr_conv1 = self.conv1(x[timestep])

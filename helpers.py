@@ -2,37 +2,30 @@ import numpy as np
 from sklearn.metrics import davies_bouldin_score, silhouette_score
 import os
 import matplotlib as mpl
-from matplotlib import cm, colors
+from matplotlib import colors
 from matplotlib import pyplot as plt
 import pandas as pd
 from torchvision import datasets#, transforms
 from torchvision.transforms import v2
-from torch.utils.data import DataLoader, Dataset, Subset
+from torch.utils.data import DataLoader, Subset
 import wandb
 from math import ceil
 import seaborn as sns
 from brian2 import *
 from umap import UMAP
-from image_to_image import SAE, SAE_ni, SC
-#from model.aux.functions import get_poisson_inputs, process_labels, mse_count_loss
+from image_to_image import SAE
 import torch
 import torch.nn as nn
 import snntorch as snn
-from snntorch import spikegen
-from snntorch import utils
-from snntorch import functional as F
 import torchvision.utils as utls
 import snntorch.spikeplot as splt
 from IPython.display import HTML
 import tonic.transforms as transforms
 import tonic
-from torchsummary import summary
 import random as rand
 from tonic import DiskCachedDataset
 import warnings
 import gc
-from snntorch import utils
-from math import ceil
 
 __all__ = ["PoissonTransform",
            "build_datasets",

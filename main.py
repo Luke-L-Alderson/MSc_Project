@@ -6,9 +6,7 @@ from datetime import datetime
 date = datetime.now().strftime("%d/%m - %H:%M")
 
 import wandb
-from helpers import build_datasets, build_network, set_seed, \
-build_nmnist_dataset, plotting_data, visTensor, weight_map, to_np,\
-build_dvs_dataset
+from helpers import build_datasets, build_network, set_seed, plotting_data, weight_map, to_np, build_dvs_dataset
 from matplotlib import pyplot as plt
 import torch
 import torchvision.models as models
@@ -19,19 +17,12 @@ import gc
     
 def main():
     
-    # for obj in gc.get_objects():
-    #     try:
-    #         if torch.is_tensor(obj) or (hasattr(obj, 'data') and torch.is_tensor(obj.data)):
-    #             print(type(obj), obj.size())
-    #     except:
-    #         pass
-    
     device = torch.device("cuda") if torch.cuda.is_available() else torch.device("cpu")
-    print("Using CUDA") if torch.cuda.is_available() else print("Using CPU")
     
     torch.backends.cudnn.benchmark = True #TURN OFF WHEN CHANGING ARCHITECTURE    
     run = wandb.init()
     set_seed(wandb.config.seed)
+    
     """## Define network architecutre and parameters"""
     network_params, input_specs, train_specs = {}, {}, {}
     
@@ -50,7 +41,7 @@ def main():
     train_specs["num_epochs"] = wandb.config.epochs    
     train_specs["device"] = device
     train_specs["lr"] = wandb.config.lr    
-    train_specs["batch_size"] = wandb.config.bs# if not wandb.config.first_saccade and not wandb.config.MNIST else 16
+    train_specs["batch_size"] = wandb.config.bs
     train_specs["subset_size"] = wandb.config.subset_size
     train_specs["num_workers"] = wandb.config.num_workers
     train_specs["norm_type"] = wandb.config.norm_type
@@ -92,13 +83,9 @@ def main():
         plt.title("Initial Weight Distribution")
         
         plt.show()
-    
-    #visTensor(network)
-    
+       
     # Train network
     network, train_loss, test_loss, final_train_loss, final_test_loss = train_network(network, train_loader, test_loader, train_specs, k1=k1, state=wandb.config.state)
-    
-    #visTensor(network)
     
     #torch.save(network.state_dict(), f'SAE_{run.name}.pth')
     
@@ -130,12 +117,12 @@ def main():
         
 if __name__ == '__main__':  
   
-  test = 0
+  dvs = False
   
   numrecs = list(range(490, 511, 2)) + list(range(590, 611, 2))
   seeds = [42, 28, 1997, 1984, 1, 2, 100, 200, 800, 500]
   
-  if test == 1:
+  if dvs:
       sweep_config = {
           'name': f'Test Sweep (DVS classifier) {date}',
           'method': 'grid',
@@ -163,7 +150,7 @@ if __name__ == '__main__':
                           }
           }
   else:
-      sweep_config = { #REMEMBER TO CHANGE RUN NAME
+      sweep_config = { 
           'name': f'MNIST freq scan 3 {date}',
           'method': 'grid',
           'metric': {'name': 'Test Loss',
@@ -176,44 +163,19 @@ if __name__ == '__main__':
                           "recurrence": {'values': [False]},
                           "noise": {'values': [0]},
                           "rate_on": {'values': [1, 50, 75, 100, 150, 200]},
-                          "rate_off": {'values': [1, 50, 75, 100, 150, 200]},
+                          "rate_off": {'values': [1]},
                           "num_workers": {'values': [0]},
-                          "num_rec": {'values': [100, 600]}, # 550, 500, 600, 100
+                          "num_rec": {'values': [100, 600]},# 550, 500, 600, 100
                           "norm_type": {'values': ["mean"]},
                           "MNIST": {'values': [True]},
                           "first_saccade": {'values': [True]},
                           "kernel_size": {'values': [7]},
-                          "seed": {'values': [42]}, # 42, 28, 1997, 1984, 1
-                          "k1": {'values': [20]}, # 42, 28, 1997, 1984, 1
-                          "lmbda": {'values': [0]}, # 42, 28, 1997, 1984, 1
-                          "state": {'values': ["present"]} #k1 = 25, bs = 64, morm=None worked
+                          "seed": {'values': [42]},        # 42, 28, 1997, 1984, 1
+                          "k1": {'values': [20]},          # 42, 28, 1997, 1984, 1
+                          "lmbda": {'values': [0]},        # 42, 28, 1997, 1984, 1
+                          "state": {'values': ["present"]} # k1 = 25, bs = 64, morm=None worked
                           }
           }
-  
-  
-    
-                          
-    
-  '''
-    {'bs': {'values': [64]},
-                    'lr': {'values': [1e-4]},
-                    'epochs': {'values': [10]},
-                    "subset_size": {'values': [10]},
-                    "recurrence": {'values': [False]},
-                    "noise": {'values': [0]},
-                    "rate_on": {'values': [75]},
-                    "rate_off": {'values': [1]},
-                    "num_workers": {'values': [0]},
-                    "num_rec": {'values': [100, 2, 20, 30, 10, 200, 450, 550, 700, 1000]+numrecs}, # 550, 500, 600, 100
-                    "norm_type": {'values': ["mean"]},
-                    "MNIST": {'values': [True]},
-                    "first_saccade": {'values': [True]},
-                    "kernel_size": {'values': [3, 5, 9, 11]},
-                    "seed": {'values': [42]}, # 42, 28, 1997, 1984, 1
-                    "k1": {'values': [10]}, # 42, 28, 1997, 1984, 1
-                    "lmbda": {'values': [0]} #k1 = 25, bs = 64, morm=None worked
-                    }
-    '''
     
   sweep_id = wandb.sweep(sweep = sweep_config, project = "MSc Project", entity="lukelalderson")
       

@@ -32,3 +32,5 @@ __pycache__/helpers.cpython-312.pyc
 hard code backup/main_nmnist.py
 /hard code backup
 *.npy
+*.pyc
+*.pyc

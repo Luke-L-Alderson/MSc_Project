@@ -1,52 +1,37 @@
-import tonic
 import torch
-import tonic.transforms as transforms
-from torch.utils.data import DataLoader, Dataset, Subset
 import numpy as np
-from tonic import DiskCachedDataset
-from torchvision.transforms import v2
 from matplotlib import pyplot as plt
 import snntorch.spikeplot as splt
 from IPython.display import HTML
-from helpers import build_network, set_seed, to_np, umap_plt, weight_map, dtype_transform, build_nmnist_dataset
+from helpers import build_network, set_seed, to_np, umap_plt, weight_map, build_nmnist_dataset
 from train_network import train_network
-import snntorch as snn
-import random
 import seaborn as sns
 import pandas as pd
 from math import ceil
 
 device = torch.device("cuda") if torch.cuda.is_available() else torch.device("cpu")
-print("Using CUDA") if torch.cuda.is_available() else print("Using CPU")
 set_seed()
 
-
-
-train_specs = {}
-train_specs["batch_size"] = 64
-
-
-train_specs["code"] = 'rate'
-
-train_specs["early_stop"] = -1
-train_specs["loss_fn"] = "spike_count"
-train_specs["lambda_rate"] = 0.0
-train_specs["lambda_weights"] = None
-train_specs["num_epochs"] = 9  
-train_specs["device"] = device
-train_specs["lr"] = 1e-4 
-train_specs["subset_size"] = 10
-train_specs["num_workers"] = 0
-train_specs["norm_type"] = "norm"
-
-
+train_specs = {
+    "batch_size": 64,
+    "code": "rate",
+    "early_stop": -1,
+    "loss_fn": "spike_count",
+    "lambda_rate": 0.0,
+    "lambda_weights": None,
+    "num_epochs": 9,
+    "device": device,
+    "lr": 1e-4,
+    "subset_size": 10,
+    "num_workers": 0,
+    "norm_type": "norm"
+}
 
 # Build network
 noise = 0
 recurrence = 1
 num_rec = 100
 learnable = True
-
 
 train_dataset, train_loader, test_dataset, test_loader = build_nmnist_dataset(train_specs)
 network, network_params = build_network(device,
@@ -57,7 +42,6 @@ network, network_params = build_network(device,
                                         depth=1, 
                                         size=train_dataset[0][0].shape[-1])
 
-print(data_shape:=train_dataset[0][0].shape[-1])
 # Train network
 network, train_loss, test_loss, final_train_loss, final_test_loss = train_network(network, train_loader, test_loader, train_specs)
 
@@ -88,7 +72,7 @@ for i, ax in enumerate(axes):
 plt.tight_layout()
 
 print("Assembling test data for 2D projection")
-###
+
 with torch.no_grad():
     features, all_labs, all_decs, all_orig_ims = [], [], [], []
     for i,(data, labs) in enumerate(test_loader, 1):
@@ -115,7 +99,6 @@ with torch.no_grad():
 tsne = pd.DataFrame(data = features)
 tsne.insert(0, "Labels", all_labs) 
 tsne.to_csv("test.csv", index=False)
-
 
 print("Plotting Results Grid")
 seen_labels = set()
@@ -181,16 +164,12 @@ anim.save(f"figures/spike_mnist_{labels}.gif")
 
 inputs = torch.tensor(inputs).unsqueeze(1)
 
-
 img_spk_recs, img_spk_outs = network(inputs)
 inputs = inputs.squeeze().cpu()
 print(img_spk_outs.shape)
 img_spk_outs = img_spk_outs.squeeze().detach().cpu()
 print(type(img_spk_outs))
 print(img_spk_outs.shape)
-
-
-#wandb.log({"Spike Animation": wandb.Video(f"figures/spike_mnist_{labels}.gif", fps=4, format="gif")}, commit = False)
 
 print("Plotting Spiking Output MNIST")
 fig, axs = plt.subplots()
@@ -228,6 +207,4 @@ if recurrence == 1:
     weight_map(network.rlif_rec.recurrent.weight)
     ax2 = plt.subplot(1,2,2)
     sns.histplot(to_np(torch.flatten(network.rlif_rec.recurrent.weight)))
-    
-    #fig.savefig(f"figures/weightmap_{run.name}.png")
     plt.show() 

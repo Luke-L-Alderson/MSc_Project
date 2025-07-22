@@ -1,15 +1,9 @@
-from helpers import get_poisson_inputs, rmse_count_loss, nmse_count_loss, print_params, get_grad
+from helpers import nmse_count_loss, get_grad
 import torch
 import wandb
-from brian2 import *
 from datetime import datetime
-import torch.nn.functional as F
 from math import ceil
-from torch.profiler import profile, record_function, ProfilerActivity
 from snntorch import utils
-from snntorch.functional import mse_count_loss
-from torch.nn.utils import clip_grad_norm_
-from matplotlib import pyplot as plt
 import gc
 from torch import nn
 
