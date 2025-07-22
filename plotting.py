@@ -22,10 +22,6 @@ import latex
 from scipy import stats
 import scikit_posthocs as sp
 import statsmodels.api as sm
-# plt.rcParams.update({
-#     "text.usetex": True
-# })
-# mpl.rcParams['text.usetex'] = True
 
 def extract_numbers(file_name):
     base_name = file_name.split('.')[0]  # Remove the extension
@@ -33,7 +29,7 @@ def extract_numbers(file_name):
     return int(parts[0]), int(parts[1])
 
 
-umap_plt("datafiles/0.01_8.csv", w=10, h=10)
+#umap_plt("datafiles/0.01_8.csv", w=10, h=10)
 
 # device = torch.device("cuda") if torch.cuda.is_available() else torch.device("cpu")
 # set_seed()

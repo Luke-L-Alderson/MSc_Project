@@ -29,12 +29,11 @@ def main_ns():
 
     run = wandb.init()
     set_seed(wandb.config.seed)
-    #run.name = "ns_UMAP"
+    
     """## Define network architecutre and parameters"""
     network_params, input_specs, train_specs, convolution_params = {}, {}, {}, {}
     
     # Parameters for use in training
-    
     convolution_params["channels_1"] = 12
     convolution_params["filter_1"] = wandb.config.kernel_size
     convolution_params["channels_2"] = 64
@@ -46,7 +45,6 @@ def main_ns():
     input_specs["bin_size"] = 1*ms
     
     train_specs["code"] = 'rate'
-    
     train_specs["early_stop"] = -1
     train_specs["loss_fn"] = "spike_count"
     train_specs["lambda_rate"] = 0.0
@@ -75,31 +73,11 @@ def main_ns():
     network, train_loss, test_loss, final_train_loss, final_test_loss = train_network_ns(network, train_loader, test_loader, train_specs)
     visTensor(network)
     # # Plot examples from MNIST
-    # unique_images = []
-    # seen_labels = set()
+
     if train_specs["lr"] == 1e-3 and train_specs["batch_size"] == 64:
         torch.save(network.state_dict(), 'CAE.pth')
-    # for image, label in train_dataset:
-    #     if label not in seen_labels:
-    #         unique_images.append((image, label))
-    #         seen_labels.add(label)
-
-    # unique_images.sort(key=lambda x: x[1])
-
-    # fig, axes = plt.subplots(2, 5, figsize=(15, 6))
-
-    # axes = axes.flatten()
-
-    # # Loop over each subplot
-    # for i, ax in enumerate(axes):
-    #     ax.set_title(f'Number: {unique_images[i][1]}')
-    #     ax.imshow(unique_images[i][0].reshape(28,28), cmap = 'gray')  # Blank image, you can replace this with your content
-    #     ax.axis('off')
-
-    # plt.tight_layout()
 
     print("Assembling test data for 2D projection")
-    ###
     with torch.no_grad():
         features, all_labs, all_decs, all_orig_ims = [], [], [], []
         for i,(data, labs) in enumerate(test_loader, 1):
@@ -119,11 +97,8 @@ def main_ns():
         all_decs = np.concatenate(all_decs, axis = 0)
 
     tsne = pd.DataFrame(data = features)
-
     tsne.insert(0, "Labels", all_labs) 
-
     tsne.to_csv("./datafiles/"+run.name+".csv", index=False)
-
 
     print("Plotting Results Grid")
     seen_labels = set()
@@ -137,56 +112,14 @@ def main_ns():
 
     unique_ims.sort(key=lambda x: x[1])
     orig_ims.sort(key=lambda x: x[1])
-
-    # fig, axs = plt.subplots(4, 5, figsize=(12, 10))
-
-    # # Flatten the axis array for easier indexing
-    # axs = axs.flatten()
-
-    # # Plot the first 5 images from orig_ims
-    # for i in range(5):
-    #     axs[i].imshow(orig_ims[i][0], cmap='grey')
-    #     print(orig_ims[i][0].shape)
-    #     if i==2:
-    #         axs[i].set_title('Originals: 0 - 4')
-    #     axs[i].axis('off')
-
-    # # Plot the first 5 images from unique_ims
-    # for i in range(5):
-    #     axs[i+5].imshow(unique_ims[i][0], cmap='grey')
-    #     print(unique_ims[i][0].shape)
-    #     if i==2:
-    #         axs[i+5].set_title('Reconstructions: 0 - 4')
-    #     axs[i+5].axis('off')
-
-    # # Plot the remaining images from orig_ims
-    # for i in range(5, 10):
-    #     axs[i+5].imshow(orig_ims[i][0], cmap='grey')
-    #     if i==7:
-    #         axs[i+5].set_title('Originals: 5 - 9')
-    #     axs[i+5].axis('off')
-
-    # # Plot the remaining images from unique_ims
-    # for i in range(5, 10):
-    #     axs[i+10].imshow(unique_ims[i][0], cmap='grey')
-    #     if i==7:
-    #         axs[i+10].set_title('Reconstructions: 5 - 9')
-    #     axs[i+10].axis('off')
-
-    # plt.tight_layout()
-
-    # fig.savefig("figures/result_summary.png")
     fig, axs = plt.subplots(1, 10, layout="constrained")
     
-    pad = 0
-    h = 0
-    w = 0
+    pad, h, w = 0, 0, 0
     
     # Flatten the axis array for easier indexing
     axs = axs.flatten()
     
-    # Plot the first 5 images from orig_ims
-    
+    # Plot the first N images from orig_ims
     for i in range(10):
         axs[i].imshow(orig_ims[i][0], cmap='grey')
         axs[i].axis('off')
@@ -206,8 +139,8 @@ def main_ns():
    
     fig.savefig(f"figures/ns_result_summary_{run.name}.png", bbox_inches='tight', pad_inches=0)
     
-    print("Plotting Spiking Input MNIST")
     # Plot originally input as image and as spiking representation - save gif.
+    print("Plotting Spiking Input MNIST")
     input_index = 0
     inputs, labels = test_dataset[input_index]
     inputs = inputs.unsqueeze(0)
@@ -215,11 +148,6 @@ def main_ns():
     inputs = inputs.squeeze().cpu()
 
     img_spk_outs = img_spk_outs.squeeze().detach().cpu()
-
-
-    #print("Plotting Spiking Output MNIST")
-    #fig, axs = plt.subplots()
-    #axs.imshow(img_spk_outs, cmap='grey')
 
     umap_file, sil_score, db_score, _ = umap_plt("./datafiles/"+run.name+".csv")
     
@@ -235,12 +163,11 @@ def main_ns():
     gc.collect()
     torch.cuda.empty_cache()
         
-        
 if __name__ == '__main__':  
   numrecs = list(range(490, 511, 2)) + list(range(590, 611, 2))
-  test = 0
+  test = True
   
-  if test == 1:
+  if test:
       sweep_config = {
           'name': f'ns_Test Sweep {date}',
           'method': 'grid',

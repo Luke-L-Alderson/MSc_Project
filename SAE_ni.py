@@ -36,9 +36,8 @@ class SAE_ni(nn.Module):
                                    init_hidden=True
                                    )
         
-        
     def forward(self, x, recorded_vars=None):
-        num_rec, noise_amp, channels_2, conv2_size = self.network_params["num_rec"], self.network_params["noise_amplitude"], self.convolution_params["channels_2"], self.convolution_params["conv2_size"]
+        channels_2, conv2_size = self.convolution_params["channels_2"], self.convolution_params["conv2_size"]
 
         try:
           x = torch.cuda.FloatTensor(x)
@@ -46,7 +45,6 @@ class SAE_ni(nn.Module):
           x = torch.FloatTensor(x)
         
         batch_size = x.shape[0]
-        spk_outs, spk_recs = [], []
 
         curr_conv1 = self.conv1(x)
         spk_conv1 = self.lif_conv1(curr_conv1)

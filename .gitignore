@@ -34,3 +34,4 @@ hard code backup/main_nmnist.py
 *.npy
 *.pyc
 *.pyc
+*.gz
