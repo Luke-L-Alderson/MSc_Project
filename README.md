@@ -15,4 +15,4 @@ A brief summary of the main files is provided as follows:
 
 Other files are included but are supplementary and don't impact the main spiking network under analysis. Further information on these can be provided on request.
 
-Any questions, I'd be happy to address them at lukealderson23@imperial.ac.uk.
+Any questions, I'd be happy to address them at luke.alderson23@alumni.imperial.ac.uk.
